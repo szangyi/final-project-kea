@@ -1,7 +1,13 @@
 from bottle import run, default_app, static_file, get
 
 ############# PY CLASSES ################
+import g
+import database_connection
 
+import get_functions
+import login
+import logout
+import signup
 
 
 
