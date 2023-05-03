@@ -10,30 +10,6 @@ import logout
 import signup
 
 
-
-
-
-############# CSS ##############
-@get("/css/style.css")
-def _():
-    return static_file("style.css", root="./css")
-
-
-  
-############# JS ##############
-
-
-
-############# IMAGES ##############
-
-@get("/images/<filepath:re:.*\.(jpg|png|gif|ico|svg)>")
-def img(filepath):
-    return static_file(filepath, root="./images")
-  
-@get("/csv/<filepath:re:.*\.(csv)>")
-def csv(filepath):
-    return static_file(filepath, root="./csv")
- 
 ############### RUN #####################
 try:
   import production
