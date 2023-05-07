@@ -1,25 +1,37 @@
 import React, { useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from "react-router-dom";
+
 
 const Signup = () => {
 
-    const [enteredFirstName, setEnteredFirstName] = useState('');
-    const [enteredLastName, setEnteredLastName] = useState('');
-    const [enteredEmail, setEnteredEmail] = useState('');
-    const [enteredPassword, setEnteredPassword] = useState('');
+    const [firstName, setEnteredFirstName] = useState('');
+    const [lastName, setEnteredLastName] = useState('');
+    const [email, setEnteredEmail] = useState('');
+    const [password, setEnteredPassword] = useState('');
+    const nav = useNavigate();
 
-
-    const submitHandler = (event) =>{
+    const submitHandler = async(event) =>{
         event.preventDefault();
+
+        try {   
+            const response = await axios.post('/signup', { firstName, lastName, email, password });
+            const message = response.data.message;
+
+            if (message == "success"){
+                nav('/login');
+            }
+            else{
+                console.log(message)
+            }
+
+          } catch (error) {
+            console.error('Signup failed');
+        }
     
-        const loginFormData = {
-            firstName: enteredFirstName,
-            lastName: enteredLastName,
-            email: enteredEmail,
-            password: enteredPassword
-        };
-    
-        console.log(loginFormData)
+
     }
+
 
     return (
         <form onSubmit={submitHandler}>

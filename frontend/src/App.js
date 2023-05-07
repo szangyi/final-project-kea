@@ -29,10 +29,6 @@ const router = createBrowserRouter([
 ]);
 
 const App = () => {
-
-  // const [token, setToken] = useState();
-
-
   return (
     <RouterProvider router={router} />
   );

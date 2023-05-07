@@ -8,7 +8,7 @@ import get_functions
 import login
 import logout
 import signup
-
+import helper_functions
 
 ############### RUN #####################
 try:
