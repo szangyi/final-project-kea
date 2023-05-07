@@ -6,14 +6,16 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 // import Button from '@mui/material/Button';
 
 import Login from './components/LoginSignup/Login';
+import Signup from './components/LoginSignup/Signup';
 import HomePage from './pages/HomePage';
 import HomePageLoggedIn from './pages/HomePageLoggedIn';
+import { authLoader } from './util/auth';
 
 const router = createBrowserRouter([
   {path: "/", element: <HomePage />},
-  {path: "/home", element: <HomePageLoggedIn />},
+  {path: "/home", element: <HomePageLoggedIn />, loader: authLoader},
   {path: "/login", element: <Login />},
-  {path: "/signup", element: <HomePage />},
+  {path: "/signup", element: <Signup />},
   {path: "/collection", element: <HomePage />},
   {path: "/my-page", element: <HomePage />},
   {path: "/collection", element: <HomePage />},
@@ -23,11 +25,6 @@ const router = createBrowserRouter([
   {path: "/collection", element: <HomePage />},
   {path: "/register", element: <HomePage />},
   {path: "/my-profiles", element: <HomePage />},
-
-
-
-
-
 
 ]);
 

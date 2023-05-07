@@ -1,6 +1,12 @@
+import LoggedinNav from '../components/Navigation/LoggedinNav'
 
-const HomePageLoggedIn = () =>{
-    return <div>Home page logged in</div>
+const HomePageLoggedIn = () => {
+    return (
+        <>
+            <LoggedinNav />
+            <div>Home page logged in</div>
+        </>
+    );
 }
 
 export default HomePageLoggedIn;
