@@ -41,8 +41,8 @@ function ResponsiveAppBar() {
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
 
-                    {/* Put logo here */}
                     {/* Desktop */}
+                    {/* Put logo here */}
                     <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'right' }}>
                         {pages.map((page) => (
@@ -58,6 +58,7 @@ function ResponsiveAppBar() {
 
 
                     {/* Mobile */}
+                    {/* Put logo here */}
                     <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
                         <IconButton
@@ -145,7 +146,7 @@ function ResponsiveAppBar() {
                             ))}
                         </Menu>
                     </Box>
-                    
+
                 </Toolbar>
             </Container>
         </AppBar>
