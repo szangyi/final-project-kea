@@ -9,6 +9,22 @@
     }
 }
 
+/* VARIANTS */
+
+[class*='bokeh-background'][variant*="dark"] {
+    background-color: #081517;
+}
+
+[class*='bokeh-background'][variant*="light"] {
+    background-color: #ffffff;
+}
+
+[class*='bokeh-background'][variant*="bg"] {
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+}
+
 
 /* STYLING */
 
@@ -18,16 +34,6 @@
     height: inherit;
     overflow: hidden;
 }
-
-[class*='bokeh-background'][variant="dark"] {
-    background-color: #081517;
-}
-
-[class*='bokeh-background'][variant="light"] {
-    background-color: #ffffff;
-
-}
-
 
 [class*='bokeh-background'] span {
     width: 70vmin;

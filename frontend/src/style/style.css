@@ -36,16 +36,15 @@ body {
 
 
 /* ----------------------- */
-/* TEST ------------------ */
+/* TYPOGRAPHY ------------ */
 /* ----------------------- */
 
-.test {
-    width: 100%;
-    height: 50vh;
-
-    display: grid;
+body {
+    color: black !important;
 }
 
-.test>* {
-    grid-area: 1/1;
+
+.test {
+    box-shadow: 20px 20px 60px #bebebe,
+             -20px -20px 60px #ffffff !important;
 }

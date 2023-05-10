@@ -7,14 +7,9 @@ import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
-
-import { logout as logoutAction } from '../../pages/Logout'
-
 
 export function alex() {
     alert('kitty cat logs in')
@@ -28,30 +23,20 @@ const pages = [
     }
 ]
 
-// const pages = ['Products', 'Pricing', 'Blog'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
-
 function ResponsiveAppBar() {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
-    const [anchorElUser, setAnchorElUser] = React.useState(null);
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
-    };
-    const handleOpenUserMenu = (event) => {
-        setAnchorElUser(event.currentTarget);
     };
 
     const handleCloseNavMenu = () => {
         setAnchorElNav(null);
     };
 
-    const handleCloseUserMenu = () => {
-        setAnchorElUser(null);
-    };
 
     return (
-        <AppBar position="static">
+        <AppBar position="static" sx={{boxShadow: 0}} >
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
 
@@ -66,7 +51,7 @@ function ResponsiveAppBar() {
                                 key={page.name}
                                 href={page.href}
                                 onClick={() => page.action()}
-                                sx={{ my: 2, color: 'white', display: 'block' }}
+                                sx={{ my: 2, color: 'primary.black', display: 'block' }}
                             >
                                 {page.name}
                             </Button>

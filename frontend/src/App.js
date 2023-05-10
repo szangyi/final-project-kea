@@ -45,7 +45,7 @@ const App = () => {
     return (
         <React.Fragment>
             <NavLoggedin />
-            <Banner />
+            {/* <Banner /> */}
             <RouterProvider router={router} />
         </React.Fragment>
     );

@@ -80,7 +80,7 @@ function ResponsiveAppBar() {
     };
 
     return (
-        <AppBar position="static">
+        <AppBar position="static" sx={{boxShadow: 0}} >
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
 
@@ -95,7 +95,7 @@ function ResponsiveAppBar() {
                                 key={page.name}
                                 href={page.href}
                                 onClick={() => page.action()}
-                                sx={{ my: 2, color: 'white', display: 'block' }}
+                                sx={{ my: 2, color: 'primary.black', display: 'block' }}
                             >
                                 {page.name}
                             </Button>
