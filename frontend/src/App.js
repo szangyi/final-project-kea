@@ -1,40 +1,49 @@
 import axios from 'axios';
+import React from 'react';
 import { useState, useEffect } from 'react';
+
 import { Typography } from '@mui/material';
 import Banner from './components/Banner';
 import Button from './components/Button';
 import BokehBackground from './components/BokehBackground';
 import Nav from './components/Nav';
 
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-function App() {
+// import Button from '@mui/material/Button';
 
-    const [people, setPeople] = useState([])
 
-    useEffect(() => {
-        axios.get('/api').then(res => setPeople(res.data))
-    }, []);
+import Login from './components/LoginSignup/Login';
+import Signup from './components/LoginSignup/Signup';
+import HomePage from './pages/HomePage';
+import AccountInfo from './pages/AccountInfo';
+import { authLoader } from './util/auth';
 
+const router = createBrowserRouter([
+    { path: "/", element: <HomePage /> },
+    { path: "/home", element: <HomePage /> },
+    { path: "/login", element: <Login /> },
+    { path: "/signup", element: <Signup /> },
+    { path: "/collection", element: <HomePage /> },
+    { path: "/my-page", element: <HomePage /> },
+    { path: "/collection", element: <HomePage /> },
+    { path: "/my-interests", element: <HomePage /> },
+    { path: "/account-info", element: <AccountInfo />, loader: authLoader },
+    { path: "/dashboard", element: <HomePage /> },
+    { path: "/collection", element: <HomePage /> },
+    { path: "/register", element: <HomePage /> },
+    { path: "/my-profiles", element: <HomePage /> },
+]);
+
+const App = () => {
     return (
-        <div>
+        <React.Fragment>
             <Nav />
             <Banner />
-            <section className='test'>
-                <BokehBackground variant="dark" className="bokeh-background" />
-                <Typography variant="h5">100% Real Followers.</Typography>
-            </section>
-        </div >
-    )
+            <RouterProvider router={router} />
+        </React.Fragment>
+    );
 
-    // return people.map((p, index) => {
-    //     return (
-    //         <div>
-    //             <p key={index}>{p.id} {p.name} {p.age}</p>
-    //             <MyCustomButton color="primary" variant="contained">My buttooooocks</MyCustomButton>
-    //             <Typography variant="h1">Sa</Typography>
-    //         </div>
-    //     )
-    // })
 }
 
 export default App;
