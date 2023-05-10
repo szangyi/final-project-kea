@@ -1,0 +1,163 @@
+
+
+
+/* ANIMATION */
+
+@keyframes move {
+    100% {
+        transform: translate3d(0, 0, 1px) rotate(360deg);
+    }
+}
+
+
+/* STYLING */
+
+[class*='bokeh-background'] {
+    position: absolute;
+    width: inherit;
+    height: inherit;
+    overflow: hidden;
+}
+
+[class*='bokeh-background'][variant="dark"] {
+    background-color: #081517;
+}
+
+[class*='bokeh-background'][variant="light"] {
+    background-color: #ffffff;
+
+}
+
+
+[class*='bokeh-background'] span {
+    width: 70vmin;
+    height: 70vmin;
+    border-radius: 70vmin;
+    backface-visibility: hidden;
+    position: absolute;
+    animation: move;
+    animation-duration: 1;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+/* CAN BE CHANGED DOWN BELOW */
+
+[class*='bokeh-background'] span:nth-child(1) {
+    color: #fedd96;
+    top: 57%;
+    left: 32%;
+    animation-duration: 252s;
+    animation-delay: -428s;
+    transform-origin: 17vw 14vh;
+    box-shadow: -100vmin 0 12.822873279237697vmin currentColor;
+}
+
+[class*='bokeh-background'] span:nth-child(2) {
+    color: #4479d9;
+    top: 39%;
+    left: 52%;
+    animation-duration: 325s;
+    animation-delay: -388s;
+    transform-origin: -7vw 1vh;
+    box-shadow: -100vmin 0 12.847102595142653vmin currentColor;
+}
+
+[class*='bokeh-background'] span:nth-child(3) {
+    color: #8eeadf;
+    top: 89%;
+    left: 12%;
+    animation-duration: 325s;
+    animation-delay: -388s;
+    transform-origin: -2vw 6vh;
+    box-shadow: -100vmin 0 12.847102595142653vmin currentColor;
+}
+
+[class*='bokeh-background'] span:nth-child(4) {
+    color: #4479d9;
+    top: 41%;
+    left: 94%;
+    animation-duration: 282s;
+    animation-delay: -333s;
+    transform-origin: -11vw 10vh;
+    box-shadow: 100vmin 0 13.20522711459154vmin currentColor;
+}
+
+[class*='bokeh-background'] span:nth-child(5) {
+    color: #fedd96;
+    top: 63%;
+    left: 26%;
+    top: 40%;
+    left: -50%;
+    animation-delay: 0;
+    animation-duration: 451s;
+    animation-delay: -19s;
+    transform-origin: -10vw -8vh;
+    box-shadow: 100vmin 0 13.120785001199467vmin currentColor;
+}
+
+[class*='bokeh-background'] span:nth-child(6) {
+    width: 30vmin;
+    height: 30vmin;
+    border-radius: 30vmin;
+    color: #9a7cb2;
+    top: 57%;
+    left: 69%;
+    animation-duration: 423s;
+    animation-delay: -271s;
+    transform-origin: 12vw -11vh;
+    box-shadow: 100vmin 0 12.883533207581296vmin currentColor;
+}
+
+[class*='bokeh-background'] span:nth-child(7) {
+    color: #fbdbd8;
+    top: 59%;
+    left: 39%;
+    animation-duration: 360s;
+    animation-delay: -276s;
+    transform-origin: 12vw -1vh;
+    box-shadow: 100vmin 0 13.424883128924083vmin currentColor;
+}
+
+[class*='bokeh-background'] span:nth-child(8) {
+    width: 60vmin;
+    height: 60vmin;
+    border-radius: 30vmin;
+    color: #9a7cb2;
+    top: -80%;
+    left: 30%;
+    animation-duration: 362s;
+    animation-delay: -391s;
+    transform-origin: 18vw 44vh;
+    box-shadow: 100vmin 0 13.351355625076673vmin currentColor;
+}
+
+[class*='bokeh-background'] span:nth-child(9) {
+    color: #8eeadf;
+    top: 22%;
+    left: 1%;
+    animation-duration: 393s;
+    animation-delay: -20s;
+    transform-origin: -19vw -2vh;
+    box-shadow: 100vmin 0 13.395313662960051vmin currentColor;
+}
+
+[class*='bokeh-background'] span:nth-child(10) {
+    color: #fedd96;
+    top: -40%;
+    left: 50%;
+    animation-duration: 229s;
+    animation-delay: -466s;
+    transform-origin: -20vw -17vh;
+    box-shadow: 100vmin 0 12.88615090130622vmin currentColor;
+}
+
+[class*='bokeh-background'] span:nth-child(11) {
+    color: #fbdbd8;
+    top: 63%;
+    left: 21%;
+    animation-duration: 168s;
+    animation-delay: -149s;
+    transform-origin: 13vw 3vh;
+    box-shadow: 100vmin 0 13.205748286547864vmin currentColor;
+}

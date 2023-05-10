@@ -1,0 +1,27 @@
+
+
+/* ----------------------- */
+/* BANNER ----------------- */
+/* ----------------------- */
+
+section {
+    height: 80vh;
+    width: 100vw;
+    display: grid;
+}
+
+section>* {
+    grid-area: 1/1;
+}
+
+.text-container {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    padding: 5vw;
+    color: black;
+    width: inherit;
+    /* height: calc(80vh - 10vw); */
+    height: 80vh;
+}
+
