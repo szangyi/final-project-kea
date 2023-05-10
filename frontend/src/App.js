@@ -4,7 +4,7 @@ import { Typography } from '@mui/material';
 import Banner from './components/Banner';
 import Button from './components/Button';
 import BokehBackground from './components/BokehBackground';
-import AccountMenu from './components/AccountMenu';
+import Nav from './components/Nav';
 
 
 function App() {
@@ -17,7 +17,7 @@ function App() {
 
     return (
         <div>
-            <AccountMenu />
+            <Nav />
             <Banner />
             <section className='test'>
                 <BokehBackground variant="dark" className="bokeh-background" />
