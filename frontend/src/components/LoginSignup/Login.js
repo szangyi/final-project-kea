@@ -9,7 +9,9 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const nav = useNavigate();
-
+    const expirationDate = new Date();
+    expirationDate.setTime(expirationDate.getTime() + 60 * 60 * 1000);
+    
     const loginHandler = async(event) =>{
         event.preventDefault();
         try {   
@@ -17,9 +19,10 @@ const Login = () => {
             const token = response.data.jwt;
             const error = response.data.error;
 
+            
             if (token){
-                Cookies.set('token', token, { expires: 1 });
-                nav('/account-info');
+                Cookies.set('token', token, { expires: expirationDate });
+                nav('/home');
             }
             else{
                 console.log(error)
