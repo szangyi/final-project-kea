@@ -47,7 +47,7 @@ def _login():
         db.close()
 
     if user:
-        token_auth = _generate_token("a@gmail.com")
+        token_auth = _generate_token(user_email)
         return token_auth
     else:
         token_auth = {
@@ -61,7 +61,6 @@ def _generate_token(email):
     
     payload = {'email': email}
     token_auth = jwt.encode(payload, g.SECRET_KEY, algorithm='HS256')
-    print(token_auth)
     
     token_json = {
         "jwt": token_auth

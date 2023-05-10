@@ -16,6 +16,7 @@ def _signup():
     user_last_name = request_user_data["lastName"]
     user_location = ""
     user_email = request_user_data["email"]
+    username = request_user_data["username"]
     user_password = request_user_data["password"]
     user_image_ID = ""
     user_interest_tags = '{}'
@@ -50,8 +51,8 @@ def _signup():
 
         
         if not user_exist:
-            sql = """INSERT INTO users (user_ID, user_first_name, user_last_name, user_location, user_email, user_password, user_image_ID, user_interest_tags, is_influencer ) VALUES ( %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
-            val = (user_ID, user_first_name,user_last_name, user_location, user_email, password_hashed, user_image_ID, user_interest_tags, is_influencer, )
+            sql = """INSERT INTO users (user_ID, username, user_first_name, user_last_name, user_location, user_email, user_password, user_image_ID, user_interest_tags, is_influencer ) VALUES ( %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
+            val = (user_ID,username, user_first_name,user_last_name, user_location, user_email, password_hashed, user_image_ID, user_interest_tags, is_influencer, )
             cursor.execute(sql, val)
             db.commit()
             

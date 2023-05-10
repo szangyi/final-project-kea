@@ -19,7 +19,7 @@ const Login = () => {
 
             if (token){
                 Cookies.set('token', token, { expires: 1 });
-                nav('/home');
+                nav('/account-info');
             }
             else{
                 console.log(error)

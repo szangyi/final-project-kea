@@ -8,19 +8,19 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Login from './components/LoginSignup/Login';
 import Signup from './components/LoginSignup/Signup';
 import HomePage from './pages/HomePage';
-import HomePageLoggedIn from './pages/HomePageLoggedIn';
+import AccountInfo from './pages/AccountInfo';
 import { authLoader } from './util/auth';
 
 const router = createBrowserRouter([
   {path: "/", element: <HomePage />},
-  {path: "/home", element: <HomePageLoggedIn />, loader: authLoader},
+  {path: "/home", element: <HomePage />},
   {path: "/login", element: <Login />},
   {path: "/signup", element: <Signup />},
   {path: "/collection", element: <HomePage />},
   {path: "/my-page", element: <HomePage />},
   {path: "/collection", element: <HomePage />},
   {path: "/my-interests", element: <HomePage />},
-  {path: "/account-info", element: <HomePage />},
+  {path: "/account-info", element: <AccountInfo />, loader: authLoader},
   {path: "/dashboard", element: <HomePage />},
   {path: "/collection", element: <HomePage />},
   {path: "/register", element: <HomePage />},

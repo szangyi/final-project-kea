@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
 
+    const [username, setEnteredUsername] = useState('');
     const [firstName, setEnteredFirstName] = useState('');
     const [lastName, setEnteredLastName] = useState('');
     const [email, setEnteredEmail] = useState('');
@@ -15,7 +16,7 @@ const Signup = () => {
         event.preventDefault();
 
         try {   
-            const response = await axios.post('/signup', { firstName, lastName, email, password });
+            const response = await axios.post('/signup', { username, firstName, lastName, email, password });
             const message = response.data.message;
 
             if (message == "success"){
@@ -39,6 +40,8 @@ const Signup = () => {
             <input type="text" placeholder="" onChange={e => setEnteredFirstName(e.target.value)}></input>  
             <label>Last name</label>
             <input type="text" placeholder="" onChange={e => setEnteredLastName(e.target.value)}></input> 
+            <label>Username</label>
+            <input type="text" placeholder="" onChange={e => setEnteredUsername(e.target.value)}></input> 
             <label>Email</label>
             <input type="email" placeholder="" onChange={e => setEnteredEmail(e.target.value)}></input>   
             <label>Password</label>
