@@ -13,9 +13,52 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 
+import { logout as logoutAction } from '../../pages/Logout'
+import { Divider } from '@mui/material';
 
-const pages = ['Products', 'Pricing', 'Blog'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+
+export function alex() {
+    alert('influence')
+}
+
+export function mycollection() {
+    alert('here should be your collection, congrats')
+}
+
+export function userdashboard() {
+    alert('here should be your collection, congrats')
+}
+
+const pages = [
+    {
+        'name': 'Switch to Influence',
+        'href': '#',
+        'action': alex,
+    },
+    {
+        'name': 'My Collection',
+        'href': '#',
+        'action': mycollection,
+    }
+]
+
+const settings = [
+    {
+        'name': 'Account',
+        'href': '/user',
+        'action': userdashboard,
+    },
+]
+
+const settings2 = [
+    {
+        'name': 'Logout',
+        'href': '/logout',
+        'action': logoutAction
+    },
+]
+
+// const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function ResponsiveAppBar() {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -44,16 +87,20 @@ function ResponsiveAppBar() {
                     {/* Desktop */}
                     {/* Put logo here */}
                     <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'right' }}>
-                        {pages.map((page) => (
-                            <Button
-                                key={page}
-                                onClick={handleCloseNavMenu}
+
+                        {pages.map(page => (
+                            <Button component="a"
+                                key={page.name}
+                                href={page.href}
+                                onClick={() => page.action()}
                                 sx={{ my: 2, color: 'white', display: 'block' }}
                             >
-                                {page}
+                                {page.name}
                             </Button>
                         ))}
+
                     </Box>
 
 
@@ -88,13 +135,20 @@ function ResponsiveAppBar() {
                                 display: { xs: 'block', md: 'none' },
                             }}
                         >
-                            {pages.map((page) => (
-                                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                    <Typography textAlign="center">{page}</Typography>
+
+                            {pages.map(page => (
+                                <MenuItem component="a"
+                                    key={page.name}
+                                    href={page.href}
+                                    onClick={() => page.action()}
+                                >
+                                    {page.name}
                                 </MenuItem>
                             ))}
+
                         </Menu>
                     </Box>
+
                     {/* Put logo here */}
                     <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 2, flexGrow: 1 }} />
                     <Typography
@@ -130,9 +184,31 @@ function ResponsiveAppBar() {
                             open={Boolean(anchorElUser)}
                             onClose={handleCloseUserMenu}
                         >
-                            {settings.map((setting) => (
+                            {/* {settings.map((setting) => (
                                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
                                     <Typography textAlign="center">{setting}</Typography>
+                                </MenuItem>
+                            ))} */}
+
+                            {settings.map(setting => (
+                                <MenuItem component="a"
+                                    key={setting.name}
+                                    href={setting.href}
+                                    onClick={() => setting.action()}
+                                >
+                                    <Typography textAlign="center">{setting.name}</Typography>
+                                </MenuItem>
+                            ))}
+
+                            <Divider />
+
+                            {settings2.map(setting => (
+                                <MenuItem component="a"
+                                    key={setting.name}
+                                    href={setting.href}
+                                    onClick={() => setting.action()}
+                                >
+                                    <Typography textAlign="center">{setting.name}</Typography>
                                 </MenuItem>
                             ))}
                         </Menu>

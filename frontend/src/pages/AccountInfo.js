@@ -1,4 +1,4 @@
-import LoggedinNav from '../components/Navigation/LoggedinNav'
+import NavLoggedin from '../components/Navigation/NavLoggedin'
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import React, { useState, useEffect } from 'react';
@@ -10,22 +10,20 @@ const AccountInfo = () => {
     const [userData, setUserData] = useState(null);
     const token = Cookies.get('token');
 
-
-
-    const getUserData = async() => {
+    const getUserData = async () => {
         try {
-        const response = await axios.get('/account-info', {
-            headers:{
-                Authorization: `${token}`,
-            }
-        });
-        const userData = response.data;
-        const error = response.data.error;
+            const response = await axios.get('/account-info', {
+                headers: {
+                    Authorization: `${token}`,
+                }
+            });
+            const userData = response.data;
+            const error = response.data.error;
 
-        setUserData(userData);
+            setUserData(userData);
 
         } catch (error) {
-        console.error('Error:', error);
+            console.error('Error:', error);
         }
     };
 
@@ -35,9 +33,9 @@ const AccountInfo = () => {
         return <div>Loading your data...</div>;
     }
 
- return (
+    return (
         <>
-            <LoggedinNav />
+            <NavLoggedin />
             <div>Hi {userData.username}</div>
             <div>First name {userData.firstName}</div>
             <div>last name {userData.lastName}</div>

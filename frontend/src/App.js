@@ -1,23 +1,27 @@
-import axios from 'axios';
 import React from 'react';
-import { useState, useEffect } from 'react';
-
-import { Typography } from '@mui/material';
-import Banner from './components/Banner';
-import Button from './components/Button';
-import BokehBackground from './components/BokehBackground';
-import Nav from './components/Nav';
-
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-// import Button from '@mui/material/Button';
-
-
+// --------------------------
+// COMPONENTS ---------------
+// --------------------------
+import Banner from './components/Banner';
+import NavLoggedin from './components/Navigation/NavLoggedin';
+import NavLoggedout from './components/Navigation/NavLoggedout';
 import Login from './components/LoginSignup/Login';
 import Signup from './components/LoginSignup/Signup';
+
+// --------------------------
+// PAGES --------------------
+// --------------------------
 import HomePage from './pages/HomePage';
 import AccountInfo from './pages/AccountInfo';
+
+// --------------------------
+// UTILS --------------------
+// --------------------------
 import { authLoader } from './util/auth';
+
+
 
 const router = createBrowserRouter([
     { path: "/", element: <HomePage /> },
@@ -35,10 +39,12 @@ const router = createBrowserRouter([
     { path: "/my-profiles", element: <HomePage /> },
 ]);
 
+
+
 const App = () => {
     return (
         <React.Fragment>
-            <Nav />
+            <NavLoggedin />
             <Banner />
             <RouterProvider router={router} />
         </React.Fragment>
