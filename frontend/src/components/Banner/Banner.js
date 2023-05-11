@@ -1,13 +1,15 @@
 import "./Banner.css"
-import BokehBackground from "./BokehBackground.js"
+import BokehBackground from "../BokehBackground/BokehBackground"
 import { Typography } from "@mui/material"
-
+import MeshGradient from "../MeshGradient/MeshGradient"
 
 const Banner = (props) => {
 
     return (
         <section>
-            <BokehBackground variant="light" className="bokeh-background"></BokehBackground>
+
+            <MeshGradient></MeshGradient>
+            {/* <BokehBackground variant="light" className="bokeh-background"></BokehBackground> */}
 
             <div className="text-container">
                 <Typography variant="h1">This is a Banner</Typography>

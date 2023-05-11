@@ -5,7 +5,7 @@ import theme from "./theme/theme.js"
 // --------------------------
 // COMPONENTS ---------------
 // --------------------------
-import Banner from './components/Banner';
+import Banner from './components/Banner/Banner';
 import NavLoggedin from './components/Navigation/NavLoggedin';
 import NavLoggedout from './components/Navigation/NavLoggedout';
 import Login from './components/LoginSignup/Login';

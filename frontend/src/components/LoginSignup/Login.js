@@ -14,7 +14,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 
-import BokehBackground from '../BokehBackground';
+import BokehBackground from '../BokehBackground/BokehBackground';
 import MyCustomButton from "../Button/Button";
 import MyCustomTextField from "../Form/TextField";
 import MeshGradient from '../MeshGradient/MeshGradient';
@@ -66,8 +66,8 @@ const Login = () => {
                         backgroundColor: "#FFFF"
                     }}
                 >
-                    <Typography component="h2" variant="h4" sx={{ mb: 5 }} >
-                        Log in
+                    <Typography component="h2" variant="h4" sx={{ mb: 2 }} >
+                        log in
                     </Typography>
                     <Box component="form" onSubmit={loginHandler} noValidate sx={{ mt: 1 }}>
                         <MyCustomTextField
@@ -99,7 +99,7 @@ const Login = () => {
                             type="submit"
                             fullWidth
                             variant="contained"
-                            sx={{ mt: 3, mb: 2 }}
+                            sx={{ mt: 3, mb: 2, }}
                         >
                             Log me in
                         </MyCustomButton>

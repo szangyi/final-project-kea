@@ -10,8 +10,14 @@
   --gradient-color-1: #E45B56; 
   --gradient-color-2: #FCA78A; 
   --gradient-color-3: #A4B0FF;
-  --gradient-color-4: #2271E6;
-  /* --gradient-color-5: #1C2A4A; */
+  --gradient-color-4: #ffcb57;
+  --gradient-color-5: #2271E6;
+
+
+  /* --gradient-color-1: #a960ee; 
+  --gradient-color-2: #ff333d; 
+  --gradient-color-3: #90e0ff;
+  --gradient-color-4: #ffcb57; */
 
 
   position: absolute;
