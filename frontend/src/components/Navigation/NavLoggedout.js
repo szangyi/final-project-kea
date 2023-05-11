@@ -51,7 +51,7 @@ function ResponsiveAppBar() {
                                 key={page.name}
                                 href={page.href}
                                 onClick={() => page.action()}
-                                sx={{ my: 2, color: 'primary.black', display: 'block' }}
+                                sx={{ my: 2, color: 'dark.black', display: 'block' }}
                             >
                                 {page.name}
                             </Button>

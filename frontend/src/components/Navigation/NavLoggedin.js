@@ -80,7 +80,7 @@ function ResponsiveAppBar() {
     };
 
     return (
-        <AppBar position="static" sx={{boxShadow: 0}} >
+        <AppBar position="static" sx={{boxShadow: 0, backgroundColor: 'transparent'}} >
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
 
@@ -91,11 +91,11 @@ function ResponsiveAppBar() {
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'right' }}>
 
                         {pages.map(page => (
-                            <Button component="a"
+                            <Button component="a" variant="navlink"
                                 key={page.name}
                                 href={page.href}
                                 onClick={() => page.action()}
-                                sx={{ my: 2, color: 'primary.black', display: 'block' }}
+                                sx={{ my: 2, color: 'dark.black', display: 'block' }}
                             >
                                 {page.name}
                             </Button>

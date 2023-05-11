@@ -52,7 +52,7 @@ const Login = () => {
                 <Box  className="test"
                     sx={{
                         // boxShadow: 3,
-                        borderRadius: 2,
+                        borderRadius: 8,
                         px: 4,
                         py: 6,
                         marginTop: 8,
@@ -62,7 +62,7 @@ const Login = () => {
                         backgroundColor: "#FFFF"
                     }}
                 >
-                    <Typography component="h1" variant="h5">
+                    <Typography component="h2" variant="h4" >
                         Sign in
                     </Typography>
                     <Box component="form" onSubmit={loginHandler} noValidate sx={{ mt: 1 }}>

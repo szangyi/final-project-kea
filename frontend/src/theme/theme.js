@@ -8,16 +8,28 @@ let theme = createTheme({
             'sans-serif',
         ].join(','),
         h1: {
-            fontFamily: 'Blinker',
+            fontFamily: 'Encode Sans Expanded',
             fontWeight: '800'
         },
         h2: {
-            fontFamily: 'Blinker',
+            fontFamily: 'Encode Sans Expanded',
+            fontWeight: '400'
+        },
+        h3: {
+            fontFamily: 'Encode Sans Expanded',
+            fontWeight: '400'
+        },
+        h4: {
+            fontFamily: 'Encode Sans Expanded',
+            fontWeight: '800'
+        },
+        navlink: {
+            fontFamily: 'Encode Sans Expanded',
             fontWeight: '400'
         }
     },
     palette: {
-        primary: {
+        dark: {
             main: "#FFFFF",
             black: "#081517",
             purple: "#997CB2",
