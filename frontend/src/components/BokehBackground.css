@@ -39,9 +39,9 @@
 }
 
 [class*='bokeh-background'] span {
-    width: 70vmin;
-    height: 70vmin;
-    border-radius: 70vmin;
+    width: 80vmin;
+    height: 80vmin;
+    border-radius: 100vmin;
     backface-visibility: hidden;
     position: absolute;
     animation: move;

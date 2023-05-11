@@ -1,5 +1,6 @@
 import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import theme from "./theme/theme.js"
 
 // --------------------------
 // COMPONENTS ---------------
@@ -20,8 +21,6 @@ import AccountInfo from './pages/AccountInfo';
 // UTILS --------------------
 // --------------------------
 import { authLoader } from './util/auth';
-
-
 
 const router = createBrowserRouter([
     { path: "/", element: <HomePage /> },
@@ -44,9 +43,9 @@ const router = createBrowserRouter([
 const App = () => {
     return (
         <React.Fragment>
-            <NavLoggedin />
-            {/* <Banner /> */}
-            <RouterProvider router={router} />
+                <NavLoggedin />
+                {/* <Banner /> */}
+                <RouterProvider router={router} />
         </React.Fragment>
     );
 

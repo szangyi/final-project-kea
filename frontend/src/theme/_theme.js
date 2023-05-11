@@ -32,6 +32,10 @@ let theme = createTheme({
         primary:{
             main: "#081517",
         },
+        focus: {
+            main: "#545454",
+            alex: "#7B7B7B"
+        },
         dark: {
             main: "#FFFFF",
             black: "#081517",
