@@ -3,6 +3,9 @@ import Cookies from 'js-cookie';
 import React, { useState, useEffect } from 'react';
 import AddFirstProfile from '../components/Influencer/AddFirstProfile';
 import Profiles from '../components/Influencer/Profiles';
+import Container from "@mui/material/Container";
+import Box from "@mui/material/Box";
+import backgroundImage from '../public/dashboard.jpg';
 
 const InfluencerPage = () => {
 
@@ -34,16 +37,41 @@ const InfluencerPage = () => {
   }
 
   const InfluencerComponent = () => {
+
     if (influencerData == "no profile") {
       return <AddFirstProfile />;
     } else {
       return <Profiles
-      influencerData = {influencerData}
+        influencerData={influencerData}
       />
     }
   };
 
-  return <div>{InfluencerComponent()}</div>;
+  const BannerComponent = () => {
+    <div>
+
+    </div>
+  }
+
+  return (
+    <React.Fragment>
+      <Container maxWidth="xl">
+
+      <Box
+          sx={{
+            backgroundImage: `url(${backgroundImage})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            minHeight: '200px',
+            width:'100%',
+          }}
+        >
+        </Box>
+
+        {InfluencerComponent()}
+      </Container>
+    </React.Fragment>
+  );
 
 
 
