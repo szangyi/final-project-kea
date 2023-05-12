@@ -1,6 +1,8 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import React, { useState, useEffect } from 'react';
+import AddFirstProfile from '../components/Influencer/AddFirstProfile';
+import Profiles from '../components/Influencer/Profiles';
 
 const InfluencerPage = () => {
 
@@ -33,17 +35,11 @@ const InfluencerPage = () => {
 
   const InfluencerComponent = () => {
     if (influencerData == "no profile") {
-      return (<div><a href="/create-profile">Add your first profile</a></div>);
+      return <AddFirstProfile />;
     } else {
-      return (<div><h2>Profile</h2>
-        <div>
-          {influencerData.map((array, index) => (
-            <div key={index}>
-              {<p>Name:{array[2]}</p>}
-            </div>
-          ))}
-        </div>
-        <a href="/create-profile">Add profile</a></div>);
+      return <Profiles
+      influencerData = {influencerData}
+      />
     }
   };
 

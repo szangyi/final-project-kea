@@ -47,8 +47,6 @@ def _():
         db.close()
 
     
-    print(type(profiles))
-    print(profiles)
     if profiles == []:
         influencer_profile_data = {
             "result": "no profile"
