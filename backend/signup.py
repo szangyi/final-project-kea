@@ -5,6 +5,7 @@ import mysql.connector
 import bcrypt
 import database_connection
 import json
+import time
 
 @post("/signup")
 def _signup():
@@ -18,6 +19,7 @@ def _signup():
     user_email = request_user_data["email"]
     username = request_user_data["username"]
     user_password = request_user_data["password"]
+    users_created_at = str(int(time.time()))
     user_image_ID = ""
     user_interest_tags = '{}'
     is_influencer = False
@@ -51,8 +53,8 @@ def _signup():
 
         
         if not user_exist:
-            sql = """INSERT INTO users (user_ID, username, user_first_name, user_last_name, user_location, user_email, user_password, user_image_ID, user_interest_tags, is_influencer ) VALUES ( %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
-            val = (user_ID,username, user_first_name,user_last_name, user_location, user_email, password_hashed, user_image_ID, user_interest_tags, is_influencer, )
+            sql = """INSERT INTO users (user_ID, username, user_first_name, user_last_name, user_location, user_email, user_password, user_image_ID, user_interest_tags, is_influencer, user_created_at ) VALUES ( %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
+            val = (user_ID,username, user_first_name,user_last_name, user_location, user_email, password_hashed, user_image_ID, user_interest_tags, is_influencer, users_created_at, )
             cursor.execute(sql, val)
             db.commit()
             

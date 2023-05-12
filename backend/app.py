@@ -6,9 +6,10 @@ import database_connection
 
 import get_functions
 import login
-import logout
 import signup
 import account_info
+import get_influencer
+import create_profile
 
 ############### RUN #####################
 try:

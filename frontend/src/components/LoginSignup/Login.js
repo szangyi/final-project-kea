@@ -22,17 +22,20 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const nav = useNavigate();
-
-    const loginHandler = async (event) => {
+    const expirationDate = new Date();
+    expirationDate.setTime(expirationDate.getTime() + 60 * 60 * 1000);
+    
+    const loginHandler = async(event) =>{
         event.preventDefault();
         try {
             const response = await axios.post('/login', { email, password });
             const token = response.data.jwt;
             const error = response.data.error;
 
-            if (token) {
-                Cookies.set('token', token, { expires: 1 });
-                nav('/account-info');
+            
+            if (token){
+                Cookies.set('token', token, { expires: expirationDate });
+                nav('/home');
             }
             else {
                 console.log(error)
