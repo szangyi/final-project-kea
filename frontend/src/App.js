@@ -1,12 +1,19 @@
-import './App.css';
-import axios from 'axios';
-import { useState, useEffect } from 'react';
+import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import theme from "./theme/theme.js"
 
-// import Button from '@mui/material/Button';
-
+// --------------------------
+// COMPONENTS ---------------
+// --------------------------
+import Banner from './components/Banner/Banner';
+import NavLoggedin from './components/Navigation/NavLoggedin';
+import NavLoggedout from './components/Navigation/NavLoggedout';
 import Login from './components/LoginSignup/Login';
 import Signup from './components/LoginSignup/Signup';
+
+// --------------------------
+// PAGES --------------------
+// --------------------------
 import HomePage from './pages/HomePage';
 import LoggedinHome from './pages/LoggedinHomePage'
 import AccountInfo from './pages/AccountInfo';
@@ -39,7 +46,17 @@ const App = () => {
   );
 }
 
+
+const App = () => {
+    return (
+        <React.Fragment>
+                {/* <NavLoggedin /> */}
+                <NavLoggedout />
+                {/* <Banner /> */}
+                <RouterProvider router={router} />
+        </React.Fragment>
+    );
+
+}
+
 export default App;
-
-
-
