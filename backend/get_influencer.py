@@ -45,14 +45,14 @@ def _():
         db.close()
 
     
-    
+    print(profiles)
     if profiles == []:
         influencer_profile_data = {
             "result": "no profile"
         }
     else:
         influencer_profile_data = {
-            "something": "something"
+            "username": ""
         }
     
     influencer_profile_data_json = json.dumps(influencer_profile_data)

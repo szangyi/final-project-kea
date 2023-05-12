@@ -33,11 +33,11 @@ const InfluencerPage= () =>{
     }
 
     const InfluencerComponent = () => {
-        if (influencerData) {
+        if (influencerData == "no profile") {
           return (<div><a href="/create-profile">Add your first profile</a></div>);
         } else {
           return (<div><h2>Profile</h2>
-          <a href="/create-profile">Add one more profile</a></div>);
+          <a href="/create-profile">Add profile</a></div>);
         }
       };
       
