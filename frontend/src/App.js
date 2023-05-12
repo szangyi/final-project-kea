@@ -1,10 +1,11 @@
 import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import theme from "./theme/theme.js"
 
 // --------------------------
 // COMPONENTS ---------------
 // --------------------------
-import Banner from './components/Banner';
+import Banner from './components/Banner/Banner';
 import NavLoggedin from './components/Navigation/NavLoggedin';
 import NavLoggedout from './components/Navigation/NavLoggedout';
 import Login from './components/LoginSignup/Login';
@@ -20,8 +21,6 @@ import AccountInfo from './pages/AccountInfo';
 // UTILS --------------------
 // --------------------------
 import { authLoader } from './util/auth';
-
-
 
 const router = createBrowserRouter([
     { path: "/", element: <HomePage /> },
@@ -44,9 +43,10 @@ const router = createBrowserRouter([
 const App = () => {
     return (
         <React.Fragment>
-            <NavLoggedin />
-            {/* <Banner /> */}
-            <RouterProvider router={router} />
+                {/* <NavLoggedin /> */}
+                <NavLoggedout />
+                {/* <Banner /> */}
+                <RouterProvider router={router} />
         </React.Fragment>
     );
 

@@ -1,3 +1,5 @@
+import "./Nav.css";
+
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -8,7 +10,6 @@ import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
@@ -29,17 +30,23 @@ export function userdashboard() {
     alert('here should be your collection, congrats')
 }
 
+export function findinfluencers() {
+    alert('here should be your collection, congrats')
+}
+
 const pages = [
     {
         'name': 'Switch to Influence',
         'href': '#',
         'action': alex,
+        'className': 'navlink-button',
     },
     {
-        'name': 'My Collection',
+        'name': 'Find your influencer',
         'href': '#',
-        'action': mycollection,
-    }
+        'action': findinfluencers,
+    },
+
 ]
 
 const settings = [
@@ -48,6 +55,11 @@ const settings = [
         'href': '/user',
         'action': userdashboard,
     },
+    {
+        'name': 'My Collection',
+        'href': '#',
+        'action': mycollection,
+    }
 ]
 
 const settings2 = [
@@ -58,7 +70,6 @@ const settings2 = [
     },
 ]
 
-// const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function ResponsiveAppBar() {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -88,17 +99,18 @@ function ResponsiveAppBar() {
                     {/* Put logo here */}
                     <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
 
-                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'right' }}>
+                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'right', alignItems: 'center' }}>
 
                         {pages.map(page => (
-                            <Button component="a" variant="navlink"
+                            <MenuItem disableRipple component="a" variant="navlink"
                                 key={page.name}
                                 href={page.href}
+                                className={page.className}
                                 onClick={() => page.action()}
-                                sx={{ my: 2, color: 'dark.black', display: 'block' }}
+                                sx={{ p: 0, marginInline: 2, my: 2, color: 'primary.main', fontWeight: 600,display: 'block', }}
                             >
                                 {page.name}
-                            </Button>
+                            </MenuItem>
                         ))}
 
                     </Box>
@@ -153,7 +165,7 @@ function ResponsiveAppBar() {
                     <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 2, flexGrow: 1 }} />
                     <Typography
                         sx={{
-                            mr: 2,
+                            mr: 0,
                             display: { xs: 'flex', md: 'none' },
                             flexGrow: 1,
                         }}
@@ -163,9 +175,9 @@ function ResponsiveAppBar() {
 
                     {/* All screen sizes */}
                     <Box sx={{ flexGrow: 0 }}>
-                        <Tooltip title="Open settings">
-                            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                        <Tooltip _title="Open settings">
+                            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0, marginLeft: 2 }}>
+                                <Avatar alt="Demy Sharp" src="/static/images/avatar/2.jpg" />
                             </IconButton>
                         </Tooltip>
                         <Menu
