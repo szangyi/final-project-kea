@@ -4,13 +4,15 @@ import jwt
 import database_connection
 import mysql.connector
 import g
+from datetime import datetime
 
 @get("/get-influencer")
 def _():
     token_request = request.headers.get('Authorization')
     token_data = jwt.decode(token_request, g.SECRET_KEY, algorithms=["HS256"])
     user_email = token_data["email"]
-    
+    influencer_profile_data = {}
+    influencer_profile_data_json = []
     
     try:
         import production
@@ -45,15 +47,22 @@ def _():
         db.close()
 
     
+    print(type(profiles))
     print(profiles)
     if profiles == []:
         influencer_profile_data = {
             "result": "no profile"
         }
+        influencer_profile_data_json = json.dumps(influencer_profile_data, default=datetime_handler)
+
     else:
-        influencer_profile_data = {
-            "username": ""
-        }
+        influencer_profile_data = profiles
+        influencer_profile_data_json = json.dumps(influencer_profile_data, default=datetime_handler)
+
     
-    influencer_profile_data_json = json.dumps(influencer_profile_data)
     return influencer_profile_data_json
+
+def datetime_handler(obj):
+    if isinstance(obj, datetime):
+        return obj.strftime('%Y-%m-%d %H:%M:%S')
+    raise TypeError(f'Object of type {type(obj)} is not JSON serializable')

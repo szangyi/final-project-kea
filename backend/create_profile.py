@@ -48,8 +48,6 @@ def _():
         val_create_profile = (influencer_ID,user_id, influencer_username,influencer_bio_description, influencer_website, influencer_instagram, influencer_youtube, influencer_tiktok, influencer_tags, influencer_share_link, profile_created_at )
         cursor.execute(sql_create_profile, val_create_profile)
         db.commit()
-        
-        
                 
 
     except Exception as ex:
@@ -59,5 +57,4 @@ def _():
     finally:
         db.close()
 
-    
     
