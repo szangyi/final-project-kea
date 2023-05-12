@@ -5,16 +5,13 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import { useNavigate } from "react-router-dom";
 
-// import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
-import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 
-import BokehBackground from '../BokehBackground/BokehBackground';
 import MyCustomButton from "../Button/Button";
 import MyCustomTextField from "../Form/TextField";
 import MeshGradient from '../MeshGradient/MeshGradient';
@@ -50,7 +47,6 @@ const Login = () => {
     return (
         <React.Fragment>
             <MeshGradient></MeshGradient>
-            {/* <BokehBackground variant="bg light" /> */}
 
             <Container component="main" maxWidth="sm">
                 <Box
@@ -71,6 +67,7 @@ const Login = () => {
                     </Typography>
                     <Box component="form" onSubmit={loginHandler} noValidate sx={{ mt: 1 }}>
                         <MyCustomTextField
+                            // component="input"
                             size="normal"
                             margin="normal"
                             required
@@ -80,8 +77,11 @@ const Login = () => {
                             name="email"
                             autoComplete="email"
                             autoFocus
+                            onChange={e => setEmail(e.target.value)}
                         />
                         <MyCustomTextField
+                            // component="input"
+                            size="normal"
                             margin="normal"
                             required
                             fullWidth
@@ -90,6 +90,7 @@ const Login = () => {
                             type="password"
                             id="password"
                             autoComplete="current-password"
+                            onChange={e => setPassword(e.target.value)}
                         />
                         {/* <FormControlLabel
                             control={<Checkbox value="remember" color="primary" />}
@@ -104,7 +105,7 @@ const Login = () => {
                             Log me in
                         </MyCustomButton>
 
-                        <Link href="#" variant="body2" sx={{ width: '100%', display: 'flex', justifyContent: 'center'}}>
+                        <Link href="#" variant="body2" sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
                             {"Don't have an account? Sign Up"}
                         </Link>
 
@@ -114,8 +115,10 @@ const Login = () => {
 
         </React.Fragment>
 
-        // <React.Fragment>
 
+        // Alanis code
+
+        // <React.Fragment>
         //     <form onSubmit={loginHandler}>
         //         <label>Email</label>
         //         <input type="email" placeholder="" onChange={e => setEmail(e.target.value)}></input>

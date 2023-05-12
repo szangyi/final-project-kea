@@ -43,7 +43,8 @@ const router = createBrowserRouter([
 const App = () => {
     return (
         <React.Fragment>
-                <NavLoggedin />
+                {/* <NavLoggedin /> */}
+                <NavLoggedout />
                 {/* <Banner /> */}
                 <RouterProvider router={router} />
         </React.Fragment>

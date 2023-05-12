@@ -1,3 +1,5 @@
+import "./Nav.css";
+
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -36,7 +38,7 @@ function ResponsiveAppBar() {
 
 
     return (
-        <AppBar position="static" sx={{boxShadow: 0}} >
+        <AppBar position="static" sx={{boxShadow: 0, backgroundColor: 'transparent'}} >
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
 
@@ -44,21 +46,20 @@ function ResponsiveAppBar() {
                     {/* Put logo here */}
                     <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
 
-                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'right' }}>
+                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'right', alignItems: 'center' }}>
 
                         {pages.map(page => (
-                            <Button component="a"
+                            <MenuItem disableRipple component="a" variant="navlink"
                                 key={page.name}
                                 href={page.href}
                                 onClick={() => page.action()}
-                                sx={{ my: 2, color: 'dark.black', display: 'block' }}
+                                sx={{ p: 0, marginInline: 2, my: 2, color: 'primary.main', fontWeight: 600,display: 'block', }}
                             >
                                 {page.name}
-                            </Button>
+                            </MenuItem>
                         ))}
 
                     </Box>
-
 
                     {/* Mobile */}
 
@@ -69,7 +70,7 @@ function ResponsiveAppBar() {
                             aria-controls="menu-appbar"
                             aria-haspopup="true"
                             onClick={handleOpenNavMenu}
-                            color="inherit"
+                            color="primary"
                         >
                             <MenuIcon />
                         </IconButton>
@@ -109,7 +110,7 @@ function ResponsiveAppBar() {
                     <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 2, flexGrow: 1 }} />
                     <Typography
                         sx={{
-                            mr: 2,
+                            mr: 0,
                             display: { xs: 'flex', md: 'none' },
                             flexGrow: 1,
                         }}
