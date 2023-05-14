@@ -12,6 +12,7 @@ import NavLoggedin from './components/Navigation/NavLoggedin';
 import NavLoggedout from './components/Navigation/NavLoggedout';
 import Login from './components/LoginSignup/Login';
 import Signup from './components/LoginSignup/Signup';
+import Footer from './components/Footer/Footer.js';
 
 // --------------------------
 // PAGES --------------------
@@ -47,11 +48,12 @@ const App = (theme) => {
 
     return (
         <div>
-            {/* <Nav /> */}
             { token ?  <NavLoggedin /> :  <NavLoggedout /> }
 
-            {/* <Banner /> */}
             <RouterProvider router={router} />
+
+            <Footer/>
+
         </div>
     );
 

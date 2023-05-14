@@ -12,6 +12,7 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
+import Logo from "../Logo/Logo";
 
 export function alex() {
     alert('kitty cat logs in')
@@ -38,13 +39,17 @@ function ResponsiveAppBar() {
 
 
     return (
-        <AppBar position="static" sx={{boxShadow: 0, backgroundColor: 'transparent'}} >
+        <AppBar position="static" sx={{ paddingInline: {xs: 2, md: 5}, boxShadow: 0, backgroundColor: 'transparent' }} >
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
 
                     {/* Desktop */}
                     {/* Put logo here */}
-                    <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+                    <Box className="logo-container" sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}>
+                        <Logo variant="black" />
+                    </Box>
+
+                    {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'right', alignItems: 'center' }}>
 
@@ -53,7 +58,7 @@ function ResponsiveAppBar() {
                                 key={page.name}
                                 href={page.href}
                                 onClick={() => page.action()}
-                                sx={{ p: 0, marginInline: 2, my: 2, color: 'primary.main', fontWeight: 600,display: 'block', }}
+                                sx={{ p: 0, marginInline: 2, my: 2, color: 'primary.main', fontWeight: 600, display: 'block', }}
                             >
                                 {page.name}
                             </MenuItem>
@@ -105,9 +110,13 @@ function ResponsiveAppBar() {
 
                         </Menu>
                     </Box>
-                    
+
                     {/* Put logo here */}
-                    <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 2, flexGrow: 1 }} />
+                    <Box className="logo-container" sx={{ display: { xs: 'block', md: 'none' }, mr: 2, flexGrow: 1 }}>
+                        <Logo variant="black" />
+                    </Box>
+
+                    {/* <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 2, flexGrow: 1 }} /> */}
                     <Typography
                         sx={{
                             mr: 0,
@@ -119,7 +128,7 @@ function ResponsiveAppBar() {
 
 
                     {/* All screen sizes */}
-            
+
 
                 </Toolbar>
             </Container>

@@ -10,7 +10,7 @@ import MyCustomButton from "../components/Button/Button";
 import MyCustomTextField from "../components/Form/TextField";
 import MeshGradient from '../components/MeshGradient/MeshGradient';
 import ChipCollection from '../components/ChipCollection/ChipCollection';
-
+import TextBox from '../components/TextBox/TextBox'
 
 const HomePage = (theme) => {
 
@@ -28,10 +28,14 @@ const HomePage = (theme) => {
             <StepsInfluencerDiscovery />
 
             <ChipCollection
-                headline1="100% verified influencers"
-                copy1="Browse in topics such as"
+                headline="100% verified influencers"
+                copy="Browse in topics such as"
+            />
 
-                
+            <TextBox 
+                headline="start discovering today"
+                copy1="For each ad campaign that you create, you can control how much you're willing to spend on clicks and conversions"
+                button="sign up"
             />
 
 

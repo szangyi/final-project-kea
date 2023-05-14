@@ -14,8 +14,10 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 
+
 import { logout as logoutAction } from '../../pages/Logout'
 import { Divider } from '@mui/material';
+import Logo from "../Logo/Logo";
 
 
 export function alex() {
@@ -97,7 +99,11 @@ function ResponsiveAppBar() {
 
                     {/* Desktop */}
                     {/* Put logo here */}
-                    <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+                    <Box className="logo-container" sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}>
+                        <Logo variant="black" />
+                    </Box>
+
+                    {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'right', alignItems: 'center' }}>
 
@@ -162,7 +168,10 @@ function ResponsiveAppBar() {
                     </Box>
 
                     {/* Put logo here */}
-                    <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 2, flexGrow: 1 }} />
+                    <Box sx={{ display: { xs: 'flex', md: 'none' }, mr: 2, flexGrow: 1 }}>
+                        <Logo variant="black" />
+                    </Box>
+                    {/* <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 2, flexGrow: 1 }} /> */}
                     <Typography
                         sx={{
                             mr: 0,

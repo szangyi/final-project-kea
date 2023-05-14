@@ -1,0 +1,10 @@
+
+
+
+.logo-container {
+    height: inherit;
+}
+
+.logo-container svg {
+    max-height: 24px;
+}

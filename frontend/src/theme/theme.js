@@ -33,13 +33,17 @@ let theme = createTheme({
             blue: {
                 dark: '#1C2A4A',
                 main: '#2271E6',
+            },
+            grey: {
+                light: '#E8E4E1',
+                main: '#B8AFA9',
             }
         },
 
+        // To fix Chip component color attribute
         salmon: {
-            dark: '#E45B56',
             main: '#FCA78A',
-            contrastText: '#fff'
+            contrastText: '#081517'
         },
 
     },
@@ -100,7 +104,6 @@ let theme = createTheme({
         IconButton: {
             // color: 'primary',
         },
-
     },
 
     spacing: 10,
