@@ -2,8 +2,9 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import Cookies from 'js-cookie';
 import { useNavigate } from "react-router-dom";
+import CreateProfile from '../components/Influencer/CreateProfile';
 
-const CreateProfilePage= () =>{
+const CreateProfilePage = () => {
 
     const [username, setUsername] = useState('');
     const [location, setLocation] = useState('');
@@ -12,6 +13,7 @@ const CreateProfilePage= () =>{
     const [instagram, setInstagram] = useState('');
     const [youTube, setYouTube] = useState('');
     const [tikTok, setTikTok] = useState('');
+    const [category, setCategory] = useState('');
     const [tags, setTags] = useState('');
     const token = Cookies.get('token');
     const nav = useNavigate();
@@ -19,11 +21,11 @@ const CreateProfilePage= () =>{
 
 
 
-    const createProfileHandler = async(event) =>{
+    const createProfileHandler = async (event) => {
         event.preventDefault();
-        try {   
-            const response = await axios.post('/create-profile', { username, location, bioDescription, website, instagram, youTube,tikTok,tags}, {
-                headers:{
+        try {
+            const response = await axios.post('/create-profile', { username, location, bioDescription, website, instagram, youTube, tikTok, category, tags }, {
+                headers: {
                     Authorization: `${token}`,
                 }
             });
@@ -33,7 +35,7 @@ const CreateProfilePage= () =>{
 
             console.log(response)
 
-          } catch (error) {
+        } catch (error) {
             console.error('Login failed:', error.response.error);
         }
     }
@@ -42,8 +44,13 @@ const CreateProfilePage= () =>{
 
 
 
-      
-    return (<div>
+
+    return (
+
+            <React.Fragment>
+
+                <CreateProfile></CreateProfile>
+                <div>
             <h2>Basic info</h2>
             <p>Some copy to explain the section</p>
             <form onSubmit={createProfileHandler}>
@@ -61,12 +68,17 @@ const CreateProfilePage= () =>{
             <input type="text" placeholder="" onChange={e => setYouTube(e.target.value)}></input>  
             <label>TikTok</label>
             <input type="text" placeholder="" onChange={e => setTikTok(e.target.value)}></input>  
+            <label>Category</label>
+            <input type="text" placeholder="" onChange={e => setCategory(e.target.value)}></input> 
             <label>Tags</label>
             <input type="text" placeholder="" onChange={e => setTags(e.target.value)}></input> 
             <button>Submit</button>
 
             </form>
-    </div>);
+    </div>
+            </React.Fragment>
+    
+    );
 
 
 

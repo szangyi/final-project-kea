@@ -21,6 +21,7 @@ def _():
     influencer_youtube = request_user_data["youTube"]
     influencer_tiktok = request_user_data["tikTok"]
     influencer_tags = request_user_data["tags"]
+    influencer_category = request_user_data["category"]
     influencer_share_link = ""
     profile_created_at = str(int(time.time()))
 
@@ -44,8 +45,8 @@ def _():
         
         user_id = user[0]
         
-        sql_create_profile = """INSERT INTO influencers_profile (influencer_ID, user_ID, influencer_username, influencer_bio_description, influencer_website, influencer_instagram, influencer_youtube, influencer_tiktok, influencer_tags, influencer_share_link, profile_created_at ) VALUES (%s, %s,%s, %s, %s, %s, %s, %s, %s, %s, %s)"""
-        val_create_profile = (influencer_ID,user_id, influencer_username,influencer_bio_description, influencer_website, influencer_instagram, influencer_youtube, influencer_tiktok, influencer_tags, influencer_share_link, profile_created_at )
+        sql_create_profile = """INSERT INTO influencers_profile (influencer_ID, user_ID, influencer_username, influencer_bio_description, influencer_website, influencer_instagram, influencer_youtube, influencer_tiktok, influencer_tags, influencer_category, influencer_share_link, profile_created_at ) VALUES (%s,%s, %s,%s, %s, %s, %s, %s, %s, %s, %s, %s)"""
+        val_create_profile = (influencer_ID,user_id, influencer_username,influencer_bio_description, influencer_website, influencer_instagram, influencer_youtube, influencer_tiktok, influencer_tags,influencer_category, influencer_share_link, profile_created_at )
         cursor.execute(sql_create_profile, val_create_profile)
         db.commit()
                 

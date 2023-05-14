@@ -48,43 +48,36 @@ const InfluencerPage = () => {
     }
   };
 
-  const BannerComponent = () => {
-    <div>
-
-    </div>
-  }
-
   return (
     <React.Fragment>
       <Container maxWidth="xl" >
 
 
-      <Box
+        <Box
           sx={{
             backgroundImage: `url(${backgroundImage})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             minHeight: '200px',
-            width:'100%',
+            width: '100%',
           }}
         >
           Influence people
         </Box>
 
         <Container
-            sx={{
-                maxWidth:'xl',
-                display:'flex',
-                flexDirection: 'column',
-                alignItems:'center',
-                justifyContent:'center'
-            }} >
-              <h2>Profiles</h2>
+          sx={{
+            maxWidth: 'xl',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }} >
+          <h2>Profiles</h2>
 
-              {InfluencerComponent()}
+          {InfluencerComponent()}
 
-
-            </Container>
+        </Container>
 
       </Container>
     </React.Fragment>
