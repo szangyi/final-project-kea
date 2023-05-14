@@ -50,7 +50,7 @@ const Signup = () => {
 
 
         <React.Fragment>
-            <MeshGradient></MeshGradient>
+            <MeshGradient variant="full"></MeshGradient>
 
             <Container component="main" maxWidth="md">
                 <Box 
@@ -70,10 +70,10 @@ const Signup = () => {
                     <Typography component="h2" variant="h4" sx={{ mb: 2 }} >
                         sign up
                     </Typography>
-                    <Box fullWidth component="form" onSubmit={submitHandler} noValidate sx={{ mt: 1, width: '100%' }}>
+                    <Box component="form" onSubmit={submitHandler} noValidate sx={{ mt: 1, width: '100%' }}>
 
                         <Grid container spacing={1}>
-                            <Grid item xs={6} fullWidth>
+                            <Grid item xs={6} >
                                 <MyCustomTextField
                                     size="normal"
                                     margin="normal"
@@ -116,7 +116,7 @@ const Signup = () => {
                         />
 
                         <Grid container spacing={1}>
-                            <Grid item xs={6} fullWidth>
+                            <Grid item xs={6} >
 
                                 <MyCustomTextField
                                     size="normal"

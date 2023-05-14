@@ -4,24 +4,35 @@
 /* BANNER ----------------- */
 /* ----------------------- */
 
-section {
-    height: 80vh;
+section.banner{
     width: 100vw;
     display: grid;
 }
 
-section>* {
+section.banner>* {
     grid-area: 1/1;
 }
 
-.text-container {
-    position: absolute;
-    display: flex;
-    align-items: center;
-    padding: 5vw;
+
+/* CHILDREN */
+
+.banner .text-container {
     color: black;
     width: inherit;
-    /* height: calc(80vh - 10vw); */
+    height: inherit;
+}
+
+.banner button {
+    width:fit-content;
+}
+
+
+/* VARIANTS */
+
+section.banner[variant='large'] {
     height: 80vh;
 }
 
+section.banner[variant='medium'] {
+    height: 60vh;
+}

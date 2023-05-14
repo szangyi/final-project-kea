@@ -42,3 +42,42 @@ body {
 body {
     /* color: black !important; */
 }
+
+
+/* sx={{ px: { xs: 5, sm: 5, md: 15 }, py: { xs: 5, sm: 5, md: 10 } }}> */
+
+.sectionPadding {
+    padding-inline: calc(5 * 10px);
+    padding-block: calc(5 * 10px);
+}
+
+/* sm */
+@media (min-width: 600px) {
+
+}
+
+/* lg */
+@media (min-width: 1200px) {
+    .sectionPadding {
+        padding-inline: calc(10 * 10px);
+        padding-block: calc(10 * 10px);
+    }
+}
+
+.bannerPadding {
+    padding-inline: calc(5 * 10px);
+}
+
+/* sm */
+@media (min-width: 600px) {
+    .bannerPadding {
+        padding-inline: calc(8 * 10px);
+    }
+}
+
+/* lg */
+@media (min-width: 1200px) {
+    .bannerPadding {
+        padding-inline: calc(10 * 10px);
+    }
+}

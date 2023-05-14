@@ -4,6 +4,8 @@ import { styled } from "@mui/material/styles"
 
 const MyCustomButton = styled(Button)(({ theme }) => ({
 
+    // width: "fit-content",
+    paddingInline: 30,
     borderRadius: "0",
     backgroundColor: theme.palette.customColors.purple.light,
     color: "black",

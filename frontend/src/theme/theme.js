@@ -16,6 +16,7 @@ let theme = createTheme({
         },
         info: {
             main: '#a4b0ff',
+            contrastText: '#fff'
         },
 
         customColors: {
@@ -26,13 +27,20 @@ let theme = createTheme({
             },
             salmon: {
                 dark: '#E45B56',
-                main: '#FCA78A'
+                main: '#FCA78A',
+                contrastText: '#fff'
             },
             blue: {
                 dark: '#1C2A4A',
                 main: '#2271E6',
             }
-        }
+        },
+
+        salmon: {
+            dark: '#E45B56',
+            main: '#FCA78A',
+            contrastText: '#fff'
+        },
 
     },
 
@@ -65,11 +73,12 @@ let theme = createTheme({
         h6: {
             fontWeight: 800,
             fontFamily: 'Encode Sans Expanded',
-            fontSize: '1.2rem',
+            fontSize: '1rem',
         },
         subtitle1: {
-            fontSize: '1rem',
-            textDecoration: 'uppercase',
+            fontSize: '.8rem',
+            fontWeight: 500,
+            textTransform: 'uppercase',
         },
         button: {
             fontWeight: 600,
@@ -90,8 +99,10 @@ let theme = createTheme({
         },
         IconButton: {
             // color: 'primary',
-        }
+        },
+
     },
+
     spacing: 10,
 });
 

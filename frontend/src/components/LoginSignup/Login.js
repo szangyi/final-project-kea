@@ -3,7 +3,7 @@ import '../../style/style.css'
 import React, { useState } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useRouteLoaderData } from "react-router-dom";
 
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
@@ -49,7 +49,7 @@ const Login = () => {
 
     return (
         <React.Fragment>
-            <MeshGradient></MeshGradient>
+            <MeshGradient variant="full" ></MeshGradient>
 
             <Container component="main" maxWidth="sm">
                 <Box
