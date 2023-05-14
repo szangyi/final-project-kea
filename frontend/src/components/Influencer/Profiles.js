@@ -1,24 +1,82 @@
 
 import React from 'react';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import Button from '@mui/material/Button';
+import AddIcon from '@mui/icons-material/Add';
+import Container from "@mui/material/Container";
+
+
 
 const Profiles = (props) => {
+
+
     const influencerData = props.influencerData;
-    return (<div><h2>Profile</h2>
-    <div>
-      {influencerData.map((array, index) => (
-        <div key={index}>
-          {<p>Name:{array[2]}</p>}
-        </div>
-      ))}
-    </div>
-    <a href="/create-profile">Add profile</a></div>);
+    return (
+        <Container
+            sx={{
+                maxWidth:'xl',
+                display:'flex',
+                flexDirection: 'column',
+                alignItems:'center',
+                justifyContent:'center'
+            }} >
+            <h2>Profiles</h2>
+            <TableContainer component={Paper} elevation={0}>
+                <Table sx={{ minWidth: 650 }} >
+                    <TableHead>
+                        <TableRow>
+                            <TableCell></TableCell>
+                            <TableCell align="right">Name</TableCell>
+                            <TableCell align="right">Category</TableCell>
+                            <TableCell align="right">Linked accounts</TableCell>
+                            <TableCell></TableCell>
+                            <TableCell >
+                                <Button href="/create-profile" variant="outlined" startIcon={<AddIcon />}>
+                                    Add new profile
+                                </Button>
+                            </TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {influencerData.map((array, index) => (
+                            <TableRow
+                                key={index}
+                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                            >
+                                <TableCell component="th" scope="row">
+                                    Image
+                                </TableCell>
+                                <TableCell align="right">{array[2]}</TableCell>
+                                <TableCell align="right">{array[9]}</TableCell>
+                                <TableCell align="right">Linked accounts</TableCell>
+                                <TableCell align="right">
+                                    <Button href="#" variant="outlined">
+                                        Edit
+                                    </Button></TableCell>
+                                <TableCell align="left">
+                                    <Button href="#" variant="outlined" >
+                                        Preview
+                                    </Button>
+                                </TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+        </Container>
+    );
 
 
-  
-  
-  }
-  
-  export default Profiles;
-  
-  
-  
+
+
+}
+
+export default Profiles;
+
+

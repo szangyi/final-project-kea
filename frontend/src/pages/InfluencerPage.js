@@ -5,7 +5,8 @@ import AddFirstProfile from '../components/Influencer/AddFirstProfile';
 import Profiles from '../components/Influencer/Profiles';
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
-import backgroundImage from '../public/dashboard.jpg';
+import backgroundImage from '../public/dashboard.png';
+import MeshGradient from "../components/MeshGradient/MeshGradient"
 
 const InfluencerPage = () => {
 
@@ -55,7 +56,8 @@ const InfluencerPage = () => {
 
   return (
     <React.Fragment>
-      <Container maxWidth="xl">
+      <Container maxWidth="xl" >
+
 
       <Box
           sx={{
@@ -66,6 +68,7 @@ const InfluencerPage = () => {
             width:'100%',
           }}
         >
+          Influence people
         </Box>
 
         {InfluencerComponent()}
