@@ -71,7 +71,21 @@ const InfluencerPage = () => {
           Influence people
         </Box>
 
-        {InfluencerComponent()}
+        <Container
+            sx={{
+                maxWidth:'xl',
+                display:'flex',
+                flexDirection: 'column',
+                alignItems:'center',
+                justifyContent:'center'
+            }} >
+              <h2>Profiles</h2>
+
+              {InfluencerComponent()}
+
+
+            </Container>
+
       </Container>
     </React.Fragment>
   );

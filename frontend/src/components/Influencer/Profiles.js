@@ -9,7 +9,6 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
-import Container from "@mui/material/Container";
 
 
 
@@ -18,15 +17,6 @@ const Profiles = (props) => {
 
     const influencerData = props.influencerData;
     return (
-        <Container
-            sx={{
-                maxWidth:'xl',
-                display:'flex',
-                flexDirection: 'column',
-                alignItems:'center',
-                justifyContent:'center'
-            }} >
-            <h2>Profiles</h2>
             <TableContainer component={Paper} elevation={0}>
                 <Table sx={{ minWidth: 650 }} >
                     <TableHead>
@@ -69,7 +59,6 @@ const Profiles = (props) => {
                     </TableBody>
                 </Table>
             </TableContainer>
-        </Container>
     );
 
 
