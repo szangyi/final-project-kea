@@ -18,25 +18,16 @@ import SocialAccounts from './Form/SocialAccounts';
 
 const steps = ['Basic info', 'Category', 'Profile image', 'Social accounts'];
 
-function getStepContent(step) {
-    switch (step) {
-      case 0:
-        return <BasicInfo />;
-      case 1:
-        return <Category />;
-      case 2:
-        return <ProfileImage />
-      case 3:
-        return <SocialAccounts />
-      default:
-        throw new Error('Unknown step');
-    }
-}
+
 
 const theme = createTheme();
 
-const CreateProfile = () =>  {
+
+
+const CreateProfile = () => {
+
   const [activeStep, setActiveStep] = React.useState(0);
+  const [formData, setFormData] = React.useState({})
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
@@ -45,6 +36,55 @@ const CreateProfile = () =>  {
   const handleBack = () => {
     setActiveStep(activeStep - 1);
   };
+
+  const handleData = (data) =>{
+    setFormData((prevData) => ({ ...prevData, ...data }));
+
+  }
+
+
+
+  function getStepContent(step) {
+    switch (step) {
+      case 0:
+        return <BasicInfo onDataChange={handleData}/>;
+      case 1:
+        return <Category onDataChange={handleData}/>;
+      case 2:
+        return <ProfileImage />
+      case 3:
+        return <SocialAccounts onDataChange={handleData} />
+      default:
+        throw new Error('Unknown step');
+    }
+  }
+
+
+
+
+  console.log(formData)
+
+  //   const loginHandler = async(event) =>{
+  //     event.preventDefault();
+  //     try {
+  //         const response = await axios.post('/api/login', { email, password });
+  //         const token = response.data.jwt;
+  //         const error = response.data.error;
+
+
+  //         if (token){
+  //             Cookies.set('token', token, { expires: expirationDate });
+  //             nav('/home');
+  //         }
+  //         else {
+  //             console.log(error)
+  //         }
+
+  //     } catch (error) {
+  //         console.error('Login failed:', error.response.error);
+  //     }
+  // }
+
 
   return (
     <ThemeProvider theme={theme}>

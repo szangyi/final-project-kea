@@ -24,7 +24,7 @@ const CreateProfilePage = () => {
     const createProfileHandler = async (event) => {
         event.preventDefault();
         try {
-            const response = await axios.post('/create-profile', { username, location, bioDescription, website, instagram, youTube, tikTok, category, tags }, {
+            const response = await axios.post('/api/create-profile', { username, location, bioDescription, website, instagram, youTube, tikTok, category, tags }, {
                 headers: {
                     Authorization: `${token}`,
                 }

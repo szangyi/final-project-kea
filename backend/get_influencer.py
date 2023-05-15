@@ -6,7 +6,7 @@ import mysql.connector
 import g
 from datetime import datetime
 
-@get("/get-influencer")
+@get("/api/get-influencer")
 def _():
     token_request = request.headers.get('Authorization')
     token_data = jwt.decode(token_request, g.SECRET_KEY, algorithms=["HS256"])

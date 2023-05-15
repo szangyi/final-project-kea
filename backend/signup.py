@@ -7,7 +7,7 @@ import database_connection
 import json
 import time
 
-@post("/signup")
+@post("/api/signup")
 def _signup():
     
     request_user_data = request.json

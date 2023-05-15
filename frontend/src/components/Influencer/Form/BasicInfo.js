@@ -4,12 +4,22 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import MyCustomTextField from "../../Form/TextField.js";
 
-const BasicInfo = () => {
+const BasicInfo = ({onDataChange}) => {
+
+    const [basicData, setBasicData] = useState({
+        username:'',
+        location: '',
+        bio: ''
+
+    });
+
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setBasicData((prevData) => ({ ...prevData, [name]: value }));
+        onDataChange(basicData); 
+    }
 
 
-    const [username, setUsername] = useState('');
-    const [location, setLocation] = useState('');
-    const [bio, setBio] = useState('');
 
     return (
         <React.Fragment>
@@ -37,7 +47,8 @@ const BasicInfo = () => {
                             name="username"
                             autoComplete="username"
                             autoFocus
-                            onChange={e => setUsername(e.target.value)}
+                            value = {basicData.username}
+                            onChange={handleChange}
                         />
                         <MyCustomTextField
                             size="normal"
@@ -49,9 +60,10 @@ const BasicInfo = () => {
                             type="text"
                             id="location"
                             autoComplete="location"
-                            onChange={e => setLocation(e.target.value)}
+                            value = {basicData.location}
+                            onChange={handleChange}
                         />
-                                                <MyCustomTextField
+                        <MyCustomTextField
                             size="normal"
                             margin="normal"
                             required
@@ -61,7 +73,8 @@ const BasicInfo = () => {
                             type="text"
                             id="bio"
                             autoComplete="bio"
-                            onChange={e => setBio(e.target.value)}
+                            value = {basicData.bio}
+                            onChange={handleChange}
                         />
 
                     </Box>

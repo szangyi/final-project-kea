@@ -12,7 +12,7 @@ const AccountInfo = () => {
 
     const getUserData = async () => {
         try {
-            const response = await axios.get('/account-info', {
+            const response = await axios.get('/api/account-info', {
                 headers: {
                     Authorization: `${token}`,
                 }

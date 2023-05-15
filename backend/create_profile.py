@@ -6,7 +6,7 @@ import g
 import uuid
 import time
 
-@post("/create-profile")
+@post("/api/create-profile")
 def _():
     request_user_data = request.json
     token_request = request.headers.get('Authorization')
@@ -16,6 +16,7 @@ def _():
     influencer_ID = str(uuid.uuid4())
     influencer_username = request_user_data["username"]
     influencer_bio_description = request_user_data["bioDescription"]
+    influencer_location = request_user_data["location"]
     influencer_website = request_user_data["website"]
     influencer_instagram = request_user_data["instagram"]
     influencer_youtube = request_user_data["youTube"]
@@ -45,8 +46,8 @@ def _():
         
         user_id = user[0]
         
-        sql_create_profile = """INSERT INTO influencers_profile (influencer_ID, user_ID, influencer_username, influencer_bio_description, influencer_website, influencer_instagram, influencer_youtube, influencer_tiktok, influencer_tags, influencer_category, influencer_share_link, profile_created_at ) VALUES (%s,%s, %s,%s, %s, %s, %s, %s, %s, %s, %s, %s)"""
-        val_create_profile = (influencer_ID,user_id, influencer_username,influencer_bio_description, influencer_website, influencer_instagram, influencer_youtube, influencer_tiktok, influencer_tags,influencer_category, influencer_share_link, profile_created_at )
+        sql_create_profile = """INSERT INTO influencers_profile (influencer_ID, user_ID, influencer_username, influencer_bio_description, influencer_location, influencer_website, influencer_instagram, influencer_youtube, influencer_tiktok, influencer_tags, influencer_category, influencer_share_link, profile_created_at ) VALUES (%s, %s,%s, %s,%s, %s, %s, %s, %s, %s, %s, %s, %s)"""
+        val_create_profile = (influencer_ID,user_id, influencer_username,influencer_bio_description, influencer_location, influencer_website, influencer_instagram, influencer_youtube, influencer_tiktok, influencer_tags,influencer_category, influencer_share_link, profile_created_at )
         cursor.execute(sql_create_profile, val_create_profile)
         db.commit()
                 

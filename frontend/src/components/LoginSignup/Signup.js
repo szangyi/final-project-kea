@@ -28,7 +28,7 @@ const Signup = () => {
         event.preventDefault();
 
         try {
-            const response = await axios.post('/signup', { username, firstName, lastName, email, password });
+            const response = await axios.post('/api/signup', { username, firstName, lastName, email, password });
             const message = response.data.message;
 
             if (message == "success") {
