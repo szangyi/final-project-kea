@@ -5,24 +5,28 @@ import database_connection
 import g
 import uuid
 import time
+import json
 
 @post("/api/create-profile")
 def _():
     request_user_data = request.json
+    print("#kdhkejwhdfekjwdhejkfhwekf")
+    print(request_user_data)
     token_request = request.headers.get('Authorization')
     token_data = jwt.decode(token_request, g.SECRET_KEY, algorithms=["HS256"])
     user_email = token_data["email"]
     
     influencer_ID = str(uuid.uuid4())
-    influencer_username = request_user_data["username"]
-    influencer_bio_description = request_user_data["bioDescription"]
-    influencer_location = request_user_data["location"]
-    influencer_website = request_user_data["website"]
-    influencer_instagram = request_user_data["instagram"]
-    influencer_youtube = request_user_data["youTube"]
-    influencer_tiktok = request_user_data["tikTok"]
-    influencer_tags = request_user_data["tags"]
-    influencer_category = request_user_data["category"]
+    influencer_username = request_user_data["formData"]["username"]
+    influencer_bio_description = request_user_data["formData"]["bio"]
+    influencer_location = request_user_data["formData"]["location"]
+    influencer_website = request_user_data["formData"]["website"]
+    influencer_instagram = request_user_data["formData"]["instagram"]
+    influencer_youtube = request_user_data["formData"]["youTube"]
+    influencer_tiktok = request_user_data["formData"]["tikTok"]
+    influencer_tags_list = request_user_data["formData"]["hashtag"]
+    influencer_tags  = json.dumps(influencer_tags_list)
+    influencer_category = request_user_data["formData"]["category"]
     influencer_share_link = ""
     profile_created_at = str(int(time.time()))
 

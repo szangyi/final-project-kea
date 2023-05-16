@@ -1,20 +1,19 @@
 import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
-import Hashtags from './Hashtags';
 import Container from "@mui/material/Container";
 
 const categoryOptions = [
-    { label: 'Beauty' },
-    { label: 'Fashion' },
-    { label: 'Health' },
-    { label: 'Travel' },
-    { label: 'Personal development' },
-    { label: 'Business' },
-    { label: 'Food' },
-    { label: 'Pets' },
-    { label: 'Sports' },
-    { label: 'Lifestyle' },
+    { category: 'Beauty' },
+    { category: 'Fashion' },
+    { category: 'Health' },
+    { category: 'Travel' },
+    { category: 'Personal development' },
+    { category: 'Business' },
+    { category: 'Food' },
+    { category: 'Pets' },
+    { category: 'Sports' },
+    { category: 'Lifestyle' },
 ]
 
 const Category = ({onDataChange}) => {
@@ -34,14 +33,12 @@ const Category = ({onDataChange}) => {
                 disablePortal
                 id="category"
                 options={categoryOptions}
-                getOptionLabel={(option) => option.label}
+                getOptionLabel={(option) => option ? option.category : ''}
                 sx={{ width: 300 }}
                 renderInput={(params) => <TextField {...params} label="Category" />}
                 onChange={handleChange}
-                value = {categoryData.label}
-                defaultValue={categoryOptions[0]}
+                value = {categoryData.category}
             />
-                  <Hashtags/>
 
         </Container>
     );

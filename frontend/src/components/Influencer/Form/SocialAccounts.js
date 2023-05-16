@@ -25,7 +25,6 @@ const SocialAccounts = ({onDataChange}) => {
         instagram: '',
         youTube: '',
         tikTok: ''
-
     });
 
     const handleChange = (event) => {
