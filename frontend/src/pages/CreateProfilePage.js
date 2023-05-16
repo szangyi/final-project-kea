@@ -63,7 +63,7 @@ const CreateProfile = () => {
       case 2:
           return <Hashtags onDataChange={handleData}/>;
       case 3:
-        return <ProfileImage />
+        return <ProfileImage onDataChange={handleData}/>
       case 4:
         return <SocialAccounts onDataChange={handleData} />
       default:
@@ -72,7 +72,7 @@ const CreateProfile = () => {
   }
 
 
-
+  console.log(formData)
 
     const createInfluencerProfile = async() =>{
       try {

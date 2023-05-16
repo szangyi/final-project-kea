@@ -1,24 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 
-const ProfileImage = () => {
+const ProfileImage = ({ onDataChange }) => {
 
-    return (
-        <Button variant="contained" component="label">
+  const handleChange = (event) => {
+    const file = event.target.files[0];
+    onDataChange({image:file.name});
+  };
+
+  return (
+    <Stack>
+      <input
+        accept="image/*"
+        id="profileImage"
+        multiple
+        type="file"
+        onChange={handleChange}
+      />
+      <label htmlFor="profileImage">
+        <Button variant="raised" component="span">
           Upload
-          <input hidden accept="image/*" multiple type="file" />
         </Button>
-    );
-  
-  
-  
-  }
-  
-  export default ProfileImage;
-  
+      </label>
+    </Stack>
+  );
+};
+
+export default ProfileImage;
 
 
 
-  
+

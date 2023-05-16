@@ -46,7 +46,7 @@ const Profiles = (props) => {
                             </TableCell>
                             <TableCell align="right">{array[2]}</TableCell>
                             <TableCell align="right">{array[10]}</TableCell>
-                            <TableCell align="right" alignItems="center">
+                            <TableCell align="right" >
                                 {array[5] && (
                                     <div>
                                         <a href={`/${array[5]}`}>WEB</a>
