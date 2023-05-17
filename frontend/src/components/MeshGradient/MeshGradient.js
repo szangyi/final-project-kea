@@ -14,7 +14,7 @@ const MeshGradient = (props) => {
         gradient.initGradient('#gradient-canvas')
 
         console.log(document.querySelector('#gradient-canvas'))
-    })
+    }, []); // Empty dependency array ensures that the effect runs only once
 
     return (
         <canvas id="gradient-canvas" data-transition-in variant={props.variant} />
