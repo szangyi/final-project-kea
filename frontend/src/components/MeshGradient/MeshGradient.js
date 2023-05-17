@@ -17,7 +17,7 @@ const MeshGradient = (props) => {
     })
 
     return (
-        <canvas id="gradient-canvas" data-transition-in variant={props.variant}/>
+        <canvas id="gradient-canvas" data-transition-in variant={props.variant} />
     )
 }
 
