@@ -28,7 +28,7 @@ const Login = () => {
     const loginHandler = async(event) =>{
         event.preventDefault();
         try {
-            const response = await axios.post('/login', { email, password });
+            const response = await axios.post('/api/login', { email, password });
             const token = response.data.jwt;
             const error = response.data.error;
 

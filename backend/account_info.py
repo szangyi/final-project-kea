@@ -7,7 +7,7 @@ import json
 
 
 
-@get("/account-info")
+@get("/api/account-info")
 def _account_info():
     token_request = request.headers.get('Authorization')
     

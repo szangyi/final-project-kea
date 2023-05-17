@@ -8,7 +8,7 @@ import jwt
 import json
 
 
-@post("/login")
+@post("/api/login")
 def _login():
     
     request_user_data = request.json
