@@ -14,7 +14,7 @@ const MeshGradient = (props) => {
         gradient.initGradient('#gradient-canvas')
 
         console.log(document.querySelector('#gradient-canvas'))
-    })
+    }, []);
 
     return (
         <canvas id="gradient-canvas" data-transition-in variant={props.variant} />

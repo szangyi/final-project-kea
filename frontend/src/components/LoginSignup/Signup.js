@@ -45,10 +45,7 @@ const Signup = () => {
 
     }
 
-
     return (
-
-
         <React.Fragment>
             <MeshGradient variant="full"></MeshGradient>
 
@@ -172,27 +169,6 @@ const Signup = () => {
 
         </React.Fragment>
 
-
-        // Alanis code
-
-        // <form onSubmit={submitHandler}>
-        //     <label>First name</label>
-        //     <input type="text" placeholder="" onChange={e => setEnteredFirstName(e.target.value)}></input>  
-
-        //     <label>Last name</label>
-        //     <input type="text" placeholder="" onChange={e => setEnteredLastName(e.target.value)}></input> 
-
-        //     <label>Username</label>
-        //     <input type="text" placeholder="" onChange={e => setEnteredUsername(e.target.value)}></input> 
-
-        //     <label>Email</label>
-        //     <input type="email" placeholder="" onChange={e => setEnteredEmail(e.target.value)}></input>   
-
-        //     <label>Password</label>
-        //     <input type="password" placeholder="" onChange={e => setEnteredPassword(e.target.value)}></input>  
-
-        //     <button>Submit</button>
-        // </form>
     );
 };
 

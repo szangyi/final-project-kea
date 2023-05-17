@@ -30,6 +30,14 @@ def _signup():
     password_encode = user_password.encode('utf-8')
     password_hashed = bcrypt.hashpw(password_encode, salt)
 
+    
+    # VALIDATION ##########################
+
+    # EMAIL
+    user_email, error_e = g._is_item_email(user_email)
+    if error_e : return g._send(400, error_e)
+
+
 
     try:
         import production
@@ -54,7 +62,7 @@ def _signup():
         
         if not user_exist:
             sql = """INSERT INTO users (user_ID, username, user_first_name, user_last_name, user_location, user_email, user_password, user_image_ID, user_interest_tags, is_influencer, user_created_at ) VALUES ( %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
-            val = (user_ID,username, user_first_name,user_last_name, user_location, user_email, password_hashed, user_image_ID, user_interest_tags, is_influencer, users_created_at, )
+            val = (user_ID, username, user_first_name,user_last_name, user_location, user_email, password_hashed, user_image_ID, user_interest_tags, is_influencer, users_created_at, )
             cursor.execute(sql, val)
             db.commit()
             
