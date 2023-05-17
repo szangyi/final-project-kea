@@ -6,31 +6,48 @@ import g
 import uuid
 import time
 import json
+import os
+import base64
+
 
 @post("/api/create-profile")
 def _():
-    request_user_data = request.json
-    print("#kdhkejwhdfekjwdhejkfhwekf")
-    print(request_user_data)
+
     token_request = request.headers.get('Authorization')
     token_data = jwt.decode(token_request, g.SECRET_KEY, algorithms=["HS256"])
     user_email = token_data["email"]
     
     influencer_ID = str(uuid.uuid4())
-    influencer_username = request_user_data["formData"]["username"]
-    influencer_bio_description = request_user_data["formData"]["bio"]
-    influencer_location = request_user_data["formData"]["location"]
-    influencer_website = request_user_data["formData"]["website"]
-    influencer_instagram = request_user_data["formData"]["instagram"]
-    influencer_youtube = request_user_data["formData"]["youTube"]
-    influencer_tiktok = request_user_data["formData"]["tikTok"]
-    influencer_tags_list = request_user_data["formData"]["hashtag"]
+    influencer_username = request.forms.get("username")
+    influencer_bio_description = request.forms.get("bio")
+    influencer_location = request.forms.get("location")
+    influencer_website = request.forms.get("website")
+    influencer_instagram = request.forms.get("instagram")
+    influencer_youtube = request.forms.get("youTube")
+    influencer_tiktok = request.forms.get("tikTok")
+    influencer_tags_list =request.forms.get("hashtag")
     influencer_tags  = json.dumps(influencer_tags_list)
-    influencer_category = request_user_data["formData"]["category"]
+    influencer_category = request.forms.get("category")
+    profile_image_delete = request.files.get("image")
+    
+    print("klwdjklefjwelj")
+    print(profile_image_delete)
+
     influencer_share_link = ""
     profile_created_at = str(int(time.time()))
 
+    image_id = str(uuid.uuid4())
+
+        
+  
     
+    if profile_image_delete is not None:
+        filename,file_extension = os.path.splitext(profile_image_delete.filename)
+
+
+        image_name =f"{image_id}{file_extension}"
+        profile_image_delete.save(f"images/{image_name}")
+
     try:
         import production
         db_config = database_connection.PRODUCTION_CONN
@@ -50,8 +67,8 @@ def _():
         
         user_id = user[0]
         
-        sql_create_profile = """INSERT INTO influencers_profile (influencer_ID, user_ID, influencer_username, influencer_bio_description, influencer_location, influencer_website, influencer_instagram, influencer_youtube, influencer_tiktok, influencer_tags, influencer_category, influencer_share_link, profile_created_at ) VALUES (%s, %s,%s, %s,%s, %s, %s, %s, %s, %s, %s, %s, %s)"""
-        val_create_profile = (influencer_ID,user_id, influencer_username,influencer_bio_description, influencer_location, influencer_website, influencer_instagram, influencer_youtube, influencer_tiktok, influencer_tags,influencer_category, influencer_share_link, profile_created_at )
+        sql_create_profile = """INSERT INTO influencers_profile (influencer_ID, user_ID, influencer_username, influencer_bio_description, influencer_location, influencer_website, influencer_instagram, influencer_youtube, influencer_tiktok, influencer_tags, influencer_category, influencer_share_link, profile_image_delete, profile_created_at ) VALUES (%s,%s, %s,%s, %s,%s, %s, %s, %s, %s, %s, %s, %s, %s)"""
+        val_create_profile = (influencer_ID,user_id, influencer_username,influencer_bio_description, influencer_location, influencer_website, influencer_instagram, influencer_youtube, influencer_tiktok, influencer_tags,influencer_category, influencer_share_link, image_name, profile_created_at )
         cursor.execute(sql_create_profile, val_create_profile)
         db.commit()
                 

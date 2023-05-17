@@ -1,4 +1,4 @@
-from bottle import run, default_app, static_file, get
+from bottle import Bottle, run, default_app, static_file, get, request
 
 ############# PY CLASSES ################
 import g

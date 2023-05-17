@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import CssBaseline from '@mui/material/CssBaseline';
 import AppBar from '@mui/material/AppBar';
@@ -33,6 +33,8 @@ const CreateProfile = () => {
 
   const [activeStep, setActiveStep] = React.useState(0);
   const [formData, setFormData] = React.useState({})
+
+
   const token = Cookies.get('token');
   const nav = useNavigate();
 
@@ -71,16 +73,31 @@ const CreateProfile = () => {
     }
   }
 
-
-  console.log(formData)
+  console.log(formData.image)
 
     const createInfluencerProfile = async() =>{
-      try {
-          const response = await axios.post('/api/create-profile', { formData }, {
+      const formDataNew = new FormData();
+      formDataNew.append('username', formData.username);
+      formDataNew.append('bio', formData.bio);
+      formDataNew.append('location', formData.location);
+      formDataNew.append('website', formData.website);
+      formDataNew.append('instagram', formData.instagram);
+      formDataNew.append('youTube', formData.youTube);
+      formDataNew.append('tikTok', formData.tikTok);
+      formDataNew.append('hashtag', formData.hashtag);
+      formDataNew.append('category', formData.category);
+      formDataNew.append('image', formData.image);
+
+
+    try {
+          const response = await axios.post('/api/create-profile', formDataNew, {
             headers: {
-                Authorization: `${token}`,
-            }
+              Authorization: `${token}`,
+              'Content-Type': 'multipart/form-data',
+          },
         });
+
+        console.log(response)
 
           nav('/dashboard');
 

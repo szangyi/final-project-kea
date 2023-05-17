@@ -7,7 +7,7 @@ const ProfileImage = ({ onDataChange }) => {
 
   const handleChange = (event) => {
     const file = event.target.files[0];
-    onDataChange({image:file.name});
+    onDataChange({image:file});
   };
 
   return (
