@@ -1,4 +1,4 @@
-
+import "./Influencer.css"
 import React from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -9,6 +9,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
+import Image from '@mui/icons-material/Image'
 
 
 
@@ -35,14 +36,15 @@ const Profiles = (props) => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
+  
                     {influencerData.map((array, index) => (
-
+                        
                         <TableRow
                             key={index}
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                         >
                             <TableCell component="th" scope="row">
-                                Image
+                            <img className="profile-image" src= {`http://127.0.0.1:7878/profile_images/${array[12]}`} alt="Profile image" />
                             </TableCell>
                             <TableCell align="right">{array[2]}</TableCell>
                             <TableCell align="right">{array[10]}</TableCell>

@@ -46,7 +46,7 @@ def _():
 
 
         image_name =f"{image_id}{file_extension}"
-        profile_image_delete.save(f"images/{image_name}")
+        profile_image_delete.save(f"images/profile_images/{image_name}")
 
     try:
         import production
