@@ -3,9 +3,11 @@ import { useParams } from 'react-router-dom';
 import Box from "@mui/material/Box";
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import ProfileLanding from '../components/Influencer/ProfileLanding'
 
 
 const ProfileLandingPage = () => {
+    const [profileData, setProfileData] = useState(null);
     const influencerID  = useParams();
     const token = Cookies.get('token');
 
@@ -16,8 +18,8 @@ const ProfileLandingPage = () => {
                     Authorization: `${token}`,
                 },
             });
-
-            console.log(response)
+            const profileData = response.data;
+            setProfileData(profileData);
             
 
         } catch {
@@ -28,10 +30,14 @@ const ProfileLandingPage = () => {
 
     getProfile();
 
+    if (profileData === null) {
+        return <div>Loading your data...</div>;
+      }
+
 
     return (
         <Box>
-        Profile
+            <ProfileLanding profileData = {profileData} />
         </Box>
     );
 
