@@ -10,6 +10,7 @@ import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
 import DeleteProfile from "./ProfileActions/DeleteProfile";
+import { Link } from 'react-router-dom';
 
 
 const Profiles = (props) => {
@@ -80,7 +81,7 @@ const Profiles = (props) => {
                                 </Button></TableCell>
 
                             <TableCell align="left">
-                                <Button href="#" variant="outlined" >
+                                <Button component={Link} to={`/profile/${array[0]}`} variant="outlined" >
                                     Preview
                                 </Button>
                             </TableCell>

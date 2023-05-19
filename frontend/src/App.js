@@ -19,6 +19,7 @@ import LoggedinHome from './pages/LoggedinHomePage'
 import AccountInfo from './pages/AccountInfo';
 import InfluencerPage from './pages/InfluencerPage'
 import CreateProfilePage from './pages/CreateProfilePage';
+import ProfileLandingPage from './pages/ProfileLandingPage.js';
 import { authLoader } from './util/auth';
 
 const router = createBrowserRouter([
@@ -34,7 +35,7 @@ const router = createBrowserRouter([
   {path: "/dashboard", element: <InfluencerPage />, loader: authLoader},
   {path: "/collection", element: <HomePage />},
   {path: "/create-profile", element: <CreateProfilePage />, loader: authLoader},
-  {path: "/my-profiles", element: <HomePage />},
+  {path: "/profile/:id", element: <ProfileLandingPage />, loader: authLoader},
 
 ]);
 

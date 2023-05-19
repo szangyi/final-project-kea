@@ -12,6 +12,7 @@ import get_influencer
 import create_profile
 import get_image
 import delete_profile
+import get_influencer_profile
 
 #############  IMAGES  #################
 
