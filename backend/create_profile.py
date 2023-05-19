@@ -7,7 +7,6 @@ import uuid
 import time
 import json
 import os
-import base64
 
 
 @post("/api/create-profile")
