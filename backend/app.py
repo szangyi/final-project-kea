@@ -10,6 +10,14 @@ import signup
 import account_info
 import get_influencer
 import create_profile
+import get_image
+import delete_profile
+
+#############  IMAGES  #################
+
+@get("/images/<filepath:re:.*\.(jpg|png|gif|ico|svg)>")
+def img(filepath):
+    return static_file(filepath, root="./images")
 
 ############### RUN #####################
 try:

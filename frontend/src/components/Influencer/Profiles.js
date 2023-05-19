@@ -1,5 +1,5 @@
-
-import React from 'react';
+import "./Influencer.css"
+import React, { useState } from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -9,11 +9,15 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
-
+import DeleteProfile from "./ProfileActions/DeleteProfile";
 
 
 const Profiles = (props) => {
 
+
+    const deleteProfile = (profileID) => {
+        console.log(`Deleting profile with ID ${profileID}`);
+    };
 
     const influencerData = props.influencerData;
     return (
@@ -35,6 +39,7 @@ const Profiles = (props) => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
+
                     {influencerData.map((array, index) => (
 
                         <TableRow
@@ -42,7 +47,7 @@ const Profiles = (props) => {
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                         >
                             <TableCell component="th" scope="row">
-                                Image
+                                <img className="profile-image" src={`http://127.0.0.1:7878/profile_images/${array[12]}`} alt="Profile image" />
                             </TableCell>
                             <TableCell align="right">{array[2]}</TableCell>
                             <TableCell align="right">{array[10]}</TableCell>
@@ -52,17 +57,17 @@ const Profiles = (props) => {
                                         <a href={`/${array[5]}`}>WEB</a>
                                     </div>
                                 )}
-                                { array[6] && (
+                                {array[6] && (
                                     <div>
                                         <a href={`/${array[6]}`}>IG</a>
                                     </div>
                                 )}
-                                { array[7] && (
+                                {array[7] && (
                                     <div>
                                         <a href={`/${array[6]}`}>YT</a>
                                     </div>
                                 )}
-                                { array[8] && (
+                                {array[8] && (
                                     <div>
                                         <a href={`/${array[6]}`}>TK</a>
                                     </div>
@@ -80,14 +85,16 @@ const Profiles = (props) => {
                                 </Button>
                             </TableCell>
                             <TableCell align="left">
-                                <Button href="#" variant="outlined">
-                                    Delete
-                                </Button></TableCell>
+                                
+                            <DeleteProfile onDelete={deleteProfile} influencerID={array[0]} />
+
+                            </TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
             </Table>
         </TableContainer>
+
     );
 
 
