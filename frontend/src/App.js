@@ -19,7 +19,9 @@ import LoggedinHome from './pages/LoggedinHomePage'
 import AccountInfo from './pages/AccountInfo';
 import InfluencerPage from './pages/InfluencerPage'
 import CreateProfilePage from './pages/CreateProfilePage';
-import ProfileLandingPage from './pages/ProfileLandingPage.js';
+import ProfileLandingPage from './pages/ProfileLandingPage';
+import CollectionPage from './pages/CollectionPage';
+import Page404 from './pages/Page404'
 import { authLoader } from './util/auth';
 
 const router = createBrowserRouter([
@@ -27,15 +29,13 @@ const router = createBrowserRouter([
   {path: "/home", element: <LoggedinHome />},
   {path: "/login", element: <Login />},
   {path: "/signup", element: <Signup />},
-  {path: "/collection", element: <HomePage />},
-  {path: "/my-page", element: <HomePage />},
-  {path: "/collection", element: <HomePage />},
   {path: "/my-interests", element: <HomePage />},
   {path: "/account-info", element: <AccountInfo />, loader: authLoader},
   {path: "/dashboard", element: <InfluencerPage />, loader: authLoader},
-  {path: "/collection", element: <HomePage />},
+  {path: "/collection", element: <CollectionPage />, loader: authLoader},
   {path: "/create-profile", element: <CreateProfilePage />, loader: authLoader},
   {path: "/profile/:id", element: <ProfileLandingPage />, loader: authLoader},
+  {path: '*', element: <Page404 replace />},
 
 ]);
 
