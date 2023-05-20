@@ -2,13 +2,9 @@ import React, { useState } from 'react';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
+import { HASHTAGSOPTIONS } from '../../../util/Constants';
 
-const hashtagsOptions = [
-    { tag: '#love' },
-    { tag: '#instagood'},
-    { tag: '#photography' },
-    { tag: '#fashion' }
-]
+
 
 const Hashtags = ({onDataChange}) => {
     const [hashtagData, setHashtagData] = useState([]);
@@ -24,7 +20,7 @@ const Hashtags = ({onDataChange}) => {
             <Autocomplete
                 multiple
                 id="hashtags"
-                options={hashtagsOptions}
+                options={HASHTAGSOPTIONS}
                 getOptionLabel={(option) => (option && option.tag) || ''}
                 onChange= {handleChange}
                 value = {hashtagData.tag}

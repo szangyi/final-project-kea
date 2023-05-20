@@ -2,19 +2,9 @@ import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import Container from "@mui/material/Container";
+import { CATEGORYOPTIONS } from '../../../util/Constants';
 
-const categoryOptions = [
-    { category: 'Beauty' },
-    { category: 'Fashion' },
-    { category: 'Health' },
-    { category: 'Travel' },
-    { category: 'Personal development' },
-    { category: 'Business' },
-    { category: 'Food' },
-    { category: 'Pets' },
-    { category: 'Sports' },
-    { category: 'Lifestyle' },
-]
+
 
 const Category = ({onDataChange}) => {
     const [categoryData, setCategoryData] = useState({
@@ -32,7 +22,7 @@ const Category = ({onDataChange}) => {
             <Autocomplete
                 disablePortal
                 id="category"
-                options={categoryOptions}
+                options={CATEGORYOPTIONS}
                 getOptionLabel={(option) => option ? option.category : ''}
                 sx={{ width: 300 }}
                 renderInput={(params) => <TextField {...params} label="Category" />}
