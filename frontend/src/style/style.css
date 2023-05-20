@@ -42,3 +42,10 @@ body {
 body {
     /* color: black !important; */
 }
+
+/* ----------------------- */
+/* COLLECTION PAGE ------------ */
+/* ----------------------- */
+.css-nzpbv3-MuiPaper-root-MuiDrawer-paper{
+    top: auto !important;
+}

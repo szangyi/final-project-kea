@@ -19,4 +19,5 @@ const HASHTAGSOPTIONS = [
     { tag: '#photography' },
     { tag: '#fashion' }
 ]
+
 export { STEPS, CATEGORYOPTIONS, HASHTAGSOPTIONS };
