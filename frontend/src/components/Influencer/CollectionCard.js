@@ -10,9 +10,11 @@ import Cookies from 'js-cookie';
 import axios from 'axios';
 
 
-const CollectionCard = () => {
+const CollectionCard = ({ searchQuery }) => {
     const token = Cookies.get('token');
     const [profilesData, setProfilesData] = useState(null);
+
+
 
     const collectionHandler = async () => {
         try {
@@ -34,17 +36,25 @@ const CollectionCard = () => {
 
     collectionHandler();
 
+
+
     if (profilesData === null) {
         return <div>Loading data...</div>;
     }
+
+    console.log(profilesData)
+
+    const filteredProfile = profilesData.filter((profile) =>
+        profile[2].toLowerCase().includes(searchQuery.toLowerCase())
+    );
 
     return (
 
 
         <Container
-        sx={{ display: 'flex', flexDirection: 'row', gap: '20px', flexWrap: 'wrap' }}
+            sx={{ display: 'flex', flexDirection: 'row', gap: '20px', flexWrap: 'wrap' }}
         >
-            {profilesData.map((array, index) => (
+            {filteredProfile.map((array, index) => (
 
                 <Card key={index} sx={{ width: 350, borderRadius: '20px' }}>
                     <CardMedia
@@ -88,7 +98,7 @@ const CollectionCard = () => {
                     </CardActions>
                     <CardActions>
                         <Button size="small">Share</Button>
-                        <Button size="small">Learn More</Button>
+                        <Button size="small">View profile</Button>
                     </CardActions>
                 </Card>
             ))}

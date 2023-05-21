@@ -3,38 +3,46 @@ import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import backgroundImage from '../public/dashboard.png';
 import CssBaseline from '@mui/material/CssBaseline';
-import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import MailIcon from '@mui/icons-material/Mail';
+import TextField from '@mui/material/TextField';
 import Toolbar from '@mui/material/Toolbar';
 
 import CollectionCard from '../components/Influencer/CollectionCard'
 
 const drawerWidth = 240;
 
+const SearchBar = ({ onChange, value }) => {
+    return (
+        <TextField
+            label="Search"
+            variant="outlined"
+            value={value}
+            onChange={onChange}
+        />
+    );
+};
+
 const CollectionPage = (props) => {
-    const { window } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
+    const [searchQuery, setSearchQuery] = useState('');
+
+
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
 
+    const handleSearchQueryChange = (event) => {
+        setSearchQuery(event.target.value);
+    };
+
+
+
+
     const drawer = (
         <div>
-            <List>
-                {['Search', 'Filter', 'Location', 'Category', 'Tags'].map((text, index) => (
-                    <ListItem key={text} disablePadding>
-                        <ListItemText primary={text} />
-                    </ListItem>
-                ))}
-            </List>
+            <SearchBar onChange={handleSearchQueryChange} value={searchQuery} />
+
         </div>
     );
 
@@ -96,7 +104,7 @@ const CollectionPage = (props) => {
                     sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
                 >
                     <Toolbar />
-                    <CollectionCard />
+                    <CollectionCard searchQuery={searchQuery}/>
                 </Box>
             </Box>
 
