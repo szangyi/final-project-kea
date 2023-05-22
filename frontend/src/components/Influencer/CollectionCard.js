@@ -10,7 +10,7 @@ import Cookies from 'js-cookie';
 import axios from 'axios';
 
 
-const CollectionCard = ({ searchQuery }) => {
+const CollectionCard = ({ searchQuery, searchCategory}) => {
     const token = Cookies.get('token');
     const [profilesData, setProfilesData] = useState(null);
 
@@ -42,11 +42,17 @@ const CollectionCard = ({ searchQuery }) => {
         return <div>Loading data...</div>;
     }
 
-    console.log(profilesData)
 
-    const filteredProfile = profilesData.filter((profile) =>
-        profile[2].toLowerCase().includes(searchQuery.toLowerCase())
-    );
+
+    const filteredProfile = profilesData.filter((profile) => {
+        const matchesSearchQuery =
+          profile[2].toLowerCase().includes(searchQuery.toLowerCase());
+    
+          const matchesCategory = searchCategory === 'All categories' || profile[10] === searchCategory;
+    
+        return matchesSearchQuery && matchesCategory;
+    });
+    
 
     return (
 

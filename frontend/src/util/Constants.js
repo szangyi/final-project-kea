@@ -13,6 +13,8 @@ const CATEGORYOPTIONS = [
     { category: 'Lifestyle' },
 ]
 
+
+
 const HASHTAGSOPTIONS = [
     { tag: '#love' },
     { tag: '#instagood'},
