@@ -19,6 +19,23 @@ def _login():
     password_encode = user_password.encode('utf-8')
     password_hashed = bcrypt.checkpw(password_encode, salt)
     
+
+    # VALIDATION ##########################
+    
+    validation_errors = []
+
+    user_email, error_e = g._is_item_email(user_email)
+    if error_e:
+        validation_errors.append(error_e)
+
+    user_password, error_pw = g._is_password(user_password)
+    if error_pw:
+        validation_errors.append(error_pw)
+
+    if validation_errors:
+        return g._send(400, validation_errors)
+
+
     
     try:
         import production
@@ -53,6 +70,7 @@ def _login():
         token_auth = {
             "error": "Wrong credentials"
         }
+        response.status= 400
         return token_auth
 
 
