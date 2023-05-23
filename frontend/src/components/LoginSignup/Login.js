@@ -48,7 +48,7 @@ const Login = () => {
         } else {
             try {
                 console.log('at least try')
-                const response = await axios.post('/login', { email, password });
+                const response = await axios.post('/api/login', { email, password });
                 console.log({ response })
                 const token = response.data.jwt;
                 const error = response.data.error;
