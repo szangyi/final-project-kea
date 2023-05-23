@@ -77,7 +77,7 @@ const Login = () => {
             <MeshGradient variant="full" ></MeshGradient>
 
             <Container component="main" maxWidth="sm">
-                <Box
+                <Box className="glassmorphism"
                     sx={{
                         // boxShadow: 3,
                         borderRadius: 1,

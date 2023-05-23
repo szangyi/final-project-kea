@@ -1,6 +1,3 @@
-
-
-
 /* ----------------------- */
 /* RESET ----------------- */
 /* ----------------------- */
@@ -52,9 +49,7 @@ body {
 }
 
 /* sm */
-@media (min-width: 600px) {
-
-}
+@media (min-width: 600px) {}
 
 /* lg */
 @media (min-width: 1200px) {
@@ -80,4 +75,17 @@ body {
     .bannerPadding {
         padding-inline: calc(10 * 10px);
     }
+}
+
+
+
+
+.glassmorphism {
+    /* From https://css.glass */
+    background: rgba(255, 255, 255, 0.6) !important;
+    border-radius: 15px !important;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1) !important;
+    backdrop-filter: blur(5px) !important;
+    -webkit-backdrop-filter: blur(5px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
 }

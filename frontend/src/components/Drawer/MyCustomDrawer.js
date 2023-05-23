@@ -15,7 +15,7 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 
 
-const drawerWidth = 240;
+const drawerWidth = 200;
 
 const MyCustomDrawer = (props) => {
 
@@ -50,7 +50,9 @@ const MyCustomDrawer = (props) => {
         <Drawer
             variant="permanent"
             anchor="left"
+            
             sx={{
+                py: 3,
                 width: drawerWidth,
                 flexShrink: 0,
                 [`& .MuiDrawer-paper`]: { width: drawerWidth, boxSizing: 'border-box', position: 'unset' },
@@ -64,10 +66,10 @@ const MyCustomDrawer = (props) => {
                     {itemsList.map(item => {
                         const { text, icon, onClick } = item;
                         return (
-                            <ListItem
+                            <ListItem disableGutters
                                 key={item.text} >
                                 <ListItemButton onClick={item.action}>
-                                    {icon && <ListItemIcon>{item.icon}</ListItemIcon>}
+                                    {icon && <ListItemIcon sx={{minWidth: '40px'}} >{item.icon}</ListItemIcon>}
                                     <ListItemText primary={item.text} />
                                 </ListItemButton>
                             </ListItem>

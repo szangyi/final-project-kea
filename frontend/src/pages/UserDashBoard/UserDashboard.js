@@ -52,7 +52,7 @@ const UserDashboard = (theme) => {
             // add username here
             />
 
-            <Box component="main" sx={{ flexGrow: 1, p: 3, display: 'flex' }}>
+            <Box component="main" sx={{ flexGrow: 1, p: { xs: 1, md: 3}, display: 'flex' }}>
 
                 <MyCustomDrawer />
                 <Outlet context={userData}/>

@@ -67,7 +67,7 @@ const Signup = () => {
             <MeshGradient variant="full"></MeshGradient>
 
             <Container component="main" maxWidth="md">
-                <Box
+                <Box className="glassmorphism"
                     sx={{
                         borderRadius: 1,
                         px: 4,
