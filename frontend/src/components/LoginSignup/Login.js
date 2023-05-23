@@ -40,14 +40,7 @@ const Login = () => {
 
     const loginHandler = async (event) => {
         event.preventDefault();
-<<<<<<< HEAD
-        try {
-            const response = await axios.post('/api/login', { email, password });
-            const token = response.data.jwt;
-            const error = response.data.error;
-=======
         const { email, password } = values; // Destructure values because of Formik
->>>>>>> validation
 
         if (errors.email || errors.password) {
             console.log(errors)

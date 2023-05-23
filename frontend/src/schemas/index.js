@@ -22,7 +22,7 @@ export const signupSchema = Yup.object().shape({
         .required('Required field'),
     email: Yup.string()
         // .email('Invalid email address')
-        .matches(regexEmail, { message: "Please enter a valid e-mail address. Correct format: john@doe.com" })
+        .matches(regexEmail, { message: "Please enter a valid e-mail address. Correct format: test@email.com" })
         .required('Required field'),
     password: Yup.string()
         .min(6, 'Min. 6 characters')

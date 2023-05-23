@@ -42,12 +42,7 @@ const Signup = () => {
         const { username, firstName, lastName, email, password } = values; // Destructure values because of Formik
 
         try {
-<<<<<<< HEAD
-            const response = await axios.post('/api/signup', { username, firstName, lastName, email, password });
-=======
             const response = await axios.post('/signup', { username, firstName, lastName, email, password });
-            console.log(response)
->>>>>>> validation
             const message = response.data.message;
 
             if (message === "Signup succeeded") {
