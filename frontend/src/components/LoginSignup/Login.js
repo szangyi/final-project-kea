@@ -3,12 +3,12 @@ import '../../style/style.css'
 import React, { useState } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import { useNavigate, useRouteLoaderData } from "react-router-dom";
+import { useNavigate, useRouteLoaderData, Link } from "react-router-dom";
 
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import { Alert } from '@mui/material';
-import Link from "@mui/material/Link";
+// import Link from "@mui/material/Link";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
@@ -145,9 +145,16 @@ const Login = () => {
                             Log me in
                         </MyCustomButton>
 
-                        <Link href="#" variant="body2" sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+                        {/* <Link href="#" variant="body2" sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
                             {"Don't have an account? Sign Up"}
-                        </Link>
+                        </Link> */}
+
+                        <Typography variant="body2" sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+                            <Link to="/signup">
+                                Don't have an account? Sign Up.
+                            </Link>
+                        </Typography>
+
 
                     </Box>
                 </Box>

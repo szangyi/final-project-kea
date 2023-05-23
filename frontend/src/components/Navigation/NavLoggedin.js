@@ -20,33 +20,33 @@ import { Divider } from '@mui/material';
 import Logo from "../Logo/Logo";
 
 
-export function alex() {
-    alert('influence')
-}
+// export function alex() {
+//     alert('influence')
+// }
 
-export function mycollection() {
-    alert('here should be your collection, congrats')
-}
+// export function mycollection() {
+//     alert('here should be your collection, congrats')
+// }
 
-export function userdashboard() {
-    alert('here should be your collection, congrats')
-}
+// export function userdashboard() {
+//     alert('here should be your collection, congrats')
+// }
 
-export function findinfluencers() {
-    alert('here should be your collection, congrats')
-}
+// export function findinfluencers() {
+//     alert('here should be your collection, congrats')
+// }
 
 const pages = [
     {
         'name': 'Switch to Influence',
         'href': '#',
-        'action': alex,
+        // 'action': alex,
         'className': 'navlink-button',
     },
     {
         'name': 'Find your influencer',
         'href': '#',
-        'action': findinfluencers,
+        // 'action': findinfluencers,
     },
 
 ]
@@ -54,13 +54,13 @@ const pages = [
 const settings = [
     {
         'name': 'Account',
-        'href': '/user',
-        'action': userdashboard,
+        'href': '/user-dashboard',
+        // 'action': userdashboard,
     },
     {
         'name': 'My Collection',
         'href': '#',
-        'action': mycollection,
+        // 'action': mycollection,
     }
 ]
 
@@ -68,7 +68,7 @@ const settings2 = [
     {
         'name': 'Logout',
         'href': '/logout',
-        'action': logoutAction
+        // 'action': logoutAction
     },
 ]
 
@@ -112,7 +112,7 @@ function ResponsiveAppBar() {
                                 key={page.name}
                                 href={page.href}
                                 className={page.className}
-                                onClick={() => page.action()}
+                                // onClick={() => page.action()}
                                 sx={{ p: 0, marginInline: 2, my: 2, color: 'primary.main', fontWeight: 600,display: 'block', }}
                             >
                                 {page.name}
@@ -158,7 +158,7 @@ function ResponsiveAppBar() {
                                 <MenuItem component="a"
                                     key={page.name}
                                     href={page.href}
-                                    onClick={() => page.action()}
+                                    // onClick={() => page.action()}
                                 >
                                     {page.name}
                                 </MenuItem>
@@ -215,7 +215,7 @@ function ResponsiveAppBar() {
                                 <MenuItem component="a"
                                     key={setting.name}
                                     href={setting.href}
-                                    onClick={() => setting.action()}
+                                    // onClick={() => setting.action()}
                                 >
                                     <Typography textAlign="center">{setting.name}</Typography>
                                 </MenuItem>
@@ -227,7 +227,7 @@ function ResponsiveAppBar() {
                                 <MenuItem component="a"
                                     key={setting.name}
                                     href={setting.href}
-                                    onClick={() => setting.action()}
+                                    // onClick={() => setting.action()}
                                 >
                                     <Typography textAlign="center">{setting.name}</Typography>
                                 </MenuItem>

@@ -1,8 +1,8 @@
-import React, {useState } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
-import Link from "@mui/material/Link";
+// import Link from "@mui/material/Link";
 import { Grid } from '@mui/material';
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -87,7 +87,7 @@ const Signup = () => {
                     {userExists && (
                         <Alert severity="error">{userExists}</Alert>
                     )}
-                    
+
                     <Box component="form" onSubmit={submitHandler} sx={{ mt: 1, width: '100%' }}>
 
                         <Grid container spacing={1}>
@@ -191,9 +191,15 @@ const Signup = () => {
                             Sign up
                         </MyCustomButton>
 
-                        <Link href="#" variant="body2" sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+                        {/* <Link href="#" variant="body2" sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
                             {"I already have an account, I want to log in!"}
-                        </Link>
+                        </Link> */}
+
+                        <Typography variant="body2" sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+                            <Link to="/login">
+                                I already have an account, I want to log in!
+                            </Link>
+                        </Typography>
 
                     </Box>
                 </Box>

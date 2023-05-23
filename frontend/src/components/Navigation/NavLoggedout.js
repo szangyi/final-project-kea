@@ -1,6 +1,8 @@
 import "./Nav.css";
 
 import * as React from 'react';
+import { useNavigate } from "react-router-dom";
+
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -14,19 +16,40 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import Logo from "../Logo/Logo";
 
-export function alex() {
-    alert('kitty cat logs in')
-}
 
-const pages = [
-    {
-        'name': 'Log in',
-        'href': '#',
-        'action': alex,
-    }
-]
+
+
 
 function ResponsiveAppBar() {
+    // const nav = useNavigate();
+
+    // function alex() {
+    //     alert('fetaserase')
+    //     nav('/login')
+    // }
+
+    let pages = [];
+
+    // not working because of SPA
+    // will have to create state handling anyways when we merge navs
+    if (window.location.pathname.includes('login')) {
+        pages = [
+            {
+                name: 'Sign up',
+                href: '/signup',
+                // action: alex,
+            },
+        ];
+    } else {
+        pages = [
+            {
+                name: 'Log in',
+                href: '/login',
+                // action: alex,
+            },
+        ];
+    }
+
     const [anchorElNav, setAnchorElNav] = React.useState(null);
 
     const handleOpenNavMenu = (event) => {
@@ -39,7 +62,7 @@ function ResponsiveAppBar() {
 
 
     return (
-        <AppBar position="static" sx={{ paddingInline: {xs: 2, md: 5}, boxShadow: 0, backgroundColor: 'transparent' }} >
+        <AppBar position="static" sx={{ paddingInline: { xs: 2, md: 5 }, boxShadow: 0, backgroundColor: 'transparent' }} >
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
 
@@ -57,13 +80,12 @@ function ResponsiveAppBar() {
                             <MenuItem disableRipple component="a" variant="navlink"
                                 key={page.name}
                                 href={page.href}
-                                onClick={() => page.action()}
+                                // onClick={() => page.action()}
                                 sx={{ p: 0, marginInline: 2, my: 2, color: 'primary.main', fontWeight: 600, display: 'block', }}
                             >
                                 {page.name}
                             </MenuItem>
                         ))}
-
                     </Box>
 
                     {/* Mobile */}

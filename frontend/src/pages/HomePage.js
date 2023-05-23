@@ -18,6 +18,7 @@ const HomePage = (theme) => {
         <>
 
             <Banner
+                variant="large"
                 headline1="people trust people"
                 headline2="not ads"
                 copy1="And we are here to help you to find your rocks."
@@ -32,7 +33,7 @@ const HomePage = (theme) => {
                 copy="Browse in topics such as"
             />
 
-            <TextBox 
+            <TextBox
                 headline="start discovering today"
                 copy1="For each ad campaign that you create, you can control how much you're willing to spend on clicks and conversions"
                 button="sign up"
