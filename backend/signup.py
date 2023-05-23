@@ -1,4 +1,6 @@
 from bottle import  post, request, redirect, response
+from bottle import HTTPResponse
+
 import g
 import uuid
 import mysql.connector
@@ -30,6 +32,34 @@ def _signup():
     password_encode = user_password.encode('utf-8')
     password_hashed = bcrypt.hashpw(password_encode, salt)
 
+    
+    # VALIDATION ##########################
+
+    validation_errors = []
+
+    user_first_name, error_fn = g._is_first_name(user_first_name)
+    if error_fn:
+        validation_errors.append(error_fn)
+
+    user_last_name, error_ln = g._is_last_name(user_last_name)
+    if error_ln:
+        validation_errors.append(error_ln)
+
+    username, error_un = g._is_username(username)
+    if error_un:
+        validation_errors.append(error_un)
+
+    user_email, error_e = g._is_item_email(user_email)
+    if error_e:
+        validation_errors.append(error_e)
+
+    user_password, error_pw = g._is_password(user_password)
+    if error_pw:
+        validation_errors.append(error_pw)
+
+    if validation_errors:
+        return g._send(400, validation_errors)
+
 
     try:
         import production
@@ -46,27 +76,27 @@ def _signup():
         db.autocommit = False
         cursor = db.cursor()
 
-        sql = """ SELECT * FROM users WHERE user_email = %s"""
-        cursor.execute(sql, (user_email,))
+        sql = """ SELECT * FROM users WHERE user_email = %s OR username = %s"""
+        cursor.execute(sql, (user_email, username))
         user_exist = cursor.fetchone()
         db.commit()
 
         
         if not user_exist:
             sql = """INSERT INTO users (user_ID, username, user_first_name, user_last_name, user_location, user_email, user_password, user_image_ID, user_interest_tags, is_influencer, user_created_at ) VALUES ( %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
-            val = (user_ID,username, user_first_name,user_last_name, user_location, user_email, password_hashed, user_image_ID, user_interest_tags, is_influencer, users_created_at, )
+            val = (user_ID, username, user_first_name,user_last_name, user_location, user_email, password_hashed, user_image_ID, user_interest_tags, is_influencer, users_created_at, )
             cursor.execute(sql, val)
             db.commit()
             
             message = {
-                "message": "success"
+                "message": "Signup succeeded"
             }
+            response.status = 200
         else:
             message = {
-                "message": "already exist"
+                "message": "User already exist"
             }
-            
-        response.status = 200
+            response.status = 409 # Conflict
 
     except Exception as ex:
         print(ex)
