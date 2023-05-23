@@ -1,9 +1,7 @@
-import React, { useState } from 'react';
+import React, {useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import { Grid } from '@mui/material';
 import Box from "@mui/material/Box";
@@ -13,36 +11,56 @@ import Container from "@mui/material/Container";
 import MyCustomButton from "../Button/Button";
 import MyCustomTextField from "../Form/TextField";
 import MeshGradient from '../MeshGradient/MeshGradient';
+import { Alert } from '@mui/material';
 
+// VALIDATION
+import { useFormik } from 'formik';
+import { signupSchema } from '../../schemas';
 
 const Signup = () => {
 
-    const [username, setEnteredUsername] = useState('');
-    const [firstName, setEnteredFirstName] = useState('');
-    const [lastName, setEnteredLastName] = useState('');
-    const [email, setEnteredEmail] = useState('');
-    const [password, setEnteredPassword] = useState('');
+    const [userExists, setUserExists] = useState('');
+
+    const { values, errors, touched, handleBlur, handleChange } = useFormik({
+        initialValues: {
+            firstName: '',
+            lastName: '',
+            username: '',
+            email: '',
+            password: '',
+        },
+
+        validationSchema: signupSchema,
+    });
+
+    console.log(errors)
+
     const nav = useNavigate();
 
     const submitHandler = async (event) => {
         event.preventDefault();
+        const { username, firstName, lastName, email, password } = values; // Destructure values because of Formik
 
         try {
             const response = await axios.post('/signup', { username, firstName, lastName, email, password });
+            console.log(response)
             const message = response.data.message;
 
-            if (message == "success") {
+            if (message === "Signup succeeded") {
                 nav('/login');
             }
             else {
                 console.log(message)
             }
+            console.log(values)
 
         } catch (error) {
-            console.error('Signup failed');
+            if (error.response && error.response.status === 409) {
+                setUserExists("User already exists maaaan");
+            } else {
+                console.error('Signup failed:', error);
+            }
         }
-
-
     }
 
     return (
@@ -50,9 +68,8 @@ const Signup = () => {
             <MeshGradient variant="full"></MeshGradient>
 
             <Container component="main" maxWidth="md">
-                <Box 
+                <Box
                     sx={{
-                        // boxShadow: 3,
                         borderRadius: 1,
                         px: 4,
                         py: 6,
@@ -67,34 +84,46 @@ const Signup = () => {
                     <Typography component="h2" variant="h4" sx={{ mb: 2 }} >
                         sign up
                     </Typography>
-                    <Box component="form" onSubmit={submitHandler} noValidate sx={{ mt: 1, width: '100%' }}>
+
+                    {userExists && (
+                        <Alert severity="error">{userExists}</Alert>
+                    )}
+                    
+                    <Box component="form" onSubmit={submitHandler} sx={{ mt: 1, width: '100%' }}>
 
                         <Grid container spacing={1}>
                             <Grid item xs={6} >
                                 <MyCustomTextField
                                     size="normal"
                                     margin="normal"
-                                    required
                                     fullWidth
-                                    id="firstname"
+                                    id="firstName"
                                     label="First Name"
-                                    name="firstname"
-                                    autoFocus
-                                    onChange={e => setEnteredFirstName(e.target.value)}
+                                    name="firstName"
+                                    type="text"
+                                    value={values.firstName}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur} // validates the input when you unclick the input
+                                    error={touched.firstName && Boolean(errors.firstName)}
+                                    helperText={touched.firstName && errors.firstName}
                                 />
+
                             </Grid>
 
                             <Grid item xs={6}>
                                 <MyCustomTextField
                                     size="normal"
                                     margin="normal"
-                                    required
                                     fullWidth
-                                    id="lastname"
+                                    id="lastName"
                                     label="Last Name"
-                                    name="lastname"
-                                    autoFocus
-                                    onChange={e => setEnteredLastName(e.target.value)}
+                                    name="lastName"
+                                    type="text"
+                                    value={values.lastName}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    error={touched.lastName && Boolean(errors.lastName)}
+                                    helperText={touched.lastName && errors.lastName}
                                 />
                             </Grid>
 
@@ -103,13 +132,16 @@ const Signup = () => {
                         <MyCustomTextField
                             size="normal"
                             margin="normal"
-                            required
                             fullWidth
                             id="username"
-                            label="UserName"
+                            label="Username"
                             name="username"
-                            autoFocus
-                            onChange={e => setEnteredUsername(e.target.value)}
+                            type="text"
+                            value={values.username}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            error={touched.username && Boolean(errors.username)}
+                            helperText={touched.username && errors.username}
                         />
 
                         <Grid container spacing={1}>
@@ -118,14 +150,16 @@ const Signup = () => {
                                 <MyCustomTextField
                                     size="normal"
                                     margin="normal"
-                                    required
                                     fullWidth
                                     id="email"
-                                    label="Email Address"
+                                    label="Email"
                                     name="email"
-                                    autoComplete="email"
-                                    autoFocus
-                                    onChange={e => setEnteredEmail(e.target.value)}
+                                    type="text"
+                                    value={values.email}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    error={touched.email && Boolean(errors.email)}
+                                    helperText={touched.email && errors.email}
                                 />
                             </Grid>
 
@@ -134,22 +168,21 @@ const Signup = () => {
                                 <MyCustomTextField
                                     size="normal"
                                     margin="normal"
-                                    required
                                     fullWidth
+                                    autoComplete="current-password"
                                     name="password"
                                     label="Password"
                                     type="password"
                                     id="password"
-                                    autoComplete="current-password"
-                                    onChange={e => setEnteredPassword(e.target.value)}
+                                    value={values.password}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    error={touched.password && Boolean(errors.password)}
+                                    helperText={touched.password && errors.password}
                                 />
                             </Grid>
                         </Grid>
 
-                        {/* <FormControlLabel
-                        control={<Checkbox value="remember" color="primary" />}
-                        label="Remember me"
-                    /> */}
                         <MyCustomButton
                             type="submit"
                             fullWidth

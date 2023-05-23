@@ -7,6 +7,7 @@ import { useNavigate, useRouteLoaderData } from "react-router-dom";
 
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
+import { Alert } from '@mui/material';
 import Link from "@mui/material/Link";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -16,33 +17,57 @@ import MyCustomButton from "../Button/Button";
 import MyCustomTextField from "../Form/TextField";
 import MeshGradient from '../MeshGradient/MeshGradient';
 
+// VALIDATION
+import { useFormik } from 'formik';
+import { loginSchema } from '../../schemas';
 
 const Login = () => {
 
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [formError, setFormError] = useState('');
+
+    const { values, errors, touched, handleBlur, handleChange } = useFormik({
+        initialValues: {
+            email: '',
+            password: '',
+        },
+
+        validationSchema: loginSchema,
+    });
+
     const nav = useNavigate();
     const expirationDate = new Date();
     expirationDate.setTime(expirationDate.getTime() + 60 * 60 * 1000);
-    
-    const loginHandler = async(event) =>{
+
+    const loginHandler = async (event) => {
         event.preventDefault();
-        try {
-            const response = await axios.post('/login', { email, password });
-            const token = response.data.jwt;
-            const error = response.data.error;
+        const { email, password } = values; // Destructure values because of Formik
 
-            
-            if (token){
-                Cookies.set('token', token, { expires: expirationDate });
-                nav('/home');
-            }
-            else {
-                console.log(error)
-            }
+        if (errors.email || errors.password) {
+            console.log(errors)
+            console.log('there is form error so you cannot send it')
+        } else {
+            try {
+                console.log('at least try')
+                const response = await axios.post('/login', { email, password });
+                console.log({ response })
+                const token = response.data.jwt;
+                const error = response.data.error;
 
-        } catch (error) {
-            console.error('Login failed:', error.response.error);
+
+                if (token) {
+                    Cookies.set('token', token, { expires: expirationDate });
+                    nav('/home');
+                }
+                // what is this?
+                else {
+                    console.log(error);
+                }
+
+                // NO matches in the database
+            } catch (error) {
+                console.error('Login failed:', error.response.error);
+                setFormError("Your e-mail or password is incorrect or this account doesn't exist "); // Set error message
+            }
         }
     }
 
@@ -68,6 +93,11 @@ const Login = () => {
                     <Typography component="h2" variant="h4" sx={{ mb: 2 }} >
                         log in
                     </Typography>
+
+                    {formError && (
+                        <Alert severity="error">{formError}</Alert>
+                    )}
+
                     <Box component="form" onSubmit={loginHandler} noValidate sx={{ mt: 1 }}>
                         <MyCustomTextField
                             // component="input"
@@ -79,8 +109,11 @@ const Login = () => {
                             label="Email Address"
                             name="email"
                             autoComplete="email"
-                            autoFocus
-                            onChange={e => setEmail(e.target.value)}
+                            value={values.email}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            error={touched.email && Boolean(errors.email)}
+                            helperText={touched.email && errors.email}
                         />
                         <MyCustomTextField
                             // component="input"
@@ -93,7 +126,11 @@ const Login = () => {
                             type="password"
                             id="password"
                             autoComplete="current-password"
-                            onChange={e => setPassword(e.target.value)}
+                            value={values.password}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            error={touched.password && Boolean(errors.password)}
+                            helperText={touched.password && errors.password}
                         />
                         {/* <FormControlLabel
                             control={<Checkbox value="remember" color="primary" />}
@@ -117,20 +154,6 @@ const Login = () => {
             </Container>
 
         </React.Fragment>
-
-
-        // Alanis code
-
-        // <React.Fragment>
-        //     <form onSubmit={loginHandler}>
-        //         <label>Email</label>
-        //         <input type="email" placeholder="" onChange={e => setEmail(e.target.value)}></input>
-        //         <label>Password</label>
-        //         <input type="password" placeholder="" onChange={e => setPassword(e.target.value)}></input>
-
-        //         <button>Submit</button>
-        //     </form>
-        // </React.Fragment>
     );
 };
 

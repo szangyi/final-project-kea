@@ -8,6 +8,7 @@ import re
 
 
 SECRET_KEY = "XM]-ktw8[f`~rRw4J"
+REGEX_EMAIL = '^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$'
 
 
 
@@ -22,8 +23,7 @@ def _send(status = 400, error_message = "unknown error"):
 def _is_item_email(text=None):
   error = f"A valid e-mail format is: 'example@email.com'. No spaces"
   if not text : return None, error
-  regex_email = '^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$'
-  if not re.match(regex_email, text) : return None, error
+  if not re.match(REGEX_EMAIL, text) : return None, error
   return text, None
 
 # NAME
@@ -61,12 +61,14 @@ def _is_username(text=None):
 
 # PASSWORD
 def _is_password(text=None):
-  min, max = 6, 20
+  min, max = 6, 100
   error = f"Password must be {min} to {max} characters, must contain at least one uppercase-, one lowercase character, and one number."
   if not text: return None, error
   if not re.search(r'\d', text) : return None, error          # must contain at least one number
   if not re.search(r'[A-Z]', text) : return None, error       # must contain at least uppercase character
   if not re.search(r'[a-z]', text): return None, error        # must contain at least lowercase character
+  # regex_password = '/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/'
+  # if not re.match(regex_password, text) : return None, error
   if len(text) < min or len(text) > max : return None, error 
   return text, None
 

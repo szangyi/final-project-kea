@@ -52,7 +52,7 @@ const App = (theme) => {
 
             <RouterProvider router={router} />
 
-            <Footer/>
+            {/* <Footer/> */}
 
         </div>
     );
