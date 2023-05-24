@@ -13,7 +13,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import IconButton from '@mui/material/IconButton';
 
 
-const CollectionCard = ({ searchQuery, searchCategory, searchHashtag }) => {
+const CollectionCard = ({ searchQuery, searchCategory, searchHashtag, searchSocial }) => {
     const token = Cookies.get('token');
     const [profilesData, setProfilesData] = useState(null);
 
@@ -64,15 +64,21 @@ const CollectionCard = ({ searchQuery, searchCategory, searchHashtag }) => {
 
 
 
+    
 
     const filteredProfile = profilesData.filter((profile) => {
         const matchesSearchQuery = profile[2].toLowerCase().includes(searchQuery.toLowerCase());
 
         const matchesCategory = searchCategory === 'All categories' || profile[10] === searchCategory;
-        const convertHashtag = JSON.parse(profile[9]);
 
+        const convertHashtag = JSON.parse(profile[9]);
         const matchesHashtags = searchHashtag.length === 0 || convertHashtag.includes(searchHashtag);
-        return matchesSearchQuery && matchesCategory && matchesHashtags;
+
+        if (searchSocial === 'All' || profile[5] && searchSocial === 'Website' || profile[6] && searchSocial === 'Instagram'  || profile[7] && searchSocial === 'Youtube' || profile[8] && searchSocial === 'Tiktok' ) {
+            return matchesSearchQuery && matchesCategory && matchesHashtags;
+        }
+        
+          return false;
     });
 
 

@@ -21,6 +21,7 @@ const HASHTAGSOPTIONS = [
 ]
 
 const SOCIALOPTIONS = [
+    { social: 'All' },
     { social: 'Website' },
     { social: 'Instagram' },
     { social: 'Youtube' },

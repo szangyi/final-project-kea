@@ -36,6 +36,8 @@ const CollectionPage = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [categoryData, setCategoryData] = useState('All categories')
     const [hashtagData, setHashtagData] = useState([]);
+    const [socialData, setSocialData] = useState('All');
+
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
@@ -52,6 +54,10 @@ const CollectionPage = () => {
     const handleHashtagChange = (event, value) => {
         const selectedTags = value.map((item) => item.tag);
         setHashtagData(selectedTags)
+    }
+
+    const handleChangeSocial = (social) =>{
+        setSocialData(social)
     }
 
 
@@ -159,14 +165,14 @@ const CollectionPage = () => {
                 >
                     <Toolbar />
                     <Box sx={{ display: 'flex', flexDirection: 'row', gap: '20px', flexWrap: 'wrap' }}>
-                    {SOCIALOPTIONS.map((category, index) => (
-                        <Box key={index} >
-                            <Button>{category["social"]}</Button>
-                        </Box>
+                        {SOCIALOPTIONS.map((social, index) => (
+                            <Box key={index} >
+                                <Button onClick={() => handleChangeSocial(social["social"])}>{social["social"]}</Button>
+                            </Box>
 
-                    ))}
+                        ))}
                     </Box>
-                    <CollectionCard searchQuery={searchQuery} searchCategory={categoryData} searchHashtag={hashtagData} />
+                    <CollectionCard searchQuery={searchQuery} searchCategory={categoryData} searchHashtag={hashtagData} searchSocial={socialData} />
                 </Box>
             </Box>
 
