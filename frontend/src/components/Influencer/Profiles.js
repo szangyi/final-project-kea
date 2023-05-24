@@ -50,7 +50,7 @@ const Profiles = (props) => {
                             <TableCell component="th" scope="row">
                                 <Box
                                     component="img"
-                                    src={`http://127.0.0.1:7878/profile_images/${array[12]}`}
+                                    src={`http://127.0.0.1:7878/profile_images/${array[11]}`}
                                     sx={{ height: 50, width: 50, borderRadius: '50%',  mx: 'auto', my: { xs: 5, sm: 10 } }}
                                 />
                             </TableCell>

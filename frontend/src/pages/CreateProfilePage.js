@@ -73,7 +73,8 @@ const CreateProfile = () => {
     }
   }
 
-  console.log(formData.image)
+  console.log(formData)
+
 
     const createInfluencerProfile = async() =>{
       const formDataNew = new FormData();

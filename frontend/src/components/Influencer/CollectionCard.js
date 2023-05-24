@@ -8,9 +8,10 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Cookies from 'js-cookie';
 import axios from 'axios';
+import { json } from 'react-router';
 
 
-const CollectionCard = ({ searchQuery, searchCategory}) => {
+const CollectionCard = ({ searchQuery, searchCategory, searchHashtag}) => {
     const token = Cookies.get('token');
     const [profilesData, setProfilesData] = useState(null);
 
@@ -44,13 +45,15 @@ const CollectionCard = ({ searchQuery, searchCategory}) => {
 
 
 
+
     const filteredProfile = profilesData.filter((profile) => {
-        const matchesSearchQuery =
-          profile[2].toLowerCase().includes(searchQuery.toLowerCase());
+        const matchesSearchQuery =profile[2].toLowerCase().includes(searchQuery.toLowerCase());
     
-          const matchesCategory = searchCategory === 'All categories' || profile[10] === searchCategory;
-    
-        return matchesSearchQuery && matchesCategory;
+        const matchesCategory = searchCategory === 'All categories' || profile[10] === searchCategory;
+        const convertHashtag = JSON.parse(profile[9]);
+
+        const matchesHashtags = searchHashtag.length === 0 || convertHashtag.includes(searchHashtag);
+        return matchesSearchQuery && matchesCategory &&  matchesHashtags;
     });
     
 
@@ -62,12 +65,13 @@ const CollectionCard = ({ searchQuery, searchCategory}) => {
         >
             {filteredProfile.map((array, index) => (
 
+
                 <Card key={index} sx={{ width: 350, borderRadius: '20px' }}>
                     <CardMedia
                         component="img"
                         alt="profile image"
                         sx={{ height: 200, width: 200, borderRadius: '50%', mx: 'auto', my: { xs: 5, sm: 10 } }}
-                        image={`http://127.0.0.1:7878/profile_images/${array[12]}`}
+                        image={`http://127.0.0.1:7878/profile_images/${array[11]}`}
                     />
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="div">

@@ -6,11 +6,13 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Drawer from '@mui/material/Drawer';
 import TextField from '@mui/material/TextField';
 import Toolbar from '@mui/material/Toolbar';
-import { CATEGORYOPTIONS } from '../util/Constants';
+import { CATEGORYOPTIONS, HASHTAGSOPTIONS } from '../util/Constants';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
+import Autocomplete from '@mui/material/Autocomplete';
+import Stack from '@mui/material/Stack';
 
 import CollectionCard from '../components/Influencer/CollectionCard'
 
@@ -31,9 +33,7 @@ const CollectionPage = () => {
     const [mobileOpen, setMobileOpen] = React.useState(false);
     const [searchQuery, setSearchQuery] = useState('');
     const [categoryData, setCategoryData] = useState('All categories')
-
-
-
+    const [hashtagData, setHashtagData] = useState([]);
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
@@ -47,9 +47,11 @@ const CollectionPage = () => {
         setCategoryData(event.target.value);
     }
 
-    
+    const handleHashtagChange = (event, value) => {
+        const selectedTags = value.map((item) => item.tag);
+        setHashtagData(selectedTags)
+    }
 
-    console.log(categoryData)
 
 
     const drawer = (
@@ -74,6 +76,26 @@ const CollectionPage = () => {
                     ))}
                 </Select>
             </FormControl>
+
+            <Stack spacing={3} sx={{ width: 500 }}>
+            <Autocomplete
+                multiple
+                id="hashtags"
+                options={HASHTAGSOPTIONS}
+                getOptionLabel={(option) => (option && option.tag) || ''}
+                onChange= {handleHashtagChange}
+                value = {HASHTAGSOPTIONS.filter(option => hashtagData.includes(option.tag))} 
+                renderInput={(params) => (
+                    <TextField
+                        {...params}
+                        variant="standard"
+                        label="Search with tags"
+                        placeholder="Tags"
+                    />
+                )}
+            />
+        </Stack>
+
 
         </div>
     );
@@ -134,7 +156,7 @@ const CollectionPage = () => {
                     sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
                 >
                     <Toolbar />
-                    <CollectionCard searchQuery={searchQuery} searchCategory={categoryData} />
+                    <CollectionCard searchQuery={searchQuery} searchCategory={categoryData} searchHashtag={hashtagData} />
                 </Box>
             </Box>
 

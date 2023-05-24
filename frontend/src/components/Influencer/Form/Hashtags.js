@@ -11,10 +11,12 @@ const Hashtags = ({onDataChange}) => {
 
     const handleChange = (event, value) => {
         const selectedTags = value.map((item) => item.tag);
-        setHashtagData((prevData) => ({ ...prevData, [selectedTags]: value }));
-        console.log(selectedTags)
-        onDataChange({ hashtag: selectedTags }); 
+        setHashtagData(selectedTags);
+        onDataChange({hashtag:selectedTags}); 
     }
+
+
+
     return (
         <Stack spacing={3} sx={{ width: 500 }}>
             <Autocomplete

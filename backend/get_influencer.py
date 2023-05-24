@@ -51,7 +51,7 @@ def _():
         influencer_profile_data = {
             "result": "no profile"
         }
-        influencer_profile_data_json = json.dumps(influencer_profile_data, default=datetime_handler)
+        influencer_profile_data_json = json.dumps(influencer_profile_data)
 
     else:
         influencer_profile_data = profiles
