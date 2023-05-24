@@ -85,7 +85,7 @@ const Profiles = (props) => {
                                 </Button></TableCell>
 
                             <TableCell align="left">
-                                <Button component={Link} to={`/profile/${array[0]}`} variant="outlined" >
+                                <Button component={Link} to={`/profile/${array[2]}`} variant="outlined" >
                                     Preview
                                 </Button>
                             </TableCell>

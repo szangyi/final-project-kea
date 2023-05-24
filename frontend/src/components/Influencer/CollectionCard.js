@@ -12,6 +12,7 @@ import { Link } from 'react-router-dom';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import IconButton from '@mui/material/IconButton';
 
+
 const CollectionCard = ({ searchQuery, searchCategory, searchHashtag }) => {
     const token = Cookies.get('token');
     const [profilesData, setProfilesData] = useState(null);
@@ -29,6 +30,23 @@ const CollectionCard = ({ searchQuery, searchCategory, searchHashtag }) => {
 
             const profilesData = response.data;
 
+            setProfilesData(profilesData);
+
+        } catch {
+            console.log('Getting all profiles failed:');
+        }
+    }
+
+    const handleAddToFavorites = async (influencerID) => {
+        try {
+            const response = await axios.post('/api/add-to-favorites', { influencerID }, {
+                headers: {
+                    Authorization: `${token}`,
+                }
+            },
+            );
+
+            console.log(response)
             setProfilesData(profilesData);
 
         } catch {
@@ -60,10 +78,9 @@ const CollectionCard = ({ searchQuery, searchCategory, searchHashtag }) => {
 
     return (
 
+        <Container sx={{ display: 'flex', flexDirection: 'row', gap: '20px', flexWrap: 'wrap' }}>
 
-        <Container
-            sx={{ display: 'flex', flexDirection: 'row', gap: '20px', flexWrap: 'wrap' }}
-        >
+
             {filteredProfile.map((array, index) => (
 
 
@@ -108,10 +125,10 @@ const CollectionCard = ({ searchQuery, searchCategory, searchHashtag }) => {
                         )}
                     </CardActions>
                     <CardActions>
-                        <IconButton >
+                        <IconButton onClick={() => handleAddToFavorites(array[0])}>
                             <FavoriteIcon />
-                        </IconButton>                        
-                        <Button component={Link} to={`/profile/${array[0]}`} size="small">View profile</Button>
+                        </IconButton>
+                        <Button component={Link} to={`/profile/${array[2]}`} size="small">View profile</Button>
                     </CardActions>
                 </Card>
             ))}

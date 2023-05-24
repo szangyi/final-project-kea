@@ -13,8 +13,6 @@ const CATEGORYOPTIONS = [
     { category: 'Lifestyle' },
 ]
 
-
-
 const HASHTAGSOPTIONS = [
     { tag: '#love' },
     { tag: '#instagood'},
@@ -22,4 +20,11 @@ const HASHTAGSOPTIONS = [
     { tag: '#fashion' }
 ]
 
-export { STEPS, CATEGORYOPTIONS, HASHTAGSOPTIONS };
+const SOCIALOPTIONS = [
+    { social: 'Website' },
+    { social: 'Instagram' },
+    { social: 'Youtube' },
+    { social: 'Tiktok' },
+]
+
+export { STEPS, CATEGORYOPTIONS, HASHTAGSOPTIONS, SOCIALOPTIONS };
