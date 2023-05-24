@@ -8,10 +8,11 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Cookies from 'js-cookie';
 import axios from 'axios';
-import { json } from 'react-router';
+import { Link } from 'react-router-dom';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import IconButton from '@mui/material/IconButton';
 
-
-const CollectionCard = ({ searchQuery, searchCategory, searchHashtag}) => {
+const CollectionCard = ({ searchQuery, searchCategory, searchHashtag }) => {
     const token = Cookies.get('token');
     const [profilesData, setProfilesData] = useState(null);
 
@@ -47,15 +48,15 @@ const CollectionCard = ({ searchQuery, searchCategory, searchHashtag}) => {
 
 
     const filteredProfile = profilesData.filter((profile) => {
-        const matchesSearchQuery =profile[2].toLowerCase().includes(searchQuery.toLowerCase());
-    
+        const matchesSearchQuery = profile[2].toLowerCase().includes(searchQuery.toLowerCase());
+
         const matchesCategory = searchCategory === 'All categories' || profile[10] === searchCategory;
         const convertHashtag = JSON.parse(profile[9]);
 
         const matchesHashtags = searchHashtag.length === 0 || convertHashtag.includes(searchHashtag);
-        return matchesSearchQuery && matchesCategory &&  matchesHashtags;
+        return matchesSearchQuery && matchesCategory && matchesHashtags;
     });
-    
+
 
     return (
 
@@ -107,8 +108,10 @@ const CollectionCard = ({ searchQuery, searchCategory, searchHashtag}) => {
                         )}
                     </CardActions>
                     <CardActions>
-                        <Button size="small">Share</Button>
-                        <Button size="small">View profile</Button>
+                        <IconButton >
+                            <FavoriteIcon />
+                        </IconButton>                        
+                        <Button component={Link} to={`/profile/${array[0]}`} size="small">View profile</Button>
                     </CardActions>
                 </Card>
             ))}
