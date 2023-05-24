@@ -9,9 +9,10 @@ const Security = () => {
 
     return (
         <>
-            <Box component="section" sx={{ py: 3, px: 8, }}>
+            <Box component="section" sx={{ py: 5, px: 5, }}>
 
-                <Typography variant="h3" >security</Typography>
+                <Typography variant="h4" >security</Typography>
+                <Typography variant="paragraph">Here you can change how you access your account.</Typography>
 
             </Box>
         </>

@@ -10,9 +10,10 @@ const Interests = () => {
 
     return (
         <>
-            <Box component="section" sx={{ py: 3, px: 8, }}>
+            <Box component="section" sx={{ py: 5, px: 5, }}>
 
-                <Typography variant="h3" >interests</Typography>
+                <Typography variant="h4" >interests</Typography>
+                <Typography variant="paragraph">Personalise your account and get recommendations based on your interests.</Typography>
 
             </Box>
         </>

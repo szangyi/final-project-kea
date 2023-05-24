@@ -70,21 +70,16 @@ const AccountInfo = (props) => {
         <>
             <Box component="section" sx={{ py: 5, px: 5, }}>
 
-                <Typography variant="h3" >account settings</Typography>
+                <Typography variant="h4" >my account</Typography>
                 <Typography variant="paragraph">Here you can edit public information about yourself.</Typography>
-
-                {/* <div>Hi {userData.username}</div>
-                <div>First name {userData.firstName}</div>
-                <div>last name {userData.lastName}</div>
-                <div>username {userData.username}</div>
-                <div>image {userData.image}</div> */}
 
                 <Box component="form" onSubmit={submitHandler} sx={{ mt: 1, width: '100%' }}>
 
-                    <Grid container spacing={4}>
+                    <Grid container spacing={4} sx={{mt: 2}}>
                         <Grid container item xs={8}>
 
-                            <Typography variant="h6">User information</Typography>
+                        <Typography variant="h6">user information</Typography>
+                            {/* <Typography variant="subtitle1" sx={{color: 'customColors.salmon.dark'}}>user information</Typography> */}
 
                             <Grid container item spacing={2}>
                                 <Grid item xs={6}>
@@ -139,7 +134,7 @@ const AccountInfo = (props) => {
                             <MyCustomButton
                                 type="submit"
                                 variant="contained"
-                                sx={{ mt: 3, mb: 2, }}
+                                sx={{ mt: 6, mb: 2, }}
                             >
                                 Save changes
                             </MyCustomButton>
@@ -148,7 +143,8 @@ const AccountInfo = (props) => {
 
                         <Grid item xs={4}>
 
-                            <Typography variant="h6">Profile photo</Typography>
+                            <Typography variant="h6">profile photo</Typography>
+                            {/* <Typography variant="subtitle1" sx={{color: 'customColors.salmon.dark'}}>profile photo</Typography> */}
 
                         </Grid>
 

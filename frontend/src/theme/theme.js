@@ -13,6 +13,7 @@ let theme = createTheme({
         type: 'light',
         primary: {
             main: '#081517',
+            light: '#627A7D',
         },
         secondary: {
             main: '#184CCA',
@@ -70,11 +71,14 @@ let theme = createTheme({
             fontFamily: 'Encode Sans Expanded',
             fontWeight: 800,
             fontSize: '2.5rem',
+            marginBottom: 16,
         },
         h4: {
             fontFamily: 'Encode Sans Expanded',
             fontWeight: 800,
             fontSize: '1.7rem',
+            marginBottom: 10,
+
         },
         h5: {
             fontWeight: 800,
@@ -85,11 +89,13 @@ let theme = createTheme({
             fontWeight: 800,
             fontFamily: 'Encode Sans Expanded',
             fontSize: '1rem',
+            marginBottom: 10,
         },
         subtitle1: {
             fontSize: '.8rem',
             fontWeight: 500,
             textTransform: 'uppercase',
+            marginBottom: 10,
         },
         button: {
             fontWeight: 600,
@@ -97,6 +103,11 @@ let theme = createTheme({
         overline: {
             fontSize: '0.6rem',
         },
+        listitem: {
+            fontSize: '.6rem',
+            fontWeight: 800,
+        },
+
     },
     shape: {
         borderRadius: 0,

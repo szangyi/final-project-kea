@@ -1,3 +1,5 @@
+import './UserDashboard.css';
+
 import React, { useState } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
@@ -15,8 +17,6 @@ import AccountInfo from './AccountInfo';
 
 
 const UserDashboard = (theme) => {
-
-
 
     const [userData, setUserData] = useState(null);
     const token = Cookies.get('token');
@@ -52,16 +52,16 @@ const UserDashboard = (theme) => {
             // add username here
             />
 
-            <Box component="main" sx={{ flexGrow: 1, p: { xs: 1, md: 3}, display: 'flex' }}>
+            <Box component="section" className="userdashboard-section">
 
-                <MyCustomDrawer />
-                <Outlet context={userData}/>
+                <Typography sx={{ pt: { xs: 1, md: 5 }, pb: { xs: 1, md: 0 }, px: { xs: 1, md: 3 } }} variant="h4">account settings </Typography>
 
-                {/* {React.cloneElement(outletContext?.element, { userData })} */}
-                {/* {outletContext?.element && React.cloneElement(outletContext.element, { userData })} */}
+                <Box className="userdashboard-section-container" sx={{ gap: 2, flexGrow: 1, py: { xs: 1, md: 3 }, pl: { xs: 1, md: 3 }, pr: { xs: 1, md: 8 }, display: 'flex' }}>
 
-                {/* <AccountInfo userData={userData}/> */}
+                    <MyCustomDrawer />
+                    <Outlet context={userData} />
 
+                </Box>
             </Box>
 
         </>
