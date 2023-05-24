@@ -17,6 +17,7 @@ import Button from '@mui/material/Button';
 
 
 import CollectionCard from '../components/Influencer/CollectionCard'
+import Location from '../components/Influencer/Form/Location';
 
 const drawerWidth = 240;
 
@@ -37,6 +38,8 @@ const CollectionPage = () => {
     const [categoryData, setCategoryData] = useState('All categories')
     const [hashtagData, setHashtagData] = useState([]);
     const [socialData, setSocialData] = useState('All');
+    const [locationData, setLocationData] = useState('');
+
 
 
     const handleDrawerToggle = () => {
@@ -58,6 +61,10 @@ const CollectionPage = () => {
 
     const handleChangeSocial = (social) =>{
         setSocialData(social)
+    }
+
+    const handleLocationChange = (data) =>{
+        setLocationData(data)
     }
 
 
@@ -103,6 +110,9 @@ const CollectionPage = () => {
                     )}
                 />
             </Stack>
+
+            <Location onLocationChange ={handleLocationChange}/>
+
 
 
         </div>
@@ -172,7 +182,7 @@ const CollectionPage = () => {
 
                         ))}
                     </Box>
-                    <CollectionCard searchQuery={searchQuery} searchCategory={categoryData} searchHashtag={hashtagData} searchSocial={socialData} />
+                    <CollectionCard searchQuery={searchQuery} searchCategory={categoryData} searchHashtag={hashtagData} searchSocial={socialData} searchLocation={locationData} />
                 </Box>
             </Box>
 

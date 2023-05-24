@@ -13,7 +13,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import IconButton from '@mui/material/IconButton';
 
 
-const CollectionCard = ({ searchQuery, searchCategory, searchHashtag, searchSocial }) => {
+const CollectionCard = ({ searchQuery, searchCategory, searchHashtag, searchSocial, searchLocation }) => {
     const token = Cookies.get('token');
     const [profilesData, setProfilesData] = useState(null);
 
@@ -74,8 +74,11 @@ const CollectionCard = ({ searchQuery, searchCategory, searchHashtag, searchSoci
         const convertHashtag = JSON.parse(profile[9]);
         const matchesHashtags = searchHashtag.length === 0 || convertHashtag.includes(searchHashtag);
 
+        const matchesLocation = searchLocation === '' || profile[4] === searchLocation;
+
+
         if (searchSocial === 'All' || profile[5] && searchSocial === 'Website' || profile[6] && searchSocial === 'Instagram'  || profile[7] && searchSocial === 'Youtube' || profile[8] && searchSocial === 'Tiktok' ) {
-            return matchesSearchQuery && matchesCategory && matchesHashtags;
+            return matchesSearchQuery && matchesCategory && matchesHashtags && matchesLocation;
         }
         
           return false;
@@ -102,10 +105,13 @@ const CollectionCard = ({ searchQuery, searchCategory, searchHashtag, searchSoci
                             {array[2]}
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
-                            {array[10]}
+                            Category: {array[10]}
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
-                            {array[9]}
+                            Tags: {array[9]}
+                        </Typography>
+                        <Typography variant="body2" color="text.secondary">
+                            Location: {array[4]}
                         </Typography>
                     </CardContent>
                     <CardActions>
