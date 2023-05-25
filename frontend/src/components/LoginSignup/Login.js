@@ -55,7 +55,9 @@ const Login = () => {
 
 
                 if (token) {
-                    Cookies.set('token', token, { expires: expirationDate });
+                    Cookies.set('token', token);
+                    // Cookies.set('token', token, { expires: expirationDate });
+
                     nav('/home');
                 }
                 // what is this?

@@ -16,7 +16,7 @@ import Footer from './components/Footer/Footer.js';
 // --------------------------
 import HomePage from './pages/HomePage';
 import LoggedinHome from './pages/LoggedinHomePage'
-import InfluencerPage from './pages/InfluencerPage'
+import InfluenceDashboardPage from './pages/InfluencerDashboard/InfluencerDashboardPage'
 import CreateProfilePage from './pages/CreateProfilePage';
 import UserDashboard from './pages/UserDashBoard/UserDashboard.js';
 import AccountInfo from './pages/UserDashBoard/AccountInfo';
@@ -48,7 +48,7 @@ const router = createBrowserRouter([
                     { path: "/user-dashboard/interests", element: <Interests />, loader: authLoader },
                 ]
             },
-            { path: "/dashboard", element: <InfluencerPage />, loader: authLoader },
+            { path: "/influencer-dashboard", element: <InfluenceDashboardPage />, loader: authLoader },
             { path: "/collection", element: <CollectionPage />, loader: authLoader },
             { path: "/create-profile", element: <CreateProfilePage />, loader: authLoader },
             { path: "/profile/:username", element: <ProfileLandingPage />, loader: authLoader },
