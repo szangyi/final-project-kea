@@ -38,8 +38,7 @@ const InfluencerPage = () => {
   }
 
   const InfluencerComponent = () => {
-
-    if (influencerData == "no profile") {
+    if (influencerData.result === "no profile") {
       return <AddFirstProfile />;
     } else {
       return <Profiles

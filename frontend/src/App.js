@@ -23,6 +23,9 @@ import AccountInfo from './pages/AccountInfo';
 import InfluencerPage from './pages/InfluencerPage'
 import CreateProfilePage from './pages/CreateProfilePage';
 import { getAuthToken, authLoader } from './util/auth';
+import ProfileLandingPage from './pages/ProfileLandingPage';
+import CollectionPage from './pages/CollectionPage';
+import Page404 from './pages/Page404'
 
 const router = createBrowserRouter([
     { path: "/", element: <HomePage /> },
@@ -38,6 +41,8 @@ const router = createBrowserRouter([
     { path: "/collection", element: <HomePage /> },
     { path: "/create-profile", element: <CreateProfilePage />, loader: authLoader },
     { path: "/my-profiles", element: <HomePage /> },
+    {path: "/profile/:username", element: <ProfileLandingPage />, loader: authLoader},
+    {path: '*', element: <Page404 replace />},
 
 ]);
 

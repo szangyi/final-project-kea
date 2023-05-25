@@ -29,10 +29,7 @@ def _():
     influencer_category = request.forms.get("category")
     profile_image_delete = request.files.get("image")
     
-    print("klwdjklefjwelj")
-    print(profile_image_delete)
 
-    influencer_share_link = ""
     profile_created_at = str(int(time.time()))
 
     image_id = str(uuid.uuid4())
@@ -66,8 +63,8 @@ def _():
         
         user_id = user[0]
         
-        sql_create_profile = """INSERT INTO influencers_profile (influencer_ID, user_ID, influencer_username, influencer_bio_description, influencer_location, influencer_website, influencer_instagram, influencer_youtube, influencer_tiktok, influencer_tags, influencer_category, influencer_share_link, profile_image_delete, profile_created_at ) VALUES (%s,%s, %s,%s, %s,%s, %s, %s, %s, %s, %s, %s, %s, %s)"""
-        val_create_profile = (influencer_ID,user_id, influencer_username,influencer_bio_description, influencer_location, influencer_website, influencer_instagram, influencer_youtube, influencer_tiktok, influencer_tags,influencer_category, influencer_share_link, image_name, profile_created_at )
+        sql_create_profile = """INSERT INTO influencers_profile (influencer_ID, user_ID, influencer_username, influencer_bio_description, influencer_location, influencer_website, influencer_instagram, influencer_youtube, influencer_tiktok, influencer_tags, influencer_category, profile_image_delete, profile_created_at ) VALUES (%s,%s, %s,%s, %s,%s, %s, %s, %s, %s, %s, %s, %s)"""
+        val_create_profile = (influencer_ID,user_id, influencer_username,influencer_bio_description, influencer_location, influencer_website, influencer_instagram, influencer_youtube, influencer_tiktok, influencer_tags,influencer_category, image_name, profile_created_at )
         cursor.execute(sql_create_profile, val_create_profile)
         db.commit()
                 

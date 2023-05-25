@@ -3,21 +3,27 @@ import React, { useState } from 'react';
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import MyCustomTextField from "../../Form/TextField.js";
+import Location from './Location.js';
 
 const BasicInfo = ({onDataChange}) => {
 
     const [basicData, setBasicData] = useState({
         username:'',
-        location: '',
         bio: ''
-
     });
+
 
     const handleChange = (event) => {
         const { name, value } = event.target;
         setBasicData((prevData) => ({ ...prevData, [name]: value }));
         onDataChange(basicData); 
     }
+
+    const handleLocationChange = (data) =>{
+        onDataChange({location:data});
+    }
+
+ 
 
 
 
@@ -50,19 +56,9 @@ const BasicInfo = ({onDataChange}) => {
                             value = {basicData.username}
                             onChange={handleChange}
                         />
-                        <MyCustomTextField
-                            size="normal"
-                            margin="normal"
-                            required
-                            fullWidth
-                            name="location"
-                            label="Location"
-                            type="text"
-                            id="location"
-                            autoComplete="location"
-                            value = {basicData.location}
-                            onChange={handleChange}
-                        />
+
+                        <Location onLocationChange={handleLocationChange}/>
+
                         <MyCustomTextField
                             size="normal"
                             margin="normal"

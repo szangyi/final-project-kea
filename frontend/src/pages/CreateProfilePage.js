@@ -20,8 +20,8 @@ import Category from '../components/Influencer/Form/Category';
 import ProfileImage from '../components/Influencer/Form/ProfileImage';
 import SocialAccounts from '../components/Influencer/Form/SocialAccounts';
 import Hashtags from '../components/Influencer/Form/Hashtags';
+import { STEPS } from '../util/Constants';
 
-const steps = ['Basic info', 'Category','Hashtags', 'Profile image', 'Social accounts'];
 
 
 
@@ -39,7 +39,7 @@ const CreateProfile = () => {
   const nav = useNavigate();
 
   const handleNext = () => {
-    if (activeStep === steps.length - 1) {
+    if (activeStep === STEPS.length - 1) {
       createInfluencerProfile();
     } else {
       setActiveStep(activeStep + 1);
@@ -73,7 +73,8 @@ const CreateProfile = () => {
     }
   }
 
-  console.log(formData.image)
+  console.log(formData)
+
 
     const createInfluencerProfile = async() =>{
       const formDataNew = new FormData();
@@ -118,14 +119,14 @@ const CreateProfile = () => {
           </Typography>
 
           <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
-            {steps.map((label) => (
+            {STEPS.map((label) => (
               <Step key={label}>
                 <StepLabel>{label}</StepLabel>
               </Step>
             ))}
           </Stepper>
 
-          {activeStep === steps.length ? (
+          {activeStep === STEPS.length ? (
             <React.Fragment>
               {/* Redirect */}
             </React.Fragment>
@@ -144,7 +145,7 @@ const CreateProfile = () => {
                   onClick={handleNext}
                   sx={{ mt: 3, ml: 1 }}
                 >
-                  {activeStep === steps.length - 1 ? 'Create profile' : 'Next'}
+                  {activeStep === STEPS.length - 1 ? 'Create profile' : 'Next'}
                 </Button>
               </Box>
             </React.Fragment>
