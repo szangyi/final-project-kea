@@ -6,13 +6,14 @@ import mysql.connector
 import g
 from datetime import datetime
 
-@get("/api/get-influencer")
+@get("/api/profiles")
 def _():
+        
     token_request = request.headers.get('Authorization')
+    print(token_request)
     token_data = jwt.decode(token_request, g.SECRET_KEY, algorithms=["HS256"])
     user_email = token_data["email"]
-    influencer_profile_data = {}
-    influencer_profile_data_json = []
+
     
     try:
         import production
@@ -31,10 +32,8 @@ def _():
         user = cursor.fetchone()
         db.commit()
         
-        user_id = user[0]
-        sql_check_influencer = "SELECT * FROM influencers_profile WHERE user_ID = %s"
-        var_check_influencer = (user_id,)
-        cursor.execute(sql_check_influencer, var_check_influencer)
+        sql_check_influencer = "SELECT * FROM influencers_profile "
+        cursor.execute(sql_check_influencer)
         profiles = cursor.fetchall()
         db.commit()
                 
@@ -46,19 +45,8 @@ def _():
     finally:
         db.close()
 
-    
-    if profiles == []:
-        influencer_profile_data = {
-            "result": "no profile"
-        }
-        influencer_profile_data_json = json.dumps(influencer_profile_data)
-
-    else:
-        influencer_profile_data = profiles
-        influencer_profile_data_json = json.dumps(influencer_profile_data, default=datetime_handler)
-
-    
-    return influencer_profile_data_json
+    profiles_json = json.dumps(profiles, default=datetime_handler)
+    return profiles_json
 
 def datetime_handler(obj):
     if isinstance(obj, datetime):

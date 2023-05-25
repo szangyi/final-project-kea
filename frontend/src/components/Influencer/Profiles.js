@@ -1,4 +1,3 @@
-import "./Influencer.css"
 import React, { useState } from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -7,9 +6,11 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
 import DeleteProfile from "./ProfileActions/DeleteProfile";
+import { Link } from 'react-router-dom';
 
 
 const Profiles = (props) => {
@@ -47,7 +48,11 @@ const Profiles = (props) => {
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                         >
                             <TableCell component="th" scope="row">
-                                <img className="profile-image" src={`http://127.0.0.1:7878/profile_images/${array[12]}`} alt="Profile image" />
+                                <Box
+                                    component="img"
+                                    src={`http://127.0.0.1:7878/profile_images/${array[11]}`}
+                                    sx={{ height: 50, width: 50, borderRadius: '50%',  mx: 'auto', my: { xs: 5, sm: 10 } }}
+                                />
                             </TableCell>
                             <TableCell align="right">{array[2]}</TableCell>
                             <TableCell align="right">{array[10]}</TableCell>
@@ -80,13 +85,13 @@ const Profiles = (props) => {
                                 </Button></TableCell>
 
                             <TableCell align="left">
-                                <Button href="#" variant="outlined" >
+                                <Button component={Link} to={`/profile/${array[2]}`} variant="outlined" >
                                     Preview
                                 </Button>
                             </TableCell>
                             <TableCell align="left">
-                                
-                            <DeleteProfile onDelete={deleteProfile} influencerID={array[0]} />
+
+                                <DeleteProfile onDelete={deleteProfile} influencerID={array[0]} />
 
                             </TableCell>
                         </TableRow>

@@ -7,9 +7,6 @@ import { getAuthToken, authLoader } from './util/auth';
 // --------------------------
 // COMPONENTS ---------------
 // --------------------------
-import Banner from './components/Banner/Banner';
-import NavLoggedin from './components/Navigation/NavLoggedin';
-import NavLoggedout from './components/Navigation/NavLoggedout';
 import Login from './components/LoginSignup/Login';
 import Signup from './components/LoginSignup/Signup';
 import Footer from './components/Footer/Footer.js';
@@ -25,10 +22,12 @@ import UserDashboard from './pages/UserDashBoard/UserDashboard.js';
 import AccountInfo from './pages/UserDashBoard/AccountInfo';
 import Interests from './pages/UserDashBoard/Interests';
 import Security from './pages/UserDashBoard/Security';
-
 import RootLayoutNav from './pages/Root/RootLayoutNav.js';
 import RootLayout from './pages/Root/RootLayout.js';
 import { Navigate } from 'react-router-dom';
+import ProfileLandingPage from './pages/ProfileLandingPage';
+import CollectionPage from './pages/CollectionPage';
+import Page404 from './pages/Page404'
 
 
 
@@ -50,17 +49,16 @@ const router = createBrowserRouter([
                 ]
             },
             { path: "/dashboard", element: <InfluencerPage />, loader: authLoader },
+            { path: "/collection", element: <CollectionPage />, loader: authLoader },
             { path: "/create-profile", element: <CreateProfilePage />, loader: authLoader },
+            { path: "/profile/:username", element: <ProfileLandingPage />, loader: authLoader },
+            { path: '*', element: <Page404 replace /> },
+
+            // To do:
+            // { path: "/my-interests", element: <HomePage /> },
         ]
     },
 
-
-    // To do:
-    // { path: "/my-profiles", element: <HomePage /> },
-    // { path: "/collection", element: <HomePage /> },
-    // { path: "/collection", element: <HomePage /> },
-    // { path: "/collection", element: <HomePage /> },
-    // { path: "/my-interests", element: <HomePage /> },
 ]);
 
 
