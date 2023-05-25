@@ -1,8 +1,5 @@
 from bottle import response
 
-# validator library
-from validator_collection import validators, checkers, errors
-
 # plain py validatyion
 import re
 
