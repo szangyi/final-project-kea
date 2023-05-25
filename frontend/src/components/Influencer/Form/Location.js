@@ -8,7 +8,7 @@ const Location = ({ onLocationChange }) => {
 
     const [locationData, setLocationData] = useState('')
 
-    const handleLocationChange = (even, value) => {
+    const handleLocationChange = (event, value) => {
         setLocationData(value.label);
         onLocationChange(value.label);
     }
@@ -20,7 +20,7 @@ const Location = ({ onLocationChange }) => {
             sx={{ width: 300 }}
             options={LOCATION}
             autoHighlight
-            getOptionLabel={(option) => option ? option.label : ''}
+            getOptionLabel={(option) => option.label || ''}
             onChange = {handleLocationChange}
             value={locationData.label}
             renderOption={(props, option) => (
