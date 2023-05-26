@@ -17,7 +17,7 @@ import Footer from './components/Footer/Footer.js';
 import HomePage from './pages/HomePage';
 import LoggedinHome from './pages/LoggedinHomePage'
 import InfluenceDashboardPage from './pages/InfluencerDashboard/InfluencerDashboardPage'
-import CreateProfilePage from './pages/CreateProfilePage';
+import CreateProfilePage from './pages/InfluencerDashboard/CreateProfilePage.js';
 import UserDashboard from './pages/UserDashBoard/UserDashboard.js';
 import AccountInfo from './pages/UserDashBoard/AccountInfo';
 import Interests from './pages/UserDashBoard/Interests';

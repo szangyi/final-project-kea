@@ -31,7 +31,7 @@ import MyCustomButton from '../../components/Button/Button';
 
 const InfluencerPage = () => {
 
-  // CONSTANTS ---------------
+  // VARIABLES ---------------
   const [influencerData, setInfluencerData] = useState(null);
   const token = Cookies.get('token');
 
