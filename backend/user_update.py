@@ -11,7 +11,8 @@ import json
 
 ##############################
 @post("/api/user_update")
-def _():
+def _user_update():
+    
     token_request = request.headers.get('Authorization')
     
     token_data = jwt.decode(token_request, g.SECRET_KEY, algorithms=["HS256"])

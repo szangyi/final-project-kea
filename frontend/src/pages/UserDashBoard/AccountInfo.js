@@ -37,34 +37,30 @@ const AccountInfo = (props) => {
 
     const nav = useNavigate();
 
-    function submitHandler() {
-        console.log('fea')
+    const submitHandler = async (event) => {
+        event.preventDefault();
+        const { username, firstName, lastName } = values; // Destructure values because of Formik
+
+        try {
+            const response = await axios.post('/api/user_update', { firstName, lastName, username });
+            const message = response.data.message;
+
+            if (message === "Userdata change succeeded") {
+                nav('/');
+            }
+            else {
+                console.log(message)
+            }
+            console.log(values)
+
+        } catch (error) {
+            if (error.response && error.response.status === 409) {
+                setUserExists("User already exists maaaan");
+            } else {
+                console.error('Userdata change failed:', error);
+            }
+        }
     }
-
-    // const submitHandler = async (event) => {
-    //     event.preventDefault();
-    //     const { username, firstName, lastName } = values; // Destructure values because of Formik
-
-    //     try {
-    //         const response = await axios.post('/api/user_update', { firstName, lastName, username });
-    //         const message = response.data.message;
-
-    //         if (message === "Userdata change succeeded") {
-    //             nav('/user-dashboard/account-info');
-    //         }
-    //         else {
-    //             console.log(message)
-    //         }
-    //         console.log(values)
-
-    //     } catch (error) {
-    //         if (error.response && error.response.status === 409) {
-    //             setUserExists("User already exists maaaan");
-    //         } else {
-    //             console.error('Userdata change failed:', error);
-    //         }
-    //     }
-    // }
 
     return (
         <>
