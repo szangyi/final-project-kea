@@ -15,7 +15,7 @@ def _account_info():
     user_email = token_data["email"]
     
     try:
-        import production
+        # import production
         db_config = database_connection.PRODUCTION_CONN
 
     except Exception as ex:

@@ -1,34 +1,34 @@
+// --------------------------
+// SYSTEM -------------------
+// --------------------------
 import { React, useState } from 'react';
-import { createBrowserRouter, RouterProvider, useRouteLoaderData } from 'react-router-dom';
-import theme from "./theme/theme.js"
+import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { getAuthToken, authLoader } from './util/auth';
 
 // --------------------------
 // COMPONENTS ---------------
 // --------------------------
-import Login from './components/LoginSignup/Login';
-import Signup from './components/LoginSignup/Signup';
 import Footer from './components/Footer/Footer.js';
 
 // --------------------------
 // PAGES --------------------
 // --------------------------
+import Login from './pages/Login';
+import Signup from './pages/Signup';
 import HomePage from './pages/HomePage';
-import LoggedinHome from './pages/LoggedinHomePage'
+import LoggedinHome from './pages/HomePageLoggedin'
 import InfluencerPage from './pages/InfluencerPage'
 import CreateProfilePage from './pages/CreateProfilePage';
 import UserDashboard from './pages/UserDashBoard/UserDashboard.js';
 import AccountInfo from './pages/UserDashBoard/AccountInfo';
 import Interests from './pages/UserDashBoard/Interests';
 import Security from './pages/UserDashBoard/Security';
-import RootLayoutNav from './pages/Root/RootLayoutNav.js';
-import RootLayout from './pages/Root/RootLayout.js';
-import { Navigate } from 'react-router-dom';
 import ProfileLandingPage from './pages/ProfileLandingPage';
 import CollectionPage from './pages/CollectionPage';
 import Page404 from './pages/Page404'
-
+import RootLayoutNav from './pages/Root/RootLayoutNav.js';
+import RootLayout from './pages/Root/RootLayout.js';
 
 
 const router = createBrowserRouter([
@@ -42,7 +42,7 @@ const router = createBrowserRouter([
             { path: "/signup", element: <Signup /> },
             {
                 path: "/user-dashboard", element: <UserDashboard />, children: [
-                    { path: "/user-dashboard/", element: <Navigate to="account-info" replace /> }, // set account-info as default
+                    // { path: "/user-dashboard/", element: <Navigate to="account-info" replace /> }, // set account-info as default
                     { path: "/user-dashboard/account-info", element: <AccountInfo />, loader: authLoader },
                     { path: "/user-dashboard/security", element: <Security />, loader: authLoader },
                     { path: "/user-dashboard/interests", element: <Interests />, loader: authLoader },
@@ -68,12 +68,7 @@ const App = (theme) => {
 
     return (
         <>
-            {/* {token ? <NavLoggedin /> : <NavLoggedout />} */}
-
             <RouterProvider router={router} />
-
-            {/* <Footer/> */}
-
         </>
     );
 

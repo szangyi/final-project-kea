@@ -1,4 +1,4 @@
-import '../../style/style.css'
+// import '../../style/style.css'
 
 import React, { useState } from 'react';
 import axios from 'axios';
@@ -13,13 +13,13 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 
-import MyCustomButton from "../Button/Button";
-import MyCustomTextField from "../Form/TextField";
-import MeshGradient from '../MeshGradient/MeshGradient';
+import MyCustomButton from "../components/Button/Button";
+import MyCustomTextField from "../components/Form/TextField";
+import MeshGradient from '../components/MeshGradient/MeshGradient';
 
 // VALIDATION
 import { useFormik } from 'formik';
-import { loginSchema } from '../../schemas';
+import { loginSchema } from '../schemas';
 
 const Login = () => {
 
@@ -55,7 +55,9 @@ const Login = () => {
 
 
                 if (token) {
-                    Cookies.set('token', token, { expires: expirationDate });
+                    Cookies.set('token', token);
+
+                    // Cookies.set('token', token, { expires: expirationDate });
                     nav('/home');
                 }
                 // what is this?

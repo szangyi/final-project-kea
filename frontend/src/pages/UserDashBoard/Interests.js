@@ -10,7 +10,7 @@ const Interests = () => {
 
     return (
         <>
-            <Box component="section" sx={{ py: 5, px: 5, }}>
+            <Box component="section"  className="glassmorphism" sx={{ py: 5, px: 5, }}>
 
                 <Typography variant="h4" >interests</Typography>
                 <Typography variant="paragraph">Personalise your account and get recommendations based on your interests.</Typography>

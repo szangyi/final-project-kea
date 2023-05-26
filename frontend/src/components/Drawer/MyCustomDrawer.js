@@ -54,7 +54,7 @@ const MyCustomDrawer = (props) => {
     return (
 
         <Drawer
-            className="drawer-section"
+            className="drawer-section glassmorphism"
             variant="permanent"
             anchor="left"
 

@@ -8,14 +8,14 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 
-import MyCustomButton from "../Button/Button";
-import MyCustomTextField from "../Form/TextField";
-import MeshGradient from '../MeshGradient/MeshGradient';
+import MyCustomButton from "../components/Button/Button";
+import MyCustomTextField from "../components/Form/TextField";
+import MeshGradient from '../components/MeshGradient/MeshGradient';
 import { Alert } from '@mui/material';
 
 // VALIDATION
 import { useFormik } from 'formik';
-import { signupSchema } from '../../schemas';
+import { signupSchema } from '../schemas';
 
 const Signup = () => {
 

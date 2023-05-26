@@ -21,7 +21,7 @@ const AccountInfo = (props) => {
 
     console.log(userData)
 
-    // const [userExists, setUserExists] = useState('');
+    const [userExists, setUserExists] = useState('');
 
     const { values, errors, touched, handleBlur, handleChange } = useFormik({
         initialValues: {
@@ -35,22 +35,22 @@ const AccountInfo = (props) => {
 
     console.log(errors)
 
-    // const nav = useNavigate();
+    const nav = useNavigate();
 
     function submitHandler() {
-        console.log('handled')
+        console.log('fea')
     }
 
     // const submitHandler = async (event) => {
     //     event.preventDefault();
-    //     const { username, firstName, lastName, email, password } = values; // Destructure values because of Formik
+    //     const { username, firstName, lastName } = values; // Destructure values because of Formik
 
     //     try {
-    //         const response = await axios.post('/api/signup', { username, firstName, lastName, email, password });
+    //         const response = await axios.post('/api/user_update', { firstName, lastName, username });
     //         const message = response.data.message;
 
-    //         if (message === "Signup succeeded") {
-    //             nav('/login');
+    //         if (message === "Userdata change succeeded") {
+    //             nav('/user-dashboard/account-info');
     //         }
     //         else {
     //             console.log(message)
@@ -61,14 +61,14 @@ const AccountInfo = (props) => {
     //         if (error.response && error.response.status === 409) {
     //             setUserExists("User already exists maaaan");
     //         } else {
-    //             console.error('Signup failed:', error);
+    //             console.error('Userdata change failed:', error);
     //         }
     //     }
     // }
 
     return (
         <>
-            <Box component="section" sx={{ py: 5, px: 5, }}>
+            <Box component="section" className="glassmorphism" sx={{ py: 5, px: 5, }}>
 
                 <Typography variant="h4" >my account</Typography>
                 <Typography variant="paragraph">Here you can edit public information about yourself.</Typography>
