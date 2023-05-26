@@ -26,6 +26,7 @@ import ProfileImage from '../../components/Influencer/Form/ProfileImage';
 import SocialAccounts from '../../components/Influencer/Form/SocialAccounts';
 import Hashtags from '../../components/Influencer/Form/Hashtags';
 import { STEPS } from '../../util/Constants';
+import MyCustomButton from '../../components/Button/Button';
 
 
 
@@ -110,53 +111,50 @@ const CreateProfile = () => {
 
   return (
     <>
-      <Typography sx={{ pt: { xs: 1, md: 5 }, pb: { xs: 1, md: 5 }, px: { xs: 1, md: 10 } }} variant="h2">Create your profile </Typography>
+    <Stack sx={{display:'flex', justifyContent:'center', alignItems:'center'}}>
+      <Typography sx={{ pt: { xs: 1, md: 5 }, pb: { xs: 1, md: 5 }}} variant="h2">Create your profile </Typography>
 
+      <Box className="glassmorphism" sx={{
+        gap: 2, flexGrow: 1, mx: { xs: 5, md: 10 }, py: { xs: 1, md: 3 }, pl: { xs: 1, md: 3 }, pr: { xs: 1, md: 8 },
+        display: 'flex', flexDirection: 'row', width: {xs:'250px', md:'800px'}
+      }}>
 
+        <Stepper activeStep={activeStep} orientation="vertical"
+          sx={{
+            backgroundColor: 'customColors.purple.light',
+            py: { xs: 1, md: 3 }, pl: { xs: 1, md: 3 }, pr: { xs: 1, md: 8 },
+            borderRadius: '25px'
+          }}>
+          {STEPS.map((label) => (
+            <Step key={label}>
+              <StepLabel >{label}</StepLabel>
+            </Step>
+          ))}
+        </Stepper>
 
+        {activeStep === STEPS.length ? (
+          <Stack>
+            {/* Redirect */}
+          </Stack>
+        ) : (
+          <Stack>
+            {getStepContent(activeStep)}
+            <Box sx={{ display: 'flex', justifyContent: 'flex-end', flexDirection: 'row' }}>
+              {activeStep !== 0 && (
+                <MyCustomButton variant="secondary" onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
+                  Back
+                </MyCustomButton>
+              )}
 
-        <Box className="glassmorphism" sx={{ gap: 2, flexGrow: 1, mx:{xs:5, md:10}, py: { xs: 1, md: 3 }, pl: { xs: 1, md: 3 }, pr: { xs: 1, md: 8 }, 
-                                            display: 'flex', flexDirection:'row' }}>
+              <MyCustomButton  onClick={handleNext} sx={{ mt: 3, ml: 1 }}>
+                {activeStep === STEPS.length - 1 ? 'Create profile' : 'Next'}
+              </MyCustomButton>
+            </Box>
 
-          <Stepper activeStep={activeStep} orientation="vertical"
-            sx={{
-              backgroundColor: 'customColors.purple.light',
-              py: { xs: 1, md: 3 }, pl: { xs: 1, md: 3 }, pr: { xs: 1, md: 8 },
-              borderRadius: '25px'
-            }}>
-            {STEPS.map((label) => (
-              <Step key={label}>
-                <StepLabel >{label}</StepLabel>
-              </Step>
-            ))}
-          </Stepper>
-
-          {activeStep === STEPS.length ? (
-            <React.Fragment>
-              {/* Redirect */}
-            </React.Fragment>
-          ) : (
-            <React.Fragment>
-              {getStepContent(activeStep)}
-              <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-                {activeStep !== 0 && (
-                  <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
-                    Back
-                  </Button>
-                )}
-
-
-              </Box>
-              <Button
-                  variant="contained"
-                  onClick={handleNext}
-                  sx={{ mt: 3, ml: 1 }}
-                >
-                  {activeStep === STEPS.length - 1 ? 'Create profile' : 'Next'}
-                </Button>
-            </React.Fragment>
-          )}
-        </Box>
+          </Stack>
+        )}
+      </Box>
+      </Stack>
     </>
   );
 }
