@@ -28,8 +28,7 @@ const BasicInfo = ({onDataChange}) => {
 
 
     return (
-        <React.Fragment>
-            <Container component="main" maxWidth="sm">
+        <>
                 <Box
                     sx={{
                         borderRadius: 1,
@@ -75,9 +74,7 @@ const BasicInfo = ({onDataChange}) => {
 
                     </Box>
                 </Box>
-            </Container>
-
-        </React.Fragment>
+                </>
 
     ); 
 

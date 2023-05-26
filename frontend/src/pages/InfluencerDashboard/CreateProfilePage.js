@@ -112,16 +112,15 @@ const CreateProfile = () => {
   return (
     <>
     <Stack sx={{display:'flex', justifyContent:'center', alignItems:'center'}}>
-      <Typography sx={{ pt: { xs: 1, md: 5 }, pb: { xs: 1, md: 5 }}} variant="h2">Create your profile </Typography>
+      <Typography sx={{pt: { xs: 1, md: 5 }, pb: { xs: 1, md: 5 }}} variant="h2">Create your profile </Typography>
 
       <Box className="glassmorphism" sx={{
         gap: 2, flexGrow: 1, mx: { xs: 5, md: 10 }, py: { xs: 1, md: 3 }, pl: { xs: 1, md: 3 }, pr: { xs: 1, md: 8 },
         display: 'flex', flexDirection: 'row', width: {xs:'250px', md:'800px'}
       }}>
 
-        <Stepper activeStep={activeStep} orientation="vertical"
+        <Stepper  className="glassmorphism" activeStep={activeStep} orientation="vertical"
           sx={{
-            backgroundColor: 'customColors.purple.light',
             py: { xs: 1, md: 3 }, pl: { xs: 1, md: 3 }, pr: { xs: 1, md: 8 },
             borderRadius: '25px'
           }}>

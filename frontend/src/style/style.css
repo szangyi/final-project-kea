@@ -95,3 +95,8 @@ body {
 .css-nzpbv3-MuiPaper-root-MuiDrawer-paper{
     top: auto !important;
 }
+
+.blue{
+    background-color: #A4B0FF;
+    height: 100vh;
+}

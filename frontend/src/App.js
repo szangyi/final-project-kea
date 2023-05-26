@@ -50,14 +50,22 @@ const router = createBrowserRouter([
             },
             { path: "/influencer-dashboard", element: <InfluenceDashboardPage />, loader: authLoader },
             { path: "/collection", element: <CollectionPage />, loader: authLoader },
-            { path: "/create-profile", element: <CreateProfilePage />, loader: authLoader },
             { path: "/profile/:username", element: <ProfileLandingPage />, loader: authLoader },
             { path: '*', element: <Page404 replace /> },
 
             // To do:
             // { path: "/my-interests", element: <HomePage /> },
-        ]
+        ],
+
     },
+    {
+        path: '/create-profile',
+        element: <RootLayout />,
+        children: [
+                 { path: "/create-profile", element: <CreateProfilePage />, loader: authLoader },
+
+        ]
+    }
 
 ]);
 
