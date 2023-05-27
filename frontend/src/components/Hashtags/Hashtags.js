@@ -7,13 +7,12 @@ import React, { useState } from 'react';
 // MATERIAL UI ---------------
 // --------------------------
 import Autocomplete from '@mui/material/Autocomplete';
-import TextField from '@mui/material/TextField';
-import Stack from '@mui/material/Stack';
 
 // --------------------------
 // COMPONENTS ---------------
 // --------------------------
 import { HASHTAGSOPTIONS } from '../../util/Constants';
+import MyCustomTextField from "../Form/TextField";
 
 
 
@@ -29,8 +28,8 @@ const Hashtags = ({onHashtagChange}) => {
 
 
     return (
-        <Stack spacing={3} sx={{ width: 500 }}>
             <Autocomplete
+                sx={{pt:3, pb:3}}
                 multiple
                 id="hashtags"
                 options={HASHTAGSOPTIONS}
@@ -38,15 +37,14 @@ const Hashtags = ({onHashtagChange}) => {
                 onChange= {handleChange}
                 value = {hashtagData.tag}
                 renderInput={(params) => (
-                    <TextField
+                    <MyCustomTextField
                         {...params}
                         variant="standard"
-                        label="Chose your tags"
-                        placeholder="Tags"
+                        label="Chose your hashtags"
+                        placeholder="Hashtags"
                     />
                 )}
             />
-        </Stack>
     );
 };
 

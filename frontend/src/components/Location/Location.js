@@ -54,7 +54,6 @@ const Location = ({ onLocationChange }) => {
                     label="Choose a country"
                     inputProps={{
                         ...params.inputProps,
-                        style: { color: 'red'}
                     }}
                 />
             )}

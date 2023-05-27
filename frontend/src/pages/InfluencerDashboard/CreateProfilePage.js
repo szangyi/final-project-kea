@@ -110,14 +110,14 @@ const CreateProfile = () => {
         <Typography sx={{ pt: { xs: 1, md: 5 }, pb: { xs: 1, md: 5 } }} variant="h2">Create your profile </Typography>
 
         <Box className="glassmorphism" sx={{
-          gap: 2, flexGrow: 1, mx: { xs: 5, md: 10 }, py: { xs: 1, md: 3 }, pl: { xs: 1, md: 3 }, pr: { xs: 1, md: 8 },
-          display: 'flex', flexDirection: 'row', width: { xs: '250px', md: '800px' }
+          gap: 2, flexGrow: 1, mx: { xs: 5, md: 10 }, py: { xs: 1, md: 3 }, pl: { xs: 1, md: 3 }, pr: { xs: 1, md: 10 },
+          display: 'flex', flexDirection: 'row', alignItems:'center', width: '700px', minHeight: '500px', position:'relative'
         }}>
 
           <Stepper className="glassmorphism" activeStep={activeStep} orientation="vertical"
             sx={{
               py: { xs: 1, md: 3 }, pl: { xs: 1, md: 3 }, pr: { xs: 1, md: 8 },
-              borderRadius: '25px'
+              borderRadius: '25px', height: '400px'
             }}>
             {STEPS.map((label) => (
               <Step key={label}>
@@ -130,8 +130,8 @@ const CreateProfile = () => {
             <Loader />
           ) : (
             <Stack >
-              <Box className="wdhjwej">{getStepContent(activeStep)}</Box>
-              <Box sx={{ display: 'flex', justifyContent: 'flex-end', flexDirection: 'row' }}>
+              <Box >{getStepContent(activeStep)}</Box>
+              <Box sx={{ pb:3, pl:8, display: 'flex', justifyContent: 'flex-end', flexDirection: 'row', position:'absolute', bottom:0 }}>
                 {activeStep !== 0 && (
                   <MyCustomButton variant="secondary" onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
                     Back
