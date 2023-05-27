@@ -73,73 +73,65 @@ const CollectionPage = () => {
         <>
 
             <Banner variant="medium" headline1="Find your influencer" />
+            <Stack sx={{ display: 'flex', flexDirection: 'row', height: '100vh', pt:5 }}>
+                <Stack className="glassmorphism" sx={{ display: 'flex', flexDirection: 'column' }}>
+                    <SearchBar onChange={handleSearchQueryChange} value={searchQuery} />
+                    <FormControl fullWidth>
+                        <InputLabel>Category</InputLabel>
+                        <Select
+                            labelId="category"
+                            id="category"
+                            value={categoryData || 'All categories'}
+                            label="Category"
+                            onChange={handleCategoryChange}
+                        >
+                            <MenuItem value="All categories">All Categories</MenuItem>
 
-            <Stack sx={{ display: 'flex', flexDirection: 'column' }}>
-                <SearchBar onChange={handleSearchQueryChange} value={searchQuery} />
-                <FormControl fullWidth>
-                    <InputLabel>Category</InputLabel>
-                    <Select
-                        labelId="category"
-                        id="category"
-                        value={categoryData || 'All categories'}
-                        label="Category"
-                        onChange={handleCategoryChange}
-                    >
-                        <MenuItem value="All categories">All Categories</MenuItem>
+                            {CATEGORYOPTIONS.map((option, index) => (
+                                <MenuItem key={index} value={option.category}>
+                                    {option.category}
+                                </MenuItem>
+                            ))}
+                        </Select>
+                    </FormControl>
 
-                        {CATEGORYOPTIONS.map((option, index) => (
-                            <MenuItem key={index} value={option.category}>
-                                {option.category}
-                            </MenuItem>
-                        ))}
-                    </Select>
-                </FormControl>
+                    <Stack spacing={3} sx={{ width: 500 }}>
+                        <Autocomplete
+                            multiple
+                            id="hashtags"
+                            options={HASHTAGSOPTIONS}
+                            getOptionLabel={(option) => (option && option.tag) || ''}
+                            onChange={handleHashtagChange}
+                            value={HASHTAGSOPTIONS.filter(option => hashtagData.includes(option.tag))}
+                            renderInput={(params) => (
+                                <TextField
+                                    {...params}
+                                    variant="standard"
+                                    label="Search with tags"
+                                    placeholder="Tags"
+                                />
+                            )}
+                        />
 
-                <Stack spacing={3} sx={{ width: 500 }}>
-                    <Autocomplete
-                        multiple
-                        id="hashtags"
-                        options={HASHTAGSOPTIONS}
-                        getOptionLabel={(option) => (option && option.tag) || ''}
-                        onChange={handleHashtagChange}
-                        value={HASHTAGSOPTIONS.filter(option => hashtagData.includes(option.tag))}
-                        renderInput={(params) => (
-                            <TextField
-                                {...params}
-                                variant="standard"
-                                label="Search with tags"
-                                placeholder="Tags"
-                            />
-                        )}
-                    />
+                    </Stack>
+                    <Location onLocationChange={handleLocationChange} />
 
                 </Stack>
-                <Location onLocationChange={handleLocationChange} />
+
+
+                <Stack sx={{overflow:'scroll'}}>
+                        <Box sx={{ display: 'flex', flexDirection: 'row', gap: '20px', flexWrap: 'wrap' }}>
+                            {SOCIALOPTIONS.map((social, index) => (
+                                <Box key={index} >
+                                    <Button onClick={() => handleChangeSocial(social["social"])}>{social["social"]}</Button>
+                                </Box>
+
+                            ))}
+                        </Box>
+                        <CollectionCard searchQuery={searchQuery} searchCategory={categoryData} searchHashtag={hashtagData} searchSocial={socialData} searchLocation={locationData} />
+                </Stack>
 
             </Stack>
-
-            <Box sx={{ display: 'flex' }}>
-
-
-                <Box
-                    component="main"
-                    sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
-                >
-                    <Toolbar />
-                    <Box sx={{ display: 'flex', flexDirection: 'row', gap: '20px', flexWrap: 'wrap' }}>
-                        {SOCIALOPTIONS.map((social, index) => (
-                            <Box key={index} >
-                                <Button onClick={() => handleChangeSocial(social["social"])}>{social["social"]}</Button>
-                            </Box>
-
-                        ))}
-                    </Box>
-                    <CollectionCard searchQuery={searchQuery} searchCategory={categoryData} searchHashtag={hashtagData} searchSocial={socialData} searchLocation={locationData} />
-                </Box>
-            </Box>
-
-
-
         </>
     )
 
