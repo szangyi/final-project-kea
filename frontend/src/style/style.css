@@ -96,7 +96,7 @@ body {
     top: auto !important;
 }
 
-.blue{
+.noNavRoot{
     background-color: #A4B0FF;
     height: 100vh;
 }

@@ -17,7 +17,7 @@ import Button from '@mui/material/Button';
 
 
 import CollectionCard from '../components/Influencer/CollectionCard'
-import Location from '../components/Influencer/Form/Location';
+import Location from '../components/Location/Location';
 
 const drawerWidth = 240;
 

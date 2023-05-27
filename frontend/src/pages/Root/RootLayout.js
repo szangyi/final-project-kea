@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom";
 
 function RootLayout() {
     return (
-    <div className="blue">
+    <div className="noNavRoot">
         <Outlet/>
     </div>
     )

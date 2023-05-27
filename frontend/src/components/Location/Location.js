@@ -1,13 +1,26 @@
+// --------------------------
+// REACT ---------------
+// --------------------------
 import React, { useState } from 'react';
+
+// --------------------------
+// MATERIAL UI ---------------
+// --------------------------
 import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
-import { LOCATION } from '../../../util/Constants';
+
+// --------------------------
+// COMPONENTS ---------------
+// --------------------------
+import MyCustomTextField from "../Form/TextField";
+import { LOCATION } from '../../util/Constants';
 
 const Location = ({ onLocationChange }) => {
 
+    // VARIABLES ---------------
     const [locationData, setLocationData] = useState('')
 
+    // HANDLE CHANGE ---------------
     const handleLocationChange = (event, value) => {
         setLocationData(value.label);
         onLocationChange(value.label);
@@ -36,12 +49,12 @@ const Location = ({ onLocationChange }) => {
                 </Box>
             )}
             renderInput={(params) => (
-                <TextField
+                <MyCustomTextField
                     {...params}
                     label="Choose a country"
                     inputProps={{
                         ...params.inputProps,
-                        autoComplete: 'new-password',
+                        style: { color: 'red'}
                     }}
                 />
             )}

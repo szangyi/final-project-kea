@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
-import Container from "@mui/material/Container";
 import Stack from '@mui/material/Stack';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
-import MyCustomTextField from "../../Form/TextField.js";
+import MyCustomTextField from "../../components/Form/TextField";
 
 import InstagramIcon from '@mui/icons-material/Instagram';
 import LaptopIcon from '@mui/icons-material/Laptop';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 
 
-const SocialAccounts = ({onDataChange}) => {
+const SocialAccountsForm = ({onDataChange}) => {
 
     const Item = styled(Paper)(({ theme }) => ({
         backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -40,7 +39,7 @@ const SocialAccounts = ({onDataChange}) => {
 
     return (
 
-        <Container>
+        <Stack>
             <Stack direction="row" spacing={2}>
                 <Item><LaptopIcon /></Item>
                 <MyCustomTextField
@@ -108,7 +107,7 @@ const SocialAccounts = ({onDataChange}) => {
                     onChange={handleChange}
                 />
             </Stack>
-        </Container>
+        </Stack>
 
     );
 
@@ -116,6 +115,6 @@ const SocialAccounts = ({onDataChange}) => {
 
 }
 
-export default SocialAccounts;
+export default SocialAccountsForm;
 
 

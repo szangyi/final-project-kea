@@ -13,21 +13,18 @@ import Box from '@mui/material/Box';
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Stack } from '@mui/material';
 
 // --------------------------
 // COMPONENTS ---------------
 // --------------------------
-import BasicInfo from '../../components/Influencer/Form/BasicInfo';
-import Category from '../../components/Influencer/Form/Category';
-import ProfileImage from '../../components/Influencer/Form/ProfileImage';
-import SocialAccounts from '../../components/Influencer/Form/SocialAccounts';
-import Hashtags from '../../components/Influencer/Form/Hashtags';
+import UserBasicInfoForm from './UserBasicInfoForm';
+import UserSelectForm from './UserSelectForm'
+import SocialAccountsForm from './SocialAccountsForm';
 import { STEPS } from '../../util/Constants';
 import MyCustomButton from '../../components/Button/Button';
-
+import Loader from '../../components/Loader/Loader'
 
 
 const CreateProfile = () => {
@@ -60,19 +57,17 @@ const CreateProfile = () => {
   function getStepContent(step) {
     switch (step) {
       case 0:
-        return <BasicInfo onDataChange={handleData} />;
+        return <UserBasicInfoForm onDataChange={handleData} />;
       case 1:
-        return <Category onDataChange={handleData} />;
+        return <UserSelectForm onDataChange={handleData} />;
       case 2:
-        return <Hashtags onDataChange={handleData} />;
-      case 3:
-        return <ProfileImage onDataChange={handleData} />
-      case 4:
-        return <SocialAccounts onDataChange={handleData} />
+        return <SocialAccountsForm onDataChange={handleData} />
       default:
         throw new Error('Unknown step');
     }
   }
+
+  console.log(formData)
 
 
   // POSTING DATA TO API ---------------
@@ -98,7 +93,7 @@ const CreateProfile = () => {
       });
 
       if (response) {
-        nav('/dashboard');
+        nav('/influencer-dashboard');
       } else {
         console.log("Something went wrong")
       }
@@ -111,48 +106,46 @@ const CreateProfile = () => {
 
   return (
     <>
-    <Stack sx={{display:'flex', justifyContent:'center', alignItems:'center'}}>
-      <Typography sx={{pt: { xs: 1, md: 5 }, pb: { xs: 1, md: 5 }}} variant="h2">Create your profile </Typography>
+      <Stack sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <Typography sx={{ pt: { xs: 1, md: 5 }, pb: { xs: 1, md: 5 } }} variant="h2">Create your profile </Typography>
 
-      <Box className="glassmorphism" sx={{
-        gap: 2, flexGrow: 1, mx: { xs: 5, md: 10 }, py: { xs: 1, md: 3 }, pl: { xs: 1, md: 3 }, pr: { xs: 1, md: 8 },
-        display: 'flex', flexDirection: 'row', width: {xs:'250px', md:'800px'}
-      }}>
+        <Box className="glassmorphism" sx={{
+          gap: 2, flexGrow: 1, mx: { xs: 5, md: 10 }, py: { xs: 1, md: 3 }, pl: { xs: 1, md: 3 }, pr: { xs: 1, md: 8 },
+          display: 'flex', flexDirection: 'row', width: { xs: '250px', md: '800px' }
+        }}>
 
-        <Stepper  className="glassmorphism" activeStep={activeStep} orientation="vertical"
-          sx={{
-            py: { xs: 1, md: 3 }, pl: { xs: 1, md: 3 }, pr: { xs: 1, md: 8 },
-            borderRadius: '25px'
-          }}>
-          {STEPS.map((label) => (
-            <Step key={label}>
-              <StepLabel >{label}</StepLabel>
-            </Step>
-          ))}
-        </Stepper>
+          <Stepper className="glassmorphism" activeStep={activeStep} orientation="vertical"
+            sx={{
+              py: { xs: 1, md: 3 }, pl: { xs: 1, md: 3 }, pr: { xs: 1, md: 8 },
+              borderRadius: '25px'
+            }}>
+            {STEPS.map((label) => (
+              <Step key={label}>
+                <StepLabel >{label}</StepLabel>
+              </Step>
+            ))}
+          </Stepper>
 
-        {activeStep === STEPS.length ? (
-          <Stack>
-            {/* Redirect */}
-          </Stack>
-        ) : (
-          <Stack>
-            {getStepContent(activeStep)}
-            <Box sx={{ display: 'flex', justifyContent: 'flex-end', flexDirection: 'row' }}>
-              {activeStep !== 0 && (
-                <MyCustomButton variant="secondary" onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
-                  Back
+          {activeStep === STEPS.length ? (
+            <Loader />
+          ) : (
+            <Stack >
+              <Box className="wdhjwej">{getStepContent(activeStep)}</Box>
+              <Box sx={{ display: 'flex', justifyContent: 'flex-end', flexDirection: 'row' }}>
+                {activeStep !== 0 && (
+                  <MyCustomButton variant="secondary" onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
+                    Back
+                  </MyCustomButton>
+                )}
+
+                <MyCustomButton onClick={handleNext} sx={{ mt: 3, ml: 1 }}>
+                  {activeStep === STEPS.length - 1 ? 'Create profile' : 'Next'}
                 </MyCustomButton>
-              )}
+              </Box>
 
-              <MyCustomButton  onClick={handleNext} sx={{ mt: 3, ml: 1 }}>
-                {activeStep === STEPS.length - 1 ? 'Create profile' : 'Next'}
-              </MyCustomButton>
-            </Box>
-
-          </Stack>
-        )}
-      </Box>
+            </Stack>
+          )}
+        </Box>
       </Stack>
     </>
   );

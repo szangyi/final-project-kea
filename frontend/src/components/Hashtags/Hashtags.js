@@ -1,18 +1,29 @@
+// --------------------------
+// REACT ---------------
+// --------------------------
 import React, { useState } from 'react';
+
+// --------------------------
+// MATERIAL UI ---------------
+// --------------------------
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
-import { HASHTAGSOPTIONS } from '../../../util/Constants';
+
+// --------------------------
+// COMPONENTS ---------------
+// --------------------------
+import { HASHTAGSOPTIONS } from '../../util/Constants';
 
 
 
-const Hashtags = ({onDataChange}) => {
+const Hashtags = ({onHashtagChange}) => {
     const [hashtagData, setHashtagData] = useState([]);
 
     const handleChange = (event, value) => {
         const selectedTags = value.map((item) => item.tag);
         setHashtagData(selectedTags);
-        onDataChange({hashtag:selectedTags}); 
+        onHashtagChange({hashtag:selectedTags}); 
     }
 
 

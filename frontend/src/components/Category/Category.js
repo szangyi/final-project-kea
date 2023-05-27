@@ -2,11 +2,9 @@ import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import Container from "@mui/material/Container";
-import { CATEGORYOPTIONS } from '../../../util/Constants';
+import { CATEGORYOPTIONS } from '../../util/Constants';
 
-
-
-const Category = ({onDataChange}) => {
+const Category = ({onCategoryChange}) => {
     const [categoryData, setCategoryData] = useState({
         category: ''
     }
@@ -14,7 +12,7 @@ const Category = ({onDataChange}) => {
 
     const handleChange = (event, value) => {
         setCategoryData({ category: value });
-        onDataChange(value); 
+        onCategoryChange(value); 
     }
     return (
         <Container component="main" maxWidth="sm">
