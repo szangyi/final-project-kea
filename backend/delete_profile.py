@@ -14,7 +14,8 @@ def _delete_profile():
     data_request = request.headers.get('Authorization')
     token_data = jwt.decode(data_request, g.SECRET_KEY, algorithms=["HS256"])
     user_email = token_data["email"]
-    influencer_ID = request_influencer_ID["influencerID"]
+    influencer_ID = request_influencer_ID["influencerid"]
+    
     
 
     try:

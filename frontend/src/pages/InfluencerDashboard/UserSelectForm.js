@@ -14,20 +14,13 @@ const UserSelectForm = ({ onDataChange }) => {
     const handleChange = (data) => {
         onDataChange(data);
     }
-
-
-
+    
     return (
         <>
             <Category onCategoryChange={handleChange}/>
-
             <Hashtags onHashtagChange={handleChange}/>
-
         </>
-
     );
-
-
 }
 
 export default UserSelectForm;

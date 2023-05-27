@@ -17,23 +17,41 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogTitle from '@mui/material/DialogTitle';
 
 // --------------------------
 // COMPONENTS ---------------
 // --------------------------
 import Banner from '../../components/Banner/Banner';
 import Loader from '../../components/Loader/Loader'
-import DeleteProfile from "../../components/Influencer/ProfileActions/DeleteProfile";
 import MyCustomButton from '../../components/Button/Button';
 
 const InfluencerPage = () => {
 
   // VARIABLES ---------------
   const [influencerData, setInfluencerData] = useState(null);
+  const [open, setOpen] = React.useState(false);
   const token = Cookies.get('token');
+
+  // HANDLERS ---------------
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleDelete = (influencerid) => {
+    deleteProfile(influencerid)
+  }
+
+
+
 
   // CONNECT TO API ---------------
   const getInfluencerData = async () => {
@@ -51,12 +69,30 @@ const InfluencerPage = () => {
     }
   };
 
+  const deleteProfile = async (influencerid) => {
+    try {
+      const response = await axios.post('/api/delete-profile', { influencerid }, {
+        headers: {
+          Authorization: `${token}`,
+        },
+      });
+
+      if (response) {
+        console.log(response)
+        handleClose();
+      }
+      else {
+        console.log("error")
+      }
+    } catch {
+      console.log('Delete of profile failed');
+    }
+
+  };
+
   getInfluencerData();
 
-  // DELETE PROFILE ---------------
-  const deleteProfile = (profileID) => {
-    console.log(`Deleting profile with ID ${profileID}`);
-  };
+
 
   // RETURN --------------- 
   return (
@@ -65,7 +101,7 @@ const InfluencerPage = () => {
       <Box
         component="section"
         className="influencerdashboard-section bannerPadding"
-        sx={{ pt: { xs: 5, md: 5 }, pb: { xs: 2, md: 5 }, minHeight: {xs: '200px', md:'500px'} }}>
+        sx={{ pt: { xs: 5, md: 5 }, pb: { xs: 2, md: 5 }, minHeight: { xs: '200px', md: '500px' } }}>
 
         {influencerData === null ? (
           <Loader />
@@ -80,13 +116,14 @@ const InfluencerPage = () => {
               }}>
               <Typography sx={{ pt: { xs: 1, md: 5 }, pb: { xs: 1, md: 0 }, px: { xs: 1, md: 3 } }} variant="h3">Step into the spotlight with effortless ease!</Typography>
               <Typography sx={{ pt: { xs: 1, md: 1 }, pb: { xs: 1, md: 0 }, px: { xs: 1, md: 3 } }} variant="p">Create your first profile, and become recognizable.</Typography>
-              <MyCustomButton href="/create-profile" sx={{mt: 4}} startIcon={<AddIcon />}>Add your first profile</MyCustomButton>
+              <MyCustomButton href="/create-profile" sx={{ mt: 4 }} startIcon={<AddIcon />}>Add your first profile</MyCustomButton>
             </Stack>
+
           ) : (
 
-            <Box className="glassmorphism" sx={{ gap: 2, flexGrow: 1, py: { xs: 1, md: 3 }, pl: { xs: 1, md: 3 }, pr: { xs: 1, md: 8 }, display: 'flex' }}>
+            <Box className="glassmorphism" sx={{ gap: 2, flexGrow: 1, py: { xs: 1, md: 3 }, pl: { xs: 1, md: 3 }, pr: { xs: 1, md: 8 }, display: 'flex', flexDirection: 'column' }}>
               <Typography sx={{ pt: { xs: 1, md: 5 }, pb: { xs: 1, md: 0 }, px: { xs: 1, md: 3 } }} variant="h2">Your profiles </Typography>
-              <TableContainer component={Paper} elevation={0}>
+              <TableContainer elevation={0}>
                 <Table sx={{ minWidth: 650 }} >
                   <TableHead>
                     <TableRow>
@@ -97,9 +134,9 @@ const InfluencerPage = () => {
                       <TableCell></TableCell>
                       <TableCell></TableCell>
                       <TableCell >
-                        <Button href="/create-profile" variant="outlined" startIcon={<AddIcon />}>
+                        <MyCustomButton href="/create-profile" startIcon={<AddIcon />}>
                           Add new profile
-                        </Button>
+                        </MyCustomButton>
                       </TableCell>
                     </TableRow>
                   </TableHead>
@@ -144,19 +181,39 @@ const InfluencerPage = () => {
 
                         </TableCell>
                         <TableCell align="right">
-                          <Button href="#" variant="outlined">
+                          <MyCustomButton variant="secondary" href="#">
                             Edit
-                          </Button></TableCell>
+                          </MyCustomButton></TableCell>
 
                         <TableCell align="left">
-                          <Button component={Link} to={`/profile/${array[2]}`} variant="outlined" >
+                          <MyCustomButton variant="secondary" component={Link} to={`/profile/${array[2]}`} >
                             Preview
-                          </Button>
+                          </MyCustomButton>
                         </TableCell>
                         <TableCell align="left">
 
-                          <DeleteProfile onDelete={deleteProfile} influencerID={array[0]} />
+                          <Button
+                            variant="outlined"
+                            onClick={() => {
+                              handleOpen();
+                            }}>
+                            Delete
+                          </Button>
 
+                          <Dialog
+                            open={open}
+                            onClose={handleClose}
+                            aria-labelledby="draggable-dialog-title">
+                            <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
+                              Are you sure you want to delete this profile?
+                            </DialogTitle>
+                            <DialogActions>
+                              <Button autoFocus onClick={handleClose}>
+                                Cancel
+                              </Button>
+                              <Button onClick={() => handleDelete(array[0])} >Delete</Button>
+                            </DialogActions>
+                          </Dialog>
                         </TableCell>
                       </TableRow>
                     ))}
