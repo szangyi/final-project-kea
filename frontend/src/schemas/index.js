@@ -42,3 +42,4 @@ export const loginSchema = Yup.object().shape({
         .matches(regexPassword, { message: "Your password must include at least 1 uppercase-, 1 lowercase letter, and 1 number" })
         .required('Required field'),
 })
+

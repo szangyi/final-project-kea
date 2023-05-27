@@ -19,8 +19,8 @@ import { Stack } from '@mui/material';
 // --------------------------
 // COMPONENTS ---------------
 // --------------------------
-import UserBasicInfoForm from './UserBasicInfoForm';
-import UserSelectForm from './UserSelectForm'
+import InfluencerBasicInfoForm from './InfluencerBasicInfoForm';
+import InfluencerSelectForm from './InfluencerSelectForm'
 import SocialAccountsForm from './SocialAccountsForm';
 import { STEPS } from '../../util/Constants';
 import MyCustomButton from '../../components/Button/Button';
@@ -57,9 +57,9 @@ const CreateProfile = () => {
   function getStepContent(step) {
     switch (step) {
       case 0:
-        return <UserBasicInfoForm onDataChange={handleData} />;
+        return <InfluencerBasicInfoForm onDataChange={handleData} />;
       case 1:
-        return <UserSelectForm onDataChange={handleData} />;
+        return <InfluencerSelectForm onDataChange={handleData} />;
       case 2:
         return <SocialAccountsForm onDataChange={handleData} />
       default:

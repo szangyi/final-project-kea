@@ -9,7 +9,7 @@ import React, { useState } from 'react';
 import Category from '../../components/Category/Category'
 import Hashtags from '../../components/Hashtags/Hashtags';
 
-const UserSelectForm = ({ onDataChange }) => {
+const InfleuncerSelectForm = ({ onDataChange }) => {
 
     const handleChange = (data) => {
         onDataChange(data);
@@ -23,6 +23,6 @@ const UserSelectForm = ({ onDataChange }) => {
     );
 }
 
-export default UserSelectForm;
+export default InfleuncerSelectForm;
 
 

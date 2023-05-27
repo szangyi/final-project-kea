@@ -10,7 +10,7 @@ import MyCustomTextField from "../../components/Form/TextField";
 import ProfileImage from '../../components/Image/ProfileImage';
 import Location from '../../components/Location/Location';
 
-const UserBasicInfoForm = ({ onDataChange }) => {
+const InfluencerBasicInfoForm = ({ onDataChange }) => {
 
     // VARIABLES ---------------
     const [basicData, setBasicData] = useState({
@@ -67,16 +67,10 @@ const UserBasicInfoForm = ({ onDataChange }) => {
             />
 
             <ProfileImage onImageChange={handleImageChange} />
-
-
-
         </>
-
     );
-
-
 }
 
-export default UserBasicInfoForm;
+export default InfluencerBasicInfoForm;
 
 
