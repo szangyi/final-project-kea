@@ -6,9 +6,7 @@ import React, { useState } from 'react';
 // --------------------------
 // MATERIAL UI ---------------
 // --------------------------
-import Drawer from '@mui/material/Drawer';
 import TextField from '@mui/material/TextField';
-import Toolbar from '@mui/material/Toolbar';
 import Autocomplete from '@mui/material/Autocomplete';
 import Stack from '@mui/material/Stack';
 import Box from "@mui/material/Box";
@@ -21,33 +19,27 @@ import MenuItem from '@mui/material/MenuItem';
 // COMPONENETS ---------------
 // --------------------------
 import { CATEGORYOPTIONS, HASHTAGSOPTIONS, SOCIALOPTIONS } from '../util/Constants';
-import CollectionCard from '../components/Influencer/CollectionCard'
+import CollectionCard from '../components/CollectionCard/CollectionCard'
 import Location from '../components/Location/Location';
 import SearchBar from '../components/SearchBar/SearchBar';
 import Banner from '../components/Banner/Banner';
 import Hashtags from '../components/Hashtags/Hashtags';
-// --------------------------
-// REMOVE ---------------
-// --------------------------
-
-
-const drawerWidth = 240;
-
+import Loader from '../components/Loader/Loader'
+import Cookies from 'js-cookie';
+import axios from 'axios';
 
 const CollectionPage = () => {
-    const [mobileOpen, setMobileOpen] = React.useState(false);
+
+    // VARIABLES ---------------
     const [searchQuery, setSearchQuery] = useState('');
     const [categoryData, setCategoryData] = useState('All categories')
     const [hashtagData, setHashtagData] = useState([]);
     const [socialData, setSocialData] = useState('All');
     const [locationData, setLocationData] = useState('');
+    const [profilesData, setProfilesData] = useState(null);
+    const token = Cookies.get('token');
 
-
-
-    const handleDrawerToggle = () => {
-        setMobileOpen(!mobileOpen);
-    };
-
+    // HANDLERS ---------------
     const handleSearchQueryChange = (event) => {
         setSearchQuery(event.target.value);
     };
@@ -69,11 +61,34 @@ const CollectionPage = () => {
         setLocationData(data)
     }
 
+    // CONNECTING TO API ---------------
+    const collectionHandler = async () => {
+        try {
+            const response = await axios.get('/api/profiles', {
+                headers: {
+                    Authorization: `${token}`,
+                }
+            },
+            );
+
+            const profilesData = response.data;
+
+            setProfilesData(profilesData);
+
+        } catch {
+            console.log('Getting all profiles failed:');
+        }
+    }
+
+    // CALLING API FUNCTION ---------------
+    collectionHandler();
+
+
     return (
         <>
 
             <Banner variant="medium" headline1="Find your influencer" />
-            <Stack sx={{ display: 'flex', flexDirection: 'row', height: '100vh', pt:5 }}>
+            <Stack sx={{ display: 'flex', flexDirection: 'row', height: '100vh', pt: 5 }}>
                 <Stack className="glassmorphism" sx={{ display: 'flex', flexDirection: 'column' }}>
                     <SearchBar onChange={handleSearchQueryChange} value={searchQuery} />
                     <FormControl fullWidth>
@@ -119,16 +134,24 @@ const CollectionPage = () => {
                 </Stack>
 
 
-                <Stack sx={{overflow:'scroll'}}>
-                        <Box sx={{ display: 'flex', flexDirection: 'row', gap: '20px', flexWrap: 'wrap' }}>
-                            {SOCIALOPTIONS.map((social, index) => (
-                                <Box key={index} >
-                                    <Button onClick={() => handleChangeSocial(social["social"])}>{social["social"]}</Button>
-                                </Box>
+                <Stack sx={{ overflow: 'scroll' }}>
+                    <Box sx={{ display: 'flex', flexDirection: 'row', gap: '20px', flexWrap: 'wrap' }}>
+                        {SOCIALOPTIONS.map((social, index) => (
+                            <Box key={index} >
+                                <Button onClick={() => handleChangeSocial(social["social"])}>{social["social"]}</Button>
+                            </Box>
 
-                            ))}
-                        </Box>
-                        <CollectionCard searchQuery={searchQuery} searchCategory={categoryData} searchHashtag={hashtagData} searchSocial={socialData} searchLocation={locationData} />
+                        ))}
+                    </Box>
+                    <Stack>
+                        {profilesData === null ? (
+                            <Loader />
+                        ) : (
+
+                            <CollectionCard filteringCard={"yes"} array={profilesData} searchQuery={searchQuery} searchCategory={categoryData} searchHashtag={hashtagData} searchSocial={socialData} searchLocation={locationData} />
+
+                        )}
+                    </Stack>
                 </Stack>
 
             </Stack>
