@@ -2,7 +2,8 @@
 // REACT ---------------
 // --------------------------
 import React, { useState } from 'react';
-
+import Cookies from 'js-cookie';
+import axios from 'axios';
 // --------------------------
 // MATERIAL UI ---------------
 // --------------------------
@@ -11,22 +12,17 @@ import Autocomplete from '@mui/material/Autocomplete';
 import Stack from '@mui/material/Stack';
 import Box from "@mui/material/Box";
 import Button from '@mui/material/Button';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
 // --------------------------
 // COMPONENETS ---------------
 // --------------------------
-import { CATEGORYOPTIONS, HASHTAGSOPTIONS, SOCIALOPTIONS } from '../util/Constants';
+import {HASHTAGSOPTIONS, SOCIALOPTIONS } from '../util/Constants';
 import CollectionCard from '../components/CollectionCard/CollectionCard'
 import Location from '../components/Location/Location';
 import SearchBar from '../components/SearchBar/SearchBar';
 import Banner from '../components/Banner/Banner';
 import Hashtags from '../components/Hashtags/Hashtags';
 import Loader from '../components/Loader/Loader'
-import Cookies from 'js-cookie';
-import axios from 'axios';
+import Category from '../components/Category/Category'
 
 const CollectionPage = () => {
 
@@ -44,13 +40,12 @@ const CollectionPage = () => {
         setSearchQuery(event.target.value);
     };
 
-    const handleCategoryChange = (event) => {
-        setCategoryData(event.target.value);
+    const handleCategoryChange = (data) => {
+        setCategoryData(data.category);
     }
 
-    const handleHashtagChange = (event, value) => {
-        const selectedTags = value.map((item) => item.tag);
-        setHashtagData(selectedTags)
+    const handleHashtagChange = (data) => {
+        setHashtagData(data.hashtag)
     }
 
     const handleChangeSocial = (social) => {
@@ -88,49 +83,13 @@ const CollectionPage = () => {
         <>
 
             <Banner variant="medium" headline1="Find your influencer" />
+
             <Stack sx={{ display: 'flex', flexDirection: 'row', height: '100vh', pt: 5 }}>
                 <Stack className="glassmorphism" sx={{ display: 'flex', flexDirection: 'column' }}>
                     <SearchBar onChange={handleSearchQueryChange} value={searchQuery} />
-                    <FormControl fullWidth>
-                        <InputLabel>Category</InputLabel>
-                        <Select
-                            labelId="category"
-                            id="category"
-                            value={categoryData || 'All categories'}
-                            label="Category"
-                            onChange={handleCategoryChange}
-                        >
-                            <MenuItem value="All categories">All Categories</MenuItem>
-
-                            {CATEGORYOPTIONS.map((option, index) => (
-                                <MenuItem key={index} value={option.category}>
-                                    {option.category}
-                                </MenuItem>
-                            ))}
-                        </Select>
-                    </FormControl>
-
-                    <Stack spacing={3} sx={{ width: 500 }}>
-                        <Autocomplete
-                            multiple
-                            id="hashtags"
-                            options={HASHTAGSOPTIONS}
-                            getOptionLabel={(option) => (option && option.tag) || ''}
-                            onChange={handleHashtagChange}
-                            value={HASHTAGSOPTIONS.filter(option => hashtagData.includes(option.tag))}
-                            renderInput={(params) => (
-                                <TextField
-                                    {...params}
-                                    variant="standard"
-                                    label="Search with tags"
-                                    placeholder="Tags"
-                                />
-                            )}
-                        />
-
-                    </Stack>
+                    <Category onCategoryChange={handleCategoryChange} filter={"yes"}/>
+                    <Hashtags onHashtagChange={handleHashtagChange} filter={"yes"} />
                     <Location onLocationChange={handleLocationChange} />
-
                 </Stack>
 
 
