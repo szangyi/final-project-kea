@@ -42,7 +42,7 @@ const Hashtags = ({onHashtagChange, filter}) => {
                     <MyCustomTextField
                         {...params}
                         variant="standard"
-                        label="Chose your hashtags"
+                        label="Chose hashtags"
                         placeholder="Hashtags"
                     />
                 )}

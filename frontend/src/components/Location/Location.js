@@ -18,12 +18,12 @@ import { LOCATION } from '../../util/Constants';
 const Location = ({ onLocationChange }) => {
 
     // VARIABLES ---------------
-    const [locationData, setLocationData] = useState('')
+    const [locationData, setLocationData] = useState(null)
 
     // HANDLE CHANGE ---------------
     const handleLocationChange = (event, value) => {
-        setLocationData(value.label);
-        onLocationChange(value.label);
+        setLocationData(value);
+        onLocationChange(value && value.label ? value.label : '');
     }
 
 
@@ -33,9 +33,9 @@ const Location = ({ onLocationChange }) => {
             sx={{ pb: 2}}
             options={LOCATION}
             autoHighlight
-            getOptionLabel={(option) => option.label || ''}
+            getOptionLabel={(option) => (option && option.label) || ''}
             onChange = {handleLocationChange}
-            value={locationData.label}
+            value={locationData}
             renderOption={(props, option) => (
                 <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
                     <img
