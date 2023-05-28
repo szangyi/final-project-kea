@@ -67,7 +67,7 @@ const CollectionCard = ({ array, filteringCard, searchQuery, searchCategory, sea
     if(filteringCard=='yes'){
         cardArray = filteredProfile;
     }else{
-        cardArray = "jdkejdk";
+        cardArray = array;
     }
 
 
