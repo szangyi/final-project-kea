@@ -7,6 +7,11 @@ const MyCustomList = styled(List)(({ theme }) => ({
     "& .MuiListItem-root": {
         color: theme.palette.primary.light,
 
+        '&.active': {
+            color: theme.palette.primary.main,
+            fontWeight: 800,
+        },
+
         '&:hover': {
             color: theme.palette.primary.main,
         },

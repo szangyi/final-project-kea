@@ -10,9 +10,9 @@ import json
 @get("/api/account-info")
 def _account_info():
     token_request = request.headers.get('Authorization')
-    
     token_data = jwt.decode(token_request, g.SECRET_KEY, algorithms=["HS256"])
     user_email = token_data["email"]
+    # user_email = 'szangyi@gmail.com'
     
     try:
         import production
@@ -44,7 +44,9 @@ def _account_info():
         "username": user[1],
         "firstName": user[2],
         "lastName": user[3],
-        "userImage": user[7]
+        "email": user[5],
+        "password": user[6],
+        # "userImage": user[7]
     }
     
     user_info_dumps = json.dumps(user_info)

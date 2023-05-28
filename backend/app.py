@@ -15,6 +15,8 @@ import delete_profile
 import get_influencer_profile
 import get_all_profiles
 import add_to_favorites
+import user_info_update
+import user_security_update
 
 #############  IMAGES  #################
 

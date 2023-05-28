@@ -24,8 +24,11 @@ import { loginSchema } from '../schemas';
 const Login = () => {
 
     const [formError, setFormError] = useState('');
+    const nav = useNavigate();
+    const expirationDate = new Date();
+    expirationDate.setTime(expirationDate.getTime() + 60 * 60 * 1000);
 
-    const { values, errors, touched, handleBlur, handleChange } = useFormik({
+    const { values, errors, touched, handleBlur, handleChange, setTouched, validateForm } = useFormik({
         initialValues: {
             email: '',
             password: '',
@@ -34,25 +37,29 @@ const Login = () => {
         validationSchema: loginSchema,
     });
 
-    const nav = useNavigate();
-    const expirationDate = new Date();
-    expirationDate.setTime(expirationDate.getTime() + 60 * 60 * 1000);
+    console.log(errors)
 
     const loginHandler = async (event) => {
         event.preventDefault();
         const { email, password } = values; // Destructure values because of Formik
 
-        if (errors.email || errors.password) {
-            console.log(errors)
-            console.log('there is form error so you cannot send it')
-        } else {
+        // Touch all the inputfields before submission
+        setTouched({
+            email: true,
+            password: true,
+        });
+
+        const updatedErrors = await validateForm();
+
+        // If form is valid continue with submission
+        if ((Object.keys(updatedErrors).length === 0) && (Object.keys(errors).length === 0)){
+            setFormError(""); // Clear form errors
             try {
                 console.log('at least try')
                 const response = await axios.post('/api/login', { email, password });
                 console.log({ response })
                 const token = response.data.jwt;
                 const error = response.data.error;
-
 
                 if (token) {
                     Cookies.set('token', token);
@@ -65,11 +72,14 @@ const Login = () => {
                     console.log(error);
                 }
 
-                // NO matches in the database
+            // No matches in the database
             } catch (error) {
                 console.error('Login failed:', error.response.error);
                 setFormError("Your e-mail or password is incorrect or this account doesn't exist "); // Set error message
             }
+        } else {
+            // Form has errors, handle them
+            setFormError('Please fill in all the required fields.');
         }
     }
 

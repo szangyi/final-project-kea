@@ -1,7 +1,7 @@
 
 import "./MyCustomDrawer.css"
 
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 
 import { Box, Typography, Divider, Drawer } from "@mui/material"
 import MyCustomList from '../List/List';
@@ -26,28 +26,29 @@ const drawerWidth = 200;
 const MyCustomDrawer = (props) => {
 
     const nav = useNavigate();
+    const location = useLocation();
 
     const itemsList = [
         {
             text: "My Account",
             icon: <PermIdentityOutlinedIcon />,
-            action: () => nav('/user-dashboard/account-info')
+            action: () => nav('/user-dashboard/account-info'),
+            href: '/account-info',
         },
         {
             text: "Security",
             icon: <SettingsOutlinedIcon />,
-            action: () => nav('/user-dashboard/security')
+            action: () => nav('/user-dashboard/security'),
             // action: () => "/security",
-            // href: '/security',
+            href: '/security',
 
         },
         {
             text: "Interests",
             icon: <VolunteerActivismOutlinedIcon />,
-            action: () => nav('/user-dashboard/interests')
+            action: () => nav('/user-dashboard/interests'),
             // action: () => "/interests",
-            // href: '/interests',
-
+            href: '/interests',
         }
     ];
 
@@ -69,12 +70,16 @@ const MyCustomDrawer = (props) => {
             {/* <Toolbar /> */}
 
             <Box sx={{ overflow: 'auto' }}>
-                <MyCustomList sx={{backgroundColor: 'transparent'}}>
+                <MyCustomList sx={{ backgroundColor: 'transparent' }}>
                     {itemsList.map(item => {
-                        const { text, icon, onClick } = item;
-                        return (
-                            <ListItem disableGutters
+                        const { text, icon, onClick, href } = item;
+                        var isActive = location.pathname.includes(href);
+                        var className = isActive ? 'active' : ''; // adding active class to the active menu element
 
+                        return (
+                            <ListItem
+                                disableGutters
+                                className={className}
                                 key={item.text} >
                                 <ListItemButton onClick={item.action}>
                                     {icon && <ListItemIcon sx={{ minWidth: '40px', minHeight: '', }} >{item.icon}</ListItemIcon>}

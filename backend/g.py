@@ -1,12 +1,28 @@
 from bottle import response
-
-# plain py validatyion
 import re
+import json
+import jwt
 
 
 SECRET_KEY = "XM]-ktw8[f`~rRw4J"
 REGEX_EMAIL = '^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$'
 
+
+# TOKEN ###############################
+def _generate_token(email):
+    
+    payload = {'email': email}
+    token_auth = jwt.encode(payload, g.SECRET_KEY, algorithm='HS256')
+    
+    token_json = {
+        "jwt": token_auth
+    }
+    
+    token_auth_json = json.dumps(token_json)
+    
+    
+    return token_auth_json
+     
 
 
 # VALIDATION ##########################

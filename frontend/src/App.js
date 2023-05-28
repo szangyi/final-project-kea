@@ -42,7 +42,7 @@ const router = createBrowserRouter([
             { path: "/signup", element: <Signup /> },
             {
                 path: "/user-dashboard", element: <UserDashboard />, children: [
-                    // { path: "/user-dashboard/", element: <Navigate to="account-info" replace /> }, // set account-info as default
+                    { path: "/user-dashboard/", element: <Navigate to="account-info" replace /> }, // set account-info as default
                     { path: "/user-dashboard/account-info", element: <AccountInfo />, loader: authLoader },
                     { path: "/user-dashboard/security", element: <Security />, loader: authLoader },
                     { path: "/user-dashboard/interests", element: <Interests />, loader: authLoader },

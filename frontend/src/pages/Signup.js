@@ -20,8 +20,9 @@ import { signupSchema } from '../schemas';
 const Signup = () => {
 
     const [userExists, setUserExists] = useState('');
+    const [formError, setFormError] = useState('');
 
-    const { values, errors, touched, handleBlur, handleChange } = useFormik({
+    const { values, errors, touched, handleBlur, handleChange, setTouched, validateForm } = useFormik({
         initialValues: {
             firstName: '',
             lastName: '',
@@ -41,24 +42,42 @@ const Signup = () => {
         event.preventDefault();
         const { username, firstName, lastName, email, password } = values; // Destructure values because of Formik
 
-        try {
-            const response = await axios.post('/api/signup', { username, firstName, lastName, email, password });
-            const message = response.data.message;
+        // Touch all the inputfields before submission
+        setTouched({
+            firstName: true,
+            lastName: true,
+            username: true,
+            email: true,
+            password: true,
+        });
 
-            if (message === "Signup succeeded") {
-                nav('/login');
-            }
-            else {
-                console.log(message)
-            }
-            console.log(values)
+        const updatedErrors = await validateForm();
 
-        } catch (error) {
-            if (error.response && error.response.status === 409) {
-                setUserExists("User already exists maaaan");
-            } else {
-                console.error('Signup failed:', error);
+        // If form is valid continue with submission
+        if ((Object.keys(updatedErrors).length === 0) && (Object.keys(errors).length === 0)){
+            setFormError(""); // Clear form errors
+            try {
+                const response = await axios.post('/api/signup', { username, firstName, lastName, email, password });
+                const message = response.data.message;
+
+                if (message === "Signup succeeded") {
+                    nav('/login');
+                }
+                else {
+                    console.log(message)
+                }
+                console.log(values)
+
+            } catch (error) {
+                if (error.response && error.response.status === 409) {
+                    setUserExists("User already exists.");
+                } else {
+                    console.error('Signup failed:', error);
+                }
             }
+        } else {
+            // Form has errors, handle them
+            setFormError('Please fill in all the required fields.');
         }
     }
 
@@ -84,11 +103,15 @@ const Signup = () => {
                         sign up
                     </Typography>
 
+                    {formError && (
+                        <Alert severity="error">{formError}</Alert>
+                    )}
+
                     {userExists && (
                         <Alert severity="error">{userExists}</Alert>
                     )}
 
-                    <Box component="form" onSubmit={submitHandler} sx={{ mt: 1, width: '100%' }}>
+                    <Box component="form" noValidate onSubmit={submitHandler} sx={{ mt: 1, width: '100%' }}>
 
                         <Grid container spacing={1}>
                             <Grid item xs={6} >
