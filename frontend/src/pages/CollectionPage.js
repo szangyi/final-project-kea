@@ -15,7 +15,7 @@ import Button from '@mui/material/Button';
 // --------------------------
 // COMPONENETS ---------------
 // --------------------------
-import {HASHTAGSOPTIONS, SOCIALOPTIONS } from '../util/Constants';
+import { SOCIALOPTIONS } from '../util/Constants';
 import CollectionCard from '../components/CollectionCard/CollectionCard'
 import Location from '../components/Location/Location';
 import SearchBar from '../components/SearchBar/SearchBar';
@@ -33,6 +33,9 @@ const CollectionPage = () => {
     const [socialData, setSocialData] = useState('All');
     const [locationData, setLocationData] = useState('');
     const [profilesData, setProfilesData] = useState(null);
+    const allOptionIndex = SOCIALOPTIONS.findIndex(option => option.social === 'All');
+    const [activeIndex, setActiveIndex] = useState(allOptionIndex);
+
     const token = Cookies.get('token');
 
     // HANDLERS ---------------
@@ -48,8 +51,9 @@ const CollectionPage = () => {
         setHashtagData(data.hashtag)
     }
 
-    const handleChangeSocial = (social) => {
+    const handleChangeSocial = (social, index) => {
         setSocialData(social)
+        setActiveIndex(index);
     }
 
     const handleLocationChange = (data) => {
@@ -85,30 +89,38 @@ const CollectionPage = () => {
             <Banner variant="medium" headline1="Find your influencer" />
 
             <Stack sx={{ display: 'flex', flexDirection: 'row', height: '100vh', pt: 5 }}>
-                <Stack className="glassmorphism" sx={{ display: 'flex', flexDirection: 'column' }}>
+                <Stack className="glassmorphism" sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', mx: 2, height: '400px', px: 2, py: 2, width: '350px' }}>
                     <SearchBar onChange={handleSearchQueryChange} value={searchQuery} />
-                    <Category onCategoryChange={handleCategoryChange} filter={"yes"}/>
-                    <Hashtags onHashtagChange={handleHashtagChange} filter={"yes"} />
+                    <Category onCategoryChange={handleCategoryChange} filter={"yes"} />
                     <Location onLocationChange={handleLocationChange} />
+                    <Hashtags onHashtagChange={handleHashtagChange} filter={"yes"} />
                 </Stack>
 
 
                 <Stack sx={{ overflow: 'scroll' }}>
-                    <Box sx={{ display: 'flex', flexDirection: 'row', gap: '20px', flexWrap: 'wrap' }}>
+                    <Box sx={{ display: 'flex', flexDirection: 'row', gap: '20px', flexWrap: 'wrap', mb: 5, ml: 10 }}>
                         {SOCIALOPTIONS.map((social, index) => (
                             <Box key={index} >
-                                <Button onClick={() => handleChangeSocial(social["social"])}>{social["social"]}</Button>
+                                <Button
+                                    sx={{
+                                        "&:hover": {
+                                            backgroundColor: "customColors.purple.hover",
+                                            borderRadius: '15px'
+                                        },
+                                        backgroundColor: activeIndex === index   ? "customColors.purple.light" : "initial",
+                                        borderRadius: activeIndex === index ? '15px' : 'initial',
+                                    }}
+                                    onClick={() => handleChangeSocial(social["social"], index)}>
+                                    {social["social"]}
+                                </Button>
                             </Box>
-
                         ))}
                     </Box>
                     <Stack>
                         {profilesData === null ? (
                             <Loader />
                         ) : (
-
                             <CollectionCard filteringCard={"yes"} array={profilesData} searchQuery={searchQuery} searchCategory={categoryData} searchHashtag={hashtagData} searchSocial={socialData} searchLocation={locationData} />
-
                         )}
                     </Stack>
                 </Stack>

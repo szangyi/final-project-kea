@@ -29,9 +29,10 @@ const Category = ({ onCategoryChange, filter }) => {
 
     return (
         <>
-            <FormControl fullWidth>
+            <FormControl sx={{pb:2}}>
                 <InputLabel>Category</InputLabel>
                 <Select
+                    sx={{borderRadius:'15px'}}
                     labelId="category"
                     id="category"
                     value={categoryData !== '' ? categoryData : 'All categories'}

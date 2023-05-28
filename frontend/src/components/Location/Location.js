@@ -30,7 +30,7 @@ const Location = ({ onLocationChange }) => {
     return (
         <Autocomplete
             id="country-select"
-            sx={{ width: 300 }}
+            sx={{ pb: 2}}
             options={LOCATION}
             autoHighlight
             getOptionLabel={(option) => option.label || ''}
