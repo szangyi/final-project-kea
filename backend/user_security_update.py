@@ -147,9 +147,9 @@ def _user_security_update():
 
 
 
-def _generate_token(email):
+def _generate_token(email_update):
     
-    payload = {'email': email}
+    payload = {'email': email_update}
     token_auth = jwt.encode(payload, g.SECRET_KEY, algorithm='HS256')
     
     token_json = {

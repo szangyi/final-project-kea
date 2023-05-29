@@ -13,10 +13,10 @@ import json
 @post("/api/user_info_update")
 def _user_info_update():
     
-    # token_request = request.headers.get('Authorization')
-    # token_data = jwt.decode(token_request, g.SECRET_KEY, algorithms=["HS256"])
-    # user_email = token_data["email"]
-    user_email = "szangyi@gmail.com"
+    token_request = request.headers.get('Authorization')
+    token_data = jwt.decode(token_request, g.SECRET_KEY, algorithms=["HS256"])
+    user_email = token_data["email"]
+    # user_email = "szangyi@gmail.com"
 
 # VARIABLES ###########################
     request_user_data = request.json
