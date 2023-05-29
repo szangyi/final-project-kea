@@ -120,17 +120,12 @@ const ProfileLandingPage = () => {
                     ))}
 
                     <Stack>
-                        <Typography sx={{ fontSize: '20px', mt: 5 }} variant="overline">Linked profiles</Typography>
-
-                    </Stack>
-
-                    <Stack>
                         {otherProfiles === [] ? (
                             <Stack></Stack>
                         ) : (
-                            <Stack sx={{ backgroundColor: 'customColors.blue.dark', pt:2, px:5, pb:5}}>
-                            <Typography sx={{ fontSize: '20px', pb:3, textAlign:'center', color: '#fff' }} variant="overline">Other profiles from the same influencer</Typography>
-                            <CollectionCard filteringCard={"no"} array={otherProfiles} />
+                            <Stack sx={{ backgroundColor: 'customColors.blue.dark', pt: 2, px: 5, pb: 5 }}>
+                                <Typography sx={{ fontSize: '20px', pb: 3, textAlign: 'center', color: '#fff' }} variant="overline">Other profiles from the same influencer</Typography>
+                                <CollectionCard filteringCard={"no"} array={otherProfiles} />
                             </Stack>
                         )}
                     </Stack>
