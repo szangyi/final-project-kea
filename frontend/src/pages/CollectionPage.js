@@ -7,8 +7,6 @@ import axios from 'axios';
 // --------------------------
 // MATERIAL UI ---------------
 // --------------------------
-import TextField from '@mui/material/TextField';
-import Autocomplete from '@mui/material/Autocomplete';
 import Stack from '@mui/material/Stack';
 import Box from "@mui/material/Box";
 import Button from '@mui/material/Button';
@@ -97,7 +95,7 @@ const CollectionPage = () => {
                 </Stack>
 
 
-                <Stack sx={{ overflow: 'scroll' }}>
+                <Stack sx={{ overflow: 'scroll', pb:5 }}>
                     <Box sx={{ display: 'flex', flexDirection: 'row', gap: '20px', flexWrap: 'wrap', mb: 5, ml: 10 }}>
                         {SOCIALOPTIONS.map((social, index) => (
                             <Box key={index} >

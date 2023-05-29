@@ -32,6 +32,7 @@ const CreateProfile = () => {
   // VARIABLES ---------------
   const [activeStep, setActiveStep] = useState(0);
   const [formData, setFormData] = useState({})
+  const [hashtagData, setHashtagData] = useState({})
   const token = Cookies.get('token');
   const nav = useNavigate();
 
@@ -47,6 +48,7 @@ const CreateProfile = () => {
   const handleBack = () => {
     setActiveStep(activeStep - 1);
   };
+
 
   // FORM DATA HANDLER ---------------
   const handleData = (data) => {
@@ -130,7 +132,7 @@ const CreateProfile = () => {
             <Loader />
           ) : (
             <Stack >
-              <Box >{getStepContent(activeStep)}</Box>
+              <Box>{getStepContent(activeStep)}</Box>
               <Box sx={{ pb:3, pl:8, display: 'flex', justifyContent: 'flex-end', flexDirection: 'row', position:'absolute', bottom:0 }}>
                 {activeStep !== 0 && (
                   <MyCustomButton variant="secondary" onClick={handleBack} sx={{ mt: 3, ml: 1 }}>

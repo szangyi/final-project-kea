@@ -101,6 +101,10 @@ a{
     top: auto !important;
 }
 
+.css-nen11g-MuiStack-root{
+    width: 100%;
+}
+
 .noNavRoot{
     background-color: #A4B0FF;
     height: 100vh;

@@ -32,12 +32,13 @@ const Hashtags = ({onHashtagChange, filter}) => {
 
     return (
             <Autocomplete
+                sx={{width:'100%'}}
                 multiple
                 id="hashtags"
                 options={HASHTAGSOPTIONS}
                 getOptionLabel={(option) => (option && option.tag) || ''}
                 onChange= {handleChange}
-                value={filter ? HASHTAGSOPTIONS.filter(option => hashtagData.includes(option.tag)) : hashtagData}
+                value={filter ? HASHTAGSOPTIONS.filter(option => hashtagData.includes(option.tag)) : hashtagData.tag}
                 renderInput={(params) => (
                     <MyCustomTextField
                         {...params}

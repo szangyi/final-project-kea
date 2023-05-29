@@ -29,7 +29,7 @@ const Category = ({ onCategoryChange, filter }) => {
 
     return (
         <>
-            <FormControl sx={{pb:2}}>
+            <FormControl sx={{pb:2, width:'100%'}}>
                 <InputLabel>Category</InputLabel>
                 <Select
                     sx={{borderRadius:'15px'}}

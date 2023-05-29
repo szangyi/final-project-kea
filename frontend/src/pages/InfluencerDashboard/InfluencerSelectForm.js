@@ -13,8 +13,8 @@ const InfleuncerSelectForm = ({ onDataChange }) => {
 
     const handleChange = (data) => {
         onDataChange(data);
-    }
-    
+    }    
+
     return (
         <>
             <Category onCategoryChange={handleChange}/>
