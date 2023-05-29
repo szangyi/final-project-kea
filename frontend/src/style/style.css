@@ -40,6 +40,11 @@ body {
     /* color: black !important; */
 }
 
+a{
+    color: #000;
+    text-decoration: none;
+}
+
 
 /* sx={{ px: { xs: 5, sm: 5, md: 15 }, py: { xs: 5, sm: 5, md: 10 } }}> */
 

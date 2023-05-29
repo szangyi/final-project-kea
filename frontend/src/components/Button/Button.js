@@ -29,6 +29,16 @@ const MyCustomButton = styled(Button)(({ variant, theme }) => ({
         "&:hover": {
             backgroundColor: theme.palette.customColors.grey.light,
         },
+    }),
+    ...(variant === "tertiary" && {
+        backgroundColor: theme.palette.customColors.grey.light,
+        border: 'none',
+        boxShadow: 'none',
+        WebkitBoxShadow:'none',
+        borderRadius: '20px',
+        "&:hover": {
+            backgroundColor: theme.palette.customColors.grey.main,
+        },
     })
 
 
