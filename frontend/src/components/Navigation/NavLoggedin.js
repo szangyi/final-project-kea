@@ -12,7 +12,6 @@ import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
 
 
 import { logout as logoutAction } from '../../pages/Logout'
@@ -67,8 +66,8 @@ const settings = [
 const settings2 = [
     {
         'name': 'Logout',
-        'href': '/logout',
-        // 'action': logoutAction
+        'href': '#',
+        'action': logoutAction
     },
 ]
 
@@ -93,7 +92,7 @@ function ResponsiveAppBar() {
     };
 
     return (
-        <AppBar position="static" sx={{boxShadow: 0, backgroundColor: 'transparent'}} >
+        <AppBar position="static" sx={{ boxShadow: 0, backgroundColor: 'transparent' }} >
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
 
@@ -113,7 +112,7 @@ function ResponsiveAppBar() {
                                 href={page.href}
                                 className={page.className}
                                 // onClick={() => page.action()}
-                                sx={{ p: 0, marginInline: 2, my: 2, color: 'primary.main', fontWeight: 600,display: 'block', }}
+                                sx={{ p: 0, marginInline: 2, my: 2, color: 'primary.main', fontWeight: 600, display: 'block', }}
                             >
                                 {page.name}
                             </MenuItem>
@@ -158,7 +157,7 @@ function ResponsiveAppBar() {
                                 <MenuItem component="a"
                                     key={page.name}
                                     href={page.href}
-                                    // onClick={() => page.action()}
+                                // onClick={() => page.action()}
                                 >
                                     {page.name}
                                 </MenuItem>
@@ -186,9 +185,9 @@ function ResponsiveAppBar() {
                     <Box sx={{ flexGrow: 0 }}>
                         <Tooltip _title="Open settings">
                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0, marginLeft: 2 }}>
-                                <Avatar alt="Demy Sharp" 
+                                <Avatar alt="Demy Sharp"
                                 // src="/static/images/avatar/2.jpg"
-                                 />
+                                />
                             </IconButton>
                         </Tooltip>
                         <Menu
@@ -217,7 +216,7 @@ function ResponsiveAppBar() {
                                 <MenuItem component="a"
                                     key={setting.name}
                                     href={setting.href}
-                                    // onClick={() => setting.action()}
+                                // onClick={() => setting.action()}
                                 >
                                     <Typography textAlign="center">{setting.name}</Typography>
                                 </MenuItem>
@@ -229,7 +228,7 @@ function ResponsiveAppBar() {
                                 <MenuItem component="a"
                                     key={setting.name}
                                     href={setting.href}
-                                    // onClick={() => setting.action()}
+                                    onClick={() => setting.action()}
                                 >
                                     <Typography textAlign="center">{setting.name}</Typography>
                                 </MenuItem>

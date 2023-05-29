@@ -21,8 +21,7 @@ const InfluencerBasicInfoForm = ({ onDataChange }) => {
     // HANDLE CHANGE ---------------
     const handleChange = (event) => {
         const { name, value } = event.target;
-        setBasicData((prevData) => ({ ...prevData, [name]: value }));
-        onDataChange(basicData);
+        onDataChange((prevData) => ({ ...prevData, [name]: value }));
     }
 
     const handleLocationChange = (data) => {
