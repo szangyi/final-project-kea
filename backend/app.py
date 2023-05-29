@@ -5,22 +5,20 @@ import g
 import database_connection
 import database_helper_functions
 import helper_functions
+import get_image
 
-import login
-import signup
+import auth_login
+import auth_signup
 
 import influencer_get_profiles
 import influencer_create_profile
 import influencer_get_one_profile
+import influencer_delete_profile
+import influencers_get_all_profiles
 
+import profile_add_to_favorites
 
-
-import get_image
-import delete_profile
-import get_all_profiles
-import add_to_favorites
-import get_functions
-import account_info 
+import user_account_info 
 
 
 #############  IMAGES  #################

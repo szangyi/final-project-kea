@@ -4,6 +4,7 @@ import uuid
 import mysql.connector
 import bcrypt
 import helper_functions
+import database_helper_functions
 
 
 @post("/api/login")
@@ -39,25 +40,8 @@ def _login():
     # DATABASE ##########################
 
     db_config = helper_functions._db_config()
+    user = database_helper_functions._login(user_email, password_hashed, db_config)
     
-    try:
-        db = mysql.connector.connect(**db_config)
-        cursor = db.cursor()
-        sql_login = """SELECT * FROM users WHERE user_email =%s AND user_password=%s """
-        var = (user_email, password_hashed)
-        cursor.execute(sql_login, var)
-        user = cursor.fetchone()
-
-        db.commit()
-        response.status = 200
-
-    except Exception as ex:
-        response.status = 500
-        print(ex)
-
-    finally:
-        db.close()
-
     if user:
         token_auth = helper_functions._generate_token(user_email)  
         response.status = 200
@@ -66,7 +50,8 @@ def _login():
             "error": "Wrong credentials"
         }
         response.status = 400
-        return token_auth
+        response.body = "wrong credentials"
+    return token_auth
 
 
 

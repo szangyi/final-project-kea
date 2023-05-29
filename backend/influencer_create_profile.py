@@ -44,7 +44,6 @@ def _():
         
     
     user_email_validated = helper_functions._token_validator(token_request)
-    print(user_email_validated)
     
     # DATABASE CONNECTION ##########################
 

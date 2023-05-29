@@ -1,6 +1,24 @@
 from bottle import response
 import mysql.connector
 
+def _login(user_email,password_hashed,db_config ):
+    try:
+        db = mysql.connector.connect(**db_config)
+        cursor = db.cursor()
+        sql_login = """SELECT * FROM users WHERE user_email =%s AND user_password=%s """
+        var = (user_email, password_hashed)
+        cursor.execute(sql_login, var)
+        user = cursor.fetchone()
+        db.commit()
+        response.status = 200
+        return user
+    except Exception as ex:
+        print(ex)
+        response.status = 500
+        response.body = ex
+    finally:
+        db.close()
+        
 def _get_user(user_email, db_config):
     try:
         db = mysql.connector.connect(**db_config)
@@ -10,11 +28,12 @@ def _get_user(user_email, db_config):
         cursor.execute(sql_get_user, var_user)
         user = cursor.fetchone()
         db.commit()
-        response.status
+        response.status = 200
         return user
     except Exception as ex:
         print(ex)
         response.status = 500
+        response.body = ex
         return None
     finally:
         db.close()
@@ -45,6 +64,8 @@ def _create_influencer_profile(influencer_data, db_config):
     except Exception as ex:
         print(ex)
         response.status = 500
+        response.body = ex
+        
     finally:
         db.close()
 
@@ -63,7 +84,7 @@ def _get_all_influencer_profiles(user_id, db_config):
 
     except Exception as ex:
         response.status= 500
-        print(ex)
+        response.body = ex
 
     finally:
         db.close()
@@ -83,7 +104,7 @@ def _get_one_influencer_profile(influencer_username, db_config):
     
     except Exception as ex:
         response.status= 500
-        print(ex)
+        response.body=ex
 
     finally:
         db.close()
@@ -102,7 +123,61 @@ def _get_other_influencer_profiles(user_ID,username, db_config):
     
     except Exception as ex:
         response.status= 500
-        print(ex)
+        response.body = ex
+
+    finally:
+        db.close()
+
+def _delete_influencer_profile(influencer_ID, db_config):
+    try:
+        db = mysql.connector.connect(**db_config)
+        cursor = db.cursor()
+        sql = """ DELETE FROM influencers_profile WHERE influencer_ID=%s"""
+        cursor.execute(sql, (influencer_ID,))
+        
+        response.status = 200
+        db.commit()
+    
+    except Exception as ex:
+        response.status= 500
+        response.body = ex
+
+    finally:
+        db.close()
+
+def _get_all_profiles(db_config):
+    try:
+        db = mysql.connector.connect(**db_config)
+        cursor = db.cursor()
+        sql_check_influencer = "SELECT * FROM influencers_profile "
+        cursor.execute(sql_check_influencer)
+        profiles = cursor.fetchall()
+        db.commit()
+        
+        response.status = 200
+        return profiles
+    
+    except Exception as ex:
+        response.status= 500
+        response.body = ex
+
+    finally:
+        db.close()
+
+def _add_to_favorites(influencer_ID, user_id, db_config):
+    try:
+        db = mysql.connector.connect(**db_config)
+        cursor = db.cursor()
+        sql_create_profile = """INSERT INTO favorites (influencer_ID, user_ID ) VALUES (%s,%s)"""
+        val_create_profile = (influencer_ID, user_id, )
+        cursor.execute(sql_create_profile, val_create_profile)
+        db.commit()
+        
+        response.status = 200
+    
+    except Exception as ex:
+        response.status= 500
+        response.body = ex
 
     finally:
         db.close()
