@@ -9,12 +9,11 @@ from datetime import datetime
 @post("/api/get-profile")
 def _():
         
-    request_influencer_ID = request.json
-    print(request_influencer_ID)
+    request_username = request.json
     token_request = request.headers.get('Authorization')
     token_data = jwt.decode(token_request, g.SECRET_KEY, algorithms=["HS256"])
     user_email = token_data["email"]
-    influencer_ID = request_influencer_ID["influencerID"]["id"]
+    username = request_username["username"]["username"]
 
     
     try:
@@ -34,8 +33,8 @@ def _():
         user = cursor.fetchone()
         db.commit()
         
-        sql_check_influencer = "SELECT * FROM influencers_profile WHERE influencer_ID = %s"
-        var_check_influencer = (influencer_ID,)
+        sql_check_influencer = "SELECT * FROM influencers_profile WHERE influencer_username = %s"
+        var_check_influencer = (username,)
         cursor.execute(sql_check_influencer, var_check_influencer)
         profile = cursor.fetchall()
         db.commit()
