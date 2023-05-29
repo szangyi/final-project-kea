@@ -62,6 +62,10 @@ const CreateProfile = () => {
     setActiveStep(activeStep - 1);
   };
 
+  const handleCloseError = () => {
+    setError(null);
+  };
+
 
   // FORM DATA HANDLER ---------------
   const handleData = (data) => {
@@ -111,8 +115,9 @@ const CreateProfile = () => {
             <Loader />
           ) : (
             <Stack >
+              {error && <Error error={error} onClose={handleCloseError} />}
+
               <Box>{getStepContent(activeStep)}</Box>
-              {error && <Error error={error} />}
 
               <Box sx={{ pb: 3, pl: 8, display: 'flex', justifyContent: 'flex-end', flexDirection: 'row', position: 'absolute', bottom: 0 }}>
                 {activeStep !== 0 && (

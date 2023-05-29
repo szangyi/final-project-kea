@@ -72,7 +72,7 @@ def _():
         response.status = 200
     else:
         response.status = 400
-        response.body = "Profile couldn't be created"
+        return  "Profile couldn't be created"
     
     
 
