@@ -55,7 +55,7 @@ const InfluencerPage = () => {
   // CONNECT TO API ---------------
   const getInfluencerData = async () => {
     try {
-      const response = await axios.get('/api/get-influencer', {
+      const response = await axios.get('/api/get-influencer-profiles', {
         headers: {
           Authorization: `${token}`,
         }

@@ -3,18 +3,25 @@ from bottle import Bottle, run, default_app, static_file, get, request
 ############# PY CLASSES ################
 import g
 import database_connection
+import database_helper_functions
+import helper_functions
 
-import get_functions
 import login
 import signup
-import account_info
-import get_influencer
-import create_profile
+
+import influencer_get_profiles
+import influencer_create_profile
+import influencer_get_one_profile
+
+
+
 import get_image
 import delete_profile
-import get_influencer_profile
 import get_all_profiles
 import add_to_favorites
+import get_functions
+import account_info 
+
 
 #############  IMAGES  #################
 

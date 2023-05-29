@@ -3,14 +3,14 @@ import g
 import uuid
 import mysql.connector
 import bcrypt
-import database_connection
-import jwt
-import json
+import helper_functions
 
 
 @post("/api/login")
 def _login():
     
+    # VARIABLES ##########################
+
     request_user_data = request.json
     user_email = request_user_data["email"]
     user_password = request_user_data["password"]
@@ -36,14 +36,9 @@ def _login():
         return g._send(400, validation_errors)
 
 
-    
-    try:
-        import production
-        db_config = database_connection.PRODUCTION_CONN
+    # DATABASE ##########################
 
-    except Exception as ex:
-        print(ex)
-        db_config = database_connection.DEVELOPMENT_CONN
+    db_config = helper_functions._db_config()
     
     try:
         db = mysql.connector.connect(**db_config)
@@ -57,38 +52,25 @@ def _login():
         response.status = 200
 
     except Exception as ex:
-        response.status= 500
+        response.status = 500
         print(ex)
 
     finally:
         db.close()
 
     if user:
-        token_auth = _generate_token(user_email)
-        return token_auth
+        token_auth = helper_functions._generate_token(user_email)  
+        response.status = 200
     else:
         token_auth = {
             "error": "Wrong credentials"
         }
-        response.status= 400
+        response.status = 400
         return token_auth
 
 
 
-def _generate_token(email):
-    
-    payload = {'email': email}
-    token_auth = jwt.encode(payload, g.SECRET_KEY, algorithm='HS256')
-    
-    token_json = {
-        "jwt": token_auth
-    }
-    
-    token_auth_json = json.dumps(token_json)
-    
-    
-    return token_auth_json
-     
+
 
 
     
