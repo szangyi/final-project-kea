@@ -17,7 +17,6 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -196,16 +195,17 @@ const InfluencerPage = () => {
 
                             <Dialog
                               open={open}
+                              className="ekdfjelkfjeklfj"
                               onClose={handleClose}
                               aria-labelledby="draggable-dialog-title">
-                              <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
+                              <DialogTitle>
                                 Are you sure you want to delete this profile?
                               </DialogTitle>
                               <DialogActions>
-                                <Button autoFocus onClick={handleClose}>
+                                <MyCustomButton variant="tertiary" autoFocus onClick={handleClose}>
                                   Cancel
-                                </Button>
-                                <Button onClick={() => handleDelete(array[0])} >Delete</Button>
+                                </MyCustomButton>
+                                <MyCustomButton variant="danger" onClick={() => handleDelete(array[0])} >Delete</MyCustomButton>
                               </DialogActions>
                             </Dialog>
                           </Stack>
