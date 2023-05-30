@@ -45,7 +45,7 @@ const pages = [
     },
     {
         'name': 'Find your influencer',
-        'href': '#',
+        'href': '/collection',
         // 'action': findinfluencers,
     },
 
@@ -59,7 +59,7 @@ const settings = [
     },
     {
         'name': 'My Collection',
-        'href': '#',
+        'href': '/user-collection',
         // 'action': mycollection,
     }
 ]

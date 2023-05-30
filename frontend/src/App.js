@@ -27,6 +27,7 @@ import RootLayout from './pages/Root/RootLayout.js';
 import { Navigate } from 'react-router-dom';
 import ProfileLandingPage from './pages/ProfileLandingPage';
 import CollectionPage from './pages/CollectionPage';
+import UserCollectionPage from './pages/UserCollectionPage.js'
 import Page404 from './pages/Page404'
 
 
@@ -48,6 +49,7 @@ const router = createBrowserRouter([
                     { path: "/user-dashboard/interests", element: <Interests />, loader: authLoader },
                 ]
             },
+            { path: "/user-collection", element: <UserCollectionPage />, loader: authLoader },
             { path: "/influencer-dashboard", element: <InfluenceDashboardPage />, loader: authLoader },
             { path: "/collection", element: <CollectionPage />, loader: authLoader },
             { path: "/profile/:username", element: <ProfileLandingPage />, loader: authLoader },
