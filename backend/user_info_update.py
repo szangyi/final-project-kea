@@ -17,12 +17,12 @@ def _user_info_update():
     # HAVE TO SET AUTHORIZATION ON THE FRONTEND OTHERWISE BACKEND CANNOT GET IT
     # --------------------------------------------------------------------------------------
 
-    token_request = request.headers.get('Authorization')
-    print('#################################')
-    print(token_request)
-    token_data = jwt.decode(token_request, g.SECRET_KEY, algorithms=["HS256"])
-    user_email = token_data["email"]
-    # user_email = "alex@gmail.com"
+    # token_request = request.headers.get('Authorization')
+    # print('#################################')
+    # print(token_request)
+    # token_data = jwt.decode(token_request, g.SECRET_KEY, algorithms=["HS256"])
+    # user_email = token_data["email"]
+    user_email = "alex@gmail.com"
 
 # VARIABLES ###########################
     request_user_data = request.json
