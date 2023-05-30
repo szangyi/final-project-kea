@@ -15,6 +15,9 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
+import { Grid, Typography } from '@mui/material';
+import Chip from '@mui/material/Chip';
+
 // --------------------------
 // COMPONENETS ---------------
 // --------------------------
@@ -37,6 +40,8 @@ const CollectionPage = () => {
     const [socialData, setSocialData] = useState('All');
     const [locationData, setLocationData] = useState('');
     const [profilesData, setProfilesData] = useState(null);
+    const [selected, setSelected] = useState('');
+
     const token = Cookies.get('token');
 
     // HANDLERS ---------------
@@ -55,7 +60,10 @@ const CollectionPage = () => {
 
     const handleChangeSocial = (social) => {
         setSocialData(social)
+        setSelected((prevSelected) => (prevSelected === social ? null : social));
+
     }
+
 
     const handleLocationChange = (data) => {
         setLocationData(data)
@@ -88,12 +96,18 @@ const CollectionPage = () => {
         <>
 
             <Banner variant="medium" headline1="Find your influencer" />
-            <Stack sx={{ display: 'flex', flexDirection: 'row', height: '100vh', pt: 5 }}>
-                <Stack className="glassmorphism" sx={{ display: 'flex', flexDirection: 'column' }}>
+            {/* <Grid container sx={{ display: 'flex', flexDirection: 'row', height: '100vh', pt: 5 }}> */}
+            <Grid container sx={{ minHeight: '100vh', my: 5, mx: 2, }}>
+
+                {/* ---------------- */}
+                {/* FILTERS */}
+                <Grid item xs={3} className="glassmorphism" sx={{ display: 'flex', flexDirection: 'column', p: 3, gap: 3, height: '90vh' }}>
+
                     <SearchBar onChange={handleSearchQueryChange} value={searchQuery} />
                     <FormControl fullWidth>
                         <InputLabel>Category</InputLabel>
                         <Select
+                            sx={{ borderRadius: '15px' }}
                             labelId="category"
                             id="category"
                             value={categoryData || 'All categories'}
@@ -110,8 +124,9 @@ const CollectionPage = () => {
                         </Select>
                     </FormControl>
 
-                    <Stack spacing={3} sx={{ width: 500 }}>
+                    <Stack spacing={8} sx={{}}>
                         <Autocomplete
+                            sx={{ m: '16.5px 6px 16.5px 14px' }}
                             multiple
                             id="hashtags"
                             options={HASHTAGSOPTIONS}
@@ -123,7 +138,7 @@ const CollectionPage = () => {
                                     {...params}
                                     variant="standard"
                                     label="Search with tags"
-                                    placeholder="Tags"
+                                    placeholder=""
                                 />
                             )}
                         />
@@ -131,18 +146,25 @@ const CollectionPage = () => {
                     </Stack>
                     <Location onLocationChange={handleLocationChange} />
 
-                </Stack>
+                </Grid>
 
-
-                <Stack sx={{ overflow: 'scroll' }}>
-                    <Box sx={{ display: 'flex', flexDirection: 'row', gap: '20px', flexWrap: 'wrap' }}>
+                {/* ---------------- */}
+                {/* COLLECTION */}
+                <Grid item xs={9} sx={{ overflow: 'scroll', pl: 3 }}>
+                    <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2, flexWrap: 'wrap', mb: 3 }}>
                         {SOCIALOPTIONS.map((social, index) => (
-                            <Box key={index} >
-                                <Button onClick={() => handleChangeSocial(social["social"])}>{social["social"]}</Button>
-                            </Box>
+                            <Chip
+                                sx={{ px: 1 }}
+                                key={index}
+                                onClick={() => handleChangeSocial(social["social"])}
+                                label={social["social"]}
+                                color={selected === social["social"] ? "primary" : "default"}
+                                variant={selected === social["social"] ? "default" : "outlined"}
+                            />
 
                         ))}
                     </Box>
+
                     <Stack>
                         {profilesData === null ? (
                             <Loader />
@@ -152,9 +174,9 @@ const CollectionPage = () => {
 
                         )}
                     </Stack>
-                </Stack>
+                </Grid>
 
-            </Stack>
+            </Grid>
         </>
     )
 

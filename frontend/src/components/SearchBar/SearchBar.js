@@ -1,4 +1,7 @@
 import MyCustomTextField from "../../components/Form/TextField";
+import { InputAdornment } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
+
 
 const SearchBar = ({ onChange, value }) => {
     return (
@@ -7,6 +10,13 @@ const SearchBar = ({ onChange, value }) => {
             variant="outlined"
             value={value}
             onChange={onChange}
+            InputProps={{
+                endAdornment: (
+                    <InputAdornment position="end">
+                        <SearchIcon />
+                    </InputAdornment>
+                ),
+            }}
         />
     );
 };

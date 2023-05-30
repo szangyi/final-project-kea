@@ -122,6 +122,9 @@ let theme = createTheme({
         IconButton: {
             // color: 'primary',
         },
+        MuiCardContent: {
+            padding: '0'
+        }
     },
 
     spacing: 10,

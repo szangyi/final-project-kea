@@ -1,0 +1,47 @@
+
+
+/* ALL THIS SHOULD BE MOVED TO CUSTOM COMPONENT (STYLED) */
+
+
+.card .card-image-container {
+    overflow: hidden;   
+    display: grid;
+}
+
+.card .card-image-container > * {
+    grid-area: 1/1;
+}
+
+
+.card .card-image-container .MuiCardActions-root {
+    height:fit-content;
+    justify-self: end;
+    z-index:10;
+}
+
+
+
+.card img {
+    width: fill;
+    width: -webkit-fill-available;
+    max-height:200px;
+    transform: scale(1);
+    transition: .2s ease-in;
+}
+
+.card-content-container * {
+    padding: 0 !important;
+}
+
+.card-container .card {
+    transition: .2s ease-in;
+}
+
+.card-container:hover .card {
+    transform:scale(.97);
+    background-color: white !important;
+}
+
+.card-container:hover img {
+    transform:scale(1.2);
+}

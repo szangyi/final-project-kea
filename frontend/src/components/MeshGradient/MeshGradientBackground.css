@@ -1,0 +1,60 @@
+#gradient-canvas-bg {
+    width: 100%;
+    height: 100%;
+    /* --gradient-color-1: #FE6860; 
+    --gradient-color-2: #FE8A71; 
+    --gradient-color-3: #D9BBAE;  
+    --gradient-color-4: #F3C9BF; */
+  
+    --gradient-color-1: #E45B56;
+    --gradient-color-2: #FCA78A;
+    --gradient-color-3: #A4B0FF;
+    --gradient-color-4: #ffcb57;
+    --gradient-color-5: #2271E6;
+  
+  
+    /* --gradient-color-1: #a960ee; 
+    --gradient-color-2: #ff333d; 
+    --gradient-color-3: #90e0ff;
+    --gradient-color-4: #ffcb57; */
+  
+  
+    position: absolute;
+    width: inherit;
+    height: inherit;
+    overflow: hidden;
+  }
+  
+  
+  /* VARIANTS */
+  
+  #gradient-canvas-bg[variant*="dark"] {}
+  
+  #gradient-canvas-bg[variant*="light"] {}
+  
+  #gradient-canvas-bg {
+    /* width: 100vw;
+    height: 100vh; */
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -100;
+  
+    width: inherit;
+    height: inherit;
+  }
+  
+  #gradient-canvas-bg[variant*="full"] {
+    height: 500vh;
+    opacity:.3;
+  }
+
+  
+  
+  .gradient-static-background {
+    background-image: url(../../assets/gradient-static.png);
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
