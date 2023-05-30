@@ -18,12 +18,15 @@ import { Box, Typography } from '@mui/material';
 
 const AccountInfo = (props) => {
 
+    const token = Cookies.get('token');
+
     const { showSnackbar } = useContext(SnackbarContext);
-    const userData = useOutletContext(); // data from UserDashBoard
+    const { userData } = useOutletContext(); // data from UserDashBoard
     const [userExists, setUserExists] = useState('');
     const [formError, setFormError] = useState('');
     // const [formSucess, setFormSuccess] = useState('');
     console.log(userData)
+    console.log(token)
 
     const { values, errors, touched, handleBlur, handleChange, setTouched, validateForm } = useFormik({
         initialValues: {
@@ -34,6 +37,7 @@ const AccountInfo = (props) => {
 
         validationSchema: userAccountInfoSchema,
     });
+
 
     console.log(errors)
 
@@ -56,7 +60,11 @@ const AccountInfo = (props) => {
         if ((Object.keys(updatedErrors).length === 0) && (Object.keys(errors).length === 0)) {
             setFormError(""); // Clear form errors
             try {
-                const response = await axios.post('/api/user_info_update', { firstName, lastName, username });
+                const response = await axios.post('/api/user_info_update', { firstName, lastName, username,
+                headers: {
+                    Authorization: `${token}`,
+                    'Content-Type': 'multipart/form-data',
+                } });
                 const message = response.data.message;
 
                 if (message === "Userdata change succeeded") {
@@ -92,11 +100,11 @@ const AccountInfo = (props) => {
 
 
                 {formError && (
-                    <Alert sx={{mt: 2, mb: -4}} severity="error">{formError}</Alert>
+                    <Alert sx={{ mt: 2, mb: -4 }} severity="error">{formError}</Alert>
                 )}
 
                 {userExists && (
-                    <Alert sx={{mt: 2, mb: -2}} severity="error">{userExists}</Alert>
+                    <Alert sx={{ mt: 2, mb: -2 }} severity="error">{userExists}</Alert>
                 )}
 
 

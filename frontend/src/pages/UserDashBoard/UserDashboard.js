@@ -59,8 +59,8 @@ const UserDashboard = (theme) => {
                 <Box className="userdashboard-section-container" sx={{ gap: 2, flexGrow: 1, py: { xs: 1, md: 3 }, pl: { xs: 1, md: 3 }, pr: { xs: 1, md: 8 }, display: 'flex' }}>
 
                     <MyCustomDrawer />
-                    <Outlet context={userData} />
-
+                    <Outlet context={{ userData, token }} />
+                    
                 </Box>
             </Box>
 
