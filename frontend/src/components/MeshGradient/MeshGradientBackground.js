@@ -12,7 +12,6 @@ const MeshGradientBackground = (props) => {
             // Call `initGradient` with the selector to your canvas
             gradient.initGradient('#gradient-canvas-bg');
 
-            console.log(document.querySelector('#gradient-canvas'));
         }).catch((error) => {
             console.error("Failed to import Gradient module:", error);
         });

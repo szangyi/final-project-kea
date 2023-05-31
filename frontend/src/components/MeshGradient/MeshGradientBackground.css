@@ -35,9 +35,9 @@
   #gradient-canvas-bg {
     /* width: 100vw;
     height: 100vh; */
-    position: absolute;
+    /* position: absolute;
     top: 0;
-    left: 0;
+    left: 0; */
     z-index: -100;
   
     width: inherit;
@@ -45,8 +45,9 @@
   }
   
   #gradient-canvas-bg[variant*="full"] {
-    height: 500vh;
-    opacity:.3;
+    height: 250vh;
+    width:100vw;
+    opacity:.2;
   }
 
   

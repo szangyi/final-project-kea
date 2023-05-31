@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom';
 // MATERIAL UI ---------------
 // --------------------------
 import Container from "@mui/material/Container";
+import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -85,11 +86,15 @@ const CollectionCard = ({ array, filteringCard, searchQuery, searchCategory, sea
 
     return (
 
-        <Container disableGutters sx={{ display: 'flex', flexDirection: 'row', gap: '20px', flexWrap: 'wrap' }}>
+        <Grid className="cards-container" container sx={{gap: '20px'}}>
+        {/* <Container disableGutters sx={{ display: 'flex', flexDirection: 'row', gap: '20px', flexWrap: 'wrap' }}> */}
 
             {cardArray.map((array, index) => (
-                <Box className="card-container">
-                    <Card className="card glassmorphism" key={index} sx={{ width: 350 }}>
+                <Grid key={index} item className="card-container">
+
+                    <Card className="card glassmorphism" 
+                    // sx={{ width: 350 }}
+                    >
                         <Box className="card-image-container" sx={{ borderRadius: '15px', mx: 3, my: 3 }}>
                             <CardMedia
                                 component="img"
@@ -105,19 +110,19 @@ const CollectionCard = ({ array, filteringCard, searchQuery, searchCategory, sea
                             </CardActions>
                         </Box>
 
-                        <Box className="card-content-container" sx={{ mx: 3, my: 3 }}>
+                        <Box className="card-content-container" sx={{ mx: 3, mt:1, mb: 3 }}>
                             <CardContent>
                                 <Typography gutterBottom variant="h5" component="div">
                                     {array[2]}
                                 </Typography>
-                                <Typography variant="body2" color="text.secondary">
+                                <Typography gutterBottom variant="body2" color="text.secondary">
                                     Category: {array[10]}
                                 </Typography>
-                                <Typography variant="body2" color="text.secondary">
-                                    {/* Tags: {array[9].substring(1, array[9].length - 1).replace(/,/g, ' ')} */}
-                                    Tags: {array[9]}
+                                <Typography gutterBottom variant="body2" color="text.secondary">
+                                    Tags: {array[9].substring(1, array[9].length - 1).replace(/,/g, ' ')}
+                                    {/* Tags: {array[9]} */}
                                 </Typography>
-                                <Typography variant="body2" color="text.secondary">
+                                <Typography gutterBottom variant="body2" color="text.secondary">
                                     Location: {array[4]}
                                 </Typography>
                             </CardContent>
@@ -173,14 +178,18 @@ const CollectionCard = ({ array, filteringCard, searchQuery, searchCategory, sea
                                 {/* <IconButton onClick={() => handleAddToFavorites(array[0])}>
                                     {array[14] ? <FavoriteIcon /> : <FavoriteBorderIcon />}
                                 </IconButton> */}
-                                <Button component={Link} to={`/profile/${array[2]}`} size="small">View profile</Button>
+                                {/* <Button component={Link} to={`/profile/${array[2]}`} size="small">View profile</Button> */}
+                            </CardActions>
+
+                            <CardActions>
+                                {/* <Box className="card-click" component={Link} to={`/profile/${array[2]}`}></Box> */}
                             </CardActions>
                         </Box>
                     </Card>
-                </Box>
+                </Grid>
             ))}
 
-        </Container>
+        </Grid>
     );
 }
 

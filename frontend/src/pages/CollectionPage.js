@@ -19,7 +19,7 @@ import { Grid, Typography } from '@mui/material';
 import Chip from '@mui/material/Chip';
 
 // --------------------------
-// COMPONENETS ---------------
+// COMPONENTS ---------------
 // --------------------------
 import { CATEGORYOPTIONS, HASHTAGSOPTIONS, SOCIALOPTIONS } from '../util/Constants';
 import CollectionCard from '../components/CollectionCard/CollectionCard'
@@ -30,6 +30,7 @@ import Hashtags from '../components/Hashtags/Hashtags';
 import Loader from '../components/Loader/Loader'
 import Cookies from 'js-cookie';
 import axios from 'axios';
+import MeshGradientBackground from '../components/MeshGradient/MeshGradientBackground';
 
 const CollectionPage = () => {
 
@@ -96,6 +97,8 @@ const CollectionPage = () => {
         <>
 
             <Banner variant="medium" headline1="Find your influencer" />
+            <MeshGradientBackground variant="full"></MeshGradientBackground>
+
             {/* <Grid container sx={{ display: 'flex', flexDirection: 'row', height: '100vh', pt: 5 }}> */}
             <Grid container sx={{ minHeight: '100vh', my: 5, mx: 2, }}>
 
@@ -150,7 +153,7 @@ const CollectionPage = () => {
 
                 {/* ---------------- */}
                 {/* COLLECTION */}
-                <Grid item xs={9} sx={{ overflow: 'scroll', pl: 3 }}>
+                <Grid item xs={9} sx={{ overflow: 'auto', pl: 3, pb: 3, pr: 6 }}>
                     <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2, flexWrap: 'wrap', mb: 3 }}>
                         {SOCIALOPTIONS.map((social, index) => (
                             <Chip

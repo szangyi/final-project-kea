@@ -17,6 +17,9 @@ import MenuItem from '@mui/material/MenuItem';
 import Banner from '../components/Banner/Banner';
 import ProfileLanding from '../components/Influencer/ProfileLanding';
 import MeshGradientBackground from '../components/MeshGradient/MeshGradientBackground';
+import { Typography } from '@mui/material';
+import TextBox from '../components/TextBox/TextBox'
+
 
 
 const UserCollectionPage = () => {
@@ -55,22 +58,26 @@ const UserCollectionPage = () => {
 
 
     return (
-        <Box>
+        <>
 
             <Banner variant="medium" headline1="Your Boards" />
 
+            <MeshGradientBackground variant="full"></MeshGradientBackground>
 
             <Stack className='sectionPadding'>
-            {/* <MeshGradientBackground variant="full"></MeshGradientBackground> */}
+
+                <Typography variant="body">
+                    Your charming boards you will find here, by category. Enjoy!
+                </Typography>
 
                 {profilesData === null ? (
                     <Loader />
                 ) : (
 
                     getUniqueCategories().map((category) => ( // create sections for categories
-                        <Box ey={category}>
-                            <h2>{category}</h2>
-                            <CollectionCard 
+                        <Box key={category}>
+                            <Typography sx={{ mt: 5, mb: 3 }} variant="h3">{category}</Typography>
+                            <CollectionCard
                                 array={profilesData.filter((profile) => profile[10] === category)}
                             />
                         </Box>
@@ -78,7 +85,17 @@ const UserCollectionPage = () => {
 
                 )}
             </Stack>
-        </Box>
+
+
+            <TextBox
+                bg="customColors.blue.dark"
+                color="white"
+                headline="discover more!"
+                copy1="For each ad campaign that you create, you can control how much you're willing to spend on clicks and conversions"
+                button="find your influencer"
+                href=""
+            />
+        </>
     );
 
 
