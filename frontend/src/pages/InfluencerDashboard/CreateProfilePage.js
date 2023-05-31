@@ -1,8 +1,7 @@
 // --------------------------
 // REACT ---------------
 // --------------------------
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
 import Cookies from 'js-cookie';
 import { useNavigate } from "react-router-dom";
 
@@ -91,8 +90,9 @@ const CreateProfile = () => {
 
   return (
     <>
-      <Stack sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+      <Stack sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
         <Typography sx={{ pt: { xs: 1, md: 5 }, pb: { xs: 1, md: 5 } }} variant="h2">Create your profile </Typography>
+        {error && <Error error={error} onClose={handleCloseError} />}
 
         <Box className="glassmorphism" sx={{
           gap: 2, flexGrow: 1, mx: { xs: 5, md: 10 }, py: { xs: 1, md: 3 }, pl: { xs: 1, md: 3 }, pr: { xs: 1, md: 10 },
@@ -115,7 +115,6 @@ const CreateProfile = () => {
             <Loader />
           ) : (
             <Stack >
-              {error && <Error error={error} onClose={handleCloseError} />}
 
               <Box>{getStepContent(activeStep)}</Box>
 
