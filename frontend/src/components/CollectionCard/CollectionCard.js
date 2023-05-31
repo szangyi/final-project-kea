@@ -32,7 +32,6 @@ import MusicVideoIcon from '@mui/icons-material/MusicVideo';
 
 
 const CollectionCard = ({ array, filteringCard, searchQuery, searchCategory, searchHashtag, searchSocial, searchLocation }) => {
-
     // VARIABLES ---------------
     const token = Cookies.get('token');
     let cardArray;
@@ -53,7 +52,6 @@ const CollectionCard = ({ array, filteringCard, searchQuery, searchCategory, sea
             console.log('Getting all profiles failed:');
         }
     }
-
 
     // CHECKING WHICH ARRAY SHOULD BE RETURNED ---------------
     if (filteringCard == 'yes') {

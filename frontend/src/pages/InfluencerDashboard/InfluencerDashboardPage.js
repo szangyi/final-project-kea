@@ -17,18 +17,17 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogTitle from '@mui/material/DialogTitle';
-
 // --------------------------
 // COMPONENTS ---------------
 // --------------------------
 import Banner from '../../components/Banner/Banner';
 import Loader from '../../components/Loader/Loader'
 import MyCustomButton from '../../components/Button/Button';
+
 
 const InfluencerPage = () => {
 
@@ -56,7 +55,7 @@ const InfluencerPage = () => {
   // CONNECT TO API ---------------
   const getInfluencerData = async () => {
     try {
-      const response = await axios.get('/api/get-influencer', {
+      const response = await axios.get('/api/get-influencer-profiles', {
         headers: {
           Authorization: `${token}`,
         }
@@ -123,17 +122,15 @@ const InfluencerPage = () => {
 
             <Box className="glassmorphism" sx={{ gap: 2, flexGrow: 1, py: { xs: 1, md: 3 }, pl: { xs: 1, md: 3 }, pr: { xs: 1, md: 8 }, display: 'flex', flexDirection: 'column' }}>
               <Typography sx={{ pt: { xs: 1, md: 5 }, pb: { xs: 1, md: 0 }, px: { xs: 1, md: 3 } }} variant="h2">Your profiles </Typography>
-              <TableContainer elevation={0}>
-                <Table sx={{ minWidth: 650 }} >
+              <TableContainer>
+                <Table  >
                   <TableHead>
                     <TableRow>
                       <TableCell></TableCell>
-                      <TableCell align="right">Name</TableCell>
-                      <TableCell align="right">Category</TableCell>
-                      <TableCell align="right">Linked accounts</TableCell>
-                      <TableCell></TableCell>
-                      <TableCell></TableCell>
-                      <TableCell >
+                      <TableCell >Name</TableCell>
+                      <TableCell >Category</TableCell>
+                      <TableCell >Linked accounts</TableCell>
+                      <TableCell align="right" >
                         <MyCustomButton href="/create-profile" startIcon={<AddIcon />}>
                           Add new profile
                         </MyCustomButton>
@@ -146,74 +143,72 @@ const InfluencerPage = () => {
 
                       <TableRow
                         key={index}
-                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                        sx={{'&:last-child td, &:last-child th': { border: 0 } }}
                       >
-                        <TableCell component="th" scope="row">
+                        <TableCell>
                           <Box
                             component="img"
                             src={`http://127.0.0.1:7878/profile_images/${array[11]}`}
-                            sx={{ height: 50, width: 50, borderRadius: '50%', mx: 'auto', my: { xs: 5, sm: 10 } }}
+                            sx={{ height: 50, width: 50, borderRadius: '50%' }}
                           />
                         </TableCell>
-                        <TableCell align="right">{array[2]}</TableCell>
-                        <TableCell align="right">{array[10]}</TableCell>
-                        <TableCell align="right" >
-                          {array[5] && (
-                            <div>
-                              <a href={`/${array[5]}`}>WEB</a>
-                            </div>
-                          )}
-                          {array[6] && (
-                            <div>
-                              <a href={`/${array[6]}`}>IG</a>
-                            </div>
-                          )}
-                          {array[7] && (
-                            <div>
-                              <a href={`/${array[6]}`}>YT</a>
-                            </div>
-                          )}
-                          {array[8] && (
-                            <div>
-                              <a href={`/${array[6]}`}>TK</a>
-                            </div>
-                          )}
-
+                        <TableCell >{array[2]}</TableCell>
+                        <TableCell >{array[10]}</TableCell>
+                        <TableCell >
+                          <Stack sx={{ display: 'flex', flexDirection: 'row', gap: 1 }}>
+                            {array[5] && (
+                              <div>
+                                <a href={`/${array[5]}`}>WEB</a>
+                              </div>
+                            )}
+                            {array[6] && (
+                              <div>
+                                <a href={`/${array[6]}`}>IG</a>
+                              </div>
+                            )}
+                            {array[7] && (
+                              <div>
+                                <a href={`/${array[6]}`}>YT</a>
+                              </div>
+                            )}
+                            {array[8] && (
+                              <div>
+                                <a href={`/${array[6]}`}>TT</a>
+                              </div>
+                            )}
+                          </Stack>
                         </TableCell>
                         <TableCell align="right">
-                          <MyCustomButton variant="secondary" href="#">
-                            Edit
-                          </MyCustomButton></TableCell>
+                          <Stack sx={{ display: 'flex', flexDirection: 'row', gap: 1 }} >
+                            <MyCustomButton variant="tertiary" href="#">
+                              Edit
+                            </MyCustomButton>
+                            <MyCustomButton variant="tertiary" component={Link} to={`/profile/${array[2]}`} >
+                              Preview
+                            </MyCustomButton>
+                            <MyCustomButton variant="tertiary"
+                              onClick={() => {
+                                handleOpen();
+                              }}>
+                              Delete
+                            </MyCustomButton>
 
-                        <TableCell align="left">
-                          <MyCustomButton variant="secondary" component={Link} to={`/profile/${array[2]}`} >
-                            Preview
-                          </MyCustomButton>
-                        </TableCell>
-                        <TableCell align="left">
-
-                          <Button
-                            variant="outlined"
-                            onClick={() => {
-                              handleOpen();
-                            }}>
-                            Delete
-                          </Button>
-
-                          <Dialog
-                            open={open}
-                            onClose={handleClose}
-                            aria-labelledby="draggable-dialog-title">
-                            <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
-                              Are you sure you want to delete this profile?
-                            </DialogTitle>
-                            <DialogActions>
-                              <Button autoFocus onClick={handleClose}>
-                                Cancel
-                              </Button>
-                              <Button onClick={() => handleDelete(array[0])} >Delete</Button>
-                            </DialogActions>
-                          </Dialog>
+                            <Dialog
+                              open={open}
+                              className="ekdfjelkfjeklfj"
+                              onClose={handleClose}
+                              aria-labelledby="draggable-dialog-title">
+                              <DialogTitle>
+                                Are you sure you want to delete this profile?
+                              </DialogTitle>
+                              <DialogActions>
+                                <MyCustomButton variant="tertiary" autoFocus onClick={handleClose}>
+                                  Cancel
+                                </MyCustomButton>
+                                <MyCustomButton variant="danger" onClick={() => handleDelete(array[0])} >Delete</MyCustomButton>
+                              </DialogActions>
+                            </Dialog>
+                          </Stack>
                         </TableCell>
                       </TableRow>
                     ))}

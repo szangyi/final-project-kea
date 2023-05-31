@@ -6,6 +6,7 @@ import SearchIcon from "@mui/icons-material/Search";
 const SearchBar = ({ onChange, value }) => {
     return (
         <MyCustomTextField
+            sx={{pb:2}}
             label="Search"
             variant="outlined"
             value={value}

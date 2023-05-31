@@ -2,12 +2,11 @@
 // REACT ---------------
 // --------------------------
 import React, { useState } from 'react';
-
+import Cookies from 'js-cookie';
+import axios from 'axios';
 // --------------------------
 // MATERIAL UI ---------------
 // --------------------------
-import TextField from '@mui/material/TextField';
-import Autocomplete from '@mui/material/Autocomplete';
 import Stack from '@mui/material/Stack';
 import Box from "@mui/material/Box";
 import Button from '@mui/material/Button';
@@ -21,16 +20,15 @@ import Chip from '@mui/material/Chip';
 // --------------------------
 // COMPONENTS ---------------
 // --------------------------
-import { CATEGORYOPTIONS, HASHTAGSOPTIONS, SOCIALOPTIONS } from '../util/Constants';
+import { SOCIALOPTIONS, HASHTAGSOPTIONS } from '../util/Constants';
 import CollectionCard from '../components/CollectionCard/CollectionCard'
 import Location from '../components/Location/Location';
 import SearchBar from '../components/SearchBar/SearchBar';
 import Banner from '../components/Banner/Banner';
 import Hashtags from '../components/Hashtags/Hashtags';
 import Loader from '../components/Loader/Loader'
-import Cookies from 'js-cookie';
-import axios from 'axios';
 import MeshGradientBackground from '../components/MeshGradient/MeshGradientBackground';
+import Category from '../components/Category/Category'
 
 const CollectionPage = () => {
 
@@ -42,6 +40,8 @@ const CollectionPage = () => {
     const [locationData, setLocationData] = useState('');
     const [profilesData, setProfilesData] = useState(null);
     const [selected, setSelected] = useState('');
+    const allOptionIndex = SOCIALOPTIONS.findIndex(option => option.social === 'All');
+    const [activeIndex, setActiveIndex] = useState(allOptionIndex);
 
     const token = Cookies.get('token');
 
@@ -50,19 +50,19 @@ const CollectionPage = () => {
         setSearchQuery(event.target.value);
     };
 
-    const handleCategoryChange = (event) => {
-        setCategoryData(event.target.value);
+    const handleCategoryChange = (data) => {
+        setCategoryData(data.category);
     }
 
-    const handleHashtagChange = (event, value) => {
-        const selectedTags = value.map((item) => item.tag);
-        setHashtagData(selectedTags)
+    const handleHashtagChange = (data) => {
+        setHashtagData(data.hashtag)
     }
 
-    const handleChangeSocial = (social) => {
+    const handleChangeSocial = (social, index) => {
         setSocialData(social)
         setSelected((prevSelected) => (prevSelected === social ? null : social));
 
+        setActiveIndex(index);
     }
 
 
@@ -107,47 +107,11 @@ const CollectionPage = () => {
                 <Grid item xs={3} className="glassmorphism" sx={{ display: 'flex', flexDirection: 'column', p: 3, gap: 3, height: '90vh' }}>
 
                     <SearchBar onChange={handleSearchQueryChange} value={searchQuery} />
-                    <FormControl fullWidth>
-                        <InputLabel>Category</InputLabel>
-                        <Select
-                            sx={{ borderRadius: '15px' }}
-                            labelId="category"
-                            id="category"
-                            value={categoryData || 'All categories'}
-                            label="Category"
-                            onChange={handleCategoryChange}
-                        >
-                            <MenuItem value="All categories">All Categories</MenuItem>
-
-                            {CATEGORYOPTIONS.map((option, index) => (
-                                <MenuItem key={index} value={option.category}>
-                                    {option.category}
-                                </MenuItem>
-                            ))}
-                        </Select>
-                    </FormControl>
-
-                    <Stack spacing={8} sx={{}}>
-                        <Autocomplete
-                            sx={{ m: '16.5px 6px 16.5px 14px' }}
-                            multiple
-                            id="hashtags"
-                            options={HASHTAGSOPTIONS}
-                            getOptionLabel={(option) => (option && option.tag) || ''}
-                            onChange={handleHashtagChange}
-                            value={HASHTAGSOPTIONS.filter(option => hashtagData.includes(option.tag))}
-                            renderInput={(params) => (
-                                <TextField
-                                    {...params}
-                                    variant="standard"
-                                    label="Search with tags"
-                                    placeholder=""
-                                />
-                            )}
-                        />
-
-                    </Stack>
+                    <Category onCategoryChange={handleCategoryChange} filter={"yes"} />
                     <Location onLocationChange={handleLocationChange} />
+                    <Hashtags onHashtagChange={handleHashtagChange} filter={"yes"} />
+
+
 
                 </Grid>
 
@@ -172,9 +136,7 @@ const CollectionPage = () => {
                         {profilesData === null ? (
                             <Loader />
                         ) : (
-
                             <CollectionCard filteringCard={"yes"} array={profilesData} searchQuery={searchQuery} searchCategory={categoryData} searchHashtag={hashtagData} searchSocial={socialData} searchLocation={locationData} />
-
                         )}
                     </Stack>
                 </Grid>

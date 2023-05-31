@@ -15,7 +15,6 @@ import Loader from '../components/Loader/Loader'
 import CollectionCard from '../components/CollectionCard/CollectionCard'
 import MenuItem from '@mui/material/MenuItem';
 import Banner from '../components/Banner/Banner';
-import ProfileLanding from '../components/Influencer/ProfileLanding';
 import MeshGradientBackground from '../components/MeshGradient/MeshGradientBackground';
 import { Typography } from '@mui/material';
 import TextBox from '../components/TextBox/TextBox'

@@ -16,9 +16,12 @@ import MyCustomTextField from "../Form/TextField";
 
 
 
-const Hashtags = ({onHashtagChange}) => {
+const Hashtags = ({onHashtagChange, filter}) => {
+
+    // VARIABLES ---------------
     const [hashtagData, setHashtagData] = useState([]);
 
+    // HANDLING CHANGE ---------------
     const handleChange = (event, value) => {
         const selectedTags = value.map((item) => item.tag);
         setHashtagData(selectedTags);
@@ -29,24 +32,25 @@ const Hashtags = ({onHashtagChange}) => {
 
     return (
             <Autocomplete
-                sx={{pt:3, pb:3}}
+                sx={{width:'100%'}}
                 multiple
                 id="hashtags"
                 options={HASHTAGSOPTIONS}
                 getOptionLabel={(option) => (option && option.tag) || ''}
                 onChange= {handleChange}
-                value = {hashtagData.tag}
+                value={filter ? HASHTAGSOPTIONS.filter(option => hashtagData.includes(option.tag)) : hashtagData.tag}
                 renderInput={(params) => (
                     <MyCustomTextField
                         {...params}
                         variant="standard"
-                        label="Chose your hashtags"
+                        label="Chose hashtags"
                         placeholder="Hashtags"
                     />
                 )}
             />
     );
 };
+
 
 export default Hashtags;
 

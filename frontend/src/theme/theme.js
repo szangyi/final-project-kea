@@ -32,6 +32,7 @@ let theme = createTheme({
                 dark: '#184CCA',
                 main: '#969CFE',
                 light: '#A4B0FF',
+                hover:'#D5D8F1',
             },
             salmon: {
                 dark: '#E45B56',
@@ -41,7 +42,8 @@ let theme = createTheme({
             blue: {
                 dark: '#1C2A4A',
                 main: '#2271E6',
-                contrastText: '#fff'
+                contrastText: '#fff',
+                light:'#D9DEE8'
             },
             grey: {
                 light: '#E8E4E1',
