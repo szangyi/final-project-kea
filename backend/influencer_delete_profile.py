@@ -23,5 +23,5 @@ def _delete_profile():
         database_helper_functions._delete_influencer_profile(influencer_ID, db_config)
     else:
         response.status = 400
-        response.body = "Profile couldn't be deleted"
+        return "Profile couldn't be deleted"
     

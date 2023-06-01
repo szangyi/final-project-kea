@@ -28,6 +28,7 @@ import Banner from '../../components/Banner/Banner';
 import Loader from '../../components/Loader/Loader'
 import MyCustomButton from '../../components/Button/Button';
 import GetInfluencerProfilesAPI from '../../api/GetInfluencerProfilesAPI'
+import DeleteProfileAPI from '../../api/DeleteProfileAPI';
 import Error from '../../components/Error/Error'
 
 const InfluencerPage = () => {
@@ -47,43 +48,15 @@ const InfluencerPage = () => {
     setOpen(false);
   };
 
-  const handleDelete = (influencerid) => {
-    deleteProfile(influencerid)
-  }
-
   const handleCloseError = () => {
     setError(null);
   };
 
-
-
-
-  // CONNECT TO API ---------------
+  // API CALLS ---------------
   GetInfluencerProfilesAPI(token, setInfluencerData, setError)
-
-  const deleteProfile = async (influencerid) => {
-    try {
-      const response = await axios.post('/api/delete-profile', { influencerid }, {
-        headers: {
-          Authorization: `${token}`,
-        },
-      });
-
-      if (response) {
-        console.log(response)
-        handleClose();
-      }
-      else {
-        console.log("error")
-      }
-    } catch {
-      console.log('Delete of profile failed');
-    }
-
-  };
-
-
-
+  const handleDelete = (influencerid) => {
+    DeleteProfileAPI(token, influencerid, handleClose, setError)
+  }
 
   // RETURN --------------- 
   return (
