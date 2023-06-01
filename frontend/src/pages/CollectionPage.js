@@ -111,8 +111,6 @@ const CollectionPage = () => {
                     <Location onLocationChange={handleLocationChange} />
                     <Hashtags onHashtagChange={handleHashtagChange} filter={"yes"} />
 
-
-
                 </Grid>
 
                 {/* ---------------- */}

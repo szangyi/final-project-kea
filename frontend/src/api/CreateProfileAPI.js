@@ -4,7 +4,7 @@
 import axios from 'axios';
 
 
-export default async function CreateProfileApi(formDataNew, token, nav, setError){
+export default async function CreateProfileAPI(formDataNew, token, nav, setError){
 
     try {
         const response = await axios.post('/api/create-profile', formDataNew, {
@@ -13,8 +13,6 @@ export default async function CreateProfileApi(formDataNew, token, nav, setError
             Authorization: `${token}`,
           },
         });
-
-        console.log(response)
   
         if (response.status === 200) {
           nav('/influencer-dashboard');

@@ -25,7 +25,7 @@ import { STEPS } from '../../util/Constants';
 import MyCustomButton from '../../components/Button/Button';
 import Loader from '../../components/Loader/Loader'
 import Error from '../../components/Error/Error'
-import CreateProfileApi from '../../api/ProfileApi'
+import CreateProfileAPI from '../../api/CreateProfileAPI'
 
 const CreateProfile = () => {
 
@@ -51,7 +51,7 @@ const CreateProfile = () => {
   // STEPS HANDLER ---------------
   const handleNext = () => {
     if (activeStep === STEPS.length - 1) {
-      CreateProfileApi(formData, token, nav, setError);
+      CreateProfileAPI(formData, token, nav, setError);
     } else {
       setActiveStep(activeStep + 1);
     }
