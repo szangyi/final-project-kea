@@ -27,8 +27,8 @@ import CollectionCard from '../components/CollectionCard/CollectionCard'
 
 const ProfileLandingPage = () => {
     // VARIABLES ---------------
-    const [profileData, setProfileData] = useState(null);
-    const [otherProfiles, setOtherProfiles] = useState(null);
+    const [profileData, setProfileData] = useState([]);
+    const [otherProfiles, setOtherProfiles] = useState([]);
     const username = useParams();
     const token = Cookies.get('token');
 
@@ -41,17 +41,23 @@ const ProfileLandingPage = () => {
                     Authorization: `${token}`,
                 },
             });
-            const profileData = response.data.profileData;
+            const profileDataResponse = response.data.profileData;
+            const profileData = Object.values(profileDataResponse)
+            console.log(profileData)
             const otherProfiles = response.data.otherProfiles;
             console.log(otherProfiles)
             setProfileData(profileData);
             setOtherProfiles(otherProfiles);
 
 
+
+
         } catch {
             console.log('getting profile failed');
         }
     }
+    console.log(typeof profileData)
+    console.log(profileData)
 
 
     getProfile();
@@ -62,62 +68,60 @@ const ProfileLandingPage = () => {
             {profileData === null ? (
                 <Loader />
             ) : (
-                <Stack>
-                    {profileData.map((data, index) => (
+                <>
                         <Stack
-                            sx={{ mt: 5, mb: 5, display: 'flex', flexDirection: 'column', alignItems: 'center' }}
-                            key={index}>
+                            sx={{ mt: 5, mb: 5, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                             <Stack
                                 sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 5 }}>
                                 <Box
                                     component="img"
-                                    src={`http://127.0.0.1:7878/profile_images/${data[11]}`}
+                                    src={`http://127.0.0.1:7878/profile_images/${profileData[11]}`}
                                     sx={{ height: 200, width: 200, borderRadius: '50%' }}
                                 />
                                 <Stack>
                                     <Typography sx={{ fontSize: '40px', fontWeight: '700' }} variant="subtitle2">{username.username}</Typography>
-                                    <Typography sx={{ fontSize: '26px' }} variant="subtitle1">{data[10]}</Typography>
-                                    <Typography sx={{ fontSize: '16px' }} variant="subtitle1">{data[4]}</Typography>
+                                    <Typography sx={{ fontSize: '26px' }} variant="subtitle1">{profileData[10]}</Typography>
+                                    <Typography sx={{ fontSize: '16px' }} variant="subtitle1">{profileData[4]}</Typography>
                                 </Stack>
                             </Stack>
 
                             <Stack sx={{ mt: 5 }}>
-                                <Chip icon={<CheckCircleIcon />} color='salmon' key={data[9]} label={data[9]} />
+                                <Chip icon={<CheckCircleIcon />} color='salmon' key={profileData[9]} label={profileData[9]} />
                             </Stack>
 
                             <Typography sx={{ fontSize: '20px', mt: 5 }} variant="overline">Bio</Typography>
                             <Stack
                                 sx={{ backgroundColor: 'customColors.blue.light', height: '100%', width: '50%', px: 10, py: 10, borderRadius: '15px' }}>
-                                {data[3]}
+                                {profileData[3]}
                             </Stack>
 
                             <Typography sx={{ fontSize: '20px', mt: 5 }} variant="overline">Linked social accounts</Typography>
                             <Stack
                                 sx={{ mt: 1, display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 5 }}>
-                                {data[5] && (
+                                {profileData[5] && (
                                     <div>
-                                        <a href={`/${data[5]}`}><img src={website} alt="web" /></a>
+                                        <a href={`/${profileData[5]}`}><img src={website} alt="web" /></a>
                                     </div>
                                 )}
-                                {data[6] && (
+                                {profileData[6] && (
                                     <div>
-                                        <a href={`/${data[6]}`}><img src={instagram} alt="instagram" /></a>
+                                        <a href={`/${profileData[6]}`}><img src={instagram} alt="instagram" /></a>
                                     </div>
                                 )}
-                                {data[7] && (
+                                {profileData[7] && (
                                     <div>
-                                        <a href={`/${data[6]}`}><img src={youtube} alt="youtube" /></a>
+                                        <a href={`/${profileData[6]}`}><img src={youtube} alt="youtube" /></a>
                                     </div>
                                 )}
-                                {data[8] && (
+                                {profileData[8] && (
                                     <div>
-                                        <a href={`/${data[6]}`}><img src={tiktok} alt="tiktok" /></a>
+                                        <a href={`/${profileData[6]}`}><img src={tiktok} alt="tiktok" /></a>
                                     </div>
                                 )}
                             </Stack>
                         </Stack>
 
-                    ))}
+                
 
                     <Stack>
                         {otherProfiles === [] ? (
@@ -128,8 +132,8 @@ const ProfileLandingPage = () => {
                                 <CollectionCard filteringCard={"no"} array={otherProfiles} />
                             </Stack>
                         )}
-                    </Stack>
                 </Stack>
+                </>
             )}
 
 
