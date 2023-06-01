@@ -23,44 +23,24 @@ import instagram from '../public/icons/instagram.png';
 import tiktok from '../public/icons/tiktok.png';
 import Loader from '../components/Loader/Loader'
 import CollectionCard from '../components/CollectionCard/CollectionCard'
-
+import GetProfileAPI from '../api/GetProfileAPI';
+import Error from '../components/Error/Error'
 
 const ProfileLandingPage = () => {
     // VARIABLES ---------------
     const [profileData, setProfileData] = useState([]);
     const [otherProfiles, setOtherProfiles] = useState([]);
+    const [error, setError] = useState(null)
     const username = useParams();
     const token = Cookies.get('token');
 
+    // HANDLERS ---------------
+    const handleCloseError = () => {
+        setError(null);
+    };
 
     // CONNECT TO API ---------------
-    const getProfile = async () => {
-        try {
-            const response = await axios.post('/api/get-profile', { username }, {
-                headers: {
-                    Authorization: `${token}`,
-                },
-            });
-            const profileDataResponse = response.data.profileData;
-            const profileData = Object.values(profileDataResponse)
-            console.log(profileData)
-            const otherProfiles = response.data.otherProfiles;
-            console.log(otherProfiles)
-            setProfileData(profileData);
-            setOtherProfiles(otherProfiles);
-
-
-
-
-        } catch {
-            console.log('getting profile failed');
-        }
-    }
-    console.log(typeof profileData)
-    console.log(profileData)
-
-
-    getProfile();
+    GetProfileAPI(token, username, setProfileData, setOtherProfiles, setError);
 
     return (
         <>
@@ -69,6 +49,11 @@ const ProfileLandingPage = () => {
                 <Loader />
             ) : (
                 <>
+                    {profileData === "error" ? (
+                        <>
+                            {error && <Error error={error} onClose={handleCloseError} />}
+                        </>
+                    ) : (
                         <Stack
                             sx={{ mt: 5, mb: 5, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                             <Stack
@@ -120,19 +105,29 @@ const ProfileLandingPage = () => {
                                 )}
                             </Stack>
                         </Stack>
+                    )}
 
-                
+
 
                     <Stack>
-                        {otherProfiles === [] ? (
-                            <Stack></Stack>
+                        {otherProfiles === "error" ? (
+                            <>
+                                {error && <Error error={error} onClose={handleCloseError} />}
+                            </>
                         ) : (
-                            <Stack sx={{ backgroundColor: 'customColors.blue.dark', pt: 2, px: 5, pb: 5 }}>
-                                <Typography sx={{ fontSize: '20px', pb: 3, textAlign: 'center', color: '#fff' }} variant="overline">Other profiles from the same influencer</Typography>
-                                <CollectionCard filteringCard={"no"} array={otherProfiles} />
-                            </Stack>
-                        )}
-                </Stack>
+                            <>
+                                {otherProfiles === [] ? (
+                                    <Stack></Stack>
+                                ) : (
+                                    <Stack sx={{ backgroundColor: 'customColors.blue.dark', pt: 2, px: 5, pb: 5 }}>
+                                        <Typography sx={{ fontSize: '20px', pb: 3, textAlign: 'center', color: '#fff' }} variant="overline">Other profiles from the same influencer</Typography>
+                                        <CollectionCard filteringCard={"no"} array={otherProfiles} />
+                                    </Stack>
+                                )}
+                            </>
+                            )}
+
+                    </Stack>
                 </>
             )}
 

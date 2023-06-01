@@ -38,6 +38,7 @@ def _():
             "profileData": profile,
             "otherProfiles": other_profiles
         }
+        
 
         profile_json = json.dumps(profile_response, default=helper_functions._datetime_handler)
         
@@ -45,4 +46,4 @@ def _():
         return profile_json
     else:
         response.status = 404
-        response.body = "User not found"
+        return "User not found"
