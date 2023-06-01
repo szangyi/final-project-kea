@@ -9,18 +9,13 @@ import axios from 'axios';
 // --------------------------
 import Stack from '@mui/material/Stack';
 import Box from "@mui/material/Box";
-import Button from '@mui/material/Button';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import { Grid, Typography } from '@mui/material';
+import { Grid } from '@mui/material';
 import Chip from '@mui/material/Chip';
 
 // --------------------------
 // COMPONENTS ---------------
 // --------------------------
-import { SOCIALOPTIONS, HASHTAGSOPTIONS } from '../util/Constants';
+import { SOCIALOPTIONS } from '../util/Constants';
 import CollectionCard from '../components/CollectionCard/CollectionCard'
 import Location from '../components/Location/Location';
 import SearchBar from '../components/SearchBar/SearchBar';
@@ -29,6 +24,8 @@ import Hashtags from '../components/Hashtags/Hashtags';
 import Loader from '../components/Loader/Loader'
 import MeshGradientBackground from '../components/MeshGradient/MeshGradientBackground';
 import Category from '../components/Category/Category'
+import GetAllProfilesAPI from '../api/GetAllProfilesAPI';
+import Error from '../components/Error/Error'
 
 const CollectionPage = () => {
 
@@ -40,6 +37,7 @@ const CollectionPage = () => {
     const [locationData, setLocationData] = useState('');
     const [profilesData, setProfilesData] = useState(null);
     const [selected, setSelected] = useState('');
+    const [error, setError] = useState(null)
     const allOptionIndex = SOCIALOPTIONS.findIndex(option => option.social === 'All');
     const [activeIndex, setActiveIndex] = useState(allOptionIndex);
 
@@ -61,7 +59,6 @@ const CollectionPage = () => {
     const handleChangeSocial = (social, index) => {
         setSocialData(social)
         setSelected((prevSelected) => (prevSelected === social ? null : social));
-
         setActiveIndex(index);
     }
 
@@ -70,27 +67,12 @@ const CollectionPage = () => {
         setLocationData(data)
     }
 
-    // CONNECTING TO API ---------------
-    const collectionHandler = async () => {
-        try {
-            const response = await axios.get('/api/profiles', {
-                headers: {
-                    Authorization: `${token}`,
-                }
-            },
-            );
-
-            const profilesData = response.data;
-
-            setProfilesData(profilesData);
-
-        } catch {
-            console.log('Getting all profiles failed:');
-        }
-    }
+    const handleCloseError = () => {
+        setError(null);
+    };
 
     // CALLING API FUNCTION ---------------
-    collectionHandler();
+    GetAllProfilesAPI(token, setProfilesData, setError)
 
 
     return (
@@ -134,7 +116,15 @@ const CollectionPage = () => {
                         {profilesData === null ? (
                             <Loader />
                         ) : (
-                            <CollectionCard filteringCard={"yes"} array={profilesData} searchQuery={searchQuery} searchCategory={categoryData} searchHashtag={hashtagData} searchSocial={socialData} searchLocation={locationData} />
+                            <>
+                            {profilesData === "error"? (
+                                <>
+                                {error && <Error error={error} onClose={handleCloseError} />}
+                                </>
+                            ):(
+                                <CollectionCard filteringCard={"yes"} array={profilesData} searchQuery={searchQuery} searchCategory={categoryData} searchHashtag={hashtagData} searchSocial={socialData} searchLocation={locationData} />
+                            )}
+                            </>
                         )}
                     </Stack>
                 </Grid>

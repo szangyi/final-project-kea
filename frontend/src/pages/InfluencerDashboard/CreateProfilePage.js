@@ -51,6 +51,8 @@ const CreateProfile = () => {
   // STEPS HANDLER ---------------
   const handleNext = () => {
     if (activeStep === STEPS.length - 1) {
+
+      // API CALL ---------------
       CreateProfileAPI(formData, token, nav, setError);
     } else {
       setActiveStep(activeStep + 1);
@@ -90,7 +92,7 @@ const CreateProfile = () => {
 
   return (
     <>
-      <Stack sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+      <Stack sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <Typography sx={{ pt: { xs: 1, md: 5 }, pb: { xs: 1, md: 5 } }} variant="h2">Create your profile </Typography>
         {error && <Error error={error} onClose={handleCloseError} />}
 

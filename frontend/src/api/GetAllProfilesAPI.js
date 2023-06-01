@@ -4,21 +4,20 @@
 // --------------------------
 import axios from 'axios';
 
-export default async function GetInfluencerProfilesAPI(token, setInfluencerData, setError) {
-    const influencerDataError = "error";
-
+export default async function GetAllProfilesAPI(token, setProfilesData, setError) {
+    const profileDataError = "error"
     try {
-        const response = await axios.get('/api/get-influencer-profiles', {
+        const response = await axios.get('/api/profiles', {
             headers: {
                 Authorization: `${token}`,
             }
         });
 
         if (response.status === 200) {
-            const influencerData = response.data;
-            setInfluencerData(influencerData);
+            const profileData = response.data;
+            setProfilesData(profileData);
         } else {
-            setInfluencerData(influencerDataError);
+            setProfilesData(profileDataError);
             const error = {
                 message: response.body,
                 statusCode: response.status,
@@ -27,7 +26,7 @@ export default async function GetInfluencerProfilesAPI(token, setInfluencerData,
         }
     } catch (error) {
         console.log('Create profile failed:', error);
-        setInfluencerData(influencerDataError);
+        setProfilesData(profileDataError);
         setError(error);
     }
 }

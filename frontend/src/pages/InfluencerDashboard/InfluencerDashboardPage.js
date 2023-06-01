@@ -87,7 +87,7 @@ const InfluencerPage = () => {
               <Typography sx={{ pt: { xs: 1, md: 1 }, pb: { xs: 1, md: 0 }, px: { xs: 1, md: 3 } }} variant="p">Create your first profile, and become recognizable.</Typography>
               <MyCustomButton href="/create-profile" sx={{ mt: 4 }} startIcon={<AddIcon />}>Add your first profile</MyCustomButton>
             </Stack>
-            ) : ( influencerData.length === 0 ? (
+            ) : ( influencerData === "error" ? (
               <Typography sx={{ pt: { xs: 1, md: 5 }, pb: { xs: 1, md: 0 }, px: { xs: 1, md: 3 } }} variant="h2">Your profiles </Typography>
             ): (
 
