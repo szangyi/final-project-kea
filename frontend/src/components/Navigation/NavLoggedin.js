@@ -38,14 +38,12 @@ import Logo from "../Logo/Logo";
 const pages = [
     {
         'name': 'Switch to Influence',
-        'href': '#',
-        // 'action': alex,
+        'href': '/influencer-dashboard',
         'className': 'navlink-button',
     },
     {
         'name': 'Find your influencer',
         'href': '/collection',
-        // 'action': findinfluencers,
     },
 
 ]
@@ -54,12 +52,10 @@ const settings = [
     {
         'name': 'Account',
         'href': '/user-dashboard',
-        // 'action': userdashboard,
     },
     {
         'name': 'My Collection',
         'href': '/user-collection',
-        // 'action': mycollection,
     }
 ]
 
