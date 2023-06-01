@@ -1,69 +1,76 @@
 import './UserDashboard.css';
-
+// --------------------------
+// REACT ---------------
+// --------------------------
 import React, { useState } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { Outlet, useOutletContext, useNavigate, useRouteLoaderData } from "react-router-dom";
-
+// --------------------------
+// MATERIAL UI ---------------
+// --------------------------
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+// --------------------------
+// COMPONENTS ---------------
+// --------------------------
 import Banner from '../../components/Banner/Banner';
 import MyCustomDrawer from '../../components/Drawer/MyCustomDrawer';
-
-import Box from '@mui/material/Box';
-import AppBar from '@mui/material/AppBar';
-import CssBaseline from '@mui/material/CssBaseline';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import AccountInfo from './AccountInfo';
-
+import AccountInfoAPI from '../../api/AccountInfoAPI';
+import Loader from '../../components/Loader/Loader'
+import Error from '../../components/Error/Error'
 
 const UserDashboard = (theme) => {
 
+    // VARIABLES ---------------
     const [userData, setUserData] = useState(null);
+    const [error, setError] = useState(null)
     const token = Cookies.get('token');
 
-    const getUserData = async () => {
-        try {
-            const response = await axios.get('/api/account-info', {
-                headers: {
-                    Authorization: `${token}`,
-                }
-            });
-            const userData = response.data;
-            const error = response.data.error;
-
-            setUserData(userData);
-
-        } catch (error) {
-            console.error('Error:', error);
-        }
+    // HANDLERS ---------------
+    const handleCloseError = () => {
+        setError(null);
     };
 
-    getUserData();
+    // API CALLS ---------------
+    AccountInfoAPI(token, setUserData, setError);
 
-    if (userData === null) {
-        return <div>Loading your data...</div>;
-    }
+
 
     return (
         <>
+            {userData === null ? (
+                <Loader />
 
-            <Banner variant="medium"
-                headline1="Hi you"
-            // add username here
-            />
+            ) : (
+                <>
+                    {userData === "error" ? (
+                        <>
+                            {error && <Error error={error} onClose={handleCloseError} />}
+                        </>
+                    ) : (
+                        <>
+                            <Banner variant="medium"
+                                headline1="Hi you"
+                            // add username here
+                            />
 
-            <Box component="section" className="userdashboard-section">
+                            <Box component="section" className="userdashboard-section">
 
-                <Typography sx={{ pt: { xs: 1, md: 5 }, pb: { xs: 1, md: 0 }, px: { xs: 1, md: 3 } }} variant="h4">account settings </Typography>
+                                <Typography sx={{ pt: { xs: 1, md: 5 }, pb: { xs: 1, md: 0 }, px: { xs: 1, md: 3 } }} variant="h4">account settings </Typography>
 
-                <Box className="userdashboard-section-container" sx={{ gap: 2, flexGrow: 1, py: { xs: 1, md: 3 }, pl: { xs: 1, md: 3 }, pr: { xs: 1, md: 8 }, display: 'flex' }}>
+                                <Box className="userdashboard-section-container" sx={{ gap: 2, flexGrow: 1, py: { xs: 1, md: 3 }, pl: { xs: 1, md: 3 }, pr: { xs: 1, md: 8 }, display: 'flex' }}>
 
-                    <MyCustomDrawer />
-                    <Outlet context={userData} />
+                                    <MyCustomDrawer />
+                                    <Outlet context={userData} />
 
-                </Box>
-            </Box>
+                                </Box>
+                            </Box>
+                        </>
+                    )}
 
+                </>
+            )}
         </>
     )
 

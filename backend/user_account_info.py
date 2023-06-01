@@ -31,4 +31,4 @@ def _account_info():
         return user_info_dumps
     else:
         response.status = 400
-        response.body = "Account info cannot be retrieved"
+        return "Account info cannot be retrieved"
