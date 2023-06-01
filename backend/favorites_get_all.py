@@ -1,13 +1,10 @@
 from bottle import get, request, response
 import json
-import mysql.connector
-import g
-from datetime import datetime
 import helper_functions
 import database_helper_functions
 
 # USER COLLECTION WITH FAVORITES ##########################
-@get("/api/favorites_get_all")
+@get("/api/favorites-get-all")
 def _():
     
     # VARIABLES ##########################

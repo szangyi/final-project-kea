@@ -1,55 +1,46 @@
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+// --------------------------
+// REACT ---------------
+// --------------------------
+import { useState } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-import TextField from '@mui/material/TextField';
-import Autocomplete from '@mui/material/Autocomplete';
+// --------------------------
+// MATERIAL UI ---------------
+// --------------------------
 import Stack from '@mui/material/Stack';
 import Box from "@mui/material/Box";
-import Button from '@mui/material/Button';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import InputLabel from '@mui/material/InputLabel';
+// --------------------------
+// COMPONENTS ---------------
+// --------------------------
 import Loader from '../components/Loader/Loader'
 import CollectionCard from '../components/CollectionCard/CollectionCard'
-import MenuItem from '@mui/material/MenuItem';
 import Banner from '../components/Banner/Banner';
 import MeshGradientBackground from '../components/MeshGradient/MeshGradientBackground';
 import { Typography } from '@mui/material';
 import TextBox from '../components/TextBox/TextBox'
-
-
+import FavoritesGetAllAPI from '../api/FavoritesGetAllAPI';
+import Error from '../components/Error/Error'
 
 const UserCollectionPage = () => {
 
     // VARIABLES ---------------
-    const [profilesData, setProfilesData] = useState(null);
+    const [favoritesData, setFavoritesData] = useState(null);
+    const [error, setError] = useState(null)
     const token = Cookies.get('token');
 
-
-    // CONNECTING TO API ---------------
-    const collectionHandler = async () => {
-        try {
-            const response = await axios.get("/api/favorites_get_all", {
-                headers: {
-                    Authorization: `${token}`,
-                },
-            });
-
-            const profilesData = response.data;
-            setProfilesData(profilesData);
-        } catch {
-            console.log("Getting all profiles failed:");
-        }
+    // HANDLERS ---------------
+    const handleCloseError = () => {
+        setError(null);
     };
 
     // CALLING API FUNCTION ---------------
-    collectionHandler();
+    FavoritesGetAllAPI(token, setFavoritesData, setError)
 
+    // GET UNIQUE CATEGORIES ---------------
     const getUniqueCategories = () => {
-        if (profilesData) {
-            const categories = profilesData.map((profile) => profile[10]);
+        if (favoritesData) {
+            const categories = favoritesData.map((profile) => profile[10]);
             return Array.from(new Set(categories));
         }
         return [];
@@ -69,19 +60,32 @@ const UserCollectionPage = () => {
                     Your charming boards you will find here, by category. Enjoy!
                 </Typography>
 
-                {profilesData === null ? (
+                {favoritesData === null ? (
                     <Loader />
                 ) : (
+                    <>
+                        {favoritesData === "error" ? (
+                            <>
+                                {error && <Error error={error} onClose={handleCloseError} />}
+                            </>
+                        ) : (
+                            <>
+                                {favoritesData === [] ? (
+                                    <Stack></Stack>
+                                ) : (
+                                    getUniqueCategories().map((category) => ( // create sections for categories
+                                        <Box key={category}>
+                                            <Typography sx={{ mt: 5, mb: 3 }} variant="h3">{category}</Typography>
+                                            <CollectionCard
+                                                array={favoritesData.filter((profile) => profile[10] === category)}
+                                            />
+                                        </Box>
+                                    ))
+                                )}
+                            </>
+                        )}
 
-                    getUniqueCategories().map((category) => ( // create sections for categories
-                        <Box key={category}>
-                            <Typography sx={{ mt: 5, mb: 3 }} variant="h3">{category}</Typography>
-                            <CollectionCard
-                                array={profilesData.filter((profile) => profile[10] === category)}
-                            />
-                        </Box>
-                    ))
-
+                    </>
                 )}
             </Stack>
 
