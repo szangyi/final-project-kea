@@ -181,3 +181,26 @@ def _add_to_favorites(influencer_ID, user_id, db_config):
 
     finally:
         db.close()
+
+def _get_all_favorites(user_id, db_config):
+    try:
+        db = mysql.connector.connect(**db_config)
+        cursor = db.cursor()
+        sql = """SELECT influencers_profile.*, 1 AS is_favorite
+            FROM influencers_profile
+            WHERE influencers_profile.influencer_ID IN (
+                SELECT influencer_ID FROM favorites WHERE user_ID = %s
+            )"""
+        val = (user_id, )
+        cursor.execute(sql, val)
+        favorite_influencers = cursor.fetchall()
+        db.commit()
+        
+        response.status = 200
+        return favorite_influencers
+    except Exception as ex:
+        response.status= 500
+        response.body = ex
+
+    finally:
+        db.close()
