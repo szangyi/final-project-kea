@@ -18,15 +18,15 @@ import SignUpAPI from '../api/SignUpAPI';
 import { useFormik } from 'formik';
 import { signupSchema } from '../schemas';
 
-const Signup = () => {
+const SignupPage = () => {
 
     // VARIABLES ---------------
-    const [formData, setFormData] = useState({})
+    const [formError, setFormError] = useState('');
+    const [userExists, setUserExists] = useState('');
     const [error, setError] = useState(null)
     const token = Cookies.get('token');
     const nav = useNavigate();
-    const [userExists, setUserExists] = useState('');
-    const { values, errors, touched, handleBlur, handleChange } = useFormik({
+    const { values, errors, touched, handleBlur, handleChange, setTouched, validateForm } = useFormik({
         initialValues: {
             firstName: '',
             lastName: '',
@@ -38,47 +38,30 @@ const Signup = () => {
         validationSchema: signupSchema,
     });
 
-    // const [basicData, setBasicData] = useState({
-    //     firstName: '',
-    //     lastName: '',
-    //     username: '',
-    //     email: '',
-    //     password: ''
-    // });
-
-    // const formDataNew = new FormData();
-    // formDataNew.append('firstName', formData.firstName);
-    // formDataNew.append('lastName', formData.lastName);
-    // formDataNew.append('username', formData.username);
-    // formDataNew.append('email', formData.email);
-    // formDataNew.append('password', formData.password);
-
-    // FORM DATA HANDLER ---------------
-    // const handleData = (data) => {
-    //     setFormData((prevData) => ({ ...prevData, ...data }));
-    // }
-
-
-    // HANDLERS ---------------
-    // const handleCloseError = () => {
-    //     setError(null);
-    // };
-
-
-    // HANDLE CHANGE ---------------
-    // const handleChange = (event) => {
-    //     const { name, value } = event.target;
-    //     setBasicData((prevData) => ({ ...prevData, [name]: value }))
-    //     onDataChange(basicData);
-    // }
 
     // API CALLS ---------------
     const submitHandler = async (event) => {
         // const { username, firstName, lastName, email, password } = values; // Destructure values because of Formik
-
         event.preventDefault();
         console.log(values)
-        SignUpAPI(values, token, nav, setError, setUserExists);
+
+        // Touch all the inputfields before submission
+        setTouched({
+            firstName: true,
+            lastName: true,
+            username: true,
+            email: true,
+            password: true,
+        });
+
+        const updatedErrors = await validateForm();
+
+        if ((Object.keys(updatedErrors).length === 0) && (Object.keys(errors).length === 0)) {
+            setFormError(""); // Clear form errors
+            SignUpAPI(values, token, nav, setError, setUserExists);
+        } else {
+            setFormError('Please fill in all the required fields.');
+        }
     }
 
 
@@ -104,11 +87,15 @@ const Signup = () => {
                         sign up
                     </Typography>
 
+                    {formError && (
+                        <Alert severity="error">{formError}</Alert>
+                    )}
+
                     {userExists && (
                         <Alert severity="error">{userExists}</Alert>
                     )}
 
-                    <Box component="form" onSubmit={submitHandler} sx={{ mt: 1, width: '100%' }}>
+                    <Box component="form" noValidate onSubmit={submitHandler} sx={{ mt: 1, width: '100%' }}>
 
                         <Grid container spacing={1}>
                             <Grid item xs={6} >
@@ -227,4 +214,4 @@ const Signup = () => {
     );
 }
 
-export default Signup;
+export default SignupPage;

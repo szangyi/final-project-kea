@@ -1,7 +1,53 @@
 from bottle import response
 import mysql.connector
 
-def _login(user_email,password_hashed,db_config ):
+def _user_exist(user_email, username, db_config):
+    try:
+        db = mysql.connector.connect(**db_config)
+        cursor = db.cursor()
+        sql_user_exist = """ SELECT * FROM users WHERE user_email = %s OR username = %s"""
+        var = (user_email, username)
+        cursor.execute(sql_user_exist, var)
+        user_exist = cursor.fetchone()
+        db.commit()
+        response.status = 200
+        return user_exist
+    except Exception as ex:
+        print(ex)
+        response.status = 500
+        response.body = ex
+    finally:
+        db.close()
+
+def _signup(user_data, db_config ):
+    try:
+        db = mysql.connector.connect(**db_config)
+        cursor = db.cursor()
+        sql_signup = """INSERT INTO users (user_ID, username, user_first_name, user_last_name, user_location, user_email, user_password, user_image_ID, user_interest_tags, is_influencer, user_created_at ) VALUES ( %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
+        val_create_profile = (
+            user_data["user_ID"],
+            user_data["username"],
+            user_data["user_first_name"],
+            user_data["user_last_name"],
+            user_data["user_location"],
+            user_data["user_email"],
+            user_data["user_password"],
+            user_data["user_image_ID"],
+            user_data["user_interest_tags"],
+            user_data["is_influencer"],
+            user_data["user_created_at"],
+        )
+        cursor.execute(sql_signup, val_create_profile)
+        db.commit()
+        response.status = 200
+    except Exception as ex:
+        print(ex)
+        response.status = 500
+        response.body = ex
+    finally:
+        db.close()
+
+def _login(user_email, password_hashed, db_config ):
     try:
         db = mysql.connector.connect(**db_config)
         cursor = db.cursor()

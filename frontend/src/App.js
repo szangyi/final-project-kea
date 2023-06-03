@@ -7,8 +7,8 @@ import { getAuthToken, authLoader } from './util/auth';
 // --------------------------
 // COMPONENTS ---------------
 // --------------------------
-import Login from './components/LoginSignup/Login';
-// import Signup from './components/LoginSignup/_Signup.js';
+// import Login from './components/Login/Login';
+// import SignupPage from './components/LoginSignupPage/_SignupPage.js';
 import Footer from './components/Footer/Footer.js';
 
 // --------------------------
@@ -29,7 +29,8 @@ import ProfileLandingPage from './pages/ProfileLandingPage';
 import CollectionPage from './pages/CollectionPage';
 import UserCollectionPage from './pages/UserCollectionPage.js'
 import Page404 from './pages/Page404'
-import Signup from './pages/Signup'
+import SignupPage from './pages/SignupPage'
+import LoginPage from './pages/LoginPage'
 
 
 
@@ -41,8 +42,8 @@ const router = createBrowserRouter([
         children: [
             { path: "/", element: <HomePage /> },
             { path: "/home", element: <HomePageLoggedin />, loader: authLoader },
-            { path: "/login", element: <Login /> },
-            { path: "/signup", element: <Signup /> },
+            { path: "/login", element: <LoginPage /> },
+            { path: "/signup", element: <SignupPage /> },
             {
                 path: "/user-dashboard", element: <UserDashboard />, children: [
                     { path: "/user-dashboard/", element: <Navigate to="account-info" replace /> }, // set account-info as default

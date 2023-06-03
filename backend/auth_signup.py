@@ -6,16 +6,22 @@ import uuid
 import mysql.connector
 import bcrypt
 import database_connection
+import database_helper_functions
+import helper_functions
 import json
 import time
+import os
 
+
+# SIGNUP ##################################
 @post("/api/signup")
 def _signup():
     
+    # VARIABLES ##########################
+
+    token_request = request.headers.get('Authorization')
+
     request_user_data = request.json
-    print('#################################')
-    print(request_user_data)
-    
     user_ID = str(uuid.uuid4())
     user_first_name = request_user_data["firstName"]
     user_last_name = request_user_data["lastName"]
@@ -23,7 +29,7 @@ def _signup():
     user_email = request_user_data["email"]
     username = request_user_data["username"]
     user_password = request_user_data["password"]
-    users_created_at = str(int(time.time()))
+    user_created_at = str(int(time.time()))
     user_image_ID = ""
     user_interest_tags = '{}'
     is_influencer = False
@@ -35,6 +41,7 @@ def _signup():
     password_hashed = bcrypt.hashpw(password_encode, salt)
 
     
+
     # VALIDATION ##########################
 
     validation_errors = []
@@ -63,50 +70,38 @@ def _signup():
         return g._send(400, validation_errors)
 
 
-    try:
-        import production
-        db_config = database_connection.PRODUCTION_CONN
-
-    except Exception as ex:
-        print(ex)
-        db_config = database_connection.DEVELOPMENT_CONN
+    user_email_validated = helper_functions._token_validator(token_request)
 
 
-    try:
+    # DATABASE CONNECTION ##########################
 
-        db = mysql.connector.connect(**db_config)
-        db.autocommit = False
-        cursor = db.cursor()
+    db_config = helper_functions._db_config()
 
-        sql = """ SELECT * FROM users WHERE user_email = %s OR username = %s"""
-        cursor.execute(sql, (user_email, username))
-        user_exist = cursor.fetchone()
-        db.commit()
+    user_exist_db = database_helper_functions._user_exist(user_email_validated, username, db_config)
 
-        
-        if not user_exist:
-            sql = """INSERT INTO users (user_ID, username, user_first_name, user_last_name, user_location, user_email, user_password, user_image_ID, user_interest_tags, is_influencer, user_created_at ) VALUES ( %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
-            val = (user_ID, username, user_first_name,user_last_name, user_location, user_email, password_hashed, user_image_ID, user_interest_tags, is_influencer, users_created_at, )
-            cursor.execute(sql, val)
-            db.commit()
-            
-            message = {
-                "message": "Signup succeeded"
-            }
-            response.status = 200
-        else:
-            message = {
-                "message": "User already exist"
-            }
-            response.status = 409 # Conflict
+    if not user_exist_db:
+        user_data = {
+            "user_ID": user_ID,
+            "username": username,
+            "user_first_name": user_first_name,
+            "user_last_name": user_last_name,
+            "user_location": user_location,
+            "user_email": user_email,
+            "user_password": password_hashed,
+            "user_image_ID": user_image_ID, 
+            "user_interest_tags": user_interest_tags, 
+            "is_influencer": is_influencer, 
+            "user_created_at": user_created_at,
+        }
 
-    except Exception as ex:
-        print(ex)
-        response.status = 500
-
-    finally:
-        db.close()
-    
+        database_helper_functions._signup(user_data, db_config)
+        response.status = 200
+    else:
+        message = {
+            "error": "User already exists"
+        }
+        response.status = 409 # Conflict
+        response.body = "user already exists"
     
     message_json = json.dumps(message)
     return message_json

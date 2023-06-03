@@ -13,6 +13,7 @@ def _login():
     # VARIABLES ##########################
 
     request_user_data = request.json
+    print(request_user_data)
     user_email = request_user_data["email"]
     user_password = request_user_data["password"]
 

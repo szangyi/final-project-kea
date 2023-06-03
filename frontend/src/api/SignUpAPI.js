@@ -6,11 +6,9 @@ import axios from 'axios';
 
 export default async function SignUpAPI(values, token, nav, setError, setUserExists) {
 
-    console.log('APIIIIII')
     console.log(values)
 
     try {
-
         const formData = {
             firstName: values.firstName,
             lastName: values.lastName,
@@ -19,7 +17,6 @@ export default async function SignUpAPI(values, token, nav, setError, setUserExi
             password: values.password,
           };
 
-        
         const response = await axios.post('/api/signup', formData, {
             headers: {
                 // 'Content-Type': 'multipart/form-data',
@@ -32,7 +29,7 @@ export default async function SignUpAPI(values, token, nav, setError, setUserExi
             nav('/login');
         } else {
             const error = {
-                message: response.body,
+                message: response.data,
                 statusCode: response.status,
             };
             setError(error);

@@ -14,26 +14,10 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 
 
-import { logout as logoutAction } from '../../pages/Logout'
+import { LogOutAPI as logoutAction } from '../../api/LogOutAPI'
 import { Divider } from '@mui/material';
 import Logo from "../Logo/Logo";
 
-
-// export function alex() {
-//     alert('influence')
-// }
-
-// export function mycollection() {
-//     alert('here should be your collection, congrats')
-// }
-
-// export function userdashboard() {
-//     alert('here should be your collection, congrats')
-// }
-
-// export function findinfluencers() {
-//     alert('here should be your collection, congrats')
-// }
 
 const pages = [
     {
