@@ -3,8 +3,10 @@
 // REACT ---------------
 // --------------------------
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 export default async function FavoritesGetAllAPI(token, setFavoritesData, setError) {
+    const nav = useNavigate();
     const errorMessage = "error"
 
     try {
@@ -23,7 +25,11 @@ export default async function FavoritesGetAllAPI(token, setFavoritesData, setErr
                 message: response.body,
                 statusCode: response.status,
             };
+
+            console.log(error.message)
+            console.log(error.statusCode)
             setError(error);
+            // nav('/error', { setError, state: { message: error.message, statusCode: error.statusCode } });
         }
     } catch (error) {
         console.log('Create profile failed:', error);

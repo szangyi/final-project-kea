@@ -73,7 +73,7 @@ const MyCustomDrawer = (props) => {
                     {itemsList.map(item => {
                         const { text, icon, onClick } = item;
                         return (
-                            <ListItem disableGutters disableRipple
+                            <ListItem disableGutters
 
                                 key={item.text} >
                                 <ListItemButton onClick={item.action}>

@@ -4,6 +4,8 @@
 import React, { useState } from 'react';
 import Cookies from 'js-cookie';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
 // --------------------------
 // MATERIAL UI ---------------
 // --------------------------
@@ -30,6 +32,7 @@ import Error from '../components/Error/Error'
 const CollectionPage = () => {
 
     // VARIABLES ---------------
+    const nav = useNavigate();
     const [searchQuery, setSearchQuery] = useState('');
     const [categoryData, setCategoryData] = useState('All categories')
     const [hashtagData, setHashtagData] = useState([]);
@@ -70,6 +73,10 @@ const CollectionPage = () => {
     const handleCloseError = () => {
         setError(null);
     };
+
+    if (profilesData === "error") {
+        nav('/error', { state: { message: error.message, statusCode: error.statusCode } })
+    }
 
     // CALLING API FUNCTION ---------------
     GetAllProfilesAPI(token, setProfilesData, setError)
@@ -117,13 +124,17 @@ const CollectionPage = () => {
                             <Loader />
                         ) : (
                             <>
-                            {profilesData === "error"? (
-                                <>
-                                {error && <Error error={error} onClose={handleCloseError} />}
-                                </>
-                            ):(
+                                {/* {profilesData === "error" ? (
+                                    <>
+                                        {error && <Error error={error} onClose={handleCloseError} />}
+                                    </>
+                                ) : (
+                                    <CollectionCard filteringCard={"yes"} array={profilesData} searchQuery={searchQuery} searchCategory={categoryData} searchHashtag={hashtagData} searchSocial={socialData} searchLocation={locationData} />
+                                )} */}
+
+
                                 <CollectionCard filteringCard={"yes"} array={profilesData} searchQuery={searchQuery} searchCategory={categoryData} searchHashtag={hashtagData} searchSocial={socialData} searchLocation={locationData} />
-                            )}
+
                             </>
                         )}
                     </Stack>

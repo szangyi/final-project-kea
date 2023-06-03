@@ -4,6 +4,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom';
 
 // --------------------------
 // MATERIAL UI ---------------
@@ -28,6 +29,8 @@ const UserCollectionPage = () => {
     const [favoritesData, setFavoritesData] = useState(null);
     const [error, setError] = useState(null)
     const token = Cookies.get('token');
+    const nav = useNavigate();
+
 
     // HANDLERS ---------------
     const handleCloseError = () => {
@@ -66,7 +69,7 @@ const UserCollectionPage = () => {
                     <>
                         {favoritesData === "error" ? (
                             <>
-                                {error && <Error error={error} onClose={handleCloseError} />}
+                                {nav('/error', { state: { message: error.message, status: error.status } })}
                             </>
                         ) : (
                             <>
@@ -83,7 +86,7 @@ const UserCollectionPage = () => {
                                     ))
                                 )}
                             </>
-                        )}
+                         )}
 
                     </>
                 )}

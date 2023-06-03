@@ -28,7 +28,8 @@ import { Navigate } from 'react-router-dom';
 import ProfileLandingPage from './pages/ProfileLandingPage';
 import CollectionPage from './pages/CollectionPage';
 import UserCollectionPage from './pages/UserCollectionPage.js'
-import Page404 from './pages/Page404'
+import ErrorPage404 from './pages/ErrorPage404'
+import ErrorPage from './pages/ErrorPage'
 
 
 
@@ -53,7 +54,9 @@ const router = createBrowserRouter([
             { path: "/influencer-dashboard", element: <InfluenceDashboardPage />, loader: authLoader },
             { path: "/collection", element: <CollectionPage />, loader: authLoader },
             { path: "/profile/:username", element: <ProfileLandingPage />, loader: authLoader },
-            { path: '*', element: <Page404 replace /> },
+            // { path: '*', element: <ErrorPage replace /> },
+            { path: '*', element:  <ErrorPage404 message="Page not found" statusCode="404" /> },
+            { path: '/error', element:  <ErrorPage replace /> },
 
             // To do:
             // { path: "/my-interests", element: <HomePage /> },
