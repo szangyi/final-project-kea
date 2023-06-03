@@ -29,7 +29,7 @@ const LoginPage = () => {
         initialValues: {
             // email: '',
             // password: '',
-            email: 'a@a.commm',
+            email: 'alex@gmail.com',
             password: 'FERImari24',
         },
 

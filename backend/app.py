@@ -15,6 +15,7 @@ import influencer_create_profile
 import influencer_get_one_profile
 import influencer_delete_profile
 import influencers_get_all_profiles
+import influencers_get_random_profiles
 
 import profile_add_to_favorites
 import favorites_get_all

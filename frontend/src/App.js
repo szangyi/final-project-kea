@@ -1,15 +1,11 @@
-import { React, useState } from 'react';
+import { React } from 'react';
 import { createBrowserRouter, RouterProvider, useRouteLoaderData } from 'react-router-dom';
-import theme from "./theme/theme.js"
-import Cookies from 'js-cookie';
-import { getAuthToken, authLoader } from './util/auth';
+import { authLoader } from './util/auth';
 
 // --------------------------
 // COMPONENTS ---------------
 // --------------------------
-// import Login from './components/Login/Login';
-// import SignupPage from './components/LoginSignupPage/_SignupPage.js';
-import Footer from './components/Footer/Footer.js';
+
 
 // --------------------------
 // PAGES --------------------
@@ -45,7 +41,7 @@ const router = createBrowserRouter([
             { path: "/login", element: <LoginPage /> },
             { path: "/signup", element: <SignupPage /> },
             {
-                path: "/user-dashboard", element: <UserDashboard />, children: [
+                path: "/user-dashboard", element: <UserDashboard />, loader: authLoader, children: [
                     { path: "/user-dashboard/", element: <Navigate to="account-info" replace /> }, // set account-info as default
                     { path: "/user-dashboard/account-info", element: <AccountInfo />, loader: authLoader },
                     { path: "/user-dashboard/security", element: <Security />, loader: authLoader },
@@ -57,9 +53,6 @@ const router = createBrowserRouter([
             { path: "/collection", element: <CollectionPage />, loader: authLoader },
             { path: "/profile/:username", element: <ProfileLandingPage />, loader: authLoader },
             { path: '*', element: <Page404 replace /> },
-
-            // To do:
-            // { path: "/my-interests", element: <HomePage /> },
         ],
 
     },
@@ -75,18 +68,11 @@ const router = createBrowserRouter([
 ]);
 
 
-const App = (theme) => {
-
-    const token = Cookies.get("token");
+const App = () => {
 
     return (
         <>
-            {/* {token ? <NavLoggedin /> : <NavLoggedout />} */}
-
             <RouterProvider router={router} />
-
-            {/* <Footer/> */}
-
         </>
     );
 

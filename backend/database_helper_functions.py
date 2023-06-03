@@ -210,6 +210,26 @@ def _get_all_profiles(db_config):
     finally:
         db.close()
 
+def _get_random_profiles(db_config, num_profiles):
+    try:
+        db = mysql.connector.connect(**db_config)
+        cursor = db.cursor()
+        sql_check_influencer = f"SELECT * FROM influencers_profile ORDER BY RAND() LIMIT {num_profiles}"
+        # sql_check_influencer = "SELECT * FROM influencers_profile ORDER BY RAND() LIMIT 4"
+        cursor.execute(sql_check_influencer)
+        random_profiles = cursor.fetchall()
+        db.commit()
+        
+        response.status = 200
+        return random_profiles
+    
+    except Exception as ex:
+        response.status= 500
+        response.body = ex
+
+    finally:
+        db.close()
+
 def _add_to_favorites(influencer_ID, user_id, db_config):
     try:
         db = mysql.connector.connect(**db_config)
