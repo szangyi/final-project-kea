@@ -13,6 +13,8 @@ import time
 def _signup():
     
     request_user_data = request.json
+    print('#################################')
+    print(request_user_data)
     
     user_ID = str(uuid.uuid4())
     user_first_name = request_user_data["firstName"]

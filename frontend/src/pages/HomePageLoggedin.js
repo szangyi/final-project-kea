@@ -15,7 +15,7 @@ import TextBox from '../components/TextBox/TextBox'
 import { Box, Typography } from "@mui/material";
 
 
-const HomePage = (theme) => {
+const HomePageLoggedin = (theme) => {
 
     return (
         <>
@@ -43,4 +43,4 @@ const HomePage = (theme) => {
 
 }
 
-export default HomePage;
+export default HomePageLoggedin;

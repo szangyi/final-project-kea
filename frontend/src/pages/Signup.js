@@ -1,26 +1,31 @@
+
 import React, { useState } from 'react';
-import axios from 'axios';
+import Cookies from 'js-cookie';
 import { useNavigate, Link } from "react-router-dom";
 
-// import Link from "@mui/material/Link";
 import { Grid } from '@mui/material';
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 
-import MyCustomButton from "../Button/Button";
-import MyCustomTextField from "../Form/TextField";
-import MeshGradient from '../MeshGradient/MeshGradient';
+import MyCustomButton from "../components/Button/Button";
+import MyCustomTextField from "../components/Form/TextField";
+import MeshGradient from '../components/MeshGradient/MeshGradient';
 import { Alert } from '@mui/material';
+import SignUpAPI from '../api/SignUpAPI';
 
 // VALIDATION
 import { useFormik } from 'formik';
-import { signupSchema } from '../../schemas';
+import { signupSchema } from '../schemas';
 
 const Signup = () => {
 
+    // VARIABLES ---------------
+    const [formData, setFormData] = useState({})
+    const [error, setError] = useState(null)
+    const token = Cookies.get('token');
+    const nav = useNavigate();
     const [userExists, setUserExists] = useState('');
-
     const { values, errors, touched, handleBlur, handleChange } = useFormik({
         initialValues: {
             firstName: '',
@@ -33,34 +38,49 @@ const Signup = () => {
         validationSchema: signupSchema,
     });
 
-    console.log(errors)
+    // const [basicData, setBasicData] = useState({
+    //     firstName: '',
+    //     lastName: '',
+    //     username: '',
+    //     email: '',
+    //     password: ''
+    // });
 
-    const nav = useNavigate();
+    // const formDataNew = new FormData();
+    // formDataNew.append('firstName', formData.firstName);
+    // formDataNew.append('lastName', formData.lastName);
+    // formDataNew.append('username', formData.username);
+    // formDataNew.append('email', formData.email);
+    // formDataNew.append('password', formData.password);
 
+    // FORM DATA HANDLER ---------------
+    // const handleData = (data) => {
+    //     setFormData((prevData) => ({ ...prevData, ...data }));
+    // }
+
+
+    // HANDLERS ---------------
+    // const handleCloseError = () => {
+    //     setError(null);
+    // };
+
+
+    // HANDLE CHANGE ---------------
+    // const handleChange = (event) => {
+    //     const { name, value } = event.target;
+    //     setBasicData((prevData) => ({ ...prevData, [name]: value }))
+    //     onDataChange(basicData);
+    // }
+
+    // API CALLS ---------------
     const submitHandler = async (event) => {
+        // const { username, firstName, lastName, email, password } = values; // Destructure values because of Formik
+
         event.preventDefault();
-        const { username, firstName, lastName, email, password } = values; // Destructure values because of Formik
-
-        try {
-            const response = await axios.post('/api/signup', { username, firstName, lastName, email, password });
-            const message = response.data.message;
-
-            if (message === "Signup succeeded") {
-                nav('/login');
-            }
-            else {
-                console.log(message)
-            }
-            console.log(values)
-
-        } catch (error) {
-            if (error.response && error.response.status === 409) {
-                setUserExists("User already exists maaaan");
-            } else {
-                console.error('Signup failed:', error);
-            }
-        }
+        console.log(values)
+        SignUpAPI(values, token, nav, setError, setUserExists);
     }
+
 
     return (
         <React.Fragment>
@@ -191,9 +211,6 @@ const Signup = () => {
                             Sign up
                         </MyCustomButton>
 
-                        {/* <Link href="#" variant="body2" sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
-                            {"I already have an account, I want to log in!"}
-                        </Link> */}
 
                         <Typography variant="body2" sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
                             <Link to="/login">
@@ -208,6 +225,6 @@ const Signup = () => {
         </React.Fragment>
 
     );
-};
+}
 
 export default Signup;

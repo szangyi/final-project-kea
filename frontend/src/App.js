@@ -8,14 +8,14 @@ import { getAuthToken, authLoader } from './util/auth';
 // COMPONENTS ---------------
 // --------------------------
 import Login from './components/LoginSignup/Login';
-import Signup from './components/LoginSignup/Signup';
+// import Signup from './components/LoginSignup/_Signup.js';
 import Footer from './components/Footer/Footer.js';
 
 // --------------------------
 // PAGES --------------------
 // --------------------------
 import HomePage from './pages/HomePage';
-import LoggedinHome from './pages/LoggedinHomePage'
+import HomePageLoggedin from './pages/HomePageLoggedin'
 import InfluenceDashboardPage from './pages/InfluencerDashboard/InfluencerDashboardPage'
 import CreateProfilePage from './pages/InfluencerDashboard/CreateProfilePage.js';
 import UserDashboard from './pages/UserDashBoard/UserDashboard.js';
@@ -29,6 +29,8 @@ import ProfileLandingPage from './pages/ProfileLandingPage';
 import CollectionPage from './pages/CollectionPage';
 import UserCollectionPage from './pages/UserCollectionPage.js'
 import Page404 from './pages/Page404'
+import Signup from './pages/Signup'
+
 
 
 
@@ -38,7 +40,7 @@ const router = createBrowserRouter([
         element: <RootLayoutNav />,
         children: [
             { path: "/", element: <HomePage /> },
-            { path: "/home", element: <LoggedinHome />, loader: authLoader },
+            { path: "/home", element: <HomePageLoggedin />, loader: authLoader },
             { path: "/login", element: <Login /> },
             { path: "/signup", element: <Signup /> },
             {

@@ -27,8 +27,10 @@ const Login = () => {
 
     const { values, errors, touched, handleBlur, handleChange } = useFormik({
         initialValues: {
-            email: '',
-            password: '',
+            // email: '',
+            // password: '',
+            email: 'a@a.commm',
+            password: 'FERImari24',
         },
 
         validationSchema: loginSchema,
