@@ -180,7 +180,7 @@ const CollectionCard = ({ array, filteringCard, searchQuery, searchCategory, sea
                             </CardActions>
 
                             <CardActions>
-                                {/* <Box className="card-click" component={Link} to={`/profile/${array[2]}`}></Box> */}
+                                <Box className="card-click" component={Link} to={`/profile/${array[2]}`}></Box>
                             </CardActions>
                         </Box>
                     </Card>

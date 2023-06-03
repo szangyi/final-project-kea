@@ -1,6 +1,6 @@
 import { React } from 'react';
 import { createBrowserRouter, RouterProvider, useRouteLoaderData } from 'react-router-dom';
-import { authLoader } from './util/auth';
+import { authLoader, useAuth, tokenLoader } from './util/auth';
 
 // --------------------------
 // COMPONENTS ---------------
@@ -29,46 +29,58 @@ import SignupPage from './pages/SignupPage'
 import LoginPage from './pages/LoginPage'
 
 
+// const { isLoggedIn } = useAuth();
 
 
-const router = createBrowserRouter([
-    {
-        path: '/',
-        element: <RootLayoutNav />,
-        children: [
-            { path: "/", element: <HomePage /> },
-            { path: "/home", element: <HomePageLoggedin />, loader: authLoader },
-            { path: "/login", element: <LoginPage /> },
-            { path: "/signup", element: <SignupPage /> },
-            {
-                path: "/user-dashboard", element: <UserDashboard />, loader: authLoader, children: [
-                    { path: "/user-dashboard/", element: <Navigate to="account-info" replace /> }, // set account-info as default
-                    { path: "/user-dashboard/account-info", element: <AccountInfo />, loader: authLoader },
-                    { path: "/user-dashboard/security", element: <Security />, loader: authLoader },
-                    { path: "/user-dashboard/interests", element: <Interests />, loader: authLoader },
-                ]
-            },
-            { path: "/user-collection", element: <UserCollectionPage />, loader: authLoader },
-            { path: "/influencer-dashboard", element: <InfluenceDashboardPage />, loader: authLoader },
-            { path: "/collection", element: <CollectionPage />, loader: authLoader },
-            { path: "/profile/:username", element: <ProfileLandingPage />, loader: authLoader },
-            { path: '*', element: <Page404 replace /> },
-        ],
-
-    },
-    {
-        path: '/create-profile',
-        element: <RootLayout />,
-        children: [
-                 { path: "/create-profile", element: <CreateProfilePage />, loader: authLoader },
-
-        ]
-    }
-
-]);
 
 
 const App = () => {
+
+    const token = tokenLoader();
+    const isLoggedIn = !!token;
+
+    console.log({token})
+  
+
+    const router = createBrowserRouter([
+        {
+            path: '/',
+            element: <RootLayoutNav />,
+            id: 'root',
+            loader: tokenLoader,
+            children: [
+                { path: "/", element: isLoggedIn ? <HomePageLoggedin /> : <HomePage /> },
+                { index: true, element: <HomePage /> },
+                { path: "/home", element: <HomePageLoggedin />, loader: authLoader },
+                { path: "/login", element: <LoginPage /> },
+                { path: "/signup", element: <SignupPage /> },
+                {
+                    path: "/user-dashboard", element: <UserDashboard />, loader: authLoader, children: [
+                        { path: "/user-dashboard/", element: <Navigate to="account-info" replace /> }, // set account-info as default
+                        { path: "/user-dashboard/account-info", element: <AccountInfo />, loader: authLoader },
+                        { path: "/user-dashboard/security", element: <Security />, loader: authLoader },
+                        { path: "/user-dashboard/interests", element: <Interests />, loader: authLoader },
+                    ]
+                },
+                { path: "/user-collection", element: <UserCollectionPage />, loader: authLoader },
+                { path: "/influencer-dashboard", element: <InfluenceDashboardPage />, loader: authLoader },
+                { path: "/collection", element: <CollectionPage />, loader: authLoader },
+                { path: "/profile/:username", element: <ProfileLandingPage />, loader: authLoader },
+                { path: '*', element: <Page404 replace /> },
+            ],
+    
+        },
+        {
+            path: '/create-profile',
+            element: <RootLayout />,
+            children: [
+                     { path: "/create-profile", element: <CreateProfilePage />, loader: authLoader },
+    
+            ]
+        }
+    
+    ]);
+    
 
     return (
         <>

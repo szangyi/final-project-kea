@@ -21,12 +21,6 @@ import Logo from "../Logo/Logo";
 
 
 function ResponsiveAppBar() {
-    // const nav = useNavigate();
-
-    // function alex() {
-    //     alert('fetaserase')
-    //     nav('/login')
-    // }
 
     let pages = [];
 
@@ -37,7 +31,6 @@ function ResponsiveAppBar() {
             {
                 name: 'Sign up',
                 href: '/signup',
-                // action: alex,
             },
         ];
     } else {
@@ -45,7 +38,6 @@ function ResponsiveAppBar() {
             {
                 name: 'Log in',
                 href: '/login',
-                // action: alex,
             },
         ];
     }

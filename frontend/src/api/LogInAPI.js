@@ -22,7 +22,8 @@ export default async function LogInAPI(values, nav, setError, setFormError) {
 
         if (response.status === 200) {
             Cookies.set('token', token);
-            nav('/home');
+            // nav('/home');
+            nav('/');
         } else {
             const error = {
                 message: response.data,
