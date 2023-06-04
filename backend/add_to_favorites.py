@@ -13,10 +13,10 @@ import os
 def _():
     
     request_data = request.json
-    # token_request = request.headers.get('Authorization')
-    # token_data = jwt.decode(token_request, g.SECRET_KEY, algorithms=["HS256"])
-    # user_email = token_data["email"]
-    user_email="a@a.commm"
+    token_request = request.headers.get('Authorization')
+    token_data = jwt.decode(token_request, g.SECRET_KEY, algorithms=["HS256"])
+    user_email = token_data["email"]
+    # user_email="a@a.commm"
     # influencer_ID = "5a094132-92e1-4d4a-8098-969add0eb8ae"
     influencer_ID = request_data["influencerID"]
     

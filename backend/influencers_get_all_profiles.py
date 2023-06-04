@@ -19,7 +19,8 @@ def _():
     selected_user_db = database_helper_functions._get_user(user_email_validated, db_config)
 
     if selected_user_db is not None:
-        profiles = database_helper_functions._get_all_profiles(db_config)
+        user_id = selected_user_db[0]
+        profiles = database_helper_functions._get_all_profiles(db_config, user_id)
         profiles_json = json.dumps(profiles, default=helper_functions._datetime_handler)
         return profiles_json
     else:

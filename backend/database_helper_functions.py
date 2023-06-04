@@ -191,12 +191,21 @@ def _delete_influencer_profile(influencer_ID, db_config):
     finally:
         db.close()
 
-def _get_all_profiles(db_config):
+def _get_all_profiles(db_config, user_id):
     try:
         db = mysql.connector.connect(**db_config)
         cursor = db.cursor()
-        sql_check_influencer = "SELECT * FROM influencers_profile "
-        cursor.execute(sql_check_influencer)
+        # sql_check_influencer = "SELECT * FROM influencers_profile "
+        sql_check_influencer = """
+            SELECT influencers_profile.*, 
+                   CASE WHEN favorites.user_ID IS NOT NULL THEN 1 ELSE 0 END AS is_favorite
+            FROM influencers_profile
+            LEFT JOIN favorites
+                ON influencers_profile.influencer_ID = favorites.influencer_ID
+                   AND favorites.user_ID = %s
+        """
+        var = (user_id,)
+        cursor.execute(sql_check_influencer, var)
         profiles = cursor.fetchall()
         db.commit()
         
