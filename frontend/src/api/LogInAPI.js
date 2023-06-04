@@ -3,12 +3,11 @@
 // --------------------------
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import { setAuthToken, useAuth } from '../util/auth';
+
 
 
 export default async function LogInAPI(values, nav, setError, setFormError) {
-
-    console.log(values)
-    console.log('login apiiiiiii')
 
     try {
         const formData = {
@@ -21,9 +20,7 @@ export default async function LogInAPI(values, nav, setError, setFormError) {
         const error = response.data.error
 
         if (response.status === 200) {
-            Cookies.set('token', token);
-            // nav('/home');
-            nav('/');
+            setAuthToken(token);
         } else {
             const error = {
                 message: response.data,

@@ -12,6 +12,8 @@ import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
+import { Link } from "react-router-dom";
+
 
 
 import { LogOutAPI as logoutAction } from '../../api/LogOutAPI'
@@ -73,14 +75,16 @@ function ResponsiveAppBar() {
     };
 
     return (
-        <AppBar position="static" sx={{ boxShadow: 0, backgroundColor: 'transparent' }} >
+        <AppBar position="static" sx={{ paddingInline: { xs: 2, md: 5 }, boxShadow: 0, backgroundColor: 'transparent' }} >
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
 
                     {/* Desktop */}
                     {/* Put logo here */}
                     <Box className="logo-container" sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}>
-                        <Logo variant="black" />
+                        <Link to="/">
+                            <Logo variant="black" />
+                        </Link>
                     </Box>
 
                     {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}

@@ -15,6 +15,8 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import Logo from "../Logo/Logo";
+import { Link } from "react-router-dom";
+
 
 
 
@@ -61,7 +63,9 @@ function ResponsiveAppBar() {
                     {/* Desktop */}
                     {/* Put logo here */}
                     <Box className="logo-container" sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}>
-                        <Logo variant="black" />
+                    <Link to="/">
+                            <Logo variant="black" />
+                        </Link>
                     </Box>
 
                     {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}

@@ -12,6 +12,7 @@ import MeshGradient from '../components/MeshGradient/MeshGradient';
 import { Alert } from '@mui/material';
 import LogInAPI from '../api/LogInAPI';
 
+
 // VALIDATION
 import { useFormik } from 'formik';
 import { loginSchema } from '../schemas';
@@ -23,6 +24,7 @@ const LoginPage = () => {
     const [error, setError] = useState(null)
     const nav = useNavigate();
     const expirationDate = new Date();
+
     expirationDate.setTime(expirationDate.getTime() + 60 * 60 * 1000);
 
     const { values, errors, touched, handleBlur, handleChange, setTouched, validateForm } = useFormik({
@@ -52,7 +54,7 @@ const LoginPage = () => {
 
         if ((Object.keys(updatedErrors).length === 0) && (Object.keys(errors).length === 0)){
             setFormError("");
-            LogInAPI(values, nav, setError, setFormError );
+            LogInAPI(values, nav, setError, setFormError);
         } else {
             setFormError('Please fill in all the required fields.');
         }

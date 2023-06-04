@@ -1,6 +1,7 @@
 import { React } from 'react';
 import { createBrowserRouter, RouterProvider, useRouteLoaderData } from 'react-router-dom';
-import { authLoader, useAuth, tokenLoader } from './util/auth';
+import { authLoader, tokenLoader } from './util/auth';
+
 
 // --------------------------
 // COMPONENTS ---------------
@@ -11,7 +12,6 @@ import { authLoader, useAuth, tokenLoader } from './util/auth';
 // PAGES --------------------
 // --------------------------
 import HomePage from './pages/HomePage';
-import HomePageLoggedin from './pages/HomePageLoggedin'
 import InfluenceDashboardPage from './pages/InfluencerDashboard/InfluencerDashboardPage'
 import CreateProfilePage from './pages/InfluencerDashboard/CreateProfilePage.js';
 import UserDashboard from './pages/UserDashBoard/UserDashboard.js';
@@ -29,18 +29,10 @@ import SignupPage from './pages/SignupPage'
 import LoginPage from './pages/LoginPage'
 
 
-// const { isLoggedIn } = useAuth();
-
-
 
 
 const App = () => {
 
-    const token = tokenLoader();
-    const isLoggedIn = !!token;
-
-    console.log({token})
-  
 
     const router = createBrowserRouter([
         {
@@ -49,9 +41,7 @@ const App = () => {
             id: 'root',
             loader: tokenLoader,
             children: [
-                { path: "/", element: isLoggedIn ? <HomePageLoggedin /> : <HomePage /> },
                 { index: true, element: <HomePage /> },
-                { path: "/home", element: <HomePageLoggedin />, loader: authLoader },
                 { path: "/login", element: <LoginPage /> },
                 { path: "/signup", element: <SignupPage /> },
                 {
@@ -68,19 +58,17 @@ const App = () => {
                 { path: "/profile/:username", element: <ProfileLandingPage />, loader: authLoader },
                 { path: '*', element: <Page404 replace /> },
             ],
-    
         },
         {
             path: '/create-profile',
             element: <RootLayout />,
             children: [
-                     { path: "/create-profile", element: <CreateProfilePage />, loader: authLoader },
-    
+                { path: "/create-profile", element: <CreateProfilePage />, loader: authLoader },
             ]
         }
-    
+
     ]);
-    
+
 
     return (
         <>

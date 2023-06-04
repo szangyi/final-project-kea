@@ -2,43 +2,38 @@ import { useState } from "react";
 import { redirect } from "react-router-dom";
 import Cookies from 'js-cookie';
 
-export function getAuthToken(){
-    const token = Cookies.get("token");
-    return token;
+export function getAuthToken() {
+  const token = Cookies.get('token');
+  return token;
 }
 
-export function authLoader(){
-    const token = getAuthToken();
-
-    if(!token){
-        return redirect("/login");
-    }
-    else{
-        return null;
-    }
+export function authLoader() {
+  const token = getAuthToken();
+  if (!token) {
+    return redirect('/login');
+  } else {
+    return null;
+  }
 }
 
-export function useAuth(){
+export function setAuthToken(token, ) {
+  Cookies.set('token', token);
+  window.location.href = '/';
+}
 
-    // What should be here?
-
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const token = getAuthToken();
-
-    setIsLoggedIn(!!token); // Set isLoggedIn to true if token exists
-    return isLoggedIn
+export function removeAuthToken() {
+  Cookies.remove('token');
+  authLoader();
 }
 
 
-export function tokenLoader(){
-    const token = getAuthToken();
+export function tokenLoader() {
+  const token = getAuthToken();
 
-    if(token){
-        return token
-    }
-    else{
-        return null;
-    }
-
-    // return getAuthToken();
+  if (token) {
+    return token
+  }
+  else {
+    return null;
+  }
 }
