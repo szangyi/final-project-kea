@@ -46,6 +46,8 @@ const UserCollectionPage = () => {
         return [];
     };
 
+    console.log("favoritesData:", favoritesData);
+
 
     return (
         <>
@@ -70,8 +72,11 @@ const UserCollectionPage = () => {
                             </>
                         ) : (
                             <>
-                                {favoritesData === [] ? (
-                                    <Stack></Stack>
+                                {favoritesData == 0 ? (
+                                    <Stack>
+                                        <Typography variant="h3">No favorites available</Typography>
+                                        <Typography variant="body">You haven't added any favorites yet.</Typography>
+                                    </Stack>
                                 ) : (
                                     getUniqueCategories().map((category) => ( // create sections for categories
                                         <Box key={category}>
@@ -89,15 +94,32 @@ const UserCollectionPage = () => {
                 )}
             </Stack>
 
-
-            <TextBox
-                bg="customColors.blue.dark"
-                color="white"
-                headline="discover more!"
-                copy1="For each ad campaign that you create, you can control how much you're willing to spend on clicks and conversions"
-                button="find your influencer"
-                href=""
-            />
+            {favoritesData === null ? (
+                 <> </>
+            ) : (
+                <>
+                    {favoritesData == 0 ? (
+                        <TextBox
+                            bg="customColors.blue.dark"
+                            color="white"
+                            headline="find your influencer!"
+                            copy1="For each ad campaign that you create, you can control how much you're willing to spend on clicks and conversions"
+                            button="browse"
+                            href=""
+                        />
+                    ) : (
+                        <TextBox
+                            bg="customColors.blue.dark"
+                            color="white"
+                            headline="discover more!"
+                            copy1="For each ad campaign that you create, you can control how much you're willing to spend on clicks and conversions"
+                            button="find your influencer"
+                            href=""
+                        />
+                    )}
+                </>
+            )
+            }
         </>
     );
 
