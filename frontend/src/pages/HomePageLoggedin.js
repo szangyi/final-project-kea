@@ -73,7 +73,7 @@ const HomePageLoggedin = (theme) => {
                                     {error && <Error error={error} onClose={handleCloseError} />}
                                 </>
                             ) : (
-                                <CollectionCard array={profilesData} />
+                                <CollectionCard favoriteenabled={false} array={profilesData} />
                             )}
                         </>
                     )}

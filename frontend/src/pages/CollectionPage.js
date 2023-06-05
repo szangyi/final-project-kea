@@ -122,7 +122,7 @@ const CollectionPage = () => {
                                 {error && <Error error={error} onClose={handleCloseError} />}
                                 </>
                             ):(
-                                <CollectionCard filteringCard={"yes"} array={profilesData} searchQuery={searchQuery} searchCategory={categoryData} searchHashtag={hashtagData} searchSocial={socialData} searchLocation={locationData} />
+                                <CollectionCard favoriteenabled={true} filteringCard={"yes"} array={profilesData} searchQuery={searchQuery} searchCategory={categoryData} searchHashtag={hashtagData} searchSocial={socialData} searchLocation={locationData} />
                             )}
                             </>
                         )}

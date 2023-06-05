@@ -121,7 +121,7 @@ const ProfileLandingPage = () => {
                                 ) : (
                                     <Stack sx={{ backgroundColor: 'customColors.blue.dark', pt: 2, px: 5, pb: 5 }}>
                                         <Typography sx={{ fontSize: '20px', pb: 3, textAlign: 'center', color: '#fff' }} variant="overline">Other profiles from the same influencer</Typography>
-                                        <CollectionCard filteringCard={"no"} array={otherProfiles} />
+                                        <CollectionCard favoriteenabled={false} filteringCard={"no"} array={otherProfiles} />
                                     </Stack>
                                 )}
                             </>

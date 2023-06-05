@@ -24,7 +24,7 @@ def _signup(user_data, db_config ):
         db = mysql.connector.connect(**db_config)
         cursor = db.cursor()
         sql_signup = """INSERT INTO users (user_ID, username, user_first_name, user_last_name, user_location, user_email, user_password, user_image_ID, user_interest_tags, is_influencer, user_created_at ) VALUES ( %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
-        val_create_profile = (
+        var = (
             user_data["user_ID"],
             user_data["username"],
             user_data["user_first_name"],
@@ -37,7 +37,7 @@ def _signup(user_data, db_config ):
             user_data["is_influencer"],
             user_data["user_created_at"],
         )
-        cursor.execute(sql_signup, val_create_profile)
+        cursor.execute(sql_signup, var)
         db.commit()
         response.status = 200
     except Exception as ex:
@@ -89,7 +89,7 @@ def _create_influencer_profile(influencer_data, db_config):
         db = mysql.connector.connect(**db_config)
         cursor = db.cursor()
         sql_create_profile = """INSERT INTO influencers_profile (influencer_ID, user_ID, influencer_username, influencer_bio_description, influencer_location, influencer_website, influencer_instagram, influencer_youtube, influencer_tiktok, influencer_tags, influencer_category, profile_image_delete, profile_created_at) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
-        val_create_profile = (
+        var = (
             influencer_data["influencer_ID"],
             influencer_data["user_id"],
             influencer_data["influencer_username"],
@@ -104,7 +104,7 @@ def _create_influencer_profile(influencer_data, db_config):
             influencer_data["image_name"],
             influencer_data["profile_created_at"],
         )
-        cursor.execute(sql_create_profile, val_create_profile)
+        cursor.execute(sql_create_profile, var)
         db.commit()
         response.status = 200
     except Exception as ex:
@@ -191,20 +191,20 @@ def _delete_influencer_profile(influencer_ID, db_config):
     finally:
         db.close()
 
-def _get_all_profiles(db_config, user_id):
+def _get_all_profiles(db_config, user_ID):
     try:
         db = mysql.connector.connect(**db_config)
         cursor = db.cursor()
         # sql_check_influencer = "SELECT * FROM influencers_profile "
         sql_check_influencer = """
             SELECT influencers_profile.*, 
-                   CASE WHEN favorites.user_ID IS NOT NULL THEN 1 ELSE 0 END AS is_favorite
+                CASE WHEN favorites.user_ID IS NOT NULL THEN 1 ELSE 0 END AS is_favorite
             FROM influencers_profile
             LEFT JOIN favorites
                 ON influencers_profile.influencer_ID = favorites.influencer_ID
                    AND favorites.user_ID = %s
         """
-        var = (user_id,)
+        var = (user_ID,)
         cursor.execute(sql_check_influencer, var)
         profiles = cursor.fetchall()
         db.commit()
@@ -219,12 +219,24 @@ def _get_all_profiles(db_config, user_id):
     finally:
         db.close()
 
-def _get_random_profiles(db_config, num_profiles):
+def _get_random_profiles(user_ID, db_config, num_profiles):
     try:
         db = mysql.connector.connect(**db_config)
         cursor = db.cursor()
         sql_check_influencer = f"SELECT * FROM influencers_profile ORDER BY RAND() LIMIT {num_profiles}"
         # sql_check_influencer = "SELECT * FROM influencers_profile ORDER BY RAND() LIMIT 4"
+        # sql_check_influencer = f"""
+        #     SELECT influencers_profile.*
+        #     FROM influencers_profile
+        #     LEFT JOIN favorites
+        #         ON influencers_profile.influencer_ID = favorites.influencer_ID
+        #            AND favorites.user_ID = %s
+        #     WHERE favorites.user_ID IS NULL
+        #     ORDER BY RAND()
+        #     LIMIT {num_profiles}
+        # """
+        # var = (user_ID,)
+        # cursor.execute(sql_check_influencer, var)
         cursor.execute(sql_check_influencer)
         random_profiles = cursor.fetchall()
         db.commit()
@@ -239,13 +251,57 @@ def _get_random_profiles(db_config, num_profiles):
     finally:
         db.close()
 
-def _add_to_favorites(influencer_ID, user_id, db_config):
+def _check_favorite_relationship(user_ID, influencer_ID, db_config):
     try:
         db = mysql.connector.connect(**db_config)
         cursor = db.cursor()
-        sql_create_profile = """INSERT INTO favorites (influencer_ID, user_ID ) VALUES (%s,%s)"""
-        val_create_profile = (influencer_ID, user_id, )
-        cursor.execute(sql_create_profile, val_create_profile)
+        sql_check_relationship = """ SELECT * FROM favorites WHERE user_ID = %s AND influencer_ID = %s"""
+        var = (user_ID, influencer_ID)
+        cursor.execute(sql_check_relationship, var)
+        relationship_exist = cursor.fetchone()
+        db.commit()
+        
+        response.status = 200
+        return relationship_exist
+    
+    except Exception as ex:
+        response.status= 500
+        response.body = ex
+
+    finally:
+        db.close()
+
+def _add_to_favorites(user_ID, influencer_ID, db_config):
+    try:
+        print("###################### add to fav")
+        db = mysql.connector.connect(**db_config)
+        cursor = db.cursor()
+        sql_add_relationship = """INSERT INTO favorites (influencer_ID, user_ID ) VALUES (%s,%s)"""
+        var = (influencer_ID, user_ID)
+        cursor.execute(sql_add_relationship, var)
+        db.commit()
+        
+        response.status = 200
+    
+    except Exception as ex:
+        response.status= 500
+        response.body = ex
+
+    finally:
+        db.close()
+
+def _remove_from_favorites(user_ID, influencer_ID, db_config):
+    try:
+        print("###################### unfav")
+        print("userid:")
+        print(user_ID)
+        print("influencerid:")
+        print(influencer_ID)
+        db = mysql.connector.connect(**db_config)
+        cursor = db.cursor()
+        sql_remove_relationship = """DELETE FROM favorites WHERE user_ID = %s AND influencer_ID = %s"""
+        var = (user_ID, influencer_ID)
+        cursor.execute(sql_remove_relationship, var)
         db.commit()
         
         response.status = 200
@@ -266,8 +322,8 @@ def _get_all_favorites(user_id, db_config):
             WHERE influencers_profile.influencer_ID IN (
                 SELECT influencer_ID FROM favorites WHERE user_ID = %s
             )"""
-        val = (user_id, )
-        cursor.execute(sql, val)
+        var = (user_id, )
+        cursor.execute(sql, var)
         favorite_influencers = cursor.fetchall()
         db.commit()
         

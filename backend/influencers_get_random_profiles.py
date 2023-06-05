@@ -18,9 +18,10 @@ def _():
     db_config = helper_functions._db_config()
     
     selected_user_db = database_helper_functions._get_user(user_email_validated, db_config)
+    user_ID = selected_user_db[0]
 
     if selected_user_db is not None:
-        random_profiles = database_helper_functions._get_random_profiles(db_config, int(num_profiles))
+        random_profiles = database_helper_functions._get_random_profiles(user_ID, db_config, int(num_profiles))
         random_profiles_json = json.dumps(random_profiles, default=helper_functions._datetime_handler)
         return random_profiles_json
     else:

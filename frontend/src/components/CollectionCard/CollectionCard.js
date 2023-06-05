@@ -31,10 +31,11 @@ import MusicVideoIcon from '@mui/icons-material/MusicVideo';
 
 
 
-const CollectionCard = ({ array, filteringCard, searchQuery, searchCategory, searchHashtag, searchSocial, searchLocation }) => {
+const CollectionCard = ({ array, filteringCard, favoriteenabled, searchQuery, searchCategory, searchHashtag, searchSocial, searchLocation }) => {
     // VARIABLES ---------------
     const token = Cookies.get('token');
     let cardArray;
+    // const favoriteenabled = props.favoriteenabled
 
     // CONNECTING TO API ---------------
     const handleAddToFavorites = async (influencerID) => {
@@ -84,13 +85,13 @@ const CollectionCard = ({ array, filteringCard, searchQuery, searchCategory, sea
 
     return (
 
-        <Grid className="cards-container" container sx={{gap: '20px'}}>
-        {/* <Container disableGutters sx={{ display: 'flex', flexDirection: 'row', gap: '20px', flexWrap: 'wrap' }}> */}
+        <Grid className="cards-container" container sx={{ gap: '20px' }}>
+            {/* <Container disableGutters sx={{ display: 'flex', flexDirection: 'row', gap: '20px', flexWrap: 'wrap' }}> */}
 
             {cardArray.map((array, index) => (
                 <Grid key={index} item className="card-container">
 
-                    <Card className="card glassmorphism" 
+                    <Card className="card glassmorphism"
                     // sx={{ width: 350 }}
                     >
                         <Box className="card-image-container" sx={{ borderRadius: '15px', mx: 3, my: 3 }}>
@@ -101,14 +102,17 @@ const CollectionCard = ({ array, filteringCard, searchQuery, searchCategory, sea
                                 // image={`http://127.0.0.1:7878/profile_images/${array[11]}`}
                                 image={'https://images.unsplash.com/photo-1571566882372-1598d88abd90?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODU0NTg1OTZ8&ixlib=rb-4.0.3&q=85'}
                             />
-                            <CardActions>
-                                <IconButton onClick={() => handleAddToFavorites(array[0])}>
-                                    {array[14] ? <FavoriteIcon sx={{ color: 'customColors.salmon.dark' }} /> : <FavoriteBorderIcon sx={{ color: 'customColors.salmon.dark' }} />}
-                                </IconButton>
-                            </CardActions>
+                            {favoriteenabled &&
+                                <CardActions>
+                                    <IconButton onClick={() => handleAddToFavorites(array[0])}>
+                                        {array[14] ? <FavoriteIcon sx={{ color: 'customColors.salmon.dark' }} /> : <FavoriteBorderIcon sx={{ color: 'customColors.salmon.dark' }} />}
+                                    </IconButton>
+                                </CardActions>
+                            }
+
                         </Box>
 
-                        <Box className="card-content-container" sx={{ mx: 3, mt:1, mb: 3 }}>
+                        <Box className="card-content-container" sx={{ mx: 3, mt: 1, mb: 3 }}>
                             <CardContent>
                                 <Typography gutterBottom variant="h5" component="div">
                                     {array[2]}
@@ -178,7 +182,6 @@ const CollectionCard = ({ array, filteringCard, searchQuery, searchCategory, sea
                                 </IconButton> */}
                                 {/* <Button component={Link} to={`/profile/${array[2]}`} size="small">View profile</Button> */}
                             </CardActions>
-
                             <CardActions>
                                 <Box className="card-click" component={Link} to={`/profile/${array[2]}`}></Box>
                             </CardActions>
