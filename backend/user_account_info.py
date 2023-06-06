@@ -26,9 +26,9 @@ def _account_info():
             "lastName": selected_user_db[3],
             "userImage": selected_user_db[7]
         }
-    
+            
+        response.status = 200
         user_info_dumps = json.dumps(user_info)
         return user_info_dumps
     else:
         response.status = 400
-        return "Account info cannot be retrieved"

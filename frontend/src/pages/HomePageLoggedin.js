@@ -12,7 +12,6 @@ import MeshGradient from '../components/MeshGradient/MeshGradient';
 import ChipCollection from '../components/ChipCollection/ChipCollection';
 import TextBox from '../components/TextBox/TextBox'
 import GetRandomProfilesAPI from '../api/GetRandomProfilesAPI';
-import Error from '../components/Error/Error'
 import Loader from '../components/Loader/Loader'
 import CollectionCard from '../components/CollectionCard/CollectionCard'
 import ErrorPage from './ErrorPage';

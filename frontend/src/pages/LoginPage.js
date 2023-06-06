@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { useNavigate, Link } from "react-router-dom";
+import {Link} from 'react-router-dom';
 
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -11,6 +11,7 @@ import MyCustomTextField from "../components/Form/TextField";
 import MeshGradient from '../components/MeshGradient/MeshGradient';
 import { Alert } from '@mui/material';
 import LogInAPI from '../api/LogInAPI';
+import ErrorPage from './ErrorPage';
 
 
 // VALIDATION
@@ -21,8 +22,7 @@ const LoginPage = () => {
 
     // VARIABLES ---------------
     const [formError, setFormError] = useState('');
-    const [error, setError] = useState(null)
-    const nav = useNavigate();
+    const [errorMessage, setErrorMessage] = useState(null)
     const expirationDate = new Date();
 
     expirationDate.setTime(expirationDate.getTime() + 60 * 60 * 1000);
@@ -54,12 +54,15 @@ const LoginPage = () => {
 
         if ((Object.keys(updatedErrors).length === 0) && (Object.keys(errors).length === 0)){
             setFormError("");
-            LogInAPI(values, nav, setError, setFormError);
+            LogInAPI(values, setFormError, setErrorMessage);
         } else {
             setFormError('Please fill in all the required fields.');
         }
     }
-
+    
+    if (errorMessage) {
+        return <ErrorPage error={errorMessage}/>
+    }
 
     return (
         <React.Fragment>

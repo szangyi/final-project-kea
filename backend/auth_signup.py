@@ -70,14 +70,16 @@ def _signup():
         return g._send(400, validation_errors)
 
 
-    user_email_validated = helper_functions._token_validator(token_request)
+    # user_email_validated = helper_functions._token_validator(token_request)
 
 
     # DATABASE CONNECTION ##########################
 
     db_config = helper_functions._db_config()
 
-    user_exist_db = database_helper_functions._user_exist(user_email_validated, username, db_config)
+    user_exist_db = database_helper_functions._user_exist(user_email, username, db_config)
+    print("######### userexist")
+    print(user_exist_db)
 
     if not user_exist_db:
         user_data = {
@@ -97,15 +99,9 @@ def _signup():
         database_helper_functions._signup(user_data, db_config)
         response.status = 200
     else:
-        message = {
-            "error": "User already exists"
-        }
+        print("########## this is a 409 for some reason")
         response.status = 409 # Conflict
-        response.body = "user already exists"
-    
-    message_json = json.dumps(message)
-    return message_json
-    
+
 
 
 

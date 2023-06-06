@@ -12,12 +12,10 @@ def _():
     
     # VALIDATION ##########################
     user_email_validated = helper_functions._token_validator(token_request)
-    # user_email_validated = 'a@a.commm'
 
     # DATABASE CONNECTION ##########################
     db_config = helper_functions._db_config()
     selected_user_db = database_helper_functions._get_user(user_email_validated, db_config)
-    print(selected_user_db)
 
     if selected_user_db is not None:
         user_id = selected_user_db[0]
@@ -28,8 +26,7 @@ def _():
         response.status = 200
         return favorite_influencers_json
     else:
-        response.status = 404
-        return "User not found"
+        response.status = 400
 
         
 

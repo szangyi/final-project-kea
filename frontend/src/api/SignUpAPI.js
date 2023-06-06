@@ -4,7 +4,7 @@
 import axios from 'axios';
 
 
-export default async function SignUpAPI(values, token, nav, setError, setUserExists) {
+export default async function SignUpAPI(values, token, nav, setErrorMessage, setUserExists) {
 
     console.log(values)
 
@@ -15,11 +15,10 @@ export default async function SignUpAPI(values, token, nav, setError, setUserExi
             username: values.username,
             email: values.email,
             password: values.password,
-          };
+        };
 
         const response = await axios.post('/api/signup', formData, {
             headers: {
-                // 'Content-Type': 'multipart/form-data',
                 'Content-Type': 'application/json',
                 Authorization: `${token}`,
             },
@@ -27,18 +26,19 @@ export default async function SignUpAPI(values, token, nav, setError, setUserExi
 
         if (response.status === 200) {
             nav('/login');
-        } else {
-            const error = {
-                message: response.data,
-                statusCode: response.status,
-            };
-            setError(error);
-        }
+        } 
     } catch (error) {
         if (error.response && error.response.status === 409) {
-            setUserExists("User already exists maaaan");
+            const errorMessage = { // Page specific error message
+                message: "User already exists with that username/ or email.",
+                statusCode: error.response.status,
+            };
+            setUserExists(errorMessage.message);
         } else {
-            console.error('Signup failed:', error);
+            const errorMessage = { // General error message
+                statusCode: error.response.status,
+            };
+            setErrorMessage(errorMessage);
         }
     }
 

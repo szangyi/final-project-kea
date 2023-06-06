@@ -25,7 +25,7 @@ import Loader from '../components/Loader/Loader'
 import MeshGradientBackground from '../components/MeshGradient/MeshGradientBackground';
 import Category from '../components/Category/Category'
 import GetAllProfilesAPI from '../api/GetAllProfilesAPI';
-import Error from '../components/Error/Error'
+import ErrorPage from './ErrorPage';
 
 const CollectionPage = () => {
 
@@ -37,7 +37,7 @@ const CollectionPage = () => {
     const [locationData, setLocationData] = useState('');
     const [profilesData, setProfilesData] = useState(null);
     const [selected, setSelected] = useState('');
-    const [error, setError] = useState(null)
+    const [errorMessage, setErrorMessage] = useState(null)
     const allOptionIndex = SOCIALOPTIONS.findIndex(option => option.social === 'All');
     const [activeIndex, setActiveIndex] = useState(allOptionIndex);
 
@@ -67,13 +67,13 @@ const CollectionPage = () => {
         setLocationData(data)
     }
 
-    const handleCloseError = () => {
-        setError(null);
-    };
-
     // CALLING API FUNCTION ---------------
-    GetAllProfilesAPI(token, setProfilesData, setError)
+    GetAllProfilesAPI(token, setProfilesData, setErrorMessage)
 
+
+    if (errorMessage) {
+        return <ErrorPage error={errorMessage} />
+    }
 
     return (
         <>
@@ -116,15 +116,7 @@ const CollectionPage = () => {
                         {profilesData === null ? (
                             <Loader />
                         ) : (
-                            <>
-                            {profilesData === "error"? (
-                                <>
-                                {error && <Error error={error} onClose={handleCloseError} />}
-                                </>
-                            ):(
                                 <CollectionCard favoriteenabled={true} filteringCard={"yes"} array={profilesData} searchQuery={searchQuery} searchCategory={categoryData} searchHashtag={hashtagData} searchSocial={socialData} searchLocation={locationData} />
-                            )}
-                            </>
                         )}
                     </Stack>
                 </Grid>

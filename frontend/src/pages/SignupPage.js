@@ -13,6 +13,7 @@ import MyCustomTextField from "../components/Form/TextField";
 import MeshGradient from '../components/MeshGradient/MeshGradient';
 import { Alert } from '@mui/material';
 import SignUpAPI from '../api/SignUpAPI';
+import ErrorPage from './ErrorPage';
 
 // VALIDATION
 import { useFormik } from 'formik';
@@ -21,9 +22,9 @@ import { signupSchema } from '../schemas';
 const SignupPage = () => {
 
     // VARIABLES ---------------
-    const [formError, setFormError] = useState('');
-    const [userExists, setUserExists] = useState('');
-    const [error, setError] = useState(null)
+    const [formError, setFormError] = useState(null);
+    const [userExists, setUserExists] = useState(null);
+    const [errorMessage, setErrorMessage] = useState(null)
     const token = Cookies.get('token');
     const nav = useNavigate();
     const { values, errors, touched, handleBlur, handleChange, setTouched, validateForm } = useFormik({
@@ -58,12 +59,19 @@ const SignupPage = () => {
 
         if ((Object.keys(updatedErrors).length === 0) && (Object.keys(errors).length === 0)) {
             setFormError(""); // Clear form errors
-            SignUpAPI(values, token, nav, setError, setUserExists);
+            SignUpAPI(values, token, nav, setErrorMessage, setUserExists);
         } else {
             setFormError('Please fill in all the required fields.');
         }
     }
 
+    console.log({formError})
+    console.log({userExists})
+    console.log({errorMessage})
+
+    if (errorMessage) {
+        return <ErrorPage error={errorMessage}/>
+    }
 
     return (
         <React.Fragment>
@@ -87,7 +95,7 @@ const SignupPage = () => {
                         sign up
                     </Typography>
 
-                    {formError && (
+                     {formError && (
                         <Alert severity="error">{formError}</Alert>
                     )}
 

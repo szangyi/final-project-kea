@@ -4,8 +4,7 @@
 // --------------------------
 import axios from 'axios';
 
-export default async function GetInfluencerProfilesAPI(token, setInfluencerData, setError) {
-    const influencerDataError = "error";
+export default async function GetInfluencerProfilesAPI(token, setInfluencerData, setErrorMessage) {
 
     try {
         const response = await axios.get('/api/get-influencer-profiles', {
@@ -17,17 +16,19 @@ export default async function GetInfluencerProfilesAPI(token, setInfluencerData,
         if (response.status === 200) {
             const influencerData = response.data;
             setInfluencerData(influencerData);
-        } else {
-            setInfluencerData(influencerDataError);
-            const error = {
-                message: response.body,
-                statusCode: response.status,
-            };
-            setError(error);
-        }
+        } 
     } catch (error) {
-        console.log('Create profile failed:', error);
-        setInfluencerData(influencerDataError);
-        setError(error);
+        if (error.response.status === 400) {
+            const errorMessage = { // Page specific error message
+                message: "We could not fetch your data. Try again!",
+                statusCode: error.response.status,
+            };
+            setErrorMessage(errorMessage);
+        } else {
+            const errorMessage = { // General error message
+                statusCode: error.response.status,
+            };
+            setErrorMessage(errorMessage);
+        }
     }
 }

@@ -44,15 +44,12 @@ def _login():
     user = database_helper_functions._login(user_email, password_hashed, db_config)
     
     if user:
+        print("##### there is user")
         token_auth = helper_functions._generate_token(user_email)  
         response.status = 200
+        return token_auth
     else:
-        token_auth = {
-            "error": "Wrong credentials"
-        }
         response.status = 400
-        response.body = "wrong credentials"
-    return token_auth
 
 
 

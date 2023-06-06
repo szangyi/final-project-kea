@@ -11,6 +11,8 @@ def _user_exist(user_email, username, db_config):
         user_exist = cursor.fetchone()
         db.commit()
         response.status = 200
+        print("###### print user exists maaaaaan")
+        print(user_exist)
         return user_exist
     except Exception as ex:
         print(ex)
@@ -224,19 +226,6 @@ def _get_random_profiles(user_ID, db_config, num_profiles):
         db = mysql.connector.connect(**db_config)
         cursor = db.cursor()
         sql_check_influencer = f"SELECT * FROM influencers_profile ORDER BY RAND() LIMIT {num_profiles}"
-        # sql_check_influencer = "SELECT * FROM influencers_profile ORDER BY RAND() LIMIT 4"
-        # sql_check_influencer = f"""
-        #     SELECT influencers_profile.*
-        #     FROM influencers_profile
-        #     LEFT JOIN favorites
-        #         ON influencers_profile.influencer_ID = favorites.influencer_ID
-        #            AND favorites.user_ID = %s
-        #     WHERE favorites.user_ID IS NULL
-        #     ORDER BY RAND()
-        #     LIMIT {num_profiles}
-        # """
-        # var = (user_ID,)
-        # cursor.execute(sql_check_influencer, var)
         cursor.execute(sql_check_influencer)
         random_profiles = cursor.fetchall()
         db.commit()

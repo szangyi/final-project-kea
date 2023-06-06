@@ -28,14 +28,14 @@ import Loader from '../../components/Loader/Loader'
 import MyCustomButton from '../../components/Button/Button';
 import GetInfluencerProfilesAPI from '../../api/GetInfluencerProfilesAPI'
 import DeleteProfileAPI from '../../api/DeleteProfileAPI';
-import Error from '../../components/Error/Error'
+import ErrorPage from '../ErrorPage';
 
 const InfluencerPage = () => {
 
   // VARIABLES ---------------
   const [influencerData, setInfluencerData] = useState(null);
   const [open, setOpen] = React.useState(false);
-  const [error, setError] = useState(null)
+  const [errorMessage, setErrorMessage] = useState(null)
   const token = Cookies.get('token');
 
   // HANDLERS ---------------
@@ -47,15 +47,16 @@ const InfluencerPage = () => {
     setOpen(false);
   };
 
-  const handleCloseError = () => {
-    setError(null);
-  };
-
   // API CALLS ---------------
-  GetInfluencerProfilesAPI(token, setInfluencerData, setError)
+  GetInfluencerProfilesAPI(token, setInfluencerData, setErrorMessage)
   const handleDelete = (influencerid) => {
-    DeleteProfileAPI(token, influencerid, handleClose, setError)
+    DeleteProfileAPI(token, influencerid, handleClose, setErrorMessage)
   }
+
+
+  if (errorMessage) {
+    return <ErrorPage error={errorMessage} />
+}
 
   // RETURN --------------- 
   return (
@@ -72,7 +73,6 @@ const InfluencerPage = () => {
 
         ) : (
           <>
-            {error && <Error error={error} onClose={handleCloseError} />}
 
             {influencerData.result === "no profile" ? (
             <Stack
@@ -86,9 +86,7 @@ const InfluencerPage = () => {
               <Typography sx={{ pt: { xs: 1, md: 1 }, pb: { xs: 1, md: 0 }, px: { xs: 1, md: 3 } }} variant="p">Create your first profile, and become recognizable.</Typography>
               <MyCustomButton href="/create-profile" sx={{ mt: 4 }} startIcon={<AddIcon />}>Add your first profile</MyCustomButton>
             </Stack>
-            ) : ( influencerData === "error" ? (
-              <Typography sx={{ pt: { xs: 1, md: 5 }, pb: { xs: 1, md: 0 }, px: { xs: 1, md: 3 } }} variant="h2">Your profiles </Typography>
-            ): (
+            ) : (
 
             <Box className="glassmorphism" sx={{ gap: 2, flexGrow: 1, py: { xs: 1, md: 3 }, pl: { xs: 1, md: 3 }, pr: { xs: 1, md: 8 }, display: 'flex', flexDirection: 'column' }}>
               <Typography sx={{ pt: { xs: 1, md: 5 }, pb: { xs: 1, md: 0 }, px: { xs: 1, md: 3 } }} variant="h2">Your profiles </Typography>
@@ -186,7 +184,7 @@ const InfluencerPage = () => {
                 </Table>
               </TableContainer>
             </Box>
-            ))}
+            )}
           </>
         )}
 

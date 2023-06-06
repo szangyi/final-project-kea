@@ -25,5 +25,4 @@ def _():
         return profiles_json
     else:
         response.status = 400
-        return "Profiles couldn't be retrieved"
 

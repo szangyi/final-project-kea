@@ -38,7 +38,6 @@ def _():
         response.status = 200
         return influencer_profile_data_json
     else:
-        response.status = 404
-        return "Profiles could not be retrieved"
+        response.status = 400
 
 

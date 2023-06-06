@@ -4,7 +4,7 @@
 // --------------------------
 import axios from 'axios';
 
-export default async function FavoritesGetAllAPI(token, setFavoritesData, setError) {
+export default async function FavoritesGetAllAPI(token, setFavoritesData, setErrorMessage) {
     const errorMessage = "error"
 
     try {
@@ -17,17 +17,19 @@ export default async function FavoritesGetAllAPI(token, setFavoritesData, setErr
         if (response.status === 200) {
             const favoritesData = response.data;
             setFavoritesData(favoritesData);
-        } else {
-            setFavoritesData(errorMessage);
-            const error = {
-                message: response.body,
-                statusCode: response.status,
-            };
-            setError(error);
         }
     } catch (error) {
-        console.log('Create profile failed:', error);
-        setFavoritesData(errorMessage);
-        setError(error);
+        if (error.response.status === 400) {
+            const errorMessage = { // Page specific error message
+                message: "We could not fetch your data. Try again!",
+                statusCode: error.response.status,
+            };
+            setErrorMessage(errorMessage);
+        } else {
+            const errorMessage = { // General error message
+                statusCode: error.response.status,
+            };
+            setErrorMessage(errorMessage);
+        }
     }
 }

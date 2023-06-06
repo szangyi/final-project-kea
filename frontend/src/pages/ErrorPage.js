@@ -30,10 +30,10 @@ export default function ErrorPage({ error }) {
     let message = 'Something went wrong!';
 
     if (error) {
-        if (error.statusCode === 404) {
+        if (error.statusCode === 500) {
             statusCode = error.statusCode
-            message = 'Ooops! Page not found';
-        } else if (error) {
+            message = "It's not you, it's us!";
+        } else {
             statusCode = error.statusCode
             message = error.message
         }

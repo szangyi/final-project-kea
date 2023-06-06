@@ -20,22 +20,17 @@ import MeshGradientBackground from '../components/MeshGradient/MeshGradientBackg
 import { Typography } from '@mui/material';
 import TextBox from '../components/TextBox/TextBox'
 import FavoritesGetAllAPI from '../api/FavoritesGetAllAPI';
-import Error from '../components/Error/Error'
+import ErrorPage from './ErrorPage';
 
 const UserCollectionPage = () => {
 
     // VARIABLES ---------------
     const [favoritesData, setFavoritesData] = useState(null);
-    const [error, setError] = useState(null)
+    const [errorMessage, setErrorMessage] = useState(null)
     const token = Cookies.get('token');
 
-    // HANDLERS ---------------
-    const handleCloseError = () => {
-        setError(null);
-    };
-
     // CALLING API FUNCTION ---------------
-    FavoritesGetAllAPI(token, setFavoritesData, setError)
+    FavoritesGetAllAPI(token, setFavoritesData, setErrorMessage)
 
     // GET UNIQUE CATEGORIES ---------------
     const getUniqueCategories = () => {
@@ -48,6 +43,9 @@ const UserCollectionPage = () => {
 
     console.log("favoritesData:", favoritesData);
 
+    if (errorMessage) {
+        return <ErrorPage error={errorMessage} />
+    }
 
     return (
         <>
@@ -66,36 +64,27 @@ const UserCollectionPage = () => {
                     <Loader />
                 ) : (
                     <>
-                        {favoritesData === "error" ? (
-                            <>
-                                {error && <Error error={error} onClose={handleCloseError} />}
-                            </>
+                        {favoritesData == 0 ? (
+                            <Stack>
+                                <Typography variant="h3">No favorites available</Typography>
+                                <Typography variant="body">You haven't added any favorites yet.</Typography>
+                            </Stack>
                         ) : (
-                            <>
-                                {favoritesData == 0 ? (
-                                    <Stack>
-                                        <Typography variant="h3">No favorites available</Typography>
-                                        <Typography variant="body">You haven't added any favorites yet.</Typography>
-                                    </Stack>
-                                ) : (
-                                    getUniqueCategories().map((category) => ( // create sections for categories
-                                        <Box key={category}>
-                                            <Typography sx={{ mt: 5, mb: 3 }} variant="h3">{category}</Typography>
-                                            <CollectionCard
-                                                favoriteenabled={true} array={favoritesData.filter((profile) => profile[10] === category)}
-                                            />
-                                        </Box>
-                                    ))
-                                )}
-                            </>
+                            getUniqueCategories().map((category) => ( // create sections for categories
+                                <Box key={category}>
+                                    <Typography sx={{ mt: 5, mb: 3 }} variant="h3">{category}</Typography>
+                                    <CollectionCard
+                                        favoriteenabled={true} array={favoritesData.filter((profile) => profile[10] === category)}
+                                    />
+                                </Box>
+                            ))
                         )}
-
                     </>
                 )}
             </Stack>
 
             {favoritesData === null ? (
-                 <> </>
+                <> </>
             ) : (
                 <>
                     {favoritesData == 0 ? (
