@@ -26,5 +26,3 @@ def _():
         return random_profiles_json
     else:
         response.status = 400
-        return "Profiles couldn't be retrieved"
-

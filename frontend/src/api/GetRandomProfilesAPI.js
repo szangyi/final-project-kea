@@ -4,7 +4,7 @@
 // --------------------------
 import axios from 'axios';
 
-export default async function GetRandomProfilesAPI(token, setProfilesData, setError, numProfilesToShow) {
+export default async function GetRandomProfilesAPI(token, setProfilesData, setErrorMessage, numProfilesToShow) {
     const profileDataError = "error"
     try {
         const response = await axios.get('/api/random-profiles', {
@@ -20,16 +20,17 @@ export default async function GetRandomProfilesAPI(token, setProfilesData, setEr
             const profileData = response.data;
             setProfilesData(profileData);
         } else {
-            setProfilesData(profileDataError);
-            const error = {
-                message: response.body,
+            const errorMessage = {
+                message: "Profiles could not be loaded. Try again!",
                 statusCode: response.status,
             };
-            setError(error);
+            setErrorMessage(errorMessage);
         }
     } catch (error) {
-        console.log('Create profile failed:', error);
-        setProfilesData(profileDataError);
-        setError(error);
+        const errorMessage = {
+            message: "Profiles could not be loaded. Try again!",
+            statusCode: error.response.status,
+        };
+        setErrorMessage(errorMessage);
     }
 }

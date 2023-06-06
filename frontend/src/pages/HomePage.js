@@ -9,7 +9,7 @@ import { getAuthToken } from '../util/auth';
 const HomePage = () => {
 
     const token = useRouteLoaderData('root');
-    console.log({token})
+    // console.log({token})
 
     // const token = getAuthToken();
     // console.log(`homepagetoken: ${token}`)
