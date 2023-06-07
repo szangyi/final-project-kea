@@ -26,7 +26,6 @@ const HomePageLoggedin = (theme) => {
     // VARIABLES ---------------
     const token = Cookies.get('token');
     const [profilesData, setProfilesData] = useState(null);
-    // const [error, setError] = useState(null)
     const [errorMessage, setErrorMessage] = useState(null)
     const numProfilesToShow = 4
 
