@@ -12,7 +12,7 @@ const Banner = (props) => {
     useEffect(() => {
         const timeoutId = setTimeout(() => {
             setShowMeshGradient(true);
-        }, 50);
+        }, 100);
 
         return () => clearTimeout(timeoutId); // Cleanup the timeout if the component unmounts before the timeout is reached
     }, []);
