@@ -9,15 +9,10 @@ import { getAuthToken } from '../util/auth';
 const HomePage = () => {
 
     const token = useRouteLoaderData('root');
-    // console.log({token})
 
-    // const token = getAuthToken();
-    // console.log(`homepagetoken: ${token}`)
-
+    // return token === true ? <HomePageLoggedin /> : (token === false ? <HomePageLoggedout /> : null);
     return token ? <HomePageLoggedin /> : <HomePageLoggedout />;
 
-
-    // return <HomePageLoggedin />
 
 }
 

@@ -4,7 +4,6 @@ import Cookies from 'js-cookie';
 import ValidateCookieAPI from "../api/ValidateCookieAPI";
 
 
-
 export const authLoader = async () => {
   const isCookie = await ValidateCookieAPI();
 
@@ -16,9 +15,9 @@ export const authLoader = async () => {
 };
 
 
-
 export async function navLoader() {
   const requestCookie = await authLoader();
+
   console.log(requestCookie)
   if (requestCookie == true) {
     return true;

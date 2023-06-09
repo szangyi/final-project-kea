@@ -1,4 +1,4 @@
-import { React } from 'react';
+import { React, useState } from 'react';
 import { createBrowserRouter, RouterProvider, useRouteLoaderData } from 'react-router-dom';
 import { authLoader, navLoader } from './util/auth';
 
@@ -28,49 +28,87 @@ import SignupPage from './pages/SignupPage'
 import LoginPage from './pages/LoginPage'
 import ErrorPage from './pages/ErrorPage';
 import ErrorPage404 from './pages/ErrorPage404';
-
+import NavLoggedin from './components/Navigation/NavLoggedin'
+import NavLoggedout from './components/Navigation/NavLoggedout'
+import HomePageLoggedout from './pages/HomePageLoggedout';
+import HomePageLoggedin from './pages/HomePageLoggedin'
 
 
 const App = () => {
 
-
     const router = createBrowserRouter([
+
         {
             path: '/',
             element: <RootLayoutNav />,
             id: 'root',
             loader: navLoader,
             children: [
+                { index: true, element: <HomePage /> },
+                { path: "/login", element: <LoginPage /> },
+                { path: "/signup", element: <SignupPage /> },
                 {
-                    // errorElement: <ErrorPage />,
-                    children: [
-                        { index: true, element: <HomePage /> },
-                        { path: "/login", element: <LoginPage /> },
-                        { path: "/signup", element: <SignupPage /> },
-                        {
-                            path: "/user-dashboard", element: <UserDashboard />, loader: {authLoader}, children: [
-                                { path: "/user-dashboard/", element: <Navigate to="account-info" replace /> }, // set account-info as default
-                                { path: "/user-dashboard/account-info", element: <AccountInfo />, loader: authLoader },
-                                { path: "/user-dashboard/security", element: <Security />, loader: authLoader },
-                                { path: "/user-dashboard/interests", element: <Interests />, loader: authLoader },
-                            ]
-                        },
-                        { path: "/user-collection", element: <UserCollectionPage />, loader: authLoader },
-                        { path: "/influencer-dashboard", element: <InfluenceDashboardPage />, loader: authLoader },
-                        { path: "/collection", element: <CollectionPage />, loader: authLoader },
-                        { path: "/profile/:username", element: <ProfileLandingPage />, loader: authLoader },
-                        { path: '*', element: <ErrorPage404 replace /> },
-                    ],
+                    path: "/user-dashboard", element: <UserDashboard />, children: [
+                        { path: "/user-dashboard/", element: <Navigate to="account-info" replace /> }, // set account-info as default
+                        { path: "/user-dashboard/account-info", element: <AccountInfo /> },
+                        { path: "/user-dashboard/security", element: <Security /> },
+                        { path: "/user-dashboard/interests", element: <Interests /> },
+                    ]
                 },
+                { path: "/user-collection", element: <UserCollectionPage /> },
+                { path: "/influencer-dashboard", element: <InfluenceDashboardPage /> },
+                { path: "/collection", element: <CollectionPage /> },
+                { path: "/profile/:username", element: <ProfileLandingPage /> },
+                { path: '*', element: <ErrorPage404 replace /> },
             ],
         },
         {
             path: '/create-profile',
             element: <RootLayout />,
             children: [
-                { path: "/create-profile", element: <CreateProfilePage />, loader: authLoader },
+                { index: true, element: <CreateProfilePage /> },
             ]
         }
+
+
+
+        // {
+        //     path: '/',
+        //     id: 'root',
+        //     children: [
+        //         {
+        //             //  PUBLIC ROUTES
+        //             id: 'public',
+        //             children: [
+        //                 { index: "/", element: <HomePageLoggedout /> },
+        //                 { path: "/login", element: <LoginPage /> },
+        //                 { path: "/signup", element: <SignupPage /> },
+        //             ]
+        //         },
+        //         //  PRIVATE ROUTES
+        //         {
+        //             id: 'private',
+        //             loader: navLoader(),
+        //             children: [
+        //                 { path: "/home", element: <HomePageLoggedin /> },
+        //                 {
+        //                     path: "/user-dashboard", element: <UserDashboard />, loader: authLoader, children: [
+        //                         { path: "/user-dashboard/", element: <Navigate to="account-info" replace /> },
+        //                         { path: "/user-dashboard/account-info", element: <AccountInfo /> },
+        //                         { path: "/user-dashboard/security", element: <Security /> },
+        //                         { path: "/user-dashboard/interests", element: <Interests /> },
+        //                     ]
+        //                 },
+        //                 { path: "/user-collection", element: <UserCollectionPage /> },
+        //                 { path: "/influencer-dashboard", element: <InfluenceDashboardPage /> },
+        //                 { path: "/collection", element: <CollectionPage /> },
+        //                 { path: "/profile/:username", element: <ProfileLandingPage /> },
+        //                 { path: '*', element: <ErrorPage404 replace /> },
+        //             ],
+        //         }
+        //     ]
+        // }
+
 
     ]);
 

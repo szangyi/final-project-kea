@@ -7,16 +7,10 @@ import NavLoggedout from '../../components/Navigation/NavLoggedout'
 const Nav = () => {
 
     const token = useRouteLoaderData('root');
-    console.log(token)
-    // console.log({token})
+    console.log({token})
 
-    // const token = getAuthToken();
-    // console.log(`homepagetoken: ${token}`)
-
-    return token ? <NavLoggedin /> : (token === false ? <NavLoggedout /> : null);;
-
-
-    // return <HomePageLoggedin />
+    // return token ? <NavLoggedin /> : (token === false ? <NavLoggedout /> : null);;
+    return token ? <NavLoggedin /> : <NavLoggedout />;
 
 }
 

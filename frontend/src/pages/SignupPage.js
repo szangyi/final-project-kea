@@ -1,7 +1,7 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useRouteLoaderData } from "react-router-dom";
 
 import { Grid } from '@mui/material';
 import Box from "@mui/material/Box";
@@ -25,6 +25,7 @@ const SignupPage = () => {
     const [formError, setFormError] = useState(null);
     const [userExists, setUserExists] = useState(null);
     const [errorMessage, setErrorMessage] = useState(null)
+    const token = useRouteLoaderData('root');
     const nav = useNavigate();
     const { values, errors, touched, handleBlur, handleChange, setTouched, validateForm } = useFormik({
         initialValues: {
@@ -37,6 +38,14 @@ const SignupPage = () => {
 
         validationSchema: signupSchema,
     });
+
+    // REDIRECT WHEN USER IS LOGGED IN ---------------
+    useEffect(() => {
+        if (token === true) {
+            console.log('userloggedinman');
+            nav('/');
+        }
+    }, [token]);
 
 
     // API CALLS ---------------
@@ -64,12 +73,8 @@ const SignupPage = () => {
         }
     }
 
-    console.log({formError})
-    console.log({userExists})
-    console.log({errorMessage})
-
     if (errorMessage) {
-        return <ErrorPage error={errorMessage}/>
+        return <ErrorPage error={errorMessage} />
     }
 
     return (
@@ -94,7 +99,7 @@ const SignupPage = () => {
                         sign up
                     </Typography>
 
-                     {formError && (
+                    {formError && (
                         <Alert severity="error">{formError}</Alert>
                     )}
 
