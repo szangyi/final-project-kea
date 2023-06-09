@@ -4,6 +4,22 @@ import json
 import jwt
 import g
 from datetime import datetime
+import database_helper_functions
+
+
+def _validation_function():
+    
+    # VARIABLES ##########################
+    cookie_request = _cookie_validator()
+
+    # VALIDATION ##########################
+    user_email_validated = _token_validator(cookie_request)
+
+    # DATABASE CONNECTION ##########################
+    db_config = _db_config()
+    selected_user_db = database_helper_functions._get_user(user_email_validated, db_config)
+    return selected_user_db
+
 
 def _cookie_validator():
     cookie = request.get_cookie("token", secret=g.COOKIE_SECRET)

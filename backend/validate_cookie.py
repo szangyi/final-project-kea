@@ -1,16 +1,17 @@
 from bottle import get, response
 import helper_functions
 
-# GETTING ONE INFLUENCER PROFILE ##########################
+# VALIDATING THE COOKIE ##########################
 @get("/api/validate-cookie")
 def _():
     
-    # VARIABLES ##########################
-    cookie_request = helper_functions._cookie_validator()
+    # VALIDATION ##########################
+    selected_user_db = helper_functions._validation_function()
     
-    if cookie_request is not None:
+    if selected_user_db is not None:
         response.status = 200
     else:
         response.status = 401
         return "Invalid request"        
     
+

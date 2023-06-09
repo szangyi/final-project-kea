@@ -14,7 +14,6 @@ def _():
     
     # VARIABLES ##########################
 
-    cookie_request = helper_functions._cookie_validator()
     
     influencer_ID = str(uuid.uuid4())
     influencer_username = request.forms.get("username")
@@ -43,13 +42,12 @@ def _():
         profile_image_delete.save(f"images/profile_images/{image_name}")
         
     
-    user_email_validated = helper_functions._token_validator(cookie_request)
     
     # DATABASE CONNECTION ##########################
 
     db_config = helper_functions._db_config()
     
-    selected_user_db = database_helper_functions._get_user(user_email_validated, db_config)
+    selected_user_db = helper_functions._validation_function()
     
     if selected_user_db is not None:
         influencer_data = {
