@@ -33,7 +33,6 @@ const CreateProfile = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [formData, setFormData] = useState({})
   const [error, setError] = useState(null)
-  const token = Cookies.get('token');
   const nav = useNavigate();
 
   const formDataNew = new FormData();
@@ -53,7 +52,7 @@ const CreateProfile = () => {
     if (activeStep === STEPS.length - 1) {
 
       // API CALL ---------------
-      CreateProfileAPI(formData, token, nav, setError);
+      CreateProfileAPI(formData, nav, setError);
     } else {
       setActiveStep(activeStep + 1);
     }

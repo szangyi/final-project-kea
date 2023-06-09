@@ -4,15 +4,11 @@
 // --------------------------
 import axios from 'axios';
 
-export default async function FavoritesGetAllAPI(token, setFavoritesData, setErrorMessage) {
+export default async function FavoritesGetAllAPI(setFavoritesData, setErrorMessage) {
     const errorMessage = "error"
 
     try {
-        const response = await axios.get('/api/favorites-get-all', {
-            headers: {
-                Authorization: `${token}`,
-            }
-        });
+        const response = await axios.get('/api/favorites-get-all');
 
         if (response.status === 200) {
             const favoritesData = response.data;

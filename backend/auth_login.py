@@ -13,7 +13,6 @@ def _login():
     # VARIABLES ##########################
 
     request_user_data = request.json
-    print(request_user_data)
     user_email = request_user_data["email"]
     user_password = request_user_data["password"]
 
@@ -44,12 +43,12 @@ def _login():
     user = database_helper_functions._login(user_email, password_hashed, db_config)
     
     if user:
-        print("##### there is user")
-        token_auth = helper_functions._generate_token(user_email)  
+        token_auth = helper_functions._generate_token(user_email)
+        response.set_cookie('token', token_auth["jwt"],  secret=g.COOKIE_SECRET, path="/", httponly=True)
         response.status = 200
-        return token_auth
     else:
         response.status = 400
+        return  "wrong credentials"
 
 
 

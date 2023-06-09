@@ -32,11 +32,10 @@ const ProfileLandingPage = () => {
     const [otherProfiles, setOtherProfiles] = useState([]);
     const [errorMessage, setErrorMessage] = useState(null)
     const username = useParams();
-    const token = Cookies.get('token');
 
 
     // CONNECT TO API ---------------
-    GetProfileAPI(token, username, setProfileData, setOtherProfiles, setErrorMessage);
+    GetProfileAPI( username, setProfileData, setOtherProfiles, setErrorMessage);
 
     if (errorMessage) {
         return <ErrorPage error={errorMessage} />

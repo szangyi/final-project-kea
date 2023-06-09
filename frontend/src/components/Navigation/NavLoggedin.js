@@ -16,7 +16,7 @@ import { Link } from "react-router-dom";
 
 
 
-import { LogOutAPI as logoutAction } from '../../api/LogOutAPI'
+import { LogOutAPIAction as logoutAction } from '../../api/LogOutAPI'
 import { Divider } from '@mui/material';
 import Logo from "../Logo/Logo";
 

@@ -25,7 +25,6 @@ const UserDashboard = (theme) => {
     // VARIABLES ---------------
     const [userData, setUserData] = useState(null);
     const [error, setError] = useState(null)
-    const token = Cookies.get('token');
 
     // HANDLERS ---------------
     const handleCloseError = () => {
@@ -33,7 +32,7 @@ const UserDashboard = (theme) => {
     };
 
     // API CALLS ---------------
-    AccountInfoAPI(token, setUserData, setError);
+    AccountInfoAPI( setUserData, setError);
 
 
 

@@ -25,7 +25,6 @@ const SignupPage = () => {
     const [formError, setFormError] = useState(null);
     const [userExists, setUserExists] = useState(null);
     const [errorMessage, setErrorMessage] = useState(null)
-    const token = Cookies.get('token');
     const nav = useNavigate();
     const { values, errors, touched, handleBlur, handleChange, setTouched, validateForm } = useFormik({
         initialValues: {
@@ -59,7 +58,7 @@ const SignupPage = () => {
 
         if ((Object.keys(updatedErrors).length === 0) && (Object.keys(errors).length === 0)) {
             setFormError(""); // Clear form errors
-            SignUpAPI(values, token, nav, setErrorMessage, setUserExists);
+            SignUpAPI(values, nav, setErrorMessage, setUserExists);
         } else {
             setFormError('Please fill in all the required fields.');
         }

@@ -36,7 +36,6 @@ const InfluencerPage = () => {
   const [influencerData, setInfluencerData] = useState(null);
   const [open, setOpen] = React.useState(false);
   const [errorMessage, setErrorMessage] = useState(null)
-  const token = Cookies.get('token');
 
   // HANDLERS ---------------
   const handleOpen = () => {
@@ -48,9 +47,9 @@ const InfluencerPage = () => {
   };
 
   // API CALLS ---------------
-  GetInfluencerProfilesAPI(token, setInfluencerData, setErrorMessage)
+  GetInfluencerProfilesAPI(setInfluencerData, setErrorMessage)
   const handleDelete = (influencerid) => {
-    DeleteProfileAPI(token, influencerid, handleClose, setErrorMessage)
+    DeleteProfileAPI(influencerid, handleClose, setErrorMessage)
   }
 
 

@@ -4,14 +4,10 @@
 // --------------------------
 import axios from 'axios';
 
-export default async function GetInfluencerProfilesAPI(token, setInfluencerData, setErrorMessage) {
+export default async function GetInfluencerProfilesAPI(setInfluencerData, setErrorMessage) {
 
     try {
-        const response = await axios.get('/api/get-influencer-profiles', {
-            headers: {
-                Authorization: `${token}`,
-            }
-        });
+        const response = await axios.get('/api/get-influencer-profiles');
 
         if (response.status === 200) {
             const influencerData = response.data;

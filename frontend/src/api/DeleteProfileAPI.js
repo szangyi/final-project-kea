@@ -4,14 +4,10 @@
 // --------------------------
 import axios from 'axios';
 
-export default async function DeleteProfileAPI(token, influencerid, handleClose, setError) {
+export default async function DeleteProfileAPI(influencerid, handleClose, setError) {
 
     try {
-        const response = await axios.post('/api/delete-profile',  { influencerid }, {
-            headers: {
-                Authorization: `${token}`,
-            }
-        });
+        const response = await axios.post('/api/delete-profile',  { influencerid });
 
         if (response.status === 200) {
             handleClose()

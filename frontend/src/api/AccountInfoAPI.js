@@ -4,15 +4,11 @@
 // --------------------------
 import axios from 'axios';
 
-export default async function AccountInfoAPI(token, setUserData, setError) {
+export default async function AccountInfoAPI(setUserData, setError) {
     const errorMessage = "error"
 
     try {
-        const response = await axios.get('/api/account-info', {
-            headers: {
-                Authorization: `${token}`,
-            }
-        });
+        const response = await axios.get('/api/account-info');
 
         if (response.status === 200) {
             const userData = response.data;

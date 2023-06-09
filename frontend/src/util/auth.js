@@ -1,39 +1,29 @@
 import { useState } from "react";
 import { redirect } from "react-router-dom";
 import Cookies from 'js-cookie';
+import ValidateCookieAPI from "../api/ValidateCookieAPI";
 
-export function getAuthToken() {
-  const token = Cookies.get('token');
-  return token;
-}
 
-export function authLoader() {
-  const token = getAuthToken();
-  if (!token) {
+
+export const authLoader = async () => {
+  const isCookie = await ValidateCookieAPI();
+
+  if (!isCookie) {
     return redirect('/login');
   } else {
-    return null;
+    return true;
   }
-}
-
-export function setAuthToken(token, ) {
-  Cookies.set('token', token);
-  window.location.href = '/';
-}
-
-export function removeAuthToken() {
-  Cookies.remove('token');
-  authLoader();
-}
+};
 
 
-export function tokenLoader() {
-  const token = getAuthToken();
 
-  if (token) {
-    return token
+export async function navLoader() {
+  const requestCookie = await authLoader();
+  console.log(requestCookie)
+  if (requestCookie == true) {
+    return true;
   }
   else {
-    return null;
+    return false;
   }
 }

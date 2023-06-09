@@ -19,7 +19,6 @@ def _signup():
     
     # VARIABLES ##########################
 
-    token_request = request.headers.get('Authorization')
 
     request_user_data = request.json
     user_ID = str(uuid.uuid4())

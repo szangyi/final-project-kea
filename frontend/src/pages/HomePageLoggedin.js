@@ -24,7 +24,6 @@ import { Box, Typography, Stack } from "@mui/material";
 const HomePageLoggedin = (theme) => {
 
     // VARIABLES ---------------
-    const token = Cookies.get('token');
     const [profilesData, setProfilesData] = useState(null);
     const [errorMessage, setErrorMessage] = useState(null)
     const numProfilesToShow = 4
@@ -33,9 +32,9 @@ const HomePageLoggedin = (theme) => {
     // GetRandomProfilesAPI(token, setProfilesData, setError)
     useEffect(() => {
         if (!profilesData) {
-            GetRandomProfilesAPI(token, setProfilesData, setErrorMessage, numProfilesToShow)
+            GetRandomProfilesAPI(setProfilesData, setErrorMessage, numProfilesToShow)
         }
-    }, [profilesData, token]);
+    }, [profilesData]);
 
     if (errorMessage) {
         return <ErrorPage error={errorMessage}/>

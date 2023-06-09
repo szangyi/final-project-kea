@@ -9,11 +9,11 @@ def _delete_profile():
     # VARIABLES ##########################
 
     request_influencer_ID = request.json
-    token_request = request.headers.get('Authorization')
+    cookie_request = helper_functions._cookie_validator()
     influencer_ID = request_influencer_ID["influencerid"]
     
     # VALIDATION ##########################
-    user_email_validated = helper_functions._token_validator(token_request)
+    user_email_validated = helper_functions._token_validator(cookie_request)
 
     # DATABASE CONNECTION ##########################
     db_config = helper_functions._db_config()

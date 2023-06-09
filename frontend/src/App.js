@@ -1,6 +1,6 @@
 import { React } from 'react';
 import { createBrowserRouter, RouterProvider, useRouteLoaderData } from 'react-router-dom';
-import { authLoader, tokenLoader } from './util/auth';
+import { authLoader, navLoader } from './util/auth';
 
 
 // --------------------------
@@ -39,7 +39,7 @@ const App = () => {
             path: '/',
             element: <RootLayoutNav />,
             id: 'root',
-            loader: tokenLoader,
+            loader: navLoader,
             children: [
                 {
                     // errorElement: <ErrorPage />,
@@ -73,6 +73,8 @@ const App = () => {
         }
 
     ]);
+
+
 
 
     return (

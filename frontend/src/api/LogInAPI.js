@@ -16,10 +16,9 @@ export default async function LogInAPI(values, setFormError, setErrorMessage) {
         };
 
         const response = await axios.post('/api/login', formData)
-        const token = response.data.jwt;
 
         if (response.status === 200) {
-            setAuthToken(token);
+            window.location.href = '/';
         }
     } catch (error) {
         console.log(error.response.status)

@@ -4,12 +4,9 @@
 // --------------------------
 import axios from 'axios';
 
-export default async function GetRandomProfilesAPI(token, setProfilesData, setErrorMessage, numProfilesToShow) {
+export default async function GetRandomProfilesAPI(setProfilesData, setErrorMessage, numProfilesToShow) {
     try {
         const response = await axios.get('/api/random-profiles', {
-            headers: {
-                Authorization: `${token}`,
-            },
             params: {
                 numProfiles: numProfilesToShow,
             },

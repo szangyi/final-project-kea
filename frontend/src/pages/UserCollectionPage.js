@@ -27,10 +27,9 @@ const UserCollectionPage = () => {
     // VARIABLES ---------------
     const [favoritesData, setFavoritesData] = useState(null);
     const [errorMessage, setErrorMessage] = useState(null)
-    const token = Cookies.get('token');
 
     // CALLING API FUNCTION ---------------
-    FavoritesGetAllAPI(token, setFavoritesData, setErrorMessage)
+    FavoritesGetAllAPI(setFavoritesData, setErrorMessage)
 
     // GET UNIQUE CATEGORIES ---------------
     const getUniqueCategories = () => {

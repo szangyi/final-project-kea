@@ -41,7 +41,6 @@ const CollectionPage = () => {
     const allOptionIndex = SOCIALOPTIONS.findIndex(option => option.social === 'All');
     const [activeIndex, setActiveIndex] = useState(allOptionIndex);
 
-    const token = Cookies.get('token');
 
     // HANDLERS ---------------
     const handleSearchQueryChange = (event) => {
@@ -68,7 +67,7 @@ const CollectionPage = () => {
     }
 
     // CALLING API FUNCTION ---------------
-    GetAllProfilesAPI(token, setProfilesData, setErrorMessage)
+    GetAllProfilesAPI(setProfilesData, setErrorMessage)
 
 
     if (errorMessage) {

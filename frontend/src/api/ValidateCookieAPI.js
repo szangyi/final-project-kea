@@ -4,16 +4,11 @@
 // --------------------------
 import axios from 'axios';
 
-
-export function LogOutAPIAction(){
-    LogOutAPI();
-}
-
-
-async function LogOutAPI() {
+export default async function ValidateCookieAPI() {
+    const errorMessage = "Invalid request"
 
     try {
-        const response = await axios.get('/api/logout');
+        const response = await axios.get('/api/validate-cookie');
 
         if (response.status === 200) {
             return true

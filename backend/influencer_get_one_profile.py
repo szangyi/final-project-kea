@@ -1,7 +1,5 @@
 from bottle import post, request, response
 import json
-import jwt
-import g
 import helper_functions
 import database_helper_functions
 import helper_functions
@@ -12,7 +10,7 @@ def _():
     
     # VARIABLES ##########################
     request_username = request.json
-    token_request = request.headers.get('Authorization')
+    cookie_request = helper_functions._cookie_validator()
     
     username = request_username["username"]["username"]
     profile_response = {}
@@ -20,7 +18,7 @@ def _():
     other_profiles = []
     
     # VALIDATION ##########################
-    user_email_validated = helper_functions._token_validator(token_request)
+    user_email_validated = helper_functions._token_validator(cookie_request)
 
     
     # DATABASE CONNECTION ##########################

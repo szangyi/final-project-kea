@@ -9,6 +9,8 @@ import get_image
 
 import auth_login
 import auth_signup
+import auth_logout
+import validate_cookie
 
 import influencer_get_profiles
 import influencer_create_profile
@@ -21,6 +23,7 @@ import profile_add_to_favorites
 import favorites_get_all
 
 import user_account_info 
+
 
 
 #############  IMAGES  #################

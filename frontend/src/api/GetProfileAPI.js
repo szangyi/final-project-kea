@@ -4,15 +4,11 @@
 // --------------------------
 import axios from 'axios';
 
-export default async function GetProfileAPI(token, username,setProfileData, setOtherProfiles, setErrorMessage) {
+export default async function GetProfileAPI(username,setProfileData, setOtherProfiles, setErrorMessage) {
     const errorMessage = "error";
 
     try {
-        const response = await axios.post('/api/get-profile', { username }, {
-            headers: {
-                Authorization: `${token}`,
-            }
-        });
+        const response = await axios.post('/api/get-profile', { username });
 
         if (response.status === 200) {
             const profileDataResponse = response.data.profileData;

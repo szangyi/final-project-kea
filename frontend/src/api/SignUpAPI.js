@@ -4,7 +4,7 @@
 import axios from 'axios';
 
 
-export default async function SignUpAPI(values, token, nav, setErrorMessage, setUserExists) {
+export default async function SignUpAPI(values, nav, setErrorMessage, setUserExists) {
 
     console.log(values)
 
@@ -20,7 +20,6 @@ export default async function SignUpAPI(values, token, nav, setErrorMessage, set
         const response = await axios.post('/api/signup', formData, {
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: `${token}`,
             },
         });
 

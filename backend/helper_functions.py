@@ -1,10 +1,19 @@
-from bottle import response
+from bottle import response, request
 import database_connection
 import json
 import jwt
 import g
 from datetime import datetime
 
+def _cookie_validator():
+    cookie = request.get_cookie("token", secret=g.COOKIE_SECRET)
+
+    if cookie:
+        response.status = 200
+        return cookie
+    else:
+        response.status = 400
+        return None
 
 def _db_config():
     try:
@@ -25,8 +34,7 @@ def _generate_token(email):
         token_json = {
             "jwt": token_auth
         }
-        token_auth_json = json.dumps(token_json)
-        return token_auth_json
+        return token_json
 
     except Exception as ex:
         print(ex)

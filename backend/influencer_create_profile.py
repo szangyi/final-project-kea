@@ -14,7 +14,7 @@ def _():
     
     # VARIABLES ##########################
 
-    token_request = request.headers.get('Authorization')
+    cookie_request = helper_functions._cookie_validator()
     
     influencer_ID = str(uuid.uuid4())
     influencer_username = request.forms.get("username")
@@ -43,7 +43,7 @@ def _():
         profile_image_delete.save(f"images/profile_images/{image_name}")
         
     
-    user_email_validated = helper_functions._token_validator(token_request)
+    user_email_validated = helper_functions._token_validator(cookie_request)
     
     # DATABASE CONNECTION ##########################
 
