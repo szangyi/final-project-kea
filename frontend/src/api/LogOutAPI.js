@@ -16,8 +16,9 @@ async function LogOutAPI() {
         const response = await axios.get('/api/logout');
 
         if (response.status === 200) {
-            return true
+            window.location.href = '/login';
         } else {
+            console.log("error")
             return false
         }
     } catch (error) {
