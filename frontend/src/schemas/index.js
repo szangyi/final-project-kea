@@ -43,3 +43,11 @@ export const loginSchema = Yup.object().shape({
         .required('Required field'),
 })
 
+
+
+
+export const basicInfoSchema = Yup.object().shape({
+    username: Yup.string()
+        .required('Required field'),
+})
+
