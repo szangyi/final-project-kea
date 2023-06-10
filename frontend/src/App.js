@@ -48,7 +48,7 @@ const App = () => {
                         { path: "/login", element: <LoginPage /> },
                         { path: "/signup", element: <SignupPage /> },
                         {
-                            path: "/user-dashboard", element: <UserDashboard />, loader: {authLoader}, children: [
+                            path: "/user-dashboard", element: <UserDashboard />, loader: authLoader, children: [
                                 { path: "/user-dashboard/", element: <Navigate to="account-info" replace /> }, // set account-info as default
                                 { path: "/user-dashboard/account-info", element: <AccountInfo />, loader: authLoader },
                                 { path: "/user-dashboard/security", element: <Security />, loader: authLoader },
