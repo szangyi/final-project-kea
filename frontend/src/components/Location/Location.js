@@ -1,7 +1,7 @@
 // --------------------------
 // REACT ---------------
 // --------------------------
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 // --------------------------
 // MATERIAL UI ---------------
@@ -17,6 +17,8 @@ import { LOCATION } from '../../util/Constants';
 
 const Location = ({ onLocationChange }) => {
 
+    // console.log({ locationData });
+  
     // VARIABLES ---------------
     const [locationData, setLocationData] = useState(null)
 
@@ -27,14 +29,16 @@ const Location = ({ onLocationChange }) => {
     }
 
 
+
     return (
         <Autocomplete
             id="country-select"
             options={LOCATION}
-            autoHighlight
+            // autoHighlight
             getOptionLabel={(option) => (option && option.label) || ''}
-            onChange = {handleLocationChange}
+            onChange={handleLocationChange}
             value={locationData}
+
             renderOption={(props, option) => (
                 <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
                     <img
