@@ -16,5 +16,7 @@ def _validate_cookie():
         
     except Exception as ex:
         print(ex)
+        response.status = 500
+        return str(ex)
 
 

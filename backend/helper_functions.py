@@ -8,17 +8,21 @@ import database_access_functions
 
 
 def _validation_function():
-    
-    # VARIABLES ##########################
-    cookie_request = _cookie_validator()
+    try:
+        # VARIABLES ##########################
+        cookie_request = _cookie_validator()
 
-    # VALIDATION ##########################
-    user_email_validated = _token_validator(cookie_request)
+        # VALIDATION ##########################
+        user_email_validated = _token_validator(cookie_request)
 
-    # DATABASE CONNECTION ##########################
-    db_config = _db_config()
-    selected_user_db = database_access_functions._get_user(user_email_validated, db_config)
-    return selected_user_db
+        # DATABASE CONNECTION ##########################
+        db_config = _db_config()
+        selected_user_db = database_access_functions._get_user(user_email_validated, db_config)
+        return selected_user_db
+    except Exception as ex:
+        response.status = 500
+        return str(ex)
+
 
 
 def _cookie_validator():

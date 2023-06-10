@@ -11,6 +11,7 @@ export default async function ValidateCookieAPI() {
         const response = await axios.get('/api/validate-cookie');
 
         if (response.status === 200) {
+            console.log(response)
             return true
         } else {
             return false
