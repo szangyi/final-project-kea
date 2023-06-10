@@ -43,3 +43,39 @@ export const loginSchema = Yup.object().shape({
         .required('Required field'),
 })
 
+export const influencerBasicForm = Yup.object().shape({
+    username: Yup.string()
+        .min(2, 'Min. 2 characters')
+        .max(20, 'Max. 20 characters')
+        .required('Required field'),
+    bio: Yup.string()
+        .min(20, 'Min. 20 characters')
+        .max(200, 'Max. 200 characters')
+        .required('Required field'),
+})
+
+
+export const createProfileSchema = Yup.object().shape({
+    username: Yup.string()
+        .min(2, 'Min. 2 characters')
+        .max(20, 'Max. 20 characters')
+        .required('Required field'),
+    bio: Yup.string()
+        .min(20, 'Min. 20 characters')
+        .max(200, 'Max. 200 characters')
+        .required('Required field'),
+    location: Yup.string()
+        .required('Required field'),
+    website: Yup.string().url('Not a valid website. Correct format: www.examplewebsite.com'),
+    instagram: Yup.string()
+        .min(2, 'Min. 2 characters')
+        .max(30, 'Max. 30 characters'),
+    youTube: Yup.string()
+        .min(2, 'Min. 2 characters')
+        .max(30, 'Max. 30 characters'),
+    tikTok: Yup.string()
+        .min(2, 'Min. 2 characters')
+        .max(30, 'Max. 30 characters'),
+    category: Yup.string()
+        .required('Required field'),
+})

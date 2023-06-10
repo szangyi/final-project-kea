@@ -48,7 +48,6 @@ const SocialAccountsForm = ({ onDataChange }) => {
                 label="Website"
                 name="website"
                 autoComplete="website"
-                autoFocus
                 value={socialAccountsData.website}
                 onChange={handleChange}
             />
@@ -62,7 +61,6 @@ const SocialAccountsForm = ({ onDataChange }) => {
                 label="Instagram"
                 name="instagram"
                 autoComplete="instagram"
-                autoFocus
                 value={socialAccountsData.instagram}
                 onChange={handleChange}
             />
@@ -76,7 +74,6 @@ const SocialAccountsForm = ({ onDataChange }) => {
                 label="YouTube"
                 name="youTube"
                 autoComplete="youTube"
-                autoFocus
                 value={socialAccountsData.youTube}
                 onChange={handleChange}
             />
@@ -90,7 +87,6 @@ const SocialAccountsForm = ({ onDataChange }) => {
                 label="TikTok"
                 name="tikTok"
                 autoComplete="tikTok"
-                autoFocus
                 value={socialAccountsData.tikTok}
                 onChange={handleChange}
             />

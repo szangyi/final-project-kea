@@ -4,26 +4,26 @@
 import axios from 'axios';
 
 
-export default async function CreateProfileAPI(formDataNew, nav, setError){
+export default async function CreateProfileAPI(formDataNew, nav, setError) {
 
     try {
         const response = await axios.post('/api/create-profile', formDataNew, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
         });
-  
+
         if (response.status === 200) {
-          nav('/influencer-dashboard');
+            nav('/influencer-dashboard');
         } else {
-          const error = {
-            message: response.body,
-            statusCode: response.status,
-          };
-          setError(error);
+            const error = {
+                message: response.body,
+                statusCode: response.status,
+            };
+            setError(error);
         }
-      } catch (error) {
+    } catch (error) {
         console.log('Create profile failed:', error);
         setError(error);
-      }
+    }
 }

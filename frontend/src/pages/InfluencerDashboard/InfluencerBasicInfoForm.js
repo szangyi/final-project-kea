@@ -10,28 +10,29 @@ import MyCustomTextField from "../../components/Form/TextField";
 import ProfileImage from '../../components/Image/ProfileImage';
 import Location from '../../components/Location/Location';
 
-const InfluencerBasicInfoForm = ({ onDataChange }) => {
+const InfluencerBasicInfoForm = ({ values, errors, handleChange, handleImageChange, handleLocationChange }) => {
 
     // VARIABLES ---------------
-    const [basicData, setBasicData] = useState({
-        username: '',
-        bio: ''
-    });
+    // const [basicData, setBasicData] = useState({
+    //     username: '',
+    //     bio: ''
+    // });
 
-    // HANDLE CHANGE ---------------
-    const handleChange = (event) => {
-        const { name, value } = event.target;
-        setBasicData((prevData) => ({ ...prevData, [name]: value }))
-        onDataChange(basicData);
-    }
+    // // HANDLE CHANGE ---------------
+    // const handleChange = (event) => {
+    //     console.log('handlechange')
+    //     const { name, value } = event.target;
+    //     setBasicData((prevData) => ({ ...prevData, [name]: value }))
+    //     onDataChange(basicData);
+    // }
 
-    const handleLocationChange = (data) => {
-        onDataChange({ location: data });
-    }
+    // const handleLocationChange = (data) => {
+    //     onDataChange({ location: data });
+    // }
 
-    const handleImageChange = (data) => {
-        onDataChange(data)
-    }
+    // const handleImageChange = (data) => {
+    //     onDataChange(data)
+    // }
 
 
     return (
@@ -45,9 +46,10 @@ const InfluencerBasicInfoForm = ({ onDataChange }) => {
                 label="Username"
                 name="username"
                 autoComplete="username"
-                autoFocus
-                value={basicData.username}
+                value={values.username}
                 onChange={handleChange}
+                // error={touched.username && Boolean(errors.username)}
+                // helperText={touched.username && errors.username}
             />
 
             <Location onLocationChange={handleLocationChange} />
@@ -62,7 +64,7 @@ const InfluencerBasicInfoForm = ({ onDataChange }) => {
                 type="text"
                 id="bio"
                 autoComplete="bio"
-                value={basicData.bio}
+                value={values.bio}
                 onChange={handleChange}
             />
 
