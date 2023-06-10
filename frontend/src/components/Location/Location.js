@@ -1,7 +1,7 @@
 // --------------------------
 // REACT ---------------
 // --------------------------
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 // --------------------------
 // MATERIAL UI ---------------
@@ -15,10 +15,8 @@ import Autocomplete from '@mui/material/Autocomplete';
 import MyCustomTextField from "../Form/TextField";
 import { LOCATION } from '../../util/Constants';
 
-const Location = ({ onLocationChange }) => {
+const Location = ({ onLocationChange, helperText, error }) => {
 
-    // console.log({ locationData });
-  
     // VARIABLES ---------------
     const [locationData, setLocationData] = useState(null)
 
@@ -29,16 +27,15 @@ const Location = ({ onLocationChange }) => {
     }
 
 
-
     return (
         <Autocomplete
             id="country-select"
             options={LOCATION}
             // autoHighlight
+            autoFocus
             getOptionLabel={(option) => (option && option.label) || ''}
             onChange={handleLocationChange}
             value={locationData}
-
             renderOption={(props, option) => (
                 <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
                     <img
@@ -58,6 +55,8 @@ const Location = ({ onLocationChange }) => {
                     inputProps={{
                         ...params.inputProps,
                     }}
+                    helperText={helperText}
+                    error={error}
                 />
             )}
         />

@@ -1,4 +1,5 @@
 import * as Yup from 'yup';
+import { LOCATION } from '../util/Constants';
 
 const regexPassword = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
 // min 6 characters, 1 upper case letter, 1 lower case letter, 1 numeric digit.
@@ -46,8 +47,34 @@ export const loginSchema = Yup.object().shape({
 
 
 
-export const basicInfoSchema = Yup.object().shape({
+export const createProfileSchema = Yup.object().shape({
     username: Yup.string()
+        .min(3, 'Min. 3 characters')
+        .max(16, 'Max. 16 characters')
         .required('Required field'),
-})
+    bio: Yup.string()
+        .min(20, 'Min. 20 characters')
+        .max(200, 'Max. 200 characters')
+        .required('Required field'),
+    location: Yup.string()
+        .required('Required field')
+        .test('valid-location', 'Invalid location', (value) => {
+            return LOCATION.some((option) => option.label === value);
+        }),
+    image: Yup.mixed()
+        // .test('fileType', 'Only JPG and PNG images are allowed', (value) => {
+        //   if (value && value.name) {
+        //     const extension = value.name.split('.').pop().toLowerCase();
+        //     return ['jpg', 'jpeg', 'png'].includes(extension);
+        //   }
+        //   return true; // If no file is selected, consider it valid
+        // })
+        .required('Image is required')
+        .test(
+            "fileFormat",
+            "Unsupported Format",
+            value => value && [ "image/jpg", "image/jpeg", "image/gif", "image/png"].includes(value.type)
+        )
 
+
+})
