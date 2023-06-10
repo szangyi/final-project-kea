@@ -55,11 +55,10 @@ const CollectionPage = () => {
         setHashtagData(data.hashtag)
     }
 
-    const handleChangeSocial = (social, index) => {
-        setSocialData(social)
+    const handleChangeSocial = (social) => {
         setSelected((prevSelected) => (prevSelected === social ? null : social));
-        setActiveIndex(index);
-    }
+        setSocialData((prevSocialData) => (prevSocialData === social ? 'All' : social));
+    };
 
 
     const handleLocationChange = (data) => {
@@ -115,7 +114,7 @@ const CollectionPage = () => {
                         {profilesData === null ? (
                             <Loader />
                         ) : (
-                                <CollectionCard favoriteenabled={true} filteringCard={"yes"} array={profilesData} searchQuery={searchQuery} searchCategory={categoryData} searchHashtag={hashtagData} searchSocial={socialData} searchLocation={locationData} />
+                            <CollectionCard favoriteenabled={true} filteringCard={"yes"} array={profilesData} searchQuery={searchQuery} searchCategory={categoryData} searchHashtag={hashtagData} searchSocial={socialData} searchLocation={locationData} />
                         )}
                     </Stack>
                 </Grid>
