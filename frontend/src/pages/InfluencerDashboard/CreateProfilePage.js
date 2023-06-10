@@ -31,6 +31,9 @@ import { LOCATION } from '../../util/Constants';
 import CreateProfileAPI from '../../api/CreateProfileAPI'
 import MyCustomButton from '../../components/Button/Button';
 
+import InfluencerBasicInfoForm from './InfluencerBasicInfoForm';
+import InfluencerSelectForm from './InfluencerSelectForm'
+import SocialAccountsForm from './SocialAccountsForm';
 
 
 
@@ -40,7 +43,6 @@ import MyCustomButton from '../../components/Button/Button';
 // --------------------------
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import InfluencerBasicInfoForm from './InfluencerBasicInfoForm';
 import { createProfileSchema } from '../../schemas';
 
 
@@ -57,19 +59,19 @@ const CreateProfile = () => {
 
     const nav = useNavigate();
 
-    const { values, errors, touched, handleBlur, handleChange, setTouched, setFieldTouched, validateForm } = useFormik({
+    const { values, errors, touched, handleChange, setTouched, validateForm } = useFormik({
         // const formik = useFormik({
         initialValues: {
             username: '',
             bio: '',
             location: '',
             image: '',
+            category: '',
+            hashtag: '',
             website: '',
             instagram: '',
             youTube: '',
             tikTok: '',
-            hashtag: '',
-            category: ''
         },
 
         validationSchema: createProfileSchema
@@ -89,7 +91,15 @@ const CreateProfile = () => {
             bio: true,
             location: true,
             image: true,
+            category: true,
+            hashtag: true,
+            website: true,
+            instagram: true,
+            youTube: true,
+            tikTok: true,
         });
+
+        console.log(category)
 
         const updatedErrors = await validateForm();
 
@@ -104,6 +114,7 @@ const CreateProfile = () => {
     }
 
     console.log(values)
+    console.log(values.hashtag)
     console.log(errors)
 
 
@@ -114,8 +125,6 @@ const CreateProfile = () => {
             <Stack sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <Typography sx={{ pt: { xs: 1, md: 5 }, pb: { xs: 1, md: 5 } }} variant="h2">Create your profile </Typography>
 
-                {/* {error && <Error error={error} onClose={handleCloseError} />} */}
-
                 <Box className="glassmorphism" sx={{
                     gap: 2, flexGrow: 1, mx: { xs: 5, md: 10 }, py: { xs: 1, md: 3 }, pl: { xs: 1, md: 3 }, pr: { xs: 1, md: 10 },
                     display: 'flex', flexDirection: 'row', alignItems: 'center', width: '700px', minHeight: '500px', position: 'relative'
@@ -123,12 +132,14 @@ const CreateProfile = () => {
 
                     <Stack>
 
-                    {formError && (
-                                <Alert severity="error" sx={{mb: 2,}}>{formError}</Alert>
-                            )}
+                        {formError && (
+                            <Alert severity="error" sx={{ mb: 2, }}>{formError}</Alert>
+                        )}
 
 
                         <InfluencerBasicInfoForm values={values} handleChange={handleChange} touched={touched} errors={errors} />
+                        <InfluencerSelectForm values={values} handleChange={handleChange} touched={touched} errors={errors} />
+                        <SocialAccountsForm values={values} handleChange={handleChange} touched={touched} errors={errors} />
 
 
                         <MyCustomButton onClick={submitHandler} sx={{ mt: 3, ml: 1 }}>

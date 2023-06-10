@@ -9,21 +9,24 @@ import axios from 'axios';
 export default async function CreateProfileAPI(values, nav, setErrorMessage) {
     
     console.log(values)
+    console.log('IMMMMMMAAAGGEEEE')
+    console.log(values.image)
     
     try {
 
-        const formData = {
-            username: values.username,
-            bio: values.bio,
-            location: values.location,
-            website: values.website,
-            instagram: values.instagram,
-            youTube: values.youTube,
-            hashtag: values.hashtag,
-            category: values.category,
-            image: values.image,
+        const formData = new FormData();
+        formData.append('username', values.username);
+        formData.append('location', values.location);
+        formData.append('bio', values.bio);
+        // formData.append('image', values.image);
+        formData.append('image', values.image[0]); // Assuming values.image is an array and contains the uploaded file data
+        formData.append('category', values.category);
+        formData.append('hashtag', values.hashtag);
+        formData.append('website', values.website);
+        formData.append('instagram', values.instagram);
+        formData.append('youTube', values.youTube);
 
-        };
+        console.log(formData)
 
         const response = await axios.post('/api/create-profile', formData, {
             headers: {
@@ -44,8 +47,7 @@ export default async function CreateProfileAPI(values, nav, setErrorMessage) {
     } catch (error) {
         console.log('Create profile failed:', error);
         setErrorMessage(error);
- 
- 
+
     }
 }
 

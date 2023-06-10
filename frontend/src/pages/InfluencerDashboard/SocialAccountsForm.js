@@ -3,13 +3,14 @@ import Stack from '@mui/material/Stack';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 import MyCustomTextField from "../../components/Form/TextField";
+import { Typography, Box } from '@mui/material';
 
 import InstagramIcon from '@mui/icons-material/Instagram';
 import LaptopIcon from '@mui/icons-material/Laptop';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 
 
-const SocialAccountsForm = ({ onDataChange }) => {
+const SocialAccountsForm = ({ values, handleChange, touched, errors }) => {
 
     const Item = styled(Paper)(({ theme }) => ({
         backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -19,81 +20,80 @@ const SocialAccountsForm = ({ onDataChange }) => {
         color: theme.palette.text.secondary,
     }));
 
-    const [socialAccountsData, setSocialAccountsData] = useState({
-        website: '',
-        instagram: '',
-        youTube: '',
-        tikTok: ''
-    });
+    // const [socialAccountsData, setSocialAccountsData] = useState({
+    //     website: '',
+    //     instagram: '',
+    //     youTube: '',
+    //     tikTok: ''
+    // });
 
-    const handleChange = (event) => {
-        const { name, value } = event.target;
-        setSocialAccountsData((prevData) => ({ ...prevData, [name]: value }));
-        onDataChange(socialAccountsData);
-    }
-
-
-
-
+    // const handleChange = (event) => {
+    //     const { name, value } = event.target;
+    //     setSocialAccountsData((prevData) => ({ ...prevData, [name]: value }));
+    //     onDataChange(socialAccountsData);
+    // }
 
 
     return (
         <>
-            <MyCustomTextField
-                size="normal"
-                margin="normal"
-                required
-                fullWidth
-                id="website"
-                label="Website"
-                name="website"
-                autoComplete="website"
-                autoFocus
-                value={socialAccountsData.website}
-                onChange={handleChange}
-            />
+            <Typography variant="h5"> Social accounts </Typography>
+            <Box>
+                <MyCustomTextField
+                    size="normal"
+                    margin="normal"
+                    fullWidth
+                    id="website"
+                    label="Website"
+                    name="website"
+                    autoComplete="website"
+                    value={values.website}
+                    onChange={handleChange}
+                    error={touched.website && Boolean(errors.website)}
+                    helperText={touched.website && errors.website}
+                />
 
-            <MyCustomTextField
-                size="normal"
-                margin="normal"
-                required
-                fullWidth
-                id="instagram"
-                label="Instagram"
-                name="instagram"
-                autoComplete="instagram"
-                autoFocus
-                value={socialAccountsData.instagram}
-                onChange={handleChange}
-            />
+                <MyCustomTextField
+                    size="normal"
+                    margin="normal"
+                    fullWidth
+                    id="instagram"
+                    label="Instagram"
+                    name="instagram"
+                    autoComplete="instagram"
+                    value={values.instagram}
+                    onChange={handleChange}
+                    error={touched.instagram && Boolean(errors.instagram)}
+                    helperText={touched.instagram && errors.instagram}
+                />
 
-            <MyCustomTextField
-                size="normal"
-                margin="normal"
-                required
-                fullWidth
-                id="youTube"
-                label="YouTube"
-                name="youTube"
-                autoComplete="youTube"
-                autoFocus
-                value={socialAccountsData.youTube}
-                onChange={handleChange}
-            />
+                <MyCustomTextField
+                    size="normal"
+                    margin="normal"
+                    fullWidth
+                    id="youTube"
+                    label="YouTube"
+                    name="youTube"
+                    autoComplete="youTube"
+                    value={values.youTube}
+                    onChange={handleChange}
+                    error={touched.youTube && Boolean(errors.youTube)}
+                    helperText={touched.youTube && errors.youTube}
+                />
 
-            <MyCustomTextField
-                size="normal"
-                margin="normal"
-                required
-                fullWidth
-                id="tikTok"
-                label="TikTok"
-                name="tikTok"
-                autoComplete="tikTok"
-                autoFocus
-                value={socialAccountsData.tikTok}
-                onChange={handleChange}
-            />
+                <MyCustomTextField
+                    size="normal"
+                    margin="normal"
+                    fullWidth
+                    id="tikTok"
+                    label="TikTok"
+                    name="tikTok"
+                    autoComplete="tikTok"
+                    value={values.tikTok}
+                    onChange={handleChange}
+                    error={touched.tikTok && Boolean(errors.tikTok)}
+                    helperText={touched.tikTok && errors.tikTok}
+                />
+            </Box>
         </>
     );
 

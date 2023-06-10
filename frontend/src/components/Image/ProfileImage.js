@@ -31,7 +31,7 @@ const ProfileImage = ({ onImageChange, helperText, error }) => {
           {helperText}
         </Typography>
       )}
-      
+
     </Stack>
   );
 };

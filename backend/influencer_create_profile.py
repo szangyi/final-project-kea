@@ -31,7 +31,8 @@ def _():
     profile_created_at = str(int(time.time()))
     image_id = str(uuid.uuid4())
 
-        
+    print("######## profile image")
+    print(profile_image_delete)
   
     # VALIDATION ##########################
 
