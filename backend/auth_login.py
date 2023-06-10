@@ -16,11 +16,8 @@ def _login():
         user_email = request_user_data["email"]
         user_password = request_user_data["password"]
 
-        salt = bcrypt.gensalt()
         password_encode = user_password.encode('utf-8')
-        password_hashed = bcrypt.checkpw(password_encode, salt)
         
-
         # VALIDATION ##########################
         
         validation_errors = []
@@ -40,12 +37,25 @@ def _login():
         # DATABASE ##########################
 
         db_config = helper_functions._db_config()
-        user = database_access_functions._login(user_email, password_hashed, db_config)
-        
-        if user:
-            token_auth = helper_functions._generate_token(user_email)
-            response.set_cookie('token', token_auth["jwt"],  secret=g.COOKIE_SECRET, path="/", httponly=True)
-            response.status = 200
+        check_password = database_access_functions._user_exist_email(user_email, db_config)
+        if check_password:
+            password_db = check_password[6]
+            password_db_encoded = password_db.encode('utf-8')
+            password_matched = bcrypt.checkpw(password_encode, password_db_encoded)
+            print(password_matched)
+
+            if password_matched:
+                user = database_access_functions._login(user_email, password_db, db_config)
+                
+                if user:
+                    token_auth = helper_functions._generate_token(user_email)
+                    response.set_cookie('token', token_auth["jwt"],  secret=g.COOKIE_SECRET, path="/", httponly=True)
+                    response.status = 200
+                else:
+                    response.status = 400
+                    return  "wrong credentials"
+            else:
+                response.status = 400
         else:
             response.status = 400
             return  "wrong credentials"

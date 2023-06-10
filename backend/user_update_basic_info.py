@@ -10,10 +10,9 @@ import os
 
 # CREATING INFLUENCER PROFILE ##########################
 @post("/api/update-basic-info")
-def _():
+def _update_basic_info():
     try:
         request_user_data = request.json
-        print(request_user_data)
         user_first_name = request_user_data["firstName"]
         user_last_name = request_user_data["lastName"]
         username = request_user_data["username"]
@@ -23,12 +22,9 @@ def _():
         selected_user_db = helper_functions._validation_function()
         
         if selected_user_db is not None:
-            print("here1")
             if selected_user_db[1] != username:
                 user_email = selected_user_db[5]
-                print("here")
                 check_user = database_access_functions._user_exist(user_email, username , db_config )
-                print("checled user", check_user)
                 if check_user is None:
                     _update_user_function(selected_user_db,user_first_name, user_last_name, username, db_config )
                 else: 

@@ -11,8 +11,24 @@ def _user_exist(user_email, username, db_config):
         user_exist = cursor.fetchone()
         db.commit()
         response.status = 200
-        print("###### print user exists maaaaaan")
-        print(user_exist)
+        return user_exist
+    except Exception as ex:
+        print(ex)
+        response.status = 500
+        return str(ex)
+    finally:
+        db.close()
+
+def _user_exist_email(user_email, db_config):
+    try:
+        db = mysql.connector.connect(**db_config)
+        cursor = db.cursor()
+        sql_user_exist = """ SELECT * FROM users WHERE user_email = %s"""
+        var = (user_email,)
+        cursor.execute(sql_user_exist, var)
+        user_exist = cursor.fetchone()
+        db.commit()
+        response.status = 200
         return user_exist
     except Exception as ex:
         print(ex)
@@ -66,7 +82,8 @@ def _login(user_email, password_hashed, db_config ):
         return str(ex)
     finally:
         db.close()
-        
+
+    
 def _get_user(user_email, db_config):
     try:
         db = mysql.connector.connect(**db_config)
@@ -340,6 +357,36 @@ def _update_user_basic_info(user_id,user_basic_data, db_config):
             user_basic_data["user_last_name"],
             user_id,
         )
+        cursor.execute(sql, var)
+        db.commit()
+        
+        response.status = 200
+    except Exception as ex:
+        print(ex)
+        response.status= 500
+        return str(ex)
+
+    finally:
+        db.close()
+
+
+
+def _update_user_security_info(user_security_data, db_config):
+    try:
+        db = mysql.connector.connect(**db_config)
+        cursor = db.cursor()
+        sql = """ UPDATE users
+                    SET user_email =%s,
+                            user_password =%s
+                    WHERE user_ID=%s
+              """
+        var = (
+            user_security_data["user_email"],
+            user_security_data["user_password_new"],
+            user_security_data["user_id"],
+        )
+        
+        print(var)
         cursor.execute(sql, var)
         db.commit()
         

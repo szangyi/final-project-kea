@@ -28,8 +28,6 @@ const AccountInfo = (props) => {
     const [formError, setFormError] = useState(null);
 
 
-    console.log(userData)
-
     const { values, errors, touched, handleBlur, handleChange, setTouched, validateForm } = useFormik({
         initialValues: {
             firstName: userData.firstName,
@@ -44,15 +42,12 @@ const AccountInfo = (props) => {
 
     const submitHandler = async(event)=>{
         event.preventDefault();
-        console.log(values)
 
         setTouched({
             firstName: true,
             lastName: true,
             username: true,
         });
-
-        console.log(errors)
 
 
         const updatedErrors = await validateForm();

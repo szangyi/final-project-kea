@@ -58,3 +58,14 @@ export const userBasicInfoSchema = Yup.object().shape({
         .required('Required field'),
 })
 
+export const userSecuritySchema = Yup.object().shape({
+    email: Yup.string()
+        .matches(regexEmail, { message: "Please enter a valid e-mail address. Correct format: test@email.com" })
+        .required('Required field'),
+    password: Yup.string()
+        .min(6, 'Min. 6 characters')
+        .max(100, 'Max. 100 characters')
+        .matches(regexPassword, { message: "Your password must include at least 1 uppercase-, 1 lowercase letter, and 1 number" })
+        .required('Required field'),
+})
+

@@ -24,6 +24,7 @@ import favorites_get_all
 
 import user_account_info 
 import user_update_basic_info
+import user_update_security_info
 
 
 
