@@ -47,15 +47,13 @@ export const loginSchema = Yup.object().shape({
 })
 
 
-
-
 export const createProfileSchema = Yup.object().shape({
     username: Yup.string()
         .min(3, 'Min. 3 characters')
         .max(16, 'Max. 16 characters')
         .required('Required field'),
     bio: Yup.string()
-        .min(20, 'Min. 20 characters')
+        .min(5, 'Min. 5 characters')
         .max(200, 'Max. 200 characters')
         .required('Required field'),
     location: Yup.string()
@@ -72,11 +70,6 @@ export const createProfileSchema = Yup.object().shape({
           }
           return true; // If no file is selected, consider it valid
         }),
-        // .test(
-        //     "fileFormat",
-        //     "Unsupported Format",
-        //     value => value && ["image/jpg", "image/jpeg", "image/gif", "image/png"].includes(value.type)
-        // ),
     category: Yup.mixed()
         .required('Required field')
         .oneOf(
