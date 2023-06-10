@@ -25,7 +25,8 @@ const Hashtags = ({ onHashtagChange, filter, helperText, error  }) => {
     const handleHashtagChange = (event, value) => {
         const selectedTags = value.map((item) => item.tag);
         setHashtagData(selectedTags);
-        onHashtagChange({ hashtag: selectedTags });
+        onHashtagChange(selectedTags);
+        // onHashtagChange({ hashtag: selectedTags });
     }
 
 

@@ -53,7 +53,7 @@ export const createProfileSchema = Yup.object().shape({
         .max(16, 'Max. 16 characters')
         .required('Required field'),
     bio: Yup.string()
-        .min(5, 'Min. 5 characters')
+        .min(10, 'Min. 10 characters')
         .max(200, 'Max. 200 characters')
         .required('Required field'),
     location: Yup.string()
@@ -63,7 +63,7 @@ export const createProfileSchema = Yup.object().shape({
         }),
     image: Yup.mixed()
         .required('Required field')
-        .test('fileType', 'Only JPG and PNG images are allowed', (value) => {
+        .test('fileType', 'Only JPG, JPEG and PNG images are allowed', (value) => {
           if (value && value.name) {
             const extension = value.name.split('.').pop().toLowerCase();
             return ['jpg', 'jpeg', 'png'].includes(extension);

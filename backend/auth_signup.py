@@ -67,10 +67,8 @@ def _signup():
 
     if validation_errors:
         return g._send(400, validation_errors)
-
-
-    # user_email_validated = helper_functions._token_validator(token_request)
-
+    
+    
 
     # DATABASE CONNECTION ##########################
 

@@ -18,7 +18,6 @@ export default async function CreateProfileAPI(values, nav, setErrorMessage) {
         formData.append('username', values.username);
         formData.append('location', values.location);
         formData.append('bio', values.bio);
-        // formData.append('image', values.image.image); 
         formData.append('image', values.image); 
         formData.append('category', values.category);
         formData.append('hashtag', values.hashtag);
