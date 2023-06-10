@@ -323,3 +323,31 @@ def _get_all_favorites(user_id, db_config):
 
     finally:
         db.close()
+
+def _update_user_basic_info(user_id,user_basic_data, db_config):
+    try:
+        db = mysql.connector.connect(**db_config)
+        cursor = db.cursor()
+        sql = """ UPDATE users
+                    SET username =%s,
+                            user_first_name =%s,
+                            user_last_name =%s
+                    WHERE user_ID=%s
+              """
+        var = (
+            user_basic_data["username"],
+            user_basic_data["user_first_name"],
+            user_basic_data["user_last_name"],
+            user_id,
+        )
+        cursor.execute(sql, var)
+        db.commit()
+        
+        response.status = 200
+    except Exception as ex:
+        print(ex)
+        response.status= 500
+        return str(ex)
+
+    finally:
+        db.close()

@@ -64,9 +64,7 @@ const SignupPage = () => {
         }
     }
 
-    console.log({formError})
-    console.log({userExists})
-    console.log({errorMessage})
+ 
 
     if (errorMessage) {
         return <ErrorPage error={errorMessage}/>

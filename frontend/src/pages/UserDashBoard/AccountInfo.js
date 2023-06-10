@@ -1,71 +1,73 @@
-import Cookies from 'js-cookie';
-import React, { useState, useEffect } from 'react';
+// --------------------------
+// REACT ---------------
+// --------------------------
+import React, { useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
-import axios from 'axios';
-import { useNavigate, Link } from "react-router-dom";
-
-// import Link from "@mui/material/Link";
-import { Grid } from '@mui/material';
+// --------------------------
+// MATERIAL UI ---------------
+// --------------------------
 import MyCustomButton from "../../components/Button/Button"
 import MyCustomTextField from "../../components/Form/TextField";
-
-// VALIDATION
-import { useFormik } from 'formik';
-import { signupSchema } from '../../schemas';
 import { Box, Typography } from '@mui/material';
-
+import { Grid } from '@mui/material';
+// --------------------------
+// VALIDATION ---------------
+// --------------------------
+import { useFormik } from 'formik';
+import { userBasicInfoSchema } from '../../schemas';
+// --------------------------
+// COMPONENTS ---------------
+// --------------------------
+import ErrorPage from '../ErrorPage';
+import UpdateBasicInfoAPI from '../../api/UpdateBasicInfoAPI';
 
 const AccountInfo = (props) => {
 
     const userData = useOutletContext(); // data from UserDashBoard
+    const [errorMessage, setErrorMessage] = useState(null)
+    const [formError, setFormError] = useState(null);
+
 
     console.log(userData)
 
-    // const [userExists, setUserExists] = useState('');
-
-    const { values, errors, touched, handleBlur, handleChange } = useFormik({
+    const { values, errors, touched, handleBlur, handleChange, setTouched, validateForm } = useFormik({
         initialValues: {
             firstName: userData.firstName,
             lastName: userData.lastName,
             username: userData.username,
         },
 
-        validationSchema: signupSchema,
+        validationSchema: userBasicInfoSchema,
     });
 
-    console.log(errors)
 
-    // const nav = useNavigate();
 
-    function submitHandler() {
-        console.log('handled')
+    const submitHandler = async(event)=>{
+        event.preventDefault();
+        console.log(values)
+
+        setTouched({
+            firstName: true,
+            lastName: true,
+            username: true,
+        });
+
+        console.log(errors)
+
+
+        const updatedErrors = await validateForm();
+        if ((Object.keys(updatedErrors).length === 0) && (Object.keys(errors).length === 0)) {
+            setFormError("");
+            UpdateBasicInfoAPI(values, setErrorMessage);
+        } else {
+            setFormError('Please fill in all the required fields.');
+        }
+
     }
 
-    // const submitHandler = async (event) => {
-    //     event.preventDefault();
-    //     const { username, firstName, lastName, email, password } = values; // Destructure values because of Formik
-
-    //     try {
-    //         const response = await axios.post('/api/signup', { username, firstName, lastName, email, password });
-    //         const message = response.data.message;
-
-    //         if (message === "Signup succeeded") {
-    //             nav('/login');
-    //         }
-    //         else {
-    //             console.log(message)
-    //         }
-    //         console.log(values)
-
-    //     } catch (error) {
-    //         if (error.response && error.response.status === 409) {
-    //             setUserExists("User already exists maaaan");
-    //         } else {
-    //             console.error('Signup failed:', error);
-    //         }
-    //     }
-    // }
-
+    if (errorMessage) {
+        return <ErrorPage error={errorMessage}/>
+    }
     return (
         <>
             <Box component="section" sx={{ py: 5, px: 5, }}>

@@ -43,3 +43,18 @@ export const loginSchema = Yup.object().shape({
         .required('Required field'),
 })
 
+export const userBasicInfoSchema = Yup.object().shape({
+    firstName: Yup.string()
+        .min(2, 'Min. 2 characters')
+        .max(20, 'Max. 20 characters')
+        .required('Required field'),
+    lastName: Yup.string()
+        .min(2, 'Min. 2 characters')
+        .max(20, 'Max. 20 characters')
+        .required('Required field'),
+    username: Yup.string()
+        .min(3, 'Min. 3 characters')
+        .max(16, 'Max. 16 characters')
+        .required('Required field'),
+})
+
