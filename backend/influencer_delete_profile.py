@@ -1,7 +1,7 @@
 from bottle import post, request, response
 import mysql.connector
 import helper_functions
-import database_helper_functions
+import database_access_functions
 
 @post("/api/delete-profile")
 def _delete_profile():
@@ -18,7 +18,7 @@ def _delete_profile():
     db_config = helper_functions._db_config()
 
     if selected_user_db is not None:
-        database_helper_functions._delete_influencer_profile(influencer_ID, db_config)
+        database_access_functions._delete_influencer_profile(influencer_ID, db_config)
     else:
         response.status = 400
         return "Profile couldn't be deleted"

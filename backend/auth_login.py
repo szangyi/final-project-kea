@@ -4,7 +4,7 @@ import uuid
 import mysql.connector
 import bcrypt
 import helper_functions
-import database_helper_functions
+import database_access_functions
 
 
 @post("/api/login")
@@ -40,7 +40,7 @@ def _login():
     # DATABASE ##########################
 
     db_config = helper_functions._db_config()
-    user = database_helper_functions._login(user_email, password_hashed, db_config)
+    user = database_access_functions._login(user_email, password_hashed, db_config)
     
     if user:
         token_auth = helper_functions._generate_token(user_email)

@@ -4,7 +4,7 @@ import g
 import uuid
 import time
 import json
-import database_helper_functions
+import database_access_functions
 import helper_functions
 import os
 
@@ -66,7 +66,7 @@ def _():
             "profile_created_at": profile_created_at,
         }
         
-        database_helper_functions._create_influencer_profile(influencer_data, db_config)
+        database_access_functions._create_influencer_profile(influencer_data, db_config)
         response.status = 200
     else:
         response.status = 400

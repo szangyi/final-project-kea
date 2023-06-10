@@ -4,7 +4,7 @@ import json
 import jwt
 import g
 from datetime import datetime
-import database_helper_functions
+import database_access_functions
 
 
 def _validation_function():
@@ -17,7 +17,7 @@ def _validation_function():
 
     # DATABASE CONNECTION ##########################
     db_config = _db_config()
-    selected_user_db = database_helper_functions._get_user(user_email_validated, db_config)
+    selected_user_db = database_access_functions._get_user(user_email_validated, db_config)
     return selected_user_db
 
 

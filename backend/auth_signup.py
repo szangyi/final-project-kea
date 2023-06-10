@@ -6,7 +6,7 @@ import uuid
 import mysql.connector
 import bcrypt
 import database_connection
-import database_helper_functions
+import database_access_functions
 import helper_functions
 import json
 import time
@@ -76,7 +76,7 @@ def _signup():
 
     db_config = helper_functions._db_config()
 
-    user_exist_db = database_helper_functions._user_exist(user_email, username, db_config)
+    user_exist_db = database_access_functions._user_exist(user_email, username, db_config)
     print("######### userexist")
     print(user_exist_db)
 
@@ -95,7 +95,7 @@ def _signup():
             "user_created_at": user_created_at,
         }
 
-        database_helper_functions._signup(user_data, db_config)
+        database_access_functions._signup(user_data, db_config)
         response.status = 200
     else:
         print("########## this is a 409 for some reason")

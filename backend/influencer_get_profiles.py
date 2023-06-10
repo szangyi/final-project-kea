@@ -3,7 +3,7 @@ import json
 import jwt
 import g
 import helper_functions
-import database_helper_functions
+import database_access_functions
 
 # GETTING ALL INFLUENCERS PROFILES ##########################
 @get("/api/get-influencer-profiles")
@@ -22,7 +22,7 @@ def _():
 
     if selected_user_db is not None:
         user_id = selected_user_db[0]
-        profiles = database_helper_functions._get_all_influencer_profiles(user_id, db_config)
+        profiles = database_access_functions._get_all_influencer_profiles(user_id, db_config)
         if profiles == []:
             influencer_profile_data = {
                 "result": "no profile"

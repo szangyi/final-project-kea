@@ -1,6 +1,6 @@
 from bottle import post, request, response
 import helper_functions
-import database_helper_functions
+import database_access_functions
 
 
 @post("/api/add-to-favorites")
@@ -19,11 +19,11 @@ def _():
 
 
     if selected_user_db is not None:
-        relationship_exist_db = database_helper_functions._check_favorite_relationship(user_ID, influencer_ID, db_config)
+        relationship_exist_db = database_access_functions._check_favorite_relationship(user_ID, influencer_ID, db_config)
         if not relationship_exist_db:
-            database_helper_functions._add_to_favorites(user_ID, influencer_ID, db_config)
+            database_access_functions._add_to_favorites(user_ID, influencer_ID, db_config)
         else:
-            database_helper_functions._remove_from_favorites(user_ID, influencer_ID, db_config)
+            database_access_functions._remove_from_favorites(user_ID, influencer_ID, db_config)
 
     else:
         response.status = 400

@@ -1,7 +1,7 @@
 from bottle import post, request, response
 import json
 import helper_functions
-import database_helper_functions
+import database_access_functions
 import helper_functions
 
 # GETTING ONE INFLUENCER PROFILE ##########################
@@ -24,10 +24,10 @@ def _():
     db_config = helper_functions._db_config()
 
     if selected_user_db is not None:
-        profile = database_helper_functions._get_one_influencer_profile(username, db_config)
+        profile = database_access_functions._get_one_influencer_profile(username, db_config)
         user_ID = profile[1]
         
-        other_profiles = database_helper_functions._get_other_influencer_profiles(user_ID, username, db_config)
+        other_profiles = database_access_functions._get_other_influencer_profiles(user_ID, username, db_config)
         
         profile_response = {
             "profileData": profile,

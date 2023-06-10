@@ -2,7 +2,7 @@ from bottle import get, request, response
 import mysql.connector
 import json
 import helper_functions
-import database_helper_functions
+import database_access_functions
 
 # USER ACCOUNT INFO ##########################
 @get("/api/account-info")
