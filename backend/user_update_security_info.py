@@ -7,11 +7,31 @@ import g
 @post("/api/update-security-info")
 def _update_security_info():
     try:
+        # VARIABLES ##########################
         request_user_data = request.json
         user_email = request_user_data["email"]
         password = request_user_data["password"]
         password_new = request_user_data["passwordNew"]
         
+        # VALIDATION ##########################
+        validation_errors = []
+
+        user_email, error_e = g._is_item_email(user_email)
+        if error_e:
+            validation_errors.append(error_e)
+
+        password, error_pw = g._is_password(password)
+        if error_pw:
+            validation_errors.append(error_pw)
+            
+        password_new, error_pw = g._is_password(password_new)
+        if error_pw:
+            validation_errors.append(error_pw)
+
+        if validation_errors:
+            return g._send(400, validation_errors)
+        
+        # FUNCTIONS ##########################
         db_config = helper_functions._db_config()
         selected_user_db = helper_functions._validation_function()
         if selected_user_db is not None:
