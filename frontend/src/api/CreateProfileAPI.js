@@ -8,12 +8,7 @@ import axios from 'axios';
 
 export default async function CreateProfileAPI(values, nav, setErrorMessage) {
     
-    console.log(values)
-    console.log('IMMMMMMAAAGGEEEE')
-    console.log(values.image)
-    
     try {
-
         const formData = new FormData();
         formData.append('username', values.username);
         formData.append('location', values.location);
@@ -24,8 +19,7 @@ export default async function CreateProfileAPI(values, nav, setErrorMessage) {
         formData.append('website', values.website);
         formData.append('instagram', values.instagram);
         formData.append('youTube', values.youTube);
-
-        console.log(formData)
+        formData.append('tikTok', values.tikTok);
 
         const response = await axios.post('/api/create-profile', formData, {
             headers: {

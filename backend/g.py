@@ -91,28 +91,26 @@ def _is_item_url(text=None):
 def _is_item_account(text=None):
   min, max = 3, 16
   # error = f"Account name cannot have any space and special characters, except '.' and '_'. "
-  # if not text : return None, error
-  # text = text.strip()
-  # if len(text) < min or len(text) > max : return None, error
   # if not re.match(REGEX_SOME_ACCOUNT, text) : return None, error
-  # return text, None
   error = f"Account name must be {min} to {max} characters. No spaces"
   if not text: return None, error
   text = re.sub("[\n\t]*", "", text)
   text = re.sub(" +", " ", text)
   text = text.strip()
-  if len(text) < min or len(text) > max : return None, error
+  if len(text) < min or len(text) > max : return None, error 
   return text, None
 
 # IMAGE
 def _is_item_image(file):
   error = f"Invalid file type. Valid types: .png, .jpg, .jpeg"
-  valid_mime_types = ['application/.png','application/.jpg','application/.jpeg']
-  file_mime_type = magic.from_buffer(file.read(1024), mime=True)
+  valid_mime_types = ['image/png', 'image/jpeg']
+  file_mime_type = magic.from_buffer(file.file.read(1024), mime=True)
+  file.file.seek(0)  # Reset the file pointer to the beginning
   if file_mime_type not in valid_mime_types:
-      return None, error
-  valid_file_extensions = ['.png','.jpg', '.jpeg']
-  ext = os.path.splitext(file.name)[1]
+    return None, error
+  valid_file_extensions = ['.png', '.jpg', '.jpeg']
+  ext = os.path.splitext(file.filename)[1]
   if ext.lower() not in valid_file_extensions:
-      return None, error   
+    return None, error
+  return file, None
     
