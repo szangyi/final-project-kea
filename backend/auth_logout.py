@@ -9,4 +9,5 @@ def _():
     except Exception as ex:
         print(ex)
         response.status = 500
+        return str(ex)
     

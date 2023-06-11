@@ -1,6 +1,8 @@
 import "./Nav.css";
 
 import * as React from 'react';
+import { useState } from 'react';
+
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -13,12 +15,14 @@ import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { Link } from "react-router-dom";
-
+import ErrorPage from '../../pages/ErrorPage'
 
 
 import { LogOutAPIAction as logoutAction } from '../../api/LogOutAPI'
 import { Divider } from '@mui/material';
 import Logo from "../Logo/Logo";
+import AccountInfoAPI from "../../api/AccountInfoAPI";
+import Loader from '../Loader/Loader'
 
 
 const pages = [
@@ -58,6 +62,10 @@ function ResponsiveAppBar() {
 
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
+    const [userData, setUserData] = useState(null);
+    const [error, setError] = useState(null)
+
+    AccountInfoAPI( setUserData, setError);
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -75,6 +83,11 @@ function ResponsiveAppBar() {
     };
 
     return (
+        <>
+        {userData === null ? (
+            <Loader />
+
+        ) : (
         <AppBar position="static" sx={{ paddingInline: { xs: 2, md: 5 }, boxShadow: 0, backgroundColor: 'transparent' }} >
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
@@ -170,9 +183,17 @@ function ResponsiveAppBar() {
                     <Box sx={{ flexGrow: 0 }}>
                         <Tooltip _title="Open settings">
                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0, marginLeft: 2 }}>
-                                <Avatar alt="Demy Sharp"
-                                // src="/static/images/avatar/2.jpg"
+                            {userData.userImage ? (
+                                <Box
+                                    component="img"
+                                    src={`http://127.0.0.1:7878/profile_images/${userData.userImage}`}
+                                    sx={{ height: 50, width: 50, borderRadius: '50%' }}
                                 />
+                            ) : (
+                                <Avatar alt="Demy Sharp"
+                                />
+                            )}
+
                             </IconButton>
                         </Tooltip>
                         <Menu
@@ -224,6 +245,8 @@ function ResponsiveAppBar() {
                 </Toolbar>
             </Container>
         </AppBar>
+        )}
+        </>
     );
 }
 export default ResponsiveAppBar;

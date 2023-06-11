@@ -33,7 +33,6 @@ const ProfileLandingPage = () => {
     const [errorMessage, setErrorMessage] = useState(null)
     const username = useParams();
 
-
     // CONNECT TO API ---------------
     GetProfileAPI( username, setProfileData, setOtherProfiles, setErrorMessage);
 
@@ -44,7 +43,7 @@ const ProfileLandingPage = () => {
     return (
         <>
             <Banner variant="medium" headline1={username.username} />
-            {profileData === null ? (
+            {profileData.length === 0 ? (
                 <Loader />
             ) : (
                 <>
