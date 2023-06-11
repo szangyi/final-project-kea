@@ -53,7 +53,7 @@ def _check_password(user_id, check_email, user_email, password, password_new, db
     check_password = database_access_functions._login(check_email, password_hashed, db_config)
 
         
-    check_password_db = check_password[6]
+    check_password_db = check_password[5]
     
     password_db = check_password_db.encode('utf-8')
     password_matched = bcrypt.checkpw(password_encode, password_db)

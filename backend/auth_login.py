@@ -39,10 +39,9 @@ def _login():
         db_config = helper_functions._db_config()
         check_password = database_access_functions._user_exist_email(user_email, db_config)
         if check_password:
-            password_db = check_password[6]
+            password_db = check_password[5]
             password_db_encoded = password_db.encode('utf-8')
             password_matched = bcrypt.checkpw(password_encode, password_db_encoded)
-            print(password_matched)
 
             if password_matched:
                 user = database_access_functions._login(user_email, password_db, db_config)

@@ -14,8 +14,6 @@ export default async function UpdateBasicInfoAPI(values, setErrorMessage) {
         formData.append('lastName', values.lastName);
         formData.append('image', values.image);
 
-        console.log(formData)
-        console.log('Form submitted:', Object.fromEntries(formData));
 
 
         const response = await axios.post('/api/update-basic-info', formData, {

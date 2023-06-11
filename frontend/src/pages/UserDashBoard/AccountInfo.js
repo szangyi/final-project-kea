@@ -44,7 +44,6 @@ const AccountInfo = (props) => {
         handleChange({ target: { name: 'image', value } });
     };
 
-    console.log(values)
 
 
 
