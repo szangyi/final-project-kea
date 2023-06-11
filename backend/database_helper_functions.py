@@ -110,10 +110,10 @@ def _create_influencer_profile(influencer_data, db_config):
     try:
         db = mysql.connector.connect(**db_config)
         cursor = db.cursor()
-        sql_create_profile = """INSERT INTO influencers_profile (influencer_ID, user_ID, influencer_username, influencer_bio_description, influencer_location, influencer_website, influencer_instagram, influencer_youtube, influencer_tiktok, influencer_tags, influencer_category, profile_image_delete, profile_created_at) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
+        sql_create_profile = """INSERT INTO influencers_profile (influencer_ID, user_ID, influencer_username, influencer_bio_description, influencer_location, influencer_website, influencer_instagram, influencer_youtube, influencer_tiktok, influencer_tags, influencer_category, profile_image, profile_created_at) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
         var = (
             influencer_data["influencer_ID"],
-            influencer_data["user_id"],
+            influencer_data["user_ID"],
             influencer_data["influencer_username"],
             influencer_data["influencer_bio_description"],
             influencer_data["influencer_location"],
@@ -123,7 +123,7 @@ def _create_influencer_profile(influencer_data, db_config):
             influencer_data["influencer_tiktok"],
             influencer_data["influencer_tags"],
             influencer_data["influencer_category"],
-            influencer_data["image_name"],
+            influencer_data["profile_image"],
             influencer_data["profile_created_at"],
         )
         cursor.execute(sql_create_profile, var)

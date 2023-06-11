@@ -9,13 +9,10 @@ from datetime import datetime
 @get("/api/profiles")
 def _():
         
-    # token_request = request.headers.get('Authorization')
-    # print(token_request)
-    # token_data = jwt.decode(token_request, g.SECRET_KEY, algorithms=["HS256"])
-    # user_email = token_data["email"]
-    user_email = 'a@a.commm'
-
-
+    token_request = request.headers.get('Authorization')
+    print(token_request)
+    token_data = jwt.decode(token_request, g.SECRET_KEY, algorithms=["HS256"])
+    user_email = token_data["email"]
     
     try:
         import production

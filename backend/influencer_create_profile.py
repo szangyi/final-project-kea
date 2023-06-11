@@ -7,6 +7,7 @@ import json
 import database_helper_functions
 import helper_functions
 import os
+import html
 
 # CREATING INFLUENCER PROFILE ##########################
 @post("/api/create-profile")
@@ -18,13 +19,13 @@ def _():
     user_email_validated = helper_functions._token_validator(cookie_request)
 
     influencer_ID = str(uuid.uuid4())
-    influencer_username = request.forms.get("username")
-    influencer_bio_description = request.forms.get("bio")
+    influencer_username = html.escape(request.forms.get("username"))
+    influencer_bio_description = html.escape(request.forms.get("bio"))
     influencer_location = request.forms.get("location") # no validation
-    influencer_website = request.forms.get("website")
-    influencer_instagram = request.forms.get("instagram")
-    influencer_youtube = request.forms.get("youTube")
-    influencer_tiktok = request.forms.get("tikTok")
+    influencer_website = html.escape(request.forms.get("website"))
+    influencer_instagram = html.escape(request.forms.get("instagram"))
+    influencer_youtube = html.escape(request.forms.get("youTube"))
+    influencer_tiktok = html.escape(request.forms.get("tikTok"))
     influencer_tags_list = request.forms.get("hashtag") # no validation
     influencer_tags  = json.dumps(influencer_tags_list) # # no validation
     influencer_category = request.forms.get("category") # no validation
@@ -93,7 +94,7 @@ def _():
 
             influencer_data = {
                 "influencer_ID": influencer_ID,
-                "user_id": selected_user_db[0],
+                "user_ID": selected_user_db[0],
                 "influencer_username": influencer_username,
                 "influencer_bio_description": influencer_bio_description,
                 "influencer_location": influencer_location,
@@ -103,7 +104,7 @@ def _():
                 "influencer_tiktok": influencer_tiktok,
                 "influencer_tags": influencer_tags,
                 "influencer_category": influencer_category,
-                "image_name": image_name,
+                "profile_image": image_name,
                 "profile_created_at": profile_created_at,
             }
             
@@ -113,7 +114,7 @@ def _():
             response.status = 409 # Conflict
     else:
         response.status = 400
-        return  "Profile couldn't be created"
+        # return  "Profile couldn't be created"
     
     
 

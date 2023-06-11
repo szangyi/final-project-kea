@@ -27,7 +27,7 @@ def _is_item_email(text=None):
 
 # NAME
 def _is_first_name(text=None):
-  min, max = 2, 20
+  min, max = 2, 50
   error = f"First name must be {min} to {max} characters. No spaces"
   if not text: return None, error
   text = re.sub("[\n\t]*", "", text)                         # removes all newline and tab characters
@@ -66,8 +66,6 @@ def _is_password(text=None):
   if not re.search(r'\d', text) : return None, error          # must contain at least one number
   if not re.search(r'[A-Z]', text) : return None, error       # must contain at least uppercase character
   if not re.search(r'[a-z]', text): return None, error        # must contain at least lowercase character
-  # regex_password = '/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/'
-  # if not re.match(regex_password, text) : return None, error
   if len(text) < min or len(text) > max : return None, error 
   return text, None
 
@@ -90,8 +88,8 @@ def _is_item_url(text=None):
 # SOME
 def _is_item_account(text=None):
   min, max = 3, 16
-  # error = f"Account name cannot have any space and special characters, except '.' and '_'. "
-  # if not re.match(REGEX_SOME_ACCOUNT, text) : return None, error
+  error = f"Account name cannot have any space and special characters, except '.' and '_'. "
+  if not re.match(REGEX_SOME_ACCOUNT, text) : return None, error
   error = f"Account name must be {min} to {max} characters. No spaces"
   if not text: return None, error
   text = re.sub("[\n\t]*", "", text)

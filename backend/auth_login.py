@@ -1,10 +1,9 @@
-from bottle import request, redirect, post, response
+from bottle import request, post, response
 import g 
-import uuid
-import mysql.connector
 import bcrypt
 import helper_functions
 import database_helper_functions
+import html
 
 
 @post("/api/login")
@@ -13,8 +12,8 @@ def _login():
     # VARIABLES ##########################
 
     request_user_data = request.json
-    user_email = request_user_data["email"]
-    user_password = request_user_data["password"]
+    user_email = html.escape(request_user_data["email"])
+    user_password = html.escape(request_user_data["password"])
 
     salt = bcrypt.gensalt()
     password_encode = user_password.encode('utf-8')
