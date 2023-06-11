@@ -21,23 +21,24 @@ const Category = ({ onCategoryChange, filter, helperText, error }) => {
     const initialCategoryData = filter ? 'All categories' : { category: '' };
     const [categoryData, setCategoryData] = useState(initialCategoryData);
 
+
     // HANDLING CHANGE ---------------
     const handleCategoryChange = (event) => {
         const valueData = event.target.value;
-        console.log('muhahahaha')
-        console.log(valueData)
-
         setCategoryData(valueData);
-        // onCategoryChange({ category: valueData });
-        onCategoryChange(valueData);
-    }
 
-    console.log(error)
+        // Different handling of data based on which context the component is used in
+        if (filter) {
+            onCategoryChange({ category: valueData });
+        } else {
+            onCategoryChange(valueData);
+        }
+    }
 
 
     return (
         <>
-            <FormControl sx={{width: '100%'}} >
+            <FormControl sx={{ width: '100%' }} >
                 <InputLabel>Category</InputLabel>
                 <Select
                     sx={{ borderRadius: '15px' }}

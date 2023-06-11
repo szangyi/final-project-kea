@@ -16,7 +16,7 @@ import MyCustomTextField from "../Form/TextField";
 
 
 
-const Hashtags = ({ onHashtagChange, filter, helperText, error  }) => {
+const Hashtags = ({ onHashtagChange, filter, helperText, error }) => {
 
     // VARIABLES ---------------
     const [hashtagData, setHashtagData] = useState([]);
@@ -26,7 +26,13 @@ const Hashtags = ({ onHashtagChange, filter, helperText, error  }) => {
         const selectedTags = value.map((item) => item.tag);
         setHashtagData(selectedTags);
         onHashtagChange(selectedTags);
-        // onHashtagChange({ hashtag: selectedTags });
+
+        // Different handling of data based on which context the component is used in
+        if (filter) {
+            onHashtagChange({hashtag:selectedTags}); 
+        } else {
+            onHashtagChange(selectedTags);
+        }
     }
 
 
