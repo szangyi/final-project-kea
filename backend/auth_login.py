@@ -1,25 +1,22 @@
-from bottle import request, redirect, post, response
+from bottle import request, post, response
 import g 
-import uuid
-import mysql.connector
 import bcrypt
 import helper_functions
+import html
 import database_access_functions
 
-
+# LOGIN #
 @post("/api/login")
 def _login():
     try:
         # VARIABLES ##########################
-
         request_user_data = request.json
-        user_email = request_user_data["email"]
-        user_password = request_user_data["password"]
-
+        user_email = html.escape(request_user_data["email"])
+        user_password = html.escape(request_user_data["password"])
         password_encode = user_password.encode('utf-8')
         
-        # VALIDATION ##########################
-        
+
+        # VALIDATION #########################
         validation_errors = []
 
         user_email, error_e = g._is_item_email(user_email)
@@ -34,8 +31,7 @@ def _login():
             return g._send(400, validation_errors)
 
 
-        # DATABASE ##########################
-
+        # DATABASE CONNECTION ################
         db_config = helper_functions._db_config()
         check_password = database_access_functions._user_exist_email(user_email, db_config)
         if check_password:

@@ -1,16 +1,15 @@
-from bottle import get, request, response
-import mysql.connector
+from bottle import get, response
 import json
 import helper_functions
-import database_access_functions
 
-# USER ACCOUNT INFO ##########################
+
+# GETTING USER ACCOUNT INFO # 
 @get("/api/account-info")
 def _account_info():
     try:
-        # VALIDATION ##########################
+        
+        # DATABASE ##########################
         selected_user_db = helper_functions._validation_function()
-
 
         if selected_user_db is not None:
             user_info = {
@@ -19,8 +18,7 @@ def _account_info():
                 "lastName": selected_user_db[3],
                 "userImage": selected_user_db[6],
                 "user_email": selected_user_db[4],
-                "user_password": selected_user_db[5],
-                
+                "user_password": selected_user_db[5],                
             }
                 
             response.status = 200

@@ -1,6 +1,8 @@
 from bottle import get, response
 import g
 
+
+# LOGOUT #
 @get("/api/logout")
 def _():
     try:

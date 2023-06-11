@@ -3,8 +3,9 @@ import { LOCATION, CATEGORYOPTIONS } from '../util/Constants';
 
 const regexURL = /(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z]{2,}(\.[a-zA-Z]{2,})(\.[a-zA-Z]{2,})?\/[a-zA-Z0-9]{2,}|((https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z]{2,}(\.[a-zA-Z]{2,})(\.[a-zA-Z]{2,})?)|(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z0-9]{2,}\.[a-zA-Z0-9]{2,}\.[a-zA-Z0-9]{2,}(\.[a-zA-Z0-9]{2,})?/g;
 const regexSoMeAccount = /^[a-zA-Z0-9_\.]+$/;
-const regexPassword = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
-// min 6 characters, 1 upper case letter, 1 lower case letter, 1 numeric digit.
+const regexPassword = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/; // min 6 characters, 1 upper case letter, 1 lower case letter, 1 numeric digit.
+const regexSpecChars = /^[^<>\[\]{}()%#~\\^|`0-9]*$/; 
+const regexSpecCharsWithNumbers = /^[^<>\[\]{}()%#~\\^|`]*$/ ; // only alphabets
 
 // eslint-disable-next-line
 const regexEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -13,18 +14,20 @@ const regexEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+")
 export const signupSchema = Yup.object().shape({
     firstName: Yup.string()
         .min(2, 'Min. 2 characters')
-        .max(20, 'Max. 20 characters')
+        .max(50, 'Max. 20 characters')
+        .matches(regexSpecChars, { message: "Invalid characters, only alphabets are allowed." })
         .required('Required field'),
     lastName: Yup.string()
         .min(2, 'Min. 2 characters')
         .max(20, 'Max. 20 characters')
+        .matches(regexSpecChars, { message: "Invalid characters, only alphabets are allowed." })
         .required('Required field'),
     username: Yup.string()
         .min(3, 'Min. 3 characters')
         .max(16, 'Max. 16 characters')
+        .matches(regexSpecCharsWithNumbers, { message: "Invalid characters, only alphabets and numberic values are allowed." })
         .required('Required field'),
     email: Yup.string()
-        // .email('Invalid email address')
         .matches(regexEmail, { message: "Please enter a valid e-mail address. Correct format: test@email.com" })
         .required('Required field'),
     password: Yup.string()
@@ -77,14 +80,16 @@ export const createProfileSchema = Yup.object().shape({
     username: Yup.string()
         .min(3, 'Min. 3 characters')
         .max(16, 'Max. 16 characters')
+        .matches(regexSpecCharsWithNumbers, { message: "Invalid characters, only alphabets and numberic values are allowed." })
         .required('Required field'),
     bio: Yup.string()
         .min(10, 'Min. 10 characters')
         .max(200, 'Max. 200 characters')
+        .matches(regexSpecChars, { message: "Invalid characters, only alphabets are allowed." })
         .required('Required field'),
     location: Yup.string()
         .required('Required field')
-        .test('valid-location', 'Invalid location', (value) => {
+        .test('valid-location', 'Invalid location. Choose from the list.', (value) => {
             return LOCATION.some((option) => option.label === value);
         }),
     image: Yup.mixed()
@@ -100,7 +105,7 @@ export const createProfileSchema = Yup.object().shape({
         .required('Required field')
         .oneOf(
             CATEGORYOPTIONS.map((option) => option.category),
-            'Invalid category'
+            'Invalid category. Choose from the list.'
         ),
     hashtag: Yup.mixed()
         .required('Required field'),

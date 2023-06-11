@@ -61,7 +61,7 @@ def _signup(user_data, db_config ):
     try:
         db = mysql.connector.connect(**db_config)
         cursor = db.cursor()
-        sql_signup = """INSERT INTO users (user_ID, username, user_first_name, user_last_name, user_email, user_password, user_image_ID, user_interest_tags, is_influencer, user_created_at ) VALUES ( %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
+        sql_signup = """INSERT INTO users (user_ID, username, user_first_name, user_last_name, user_email, user_password, user_image_ID, is_influencer, user_created_at ) VALUES ( %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
         var = (
             user_data["user_ID"],
             user_data["username"],
@@ -70,7 +70,6 @@ def _signup(user_data, db_config ):
             user_data["user_email"],
             user_data["user_password"],
             user_data["user_image_ID"],
-            user_data["user_interest_tags"],
             user_data["is_influencer"],
             user_data["user_created_at"],
         )
@@ -78,6 +77,8 @@ def _signup(user_data, db_config ):
         db.commit()
         response.status = 200
     except Exception as ex:
+        print("##############")
+        print("this mf")
         print(ex)
         response.status = 500
         return str(ex)
@@ -128,7 +129,7 @@ def _create_influencer_profile(influencer_data, db_config):
         sql_create_profile = """INSERT INTO influencers_profile (influencer_ID, user_ID, influencer_username, influencer_bio_description, influencer_location, influencer_website, influencer_instagram, influencer_youtube, influencer_tiktok, influencer_tags, influencer_category, profile_image, profile_created_at) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
         var = (
             influencer_data["influencer_ID"],
-            influencer_data["user_id"],
+            influencer_data["user_ID"],
             influencer_data["influencer_username"],
             influencer_data["influencer_bio_description"],
             influencer_data["influencer_location"],
@@ -138,7 +139,7 @@ def _create_influencer_profile(influencer_data, db_config):
             influencer_data["influencer_tiktok"],
             influencer_data["influencer_tags"],
             influencer_data["influencer_category"],
-            influencer_data["image_name"],
+            influencer_data["profile_image"],
             influencer_data["profile_created_at"],
         )
         cursor.execute(sql_create_profile, var)
@@ -447,3 +448,37 @@ def _update_user_is_influencer(user_id,is_influencer, db_config):
 
     finally:
         db.close()
+
+def _hashtags_manager(array_hashtags, hashtag_list, db_config):
+    try:
+        db = mysql.connector.connect(**db_config)
+        db.start_transaction()
+        cursor = db.cursor()
+        
+        for hashtag in hashtag_list:
+            
+            sql_check = "SELECT tag_ID FROM tags WHERE tag_name = %s"
+            val_check = (hashtag,)
+            cursor.execute(sql_check, val_check)
+            result_check = cursor.fetchone()
+            
+            if not result_check:
+                sql_insert = "INSERT INTO tags (tag_name) VALUES (%s)"
+                val_insert = (hashtag,)
+                cursor.execute(sql_insert, val_insert)
+                db.commit()
+                
+                get_last_inserted_hashtag = cursor.lastrowid
+                array_hashtags.append(get_last_inserted_hashtag)
+            else:
+                array_hashtags.append(result_check[0])
+        
+        return array_hashtags
+        
+    except Exception as ex:
+        print(ex)
+        response.status= 500
+        return str(ex)
+
+    finally:
+        db.close()    

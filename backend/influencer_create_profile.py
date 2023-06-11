@@ -7,34 +7,32 @@ import json
 import database_access_functions
 import helper_functions
 import os
+import html
 
-# CREATING INFLUENCER PROFILE ##########################
+# CREATING INFLUENCER PROFILE #
 @post("/api/create-profile")
 def _():
     try:
-            # VARIABLES ##########################
-
+        # VARIABLES ##########################
         cookie_request = helper_functions._cookie_validator()
         user_email_validated = helper_functions._token_validator(cookie_request)
-
         influencer_ID = str(uuid.uuid4())
-        influencer_username = request.forms.get("username")
-        influencer_bio_description = request.forms.get("bio")
+        influencer_username = html.escape(request.forms.get("username"))
+        influencer_bio_description = html.escape(request.forms.get("bio"))
         influencer_location = request.forms.get("location") # no validation
-        influencer_website = request.forms.get("website")
-        influencer_instagram = request.forms.get("instagram")
-        influencer_youtube = request.forms.get("youTube")
-        influencer_tiktok = request.forms.get("tikTok")
+        influencer_website = html.escape(request.forms.get("website"))
+        influencer_instagram = html.escape(request.forms.get("instagram"))
+        influencer_youtube = html.escape(request.forms.get("youTube"))
+        influencer_tiktok = html.escape(request.forms.get("tikTok"))
         influencer_tags_list = request.forms.get("hashtag") # no validation
         influencer_tags  = json.dumps(influencer_tags_list) # # no validation
         influencer_category = request.forms.get("category") # no validation
-        profile_image = request.files.get("image")
+        profile_image_delete = request.files.get("image")
         profile_created_at = str(int(time.time()))
         image_id = str(uuid.uuid4())
 
 
         # VALIDATION ##########################
-
         validation_errors = []
 
         influencer_username, error_un = g._is_username(influencer_username)
@@ -65,24 +63,19 @@ def _():
             if error_tt:
                 validation_errors.append(error_tt)
         
-        profile_image, error_img = g._is_item_image(profile_image )
+        profile_image_delete, error_img = g._is_item_image(profile_image_delete)
         if error_img:
             validation_errors.append(error_img)
         else:
-            filename,file_extension = os.path.splitext(profile_image.filename)
+            filename,file_extension = os.path.splitext(profile_image_delete.filename)
             image_name =f"{image_id}{file_extension}"
-            profile_image.save(f"images/profile_images/{image_name}")
+            profile_image_delete.save(f"images/profile_images/{image_name}")
 
         if validation_errors:
-            print("################## VALIDATION ERRORS:")
-            print(validation_errors)
             return g._send(400, validation_errors)
-        
-        
-
-
+    
+    
         # DATABASE CONNECTION ##########################
-
         db_config = helper_functions._db_config()
         selected_user_db = database_access_functions._get_user(user_email_validated, db_config)
         
@@ -97,11 +90,15 @@ def _():
                     database_access_functions._update_user_is_influencer(user_id, is_influencer, db_config)
                 else:
                     pass
-                    
+                                
+                array_hashtags = []
+                influencer_hashtag_divided = influencer_tags_list.split(",")
+                hashtag_list = database_access_functions._hashtags_manager(array_hashtags, influencer_hashtag_divided, db_config)
+                hashtag_list_json = json.dumps(hashtag_list)
 
                 influencer_data = {
                     "influencer_ID": influencer_ID,
-                    "user_id": selected_user_db[0],
+                    "user_ID": selected_user_db[0],
                     "influencer_username": influencer_username,
                     "influencer_bio_description": influencer_bio_description,
                     "influencer_location": influencer_location,
@@ -109,9 +106,9 @@ def _():
                     "influencer_instagram": influencer_instagram,
                     "influencer_youtube": influencer_youtube,
                     "influencer_tiktok": influencer_tiktok,
-                    "influencer_tags": influencer_tags,
+                    "influencer_tags": hashtag_list_json,
                     "influencer_category": influencer_category,
-                    "image_name": image_name,
+                    "profile_image": image_name,
                     "profile_created_at": profile_created_at,
                 }
                 
@@ -125,9 +122,3 @@ def _():
     except Exception as ex:
         print(ex)
         response.status = 500
-    
-    
-
-
-    
-    
