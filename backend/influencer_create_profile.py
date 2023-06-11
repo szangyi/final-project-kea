@@ -31,6 +31,12 @@ def _():
         profile_image = request.files.get("image")
         profile_created_at = str(int(time.time()))
         image_id = str(uuid.uuid4())
+        
+        print(type(influencer_tags_list))
+        print(influencer_tags_list)
+        
+        print(type(influencer_tags))
+        print(influencer_tags)
 
 
         # VALIDATION ##########################
@@ -97,6 +103,13 @@ def _():
                     database_access_functions._update_user_is_influencer(user_id, is_influencer, db_config)
                 else:
                     pass
+                
+                
+                array_hashtags = []
+                influencer_hashtag_divided = influencer_tags_list.split(",")
+                hashtag_list = database_access_functions._hashtags_manager(array_hashtags, influencer_hashtag_divided, db_config)
+                hashtag_list_json = json.dumps(hashtag_list)
+
                     
 
                 influencer_data = {
@@ -109,7 +122,7 @@ def _():
                     "influencer_instagram": influencer_instagram,
                     "influencer_youtube": influencer_youtube,
                     "influencer_tiktok": influencer_tiktok,
-                    "influencer_tags": influencer_tags,
+                    "influencer_tags": hashtag_list_json,
                     "influencer_category": influencer_category,
                     "image_name": image_name,
                     "profile_created_at": profile_created_at,

@@ -447,3 +447,37 @@ def _update_user_is_influencer(user_id,is_influencer, db_config):
 
     finally:
         db.close()
+
+def _hashtags_manager(array_hashtags, hashtag_list, db_config):
+    try:
+        db = mysql.connector.connect(**db_config)
+        db.start_transaction()
+        cursor = db.cursor()
+        
+        for hashtag in hashtag_list:
+            
+            sql_check = "SELECT tag_ID FROM tags WHERE tag_name = %s"
+            val_check = (hashtag,)
+            cursor.execute(sql_check, val_check)
+            result_check = cursor.fetchone()
+            
+            if not result_check:
+                sql_insert = "INSERT INTO tags (tag_name) VALUES (%s)"
+                val_insert = (hashtag,)
+                cursor.execute(sql_insert, val_insert)
+                db.commit()
+                
+                get_last_inserted_hashtag = cursor.lastrowid
+                array_hashtags.append(get_last_inserted_hashtag)
+            else:
+                array_hashtags.append(result_check[0])
+        
+        return array_hashtags
+        
+    except Exception as ex:
+        print(ex)
+        response.status= 500
+        return str(ex)
+
+    finally:
+        db.close()    
