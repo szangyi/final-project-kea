@@ -27,7 +27,6 @@ def _validation_function():
 
 def _cookie_validator():
     cookie = request.get_cookie("token", secret=g.COOKIE_SECRET)
-
     if cookie:
         response.status = 200
         return cookie
@@ -49,6 +48,7 @@ def _db_config():
         
 def _generate_token(email):
     try:
+        print("I am here 2")
         payload = {'email': email}
         token_auth = jwt.encode(payload, g.SECRET_KEY, algorithm='HS256')
         token_json = {
