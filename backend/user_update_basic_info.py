@@ -12,25 +12,56 @@ import os
 @post("/api/update-basic-info")
 def _update_basic_info():
     try:
-        request_user_data = request.json
-        user_first_name = request_user_data["firstName"]
-        user_last_name = request_user_data["lastName"]
-        username = request_user_data["username"]
-    
+         # VARIABLES ##########################
+        user_first_name = request.forms.get("firstName")
+        user_last_name = request.forms.get("lastName")
+        username = request.forms.get("username")
+        user_image = request.files.get("image")
+        image_id = str(uuid.uuid4())
+        print(user_image)
+        print(request.files)
+        
+         # VALIDATION ##########################
+        validation_errors = []
+
+        username, error_un = g._is_username(username)
+        if error_un:
+            validation_errors.append(error_un)
+        user_first_name, error_un = g._is_first_name(user_first_name)
+        if error_un:
+            validation_errors.append(error_un)
+        user_last_name, error_un = g._is_last_name(user_last_name)
+        if error_un:
+            validation_errors.append(error_un)        
+        user_image, error_img = g._is_item_image(user_image )
+        if error_img:
+            validation_errors.append(error_img)
+        else:
+            filename,file_extension = os.path.splitext(user_image.filename)
+            image_name =f"{image_id}{file_extension}"
+            user_image.save(f"images/profile_images/{image_name}")
+
+        if validation_errors:
+            print("################## VALIDATION ERRORS:")
+            print(validation_errors)
+            return g._send(400, validation_errors)
+        
+        
+
         
         db_config = helper_functions._db_config()
         selected_user_db = helper_functions._validation_function()
         
         if selected_user_db is not None:
             if selected_user_db[1] != username:
-                user_email = selected_user_db[5]
+                user_email = selected_user_db[4]
                 check_user = database_access_functions._user_exist(user_email, username , db_config )
                 if check_user is None:
-                    _update_user_function(selected_user_db,user_first_name, user_last_name, username, db_config )
+                    _update_user_function(selected_user_db,user_first_name, user_last_name, username,image_name, db_config )
                 else: 
                     response.status = 409
             else:
-                _update_user_function(selected_user_db,user_first_name, user_last_name, username, db_config )
+                _update_user_function(selected_user_db,user_first_name, user_last_name, username, image_name, db_config )
 
         else:
             response.status = 400
@@ -42,12 +73,13 @@ def _update_basic_info():
         print(ex)
         return str(ex)
     
-def _update_user_function(selected_user_db,user_first_name, user_last_name, username, db_config):
+def _update_user_function(selected_user_db,user_first_name, user_last_name, username, image_name, db_config):
     user_id = selected_user_db[0]
     user_basic_data = {
         "user_first_name": user_first_name,
         "user_last_name": user_last_name,
         "username": username,
+        "image_name": image_name
     }
     
     database_access_functions._update_user_basic_info(user_id, user_basic_data, db_config)

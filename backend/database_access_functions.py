@@ -61,13 +61,12 @@ def _signup(user_data, db_config ):
     try:
         db = mysql.connector.connect(**db_config)
         cursor = db.cursor()
-        sql_signup = """INSERT INTO users (user_ID, username, user_first_name, user_last_name, user_location, user_email, user_password, user_image_ID, user_interest_tags, is_influencer, user_created_at ) VALUES ( %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
+        sql_signup = """INSERT INTO users (user_ID, username, user_first_name, user_last_name, user_email, user_password, user_image_ID, user_interest_tags, is_influencer, user_created_at ) VALUES ( %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
         var = (
             user_data["user_ID"],
             user_data["username"],
             user_data["user_first_name"],
             user_data["user_last_name"],
-            user_data["user_location"],
             user_data["user_email"],
             user_data["user_password"],
             user_data["user_image_ID"],
@@ -126,7 +125,7 @@ def _create_influencer_profile(influencer_data, db_config):
     try:
         db = mysql.connector.connect(**db_config)
         cursor = db.cursor()
-        sql_create_profile = """INSERT INTO influencers_profile (influencer_ID, user_ID, influencer_username, influencer_bio_description, influencer_location, influencer_website, influencer_instagram, influencer_youtube, influencer_tiktok, influencer_tags, influencer_category, profile_image_delete, profile_created_at) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
+        sql_create_profile = """INSERT INTO influencers_profile (influencer_ID, user_ID, influencer_username, influencer_bio_description, influencer_location, influencer_website, influencer_instagram, influencer_youtube, influencer_tiktok, influencer_tags, influencer_category, profile_image, profile_created_at) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
         var = (
             influencer_data["influencer_ID"],
             influencer_data["user_id"],
@@ -368,14 +367,18 @@ def _update_user_basic_info(user_id,user_basic_data, db_config):
         sql = """ UPDATE users
                     SET username =%s,
                             user_first_name =%s,
-                            user_last_name =%s
+                            user_last_name =%s,
+                            user_image_ID = %s
+                            
                     WHERE user_ID=%s
               """
         var = (
             user_basic_data["username"],
             user_basic_data["user_first_name"],
             user_basic_data["user_last_name"],
+            user_basic_data["image_name"],
             user_id,
+            
         )
         cursor.execute(sql, var)
         db.commit()

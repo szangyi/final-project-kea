@@ -28,7 +28,7 @@ def _():
         influencer_tags_list = request.forms.get("hashtag") # no validation
         influencer_tags  = json.dumps(influencer_tags_list) # # no validation
         influencer_category = request.forms.get("category") # no validation
-        profile_image_delete = request.files.get("image")
+        profile_image = request.files.get("image")
         profile_created_at = str(int(time.time()))
         image_id = str(uuid.uuid4())
 
@@ -65,13 +65,13 @@ def _():
             if error_tt:
                 validation_errors.append(error_tt)
         
-        profile_image_delete, error_img = g._is_item_image(profile_image_delete )
+        profile_image, error_img = g._is_item_image(profile_image )
         if error_img:
             validation_errors.append(error_img)
         else:
-            filename,file_extension = os.path.splitext(profile_image_delete.filename)
+            filename,file_extension = os.path.splitext(profile_image.filename)
             image_name =f"{image_id}{file_extension}"
-            profile_image_delete.save(f"images/profile_images/{image_name}")
+            profile_image.save(f"images/profile_images/{image_name}")
 
         if validation_errors:
             print("################## VALIDATION ERRORS:")

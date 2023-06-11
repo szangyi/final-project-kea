@@ -16,7 +16,7 @@ def _update_security_info():
         selected_user_db = helper_functions._validation_function()
         if selected_user_db is not None:
             user_id = selected_user_db[0]            
-            check_email = selected_user_db[5]
+            check_email = selected_user_db[4]
             if check_email != user_email:
                 check_user = database_access_functions._user_exist_email(user_email , db_config )
                 if check_user is None:

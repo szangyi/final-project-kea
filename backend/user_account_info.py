@@ -17,9 +17,9 @@ def _account_info():
                 "username": selected_user_db[1],
                 "firstName": selected_user_db[2],
                 "lastName": selected_user_db[3],
-                "userImage": selected_user_db[7],
-                "user_email": selected_user_db[5],
-                "user_password": selected_user_db[6],
+                "userImage": selected_user_db[6],
+                "user_email": selected_user_db[4],
+                "user_password": selected_user_db[5],
                 
             }
                 

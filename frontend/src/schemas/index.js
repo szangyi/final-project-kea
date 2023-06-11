@@ -108,15 +108,15 @@ export const createProfileSchema = Yup.object().shape({
         .matches(regexURL, { message: "This website is a wrong format. Correct format: www.testsite.com" }),
     instagram: Yup.string()
         .min(3, 'Min. 3 characters')
-        .max(16, 'Max. 16 characters')
+        .max(60, 'Max. 60 characters')
         .matches(regexSoMeAccount, { message: "Your accountname is invalid. It cannot have any space and special characters, except '.' and '_'. " }),
     youTube: Yup.string()
         .min(3, 'Min. 3 characters')
-        .max(16, 'Max. 16 characters')
+        .max(60, 'Max. 60 characters')
         .matches(regexSoMeAccount, { message: "Your accountname is invalid. It cannot have any space and special characters, except '.' and '_'. " }),
     tikTok: Yup.string()
         .min(3, 'Min. 3 characters')
-        .max(16, 'Max. 16 characters')
+        .max(60, 'Max. 60 characters')
         .matches(regexSoMeAccount, { message: "Your accountname is invalid. It cannot have any space and special characters, except '.' and '_'. " })
 
 })

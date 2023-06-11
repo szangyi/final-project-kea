@@ -20,6 +20,7 @@ import { userBasicInfoSchema } from '../../schemas';
 // --------------------------
 import ErrorPage from '../ErrorPage';
 import UpdateBasicInfoAPI from '../../api/UpdateBasicInfoAPI';
+import ProfileImage from '../../components/Image/ProfileImage';
 
 const AccountInfo = (props) => {
 
@@ -33,14 +34,22 @@ const AccountInfo = (props) => {
             firstName: userData.firstName,
             lastName: userData.lastName,
             username: userData.username,
+            profileImage: userData.userImage
         },
 
         validationSchema: userBasicInfoSchema,
     });
 
+    const handleImageChange = (value) => {
+        handleChange({ target: { name: 'image', value } });
+    };
+
+    console.log(values)
 
 
-    const submitHandler = async(event)=>{
+
+
+    const submitHandler = async (event) => {
         event.preventDefault();
 
         setTouched({
@@ -61,7 +70,7 @@ const AccountInfo = (props) => {
     }
 
     if (errorMessage) {
-        return <ErrorPage error={errorMessage}/>
+        return <ErrorPage error={errorMessage} />
     }
     return (
         <>
@@ -72,10 +81,10 @@ const AccountInfo = (props) => {
 
                 <Box component="form" onSubmit={submitHandler} sx={{ mt: 1, width: '100%' }}>
 
-                    <Grid container spacing={4} sx={{mt: 2}}>
+                    <Grid container spacing={4} sx={{ mt: 2 }}>
                         <Grid container item xs={8}>
 
-                        <Typography variant="h6">user information</Typography>
+                            <Typography variant="h6">user information</Typography>
                             {/* <Typography variant="subtitle1" sx={{color: 'customColors.salmon.dark'}}>user information</Typography> */}
 
                             <Grid container item spacing={2}>
@@ -141,7 +150,24 @@ const AccountInfo = (props) => {
                         <Grid item xs={4}>
 
                             <Typography variant="h6">profile photo</Typography>
-                            {/* <Typography variant="subtitle1" sx={{color: 'customColors.salmon.dark'}}>profile photo</Typography> */}
+
+                            {values.profileImage ? (
+                                <Box
+                                    component="img"
+                                    src={`http://127.0.0.1:7878/profile_images/${values.profileImage}`}
+                                    sx={{ height: 50, width: 50, borderRadius: '50%' }}
+                                />
+                            ) : (
+                                <Typography variant="p">You dont have a profile photo yet</Typography>
+
+                            )}
+                            <ProfileImage
+                                onImageChange={handleImageChange}
+                                onChange={handleChange}
+                                value={values.image}
+                                error={touched.image && Boolean(errors.image)}
+                                helperText={touched.image && errors.image}
+                            />
 
                         </Grid>
 

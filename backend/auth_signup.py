@@ -24,7 +24,6 @@ def _signup():
         user_ID = str(uuid.uuid4())
         user_first_name = request_user_data["firstName"]
         user_last_name = request_user_data["lastName"]
-        user_location = ""
         user_email = request_user_data["email"]
         username = request_user_data["username"]
         user_password = request_user_data["password"]
@@ -32,8 +31,6 @@ def _signup():
         user_image_ID = ""
         user_interest_tags = '{}'
         is_influencer = False
-        message_json = None
-        message = None
 
         salt = bcrypt.gensalt()
         password_encode = user_password.encode('utf-8')
@@ -81,7 +78,6 @@ def _signup():
                 "username": username,
                 "user_first_name": user_first_name,
                 "user_last_name": user_last_name,
-                "user_location": user_location,
                 "user_email": user_email,
                 "user_password": password_hashed,
                 "user_image_ID": user_image_ID, 

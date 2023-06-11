@@ -103,7 +103,7 @@ const Security = () => {
                                 id="password"
                                 label="Current password"
                                 name="password"
-                                // type="password"
+                                type="password"
                                 value={values.password}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
@@ -118,7 +118,7 @@ const Security = () => {
                                 id="passwordNew"
                                 label="New password"
                                 name="passwordNew"
-                                // type="password"
+                                type="password"
                                 value={values.passwordNew}
                                 onChange={handleChange}
                                 onBlur={handleBlur}

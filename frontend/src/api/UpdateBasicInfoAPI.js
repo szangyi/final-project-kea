@@ -8,16 +8,19 @@ export default async function UpdateBasicInfoAPI(values, setErrorMessage) {
 
     try {
 
-        const formData = {
-            firstName: values.firstName,
-            lastName: values.lastName,
-            username: values.username,
-        };
+        const formData = new FormData();
+        formData.append('username', values.username);
+        formData.append('firstName', values.firstName);
+        formData.append('lastName', values.lastName);
+        formData.append('image', values.image);
+
+        console.log(formData)
+        console.log('Form submitted:', Object.fromEntries(formData));
 
 
         const response = await axios.post('/api/update-basic-info', formData, {
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'multipart/form-data',
             },
         });
 
