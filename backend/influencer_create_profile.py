@@ -4,15 +4,15 @@ import g
 import uuid
 import time
 import json
-import database_helper_functions
+import database_access_functions
 import helper_functions
 import os
 
 # CREATING INFLUENCER PROFILE ##########################
 @post("/api/create-profile")
 def _():
-    
-    # VARIABLES ##########################
+    try:
+        # VARIABLES ##########################
 
     cookie_request = helper_functions._cookie_validator()
     user_email_validated = helper_functions._token_validator(cookie_request)
@@ -118,4 +118,5 @@ def _():
     
 
 
+    
     

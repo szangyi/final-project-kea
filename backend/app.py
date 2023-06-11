@@ -3,7 +3,7 @@ from bottle import Bottle, run, default_app, static_file, get, request
 ############# PY CLASSES ################
 import g
 import database_connection
-import database_helper_functions
+import database_access_functions
 import helper_functions
 import get_image
 
@@ -23,6 +23,8 @@ import profile_add_to_favorites
 import favorites_get_all
 
 import user_account_info 
+import user_update_basic_info
+import user_update_security_info
 
 
 

@@ -4,10 +4,29 @@ import json
 import jwt
 import g
 from datetime import datetime
+import database_access_functions
+
+
+def _validation_function():
+    try:
+        # VARIABLES ##########################
+        cookie_request = _cookie_validator()
+
+        # VALIDATION ##########################
+        user_email_validated = _token_validator(cookie_request)
+
+        # DATABASE CONNECTION ##########################
+        db_config = _db_config()
+        selected_user_db = database_access_functions._get_user(user_email_validated, db_config)
+        return selected_user_db
+    except Exception as ex:
+        response.status = 500
+        return str(ex)
+
+
 
 def _cookie_validator():
     cookie = request.get_cookie("token", secret=g.COOKIE_SECRET)
-
     if cookie:
         response.status = 200
         return cookie
@@ -29,6 +48,7 @@ def _db_config():
         
 def _generate_token(email):
     try:
+        print("I am here 2")
         payload = {'email': email}
         token_auth = jwt.encode(payload, g.SECRET_KEY, algorithm='HS256')
         token_json = {

@@ -46,6 +46,32 @@ export const loginSchema = Yup.object().shape({
         .required('Required field'),
 })
 
+export const userBasicInfoSchema = Yup.object().shape({
+    firstName: Yup.string()
+        .min(2, 'Min. 2 characters')
+        .max(20, 'Max. 20 characters')
+        .required('Required field'),
+    lastName: Yup.string()
+        .min(2, 'Min. 2 characters')
+        .max(20, 'Max. 20 characters')
+        .required('Required field'),
+    username: Yup.string()
+        .min(3, 'Min. 3 characters')
+        .max(16, 'Max. 16 characters')
+        .required('Required field'),
+})
+
+export const userSecuritySchema = Yup.object().shape({
+    email: Yup.string()
+        .matches(regexEmail, { message: "Please enter a valid e-mail address. Correct format: test@email.com" })
+        .required('Required field'),
+    password: Yup.string()
+        .min(6, 'Min. 6 characters')
+        .max(100, 'Max. 100 characters')
+        .matches(regexPassword, { message: "Your password must include at least 1 uppercase-, 1 lowercase letter, and 1 number" })
+        .required('Required field'),
+})
+
 
 export const createProfileSchema = Yup.object().shape({
     username: Yup.string()

@@ -11,13 +11,29 @@ def _user_exist(user_email, username, db_config):
         user_exist = cursor.fetchone()
         db.commit()
         response.status = 200
-        print("###### print user exists maaaaaan")
-        print(user_exist)
         return user_exist
     except Exception as ex:
         print(ex)
         response.status = 500
-        response.body = ex
+        return str(ex)
+    finally:
+        db.close()
+
+def _user_exist_email(user_email, db_config):
+    try:
+        db = mysql.connector.connect(**db_config)
+        cursor = db.cursor()
+        sql_user_exist = """ SELECT * FROM users WHERE user_email = %s"""
+        var = (user_email,)
+        cursor.execute(sql_user_exist, var)
+        user_exist = cursor.fetchone()
+        db.commit()
+        response.status = 200
+        return user_exist
+    except Exception as ex:
+        print(ex)
+        response.status = 500
+        return str(ex)
     finally:
         db.close()
 
@@ -65,7 +81,7 @@ def _signup(user_data, db_config ):
     except Exception as ex:
         print(ex)
         response.status = 500
-        response.body = ex
+        return str(ex)
     finally:
         db.close()
 
@@ -83,10 +99,11 @@ def _login(user_email, password_hashed, db_config ):
     except Exception as ex:
         print(ex)
         response.status = 500
-        response.body = ex
+        return str(ex)
     finally:
         db.close()
-        
+
+    
 def _get_user(user_email, db_config):
     try:
         db = mysql.connector.connect(**db_config)
@@ -101,7 +118,6 @@ def _get_user(user_email, db_config):
     except Exception as ex:
         print(ex)
         response.status = 500
-        response.body = ex
         return None
     finally:
         db.close()
@@ -132,7 +148,7 @@ def _create_influencer_profile(influencer_data, db_config):
     except Exception as ex:
         print(ex)
         response.status = 500
-        response.body = ex
+        return str(ex)
         
     finally:
         db.close()
@@ -152,7 +168,7 @@ def _get_all_influencer_profiles(user_id, db_config):
 
     except Exception as ex:
         response.status= 500
-        response.body = ex
+        return str(ex)
 
     finally:
         db.close()
@@ -172,7 +188,7 @@ def _get_one_influencer_profile(influencer_username, db_config):
     
     except Exception as ex:
         response.status= 500
-        response.body=ex
+        return str(ex)
 
     finally:
         db.close()
@@ -191,7 +207,7 @@ def _get_other_influencer_profiles(user_ID,username, db_config):
     
     except Exception as ex:
         response.status= 500
-        response.body = ex
+        return str(ex)
 
     finally:
         db.close()
@@ -208,7 +224,7 @@ def _delete_influencer_profile(influencer_ID, db_config):
     
     except Exception as ex:
         response.status= 500
-        response.body = ex
+        return str(ex)
 
     finally:
         db.close()
@@ -236,7 +252,7 @@ def _get_all_profiles(db_config, user_ID):
     
     except Exception as ex:
         response.status= 500
-        response.body = ex
+        return str(ex)
 
     finally:
         db.close()
@@ -255,7 +271,7 @@ def _get_random_profiles(user_ID, db_config, num_profiles):
     
     except Exception as ex:
         response.status= 500
-        response.body = ex
+        return str(ex)
 
     finally:
         db.close()
@@ -275,7 +291,7 @@ def _check_favorite_relationship(user_ID, influencer_ID, db_config):
     
     except Exception as ex:
         response.status= 500
-        response.body = ex
+        return str(ex)
 
     finally:
         db.close()
@@ -294,7 +310,7 @@ def _add_to_favorites(user_ID, influencer_ID, db_config):
     
     except Exception as ex:
         response.status= 500
-        response.body = ex
+        return str(ex)
 
     finally:
         db.close()
@@ -317,7 +333,7 @@ def _remove_from_favorites(user_ID, influencer_ID, db_config):
     
     except Exception as ex:
         response.status= 500
-        response.body = ex
+        return str(ex)
 
     finally:
         db.close()
@@ -340,7 +356,65 @@ def _get_all_favorites(user_id, db_config):
         return favorite_influencers
     except Exception as ex:
         response.status= 500
-        response.body = ex
+        return str(ex)
+
+    finally:
+        db.close()
+
+def _update_user_basic_info(user_id,user_basic_data, db_config):
+    try:
+        db = mysql.connector.connect(**db_config)
+        cursor = db.cursor()
+        sql = """ UPDATE users
+                    SET username =%s,
+                            user_first_name =%s,
+                            user_last_name =%s
+                    WHERE user_ID=%s
+              """
+        var = (
+            user_basic_data["username"],
+            user_basic_data["user_first_name"],
+            user_basic_data["user_last_name"],
+            user_id,
+        )
+        cursor.execute(sql, var)
+        db.commit()
+        
+        response.status = 200
+    except Exception as ex:
+        print(ex)
+        response.status= 500
+        return str(ex)
+
+    finally:
+        db.close()
+
+
+
+def _update_user_security_info(user_security_data, db_config):
+    try:
+        db = mysql.connector.connect(**db_config)
+        cursor = db.cursor()
+        sql = """ UPDATE users
+                    SET user_email =%s,
+                            user_password =%s
+                    WHERE user_ID=%s
+              """
+        var = (
+            user_security_data["user_email"],
+            user_security_data["user_password_new"],
+            user_security_data["user_id"],
+        )
+        
+        print(var)
+        cursor.execute(sql, var)
+        db.commit()
+        
+        response.status = 200
+    except Exception as ex:
+        print(ex)
+        response.status= 500
+        return str(ex)
 
     finally:
         db.close()
