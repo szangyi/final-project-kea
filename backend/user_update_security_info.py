@@ -20,10 +20,8 @@ def _update_security_info():
             check_email = selected_user_db[5]
             username = selected_user_db[1]
             if check_email != user_email:
-                print("jedfhkwefhkwefhkwefhkew")
                 check_user = database_access_functions._user_exist(user_email, username , db_config )
                 if check_user is None:
-                    print("I am here")
                     _check_password(user_id, user_email,password, password_new, db_config)
                     _update_cookie_value(user_email)
                 else:
@@ -62,10 +60,9 @@ def _check_password(user_id, user_email, password, password_new, db_config):
     if password_matched:
         password_encode_new = password_new.encode('utf-8')
         password_hashed_new = bcrypt.hashpw(password_encode_new, salt)
-        _update_security_info(user_id, user_email, password_new, db_config)
+        _update_security_info(user_id, user_email, password_hashed_new, db_config)
         response.status = 200
     else:
-        print("efhwefkjewhfiuewu")
         response.status = 401
 
 def _update_cookie_value(user_email):
