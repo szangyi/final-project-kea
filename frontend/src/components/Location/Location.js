@@ -15,7 +15,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 import MyCustomTextField from "../Form/TextField";
 import { LOCATION } from '../../util/Constants';
 
-const Location = ({ onLocationChange }) => {
+const Location = ({ onLocationChange, helperText, error }) => {
 
     // VARIABLES ---------------
     const [locationData, setLocationData] = useState(null)
@@ -31,9 +31,10 @@ const Location = ({ onLocationChange }) => {
         <Autocomplete
             id="country-select"
             options={LOCATION}
-            autoHighlight
+            // autoHighlight
+            autoFocus
             getOptionLabel={(option) => (option && option.label) || ''}
-            onChange = {handleLocationChange}
+            onChange={handleLocationChange}
             value={locationData}
             renderOption={(props, option) => (
                 <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
@@ -54,6 +55,8 @@ const Location = ({ onLocationChange }) => {
                     inputProps={{
                         ...params.inputProps,
                     }}
+                    helperText={helperText}
+                    error={error}
                 />
             )}
         />

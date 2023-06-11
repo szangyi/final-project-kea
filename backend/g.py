@@ -1,10 +1,16 @@
 from bottle import response
-
+import magic
+import os
 import re
 
+
 SECRET_KEY = "XM]-ktw8[f`~rRw4J"
-REGEX_EMAIL = '^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$'
 COOKIE_SECRET = "7RDGNwEvWQ"
+
+REGEX_EMAIL = '^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$'
+REGEX_URL = '(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z]{2,}(\.[a-zA-Z]{2,})(\.[a-zA-Z]{2,})?\/[a-zA-Z0-9]{2,}|((https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z]{2,}(\.[a-zA-Z]{2,})(\.[a-zA-Z]{2,})?)|(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z0-9]{2,}\.[a-zA-Z0-9]{2,}\.[a-zA-Z0-9]{2,}(\.[a-zA-Z0-9]{2,})?'
+REGEX_SOME_ACCOUNT = '^[a-zA-Z0-9_\.]+$'
+
 # VALIDATION ##########################
 
 def _send(status = 400, error_message = "Something went wrong!"):
@@ -67,9 +73,44 @@ def _is_password(text=None):
 
 # BIO
 def _is_longtext(text=None):
-  min, max = 10, 100
+  min, max = 10, 200
   error = f"Bio must be {min} to {max} characters."
   if not text: return None, error
   text = text.strip()
   if len(text) < min or len(text) > max : return None, error
   return text, None
+
+# URL
+def _is_item_url(text=None):
+  error = f"A valid url is: 'www.testsite.com'."
+  if not text : return None, error
+  if not re.match(REGEX_URL, text) : return None, error
+  return text, None
+
+# SOME
+def _is_item_account(text=None):
+  min, max = 3, 16
+  # error = f"Account name cannot have any space and special characters, except '.' and '_'. "
+  # if not re.match(REGEX_SOME_ACCOUNT, text) : return None, error
+  error = f"Account name must be {min} to {max} characters. No spaces"
+  if not text: return None, error
+  text = re.sub("[\n\t]*", "", text)
+  text = re.sub(" +", " ", text)
+  text = text.strip()
+  if len(text) < min or len(text) > max : return None, error 
+  return text, None
+
+# IMAGE
+def _is_item_image(file):
+  error = f"Invalid file type. Valid types: .png, .jpg, .jpeg"
+  valid_mime_types = ['image/png', 'image/jpeg']
+  file_mime_type = magic.from_buffer(file.file.read(1024), mime=True)
+  file.file.seek(0)  # Reset the file pointer to the beginning
+  if file_mime_type not in valid_mime_types:
+    return None, error
+  valid_file_extensions = ['.png', '.jpg', '.jpeg']
+  ext = os.path.splitext(file.filename)[1]
+  if ext.lower() not in valid_file_extensions:
+    return None, error
+  return file, None
+    

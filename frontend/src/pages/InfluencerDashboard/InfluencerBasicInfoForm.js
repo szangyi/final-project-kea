@@ -3,70 +3,76 @@
 // --------------------------
 import React, { useState } from 'react';
 
+
 // --------------------------
 // COMPONENTS ---------------
 // --------------------------
 import MyCustomTextField from "../../components/Form/TextField";
 import ProfileImage from '../../components/Image/ProfileImage';
 import Location from '../../components/Location/Location';
+import { Typography, Box } from '@mui/material';
 
-const InfluencerBasicInfoForm = ({ onDataChange }) => {
 
-    // VARIABLES ---------------
-    const [basicData, setBasicData] = useState({
-        username: '',
-        bio: ''
-    });
+const InfluencerBasicInfoForm = ({ values, handleChange, touched, errors }) => {
 
-    // HANDLE CHANGE ---------------
-    const handleChange = (event) => {
-        const { name, value } = event.target;
-        setBasicData((prevData) => ({ ...prevData, [name]: value }))
-        onDataChange(basicData);
-    }
+    const handleLocationChange = (value) => {
+        handleChange({ target: { name: 'location', value } });
+    };
 
-    const handleLocationChange = (data) => {
-        onDataChange({ location: data });
-    }
-
-    const handleImageChange = (data) => {
-        onDataChange(data)
-    }
-
+    const handleImageChange = (value) => {
+        handleChange({ target: { name: 'image', value } });
+    };
 
     return (
         <>
-            <MyCustomTextField
-                size="normal"
-                margin="normal"
-                required
-                fullWidth
-                id="username"
-                label="Username"
-                name="username"
-                autoComplete="username"
-                autoFocus
-                value={basicData.username}
-                onChange={handleChange}
-            />
 
-            <Location onLocationChange={handleLocationChange} />
+            <Typography variant="h5"> Basic information </Typography>
+            <Box>
+                <MyCustomTextField
+                    size="normal"
+                    margin="normal"
+                    fullWidth
+                    id="username"
+                    label="Username"
+                    name="username"
+                    autoComplete="username"
+                    onChange={handleChange}
+                    value={values.username}
+                    error={touched.username && Boolean(errors.username)}
+                    helperText={touched.username && errors.username}
+                />
 
-            <MyCustomTextField
-                margin="normal"
-                multiline
-                required
-                fullWidth
-                name="bio"
-                label="Write about yourself"
-                type="text"
-                id="bio"
-                autoComplete="bio"
-                value={basicData.bio}
-                onChange={handleChange}
-            />
+                <Location
+                    onLocationChange={handleLocationChange}
+                    error={touched.location && Boolean(errors.location)}
+                    helperText={touched.location && errors.location}
+                />
 
-            <ProfileImage onImageChange={handleImageChange} />
+                <MyCustomTextField
+                    margin="normal"
+                    multiline
+                    fullWidth
+                    name="bio"
+                    label="Write about yourself"
+                    type="text"
+                    id="bio"
+                    autoComplete="bio"
+                    onChange={handleChange}
+                    value={values.bio}
+                    error={touched.bio && Boolean(errors.bio)}
+                    helperText={touched.bio && errors.bio}
+                />
+
+                <ProfileImage
+                    onImageChange={handleImageChange}
+                    onChange={handleChange}
+                    value={values.image}
+                    error={touched.image && Boolean(errors.image)}
+                    helperText={touched.image && errors.image}
+
+                />
+
+            </Box>
         </>
     );
 }
