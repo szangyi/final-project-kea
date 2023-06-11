@@ -11,23 +11,16 @@ import { useNavigate } from "react-router-dom";
 // MATERIAL UI ---------------
 // --------------------------
 import Box from '@mui/material/Box';
-import Stepper from '@mui/material/Stepper';
-import Step from '@mui/material/Step';
-import StepLabel from '@mui/material/StepLabel';
 import Typography from '@mui/material/Typography';
 import { Stack } from '@mui/material';
 import { Alert } from '@mui/material';
-import Autocomplete from '@mui/material/Autocomplete';
-
+import ErrorPage from '../ErrorPage'
 
 
 
 // --------------------------
 // COMPONENTS ---------------
 // --------------------------
-import MyCustomTextField from "../../components/Form/TextField";
-import ProfileImage from '../../components/Image/ProfileImage';
-import { LOCATION } from '../../util/Constants';
 import CreateProfileAPI from '../../api/CreateProfileAPI'
 import MyCustomButton from '../../components/Button/Button';
 
@@ -50,10 +43,7 @@ const CreateProfile = () => {
 
 
     // VARIABLES ---------------
-    const [activeStep, setActiveStep] = useState(0);
-    const [formData, setFormData] = useState({})
-    const [error, setError] = useState(null)
-
+    const [profileExists, setProfileExists] = useState(null);
     const [formError, setFormError] = useState(null);
     const [errorMessage, setErrorMessage] = useState(null)
 
@@ -83,8 +73,6 @@ const CreateProfile = () => {
     // API CALLS ---------------
     const submitHandler = async () => {
 
-        console.log(values)
-
         // Touch all the inputfields before submission
         setTouched({
             username: true,
@@ -99,13 +87,11 @@ const CreateProfile = () => {
             tikTok: true,
         });
 
-        console.log(category)
-
         const updatedErrors = await validateForm();
 
         if ((Object.keys(updatedErrors).length === 0) && (Object.keys(errors).length === 0)) {
             setFormError(""); // Clear form errors
-            CreateProfileAPI(values, nav, setErrorMessage);
+            CreateProfileAPI(values, nav, setErrorMessage, setProfileExists);
         } else {
             setFormError('Please fill in all the required fields.');
         }
@@ -114,9 +100,11 @@ const CreateProfile = () => {
     }
 
     console.log(values)
-    console.log(values.hashtag)
     console.log(errors)
 
+    if (errorMessage) {
+        return <ErrorPage error={errorMessage} />
+    }
 
     return (
         <>
@@ -135,6 +123,11 @@ const CreateProfile = () => {
                         {formError && (
                             <Alert severity="error" sx={{ mb: 2, }}>{formError}</Alert>
                         )}
+
+
+                    {profileExists && (
+                        <Alert severity="error">{profileExists}</Alert>
+                    )}
 
 
                         <InfluencerBasicInfoForm values={values} handleChange={handleChange} touched={touched} errors={errors} />

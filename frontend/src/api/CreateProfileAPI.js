@@ -6,7 +6,7 @@ import axios from 'axios';
 
 
 
-export default async function CreateProfileAPI(values, nav, setErrorMessage) {
+export default async function CreateProfileAPI(values, nav, setErrorMessage, setProfileExists) {
     
     try {
         const formData = new FormData();
@@ -23,47 +23,27 @@ export default async function CreateProfileAPI(values, nav, setErrorMessage) {
 
         const response = await axios.post('/api/create-profile', formData, {
             headers: {
-            'Content-Type': 'multipart/form-data',
+                'Content-Type': 'multipart/form-data',
             },
         });
 
         if (response.status === 200) {
             nav('/influencer-dashboard');
-        } else {
-            const error = {
-            message: response.body,
-            statusCode: response.status,
-            };
-            setErrorMessage(error);
-        }
+        } 
     
     } catch (error) {
-        console.log('Create profile failed:', error);
-        setErrorMessage(error);
-
+        if (error.response && error.response.status === 409) {
+            const errorMessage = { // Page specific error message
+                message: "An influencer profile already exists with that username.",
+                statusCode: error.response.status,
+            };
+            setProfileExists(errorMessage.message);
+        } else {
+            const errorMessage = { // General error message
+                statusCode: error.response.status,
+            };
+            setErrorMessage(errorMessage);
+        }
     }
+
 }
-
-// export default async function CreateProfileAPI(formDataNew, nav, setError){
-
-//     try {
-//         const response = await axios.post('/api/create-profile', formDataNew, {
-//           headers: {
-//             'Content-Type': 'multipart/form-data',
-//           },
-//         });
-  
-//         if (response.status === 200) {
-//           nav('/influencer-dashboard');
-//         } else {
-//           const error = {
-//             message: response.body,
-//             statusCode: response.status,
-//           };
-//           setError(error);
-//         }
-//       } catch (error) {
-//         console.log('Create profile failed:', error);
-//         setError(error);
-//       }
-// }

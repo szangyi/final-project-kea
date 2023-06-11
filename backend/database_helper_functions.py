@@ -21,6 +21,26 @@ def _user_exist(user_email, username, db_config):
     finally:
         db.close()
 
+
+def _profile_exist(influencer_username, db_config):
+    try:
+        db = mysql.connector.connect(**db_config)
+        cursor = db.cursor()
+        sql_profile_exist = """ SELECT * FROM influencers_profile WHERE influencer_username = %s """
+        var = (influencer_username, )
+        cursor.execute(sql_profile_exist, var)
+        profile_exist = cursor.fetchone()
+        db.commit()
+        response.status = 200
+        return profile_exist
+    except Exception as ex:
+        print(ex)
+        response.status = 500
+        response.body = ex
+    finally:
+        db.close()
+
+
 def _signup(user_data, db_config ):
     try:
         db = mysql.connector.connect(**db_config)

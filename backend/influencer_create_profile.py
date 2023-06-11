@@ -15,7 +15,8 @@ def _():
     # VARIABLES ##########################
 
     cookie_request = helper_functions._cookie_validator()
-    
+    user_email_validated = helper_functions._token_validator(cookie_request)
+
     influencer_ID = str(uuid.uuid4())
     influencer_username = request.forms.get("username")
     influencer_bio_description = request.forms.get("bio")
@@ -77,32 +78,39 @@ def _():
         print(validation_errors)
         return g._send(400, validation_errors)
     
-    user_email_validated = helper_functions._token_validator(cookie_request)
     
+
+
     # DATABASE CONNECTION ##########################
 
     db_config = helper_functions._db_config()
     selected_user_db = database_helper_functions._get_user(user_email_validated, db_config)
     
     if selected_user_db is not None:
-        influencer_data = {
-            "influencer_ID": influencer_ID,
-            "user_id": selected_user_db[0],
-            "influencer_username": influencer_username,
-            "influencer_bio_description": influencer_bio_description,
-            "influencer_location": influencer_location,
-            "influencer_website": influencer_website,
-            "influencer_instagram": influencer_instagram,
-            "influencer_youtube": influencer_youtube,
-            "influencer_tiktok": influencer_tiktok,
-            "influencer_tags": influencer_tags,
-            "influencer_category": influencer_category,
-            "image_name": image_name,
-            "profile_created_at": profile_created_at,
-        }
-        
-        database_helper_functions._create_influencer_profile(influencer_data, db_config)
-        response.status = 200
+
+        profile_exist_db = database_helper_functions._profile_exist(influencer_username, db_config)
+        if not profile_exist_db:
+
+            influencer_data = {
+                "influencer_ID": influencer_ID,
+                "user_id": selected_user_db[0],
+                "influencer_username": influencer_username,
+                "influencer_bio_description": influencer_bio_description,
+                "influencer_location": influencer_location,
+                "influencer_website": influencer_website,
+                "influencer_instagram": influencer_instagram,
+                "influencer_youtube": influencer_youtube,
+                "influencer_tiktok": influencer_tiktok,
+                "influencer_tags": influencer_tags,
+                "influencer_category": influencer_category,
+                "image_name": image_name,
+                "profile_created_at": profile_created_at,
+            }
+            
+            database_helper_functions._create_influencer_profile(influencer_data, db_config)
+            response.status = 200
+        else:
+            response.status = 409 # Conflict
     else:
         response.status = 400
         return  "Profile couldn't be created"
