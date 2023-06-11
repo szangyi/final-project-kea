@@ -90,6 +90,14 @@ def _():
 
             profile_exist_db = database_access_functions._profile_exist(influencer_username, db_config)
             if not profile_exist_db:
+                user_id = selected_user_db[0]
+                profiles = database_access_functions._get_all_influencer_profiles(user_id, db_config)
+                if profiles == []:
+                    is_influencer = True
+                    database_access_functions._update_user_is_influencer(user_id, is_influencer, db_config)
+                else:
+                    pass
+                    
 
                 influencer_data = {
                     "influencer_ID": influencer_ID,

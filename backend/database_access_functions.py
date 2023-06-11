@@ -421,3 +421,29 @@ def _update_user_security_info(user_security_data, db_config):
 
     finally:
         db.close()
+        
+def _update_user_is_influencer(user_id,is_influencer, db_config):
+    try:
+        db = mysql.connector.connect(**db_config)
+        cursor = db.cursor()
+        sql = """ UPDATE users
+                    SET is_influencer =%s
+                    WHERE user_ID=%s
+              """
+        var = (
+            is_influencer,
+            user_id
+        )
+        
+        print(var)
+        cursor.execute(sql, var)
+        db.commit()
+        
+        response.status = 200
+    except Exception as ex:
+        print(ex)
+        response.status= 500
+        return str(ex)
+
+    finally:
+        db.close()

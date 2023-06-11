@@ -19,6 +19,14 @@ def _delete_profile():
 
         if selected_user_db is not None:
             database_access_functions._delete_influencer_profile(influencer_ID, db_config)
+            user_id = selected_user_db[0]
+
+            profiles = database_access_functions._get_all_influencer_profiles(user_id, db_config)
+            if profiles == []:
+                is_influencer = False
+                database_access_functions._update_user_is_influencer(user_id, is_influencer, db_config)
+            else:
+                pass
         else:
             response.status = 400
             return "Profile couldn't be deleted"
