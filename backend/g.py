@@ -1,5 +1,6 @@
 from bottle import response
-import pylibmagic
+
+# import pylibmagic
 
 import magic
 import os
