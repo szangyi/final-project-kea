@@ -1,31 +1,24 @@
-from bottle import  post, request, redirect, response
-from bottle import HTTPResponse
-
+from bottle import  post, request, response
 import g
 import uuid
-import mysql.connector
 import bcrypt
-import database_connection
 import database_access_functions
 import helper_functions
-import json
 import time
-import os
+import html
 
 
-# SIGNUP ##################################
+# SIGNUP #
 @post("/api/signup")
 def _signup():
     try:
         # VARIABLES ##########################
-
-
         request_user_data = request.json
         user_ID = str(uuid.uuid4())
-        user_first_name = request_user_data["firstName"]
-        user_last_name = request_user_data["lastName"]
-        user_email = request_user_data["email"]
-        username = request_user_data["username"]
+        user_first_name = html.escape(request_user_data["firstName"])
+        user_last_name = html.escape(request_user_data["lastName"])
+        user_email = html.escape(request_user_data["email"])
+        username = html.escape(request_user_data["username"])
         user_password = request_user_data["password"]
         user_created_at = str(int(time.time()))
         user_image_ID = ""
@@ -36,10 +29,8 @@ def _signup():
         password_encode = user_password.encode('utf-8')
         password_hashed = bcrypt.hashpw(password_encode, salt)
 
-        
 
         # VALIDATION ##########################
-
         validation_errors = []
 
         user_first_name, error_fn = g._is_first_name(user_first_name)
@@ -66,9 +57,7 @@ def _signup():
             return g._send(400, validation_errors)
 
 
-
         # DATABASE CONNECTION ##########################
-
         db_config = helper_functions._db_config()
         user_exist_db = database_access_functions._user_exist(user_email, username, db_config)
 

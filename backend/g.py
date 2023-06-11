@@ -19,7 +19,6 @@ def _send(status = 400, error_message = "Something went wrong!"):
   response.status = status
   return {"Error message(s)":error_message}
 
-
 # EMAIL
 def _is_item_email(text=None):
   error = f"A valid e-mail format is: 'example@email.com'. No spaces"
@@ -113,4 +112,4 @@ def _is_item_image(file):
   if ext.lower() not in valid_file_extensions:
     return None, error
   return file, None
-    
+  

@@ -3,7 +3,7 @@ import json
 import helper_functions
 import database_access_functions
 
-# USER COLLECTION WITH FAVORITES ##########################
+# USER COLLECTION WITH FAVORITES #
 @get("/api/favorites-get-all")
 def _():
     try:

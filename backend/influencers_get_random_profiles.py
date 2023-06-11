@@ -3,16 +3,19 @@ import json
 import database_access_functions
 import helper_functions
 
-# GETTING ALL EXISTING INFLUENCERS PROFILES ##########################
+# GETTING LIMITED RANDOM INFLUENCERS PROFILES #
 @get("/api/random-profiles")
 def _():
     try:
         # VARIABLES ##########################
         num_profiles = request.query.numProfiles
 
+
         # VALIDATION ##########################
         selected_user_db = helper_functions._validation_function()
-        # DATABASE CONNECTION ##########################
+
+
+        # DATABASE CONNECTION #################
         db_config = helper_functions._db_config()
         
 

@@ -3,6 +3,7 @@ import helper_functions
 import database_access_functions
 
 
+# ADD INFLUENCER PROFILE TO FAVORITES #
 @post("/api/add-to-favorites")
 def _():
     try:
@@ -10,13 +11,14 @@ def _():
         request_data = request.json
         influencer_ID = request_data["influencerID"]
         
+
         # VALIDATION ##########################
         selected_user_db = helper_functions._validation_function()
+
 
         # DATABASE CONNECTION ##########################
         db_config = helper_functions._db_config()
         user_ID = selected_user_db[0]
-
 
         if selected_user_db is not None:
             relationship_exist_db = database_access_functions._check_favorite_relationship(user_ID, influencer_ID, db_config)

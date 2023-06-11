@@ -1,7 +1,7 @@
 from bottle import get, response
 import helper_functions
 
-# VALIDATING THE COOKIE ##########################
+# VALIDATING THE COOKIE #
 @get("/api/validate-cookie")
 def _validate_cookie():
     try:

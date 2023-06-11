@@ -1,27 +1,26 @@
 from bottle import post, request, response
-import jwt
 import g
 import uuid
-import time
-import json
 import database_access_functions
 import helper_functions
 import os
+import html
 
-# CREATING INFLUENCER PROFILE ##########################
+# UPDATING USER ACCOUNT INFO # 
 @post("/api/update-basic-info")
 def _update_basic_info():
     try:
-         # VARIABLES ##########################
-        user_first_name = request.forms.get("firstName")
-        user_last_name = request.forms.get("lastName")
-        username = request.forms.get("username")
+        # VARIABLES ##########################
+        user_first_name = html.escape(request.forms.get("firstName"))
+        user_last_name = html.escape(request.forms.get("lastName"))
+        username = html.escape(request.forms.get("username"))
         user_image = request.files.get("image")
         image_id = str(uuid.uuid4())
         print(user_image)
         print(request.files)
         
-         # VALIDATION ##########################
+
+        # VALIDATION ##########################
         validation_errors = []
 
         username, error_un = g._is_username(username)
@@ -42,13 +41,10 @@ def _update_basic_info():
             user_image.save(f"images/profile_images/{image_name}")
 
         if validation_errors:
-            print("################## VALIDATION ERRORS:")
-            print(validation_errors)
             return g._send(400, validation_errors)
         
         
-
-        
+        # DATABASE ##########################
         db_config = helper_functions._db_config()
         selected_user_db = helper_functions._validation_function()
         

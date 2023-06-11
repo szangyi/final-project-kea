@@ -9,15 +9,13 @@ import helper_functions
 import os
 import html
 
-# CREATING INFLUENCER PROFILE ##########################
+# CREATING INFLUENCER PROFILE #
 @post("/api/create-profile")
 def _():
     try:
         # VARIABLES ##########################
-
         cookie_request = helper_functions._cookie_validator()
         user_email_validated = helper_functions._token_validator(cookie_request)
-
         influencer_ID = str(uuid.uuid4())
         influencer_username = html.escape(request.forms.get("username"))
         influencer_bio_description = html.escape(request.forms.get("bio"))
@@ -35,7 +33,6 @@ def _():
 
 
         # VALIDATION ##########################
-
         validation_errors = []
 
         influencer_username, error_un = g._is_username(influencer_username)
@@ -75,13 +72,10 @@ def _():
             profile_image_delete.save(f"images/profile_images/{image_name}")
 
         if validation_errors:
-            print("################## VALIDATION ERRORS:")
-            print(validation_errors)
             return g._send(400, validation_errors)
     
     
         # DATABASE CONNECTION ##########################
-
         db_config = helper_functions._db_config()
         selected_user_db = database_access_functions._get_user(user_email_validated, db_config)
         

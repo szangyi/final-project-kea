@@ -3,18 +3,20 @@ import mysql.connector
 import helper_functions
 import database_access_functions
 
+# DELETING INFLUENCER PROFILE #
 @post("/api/delete-profile")
 def _delete_profile():
     try:
         # VARIABLES ##########################
-
         request_influencer_ID = request.json
         influencer_ID = request_influencer_ID["influencerid"]
         
-        # VALIDATION ##########################
+
+        # VALIDATION #########################
         selected_user_db = helper_functions._validation_function()
 
-        # DATABASE CONNECTION ##########################
+
+        # DATABASE CONNECTION ################
         db_config = helper_functions._db_config()
 
         if selected_user_db is not None:

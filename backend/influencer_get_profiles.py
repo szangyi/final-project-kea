@@ -5,7 +5,7 @@ import g
 import helper_functions
 import database_access_functions
 
-# GETTING ALL INFLUENCERS PROFILES ##########################
+# GETTING ALL INFLUENCERS PROFILES #
 @get("/api/get-influencer-profiles")
 def _():
     try:
@@ -13,12 +13,13 @@ def _():
         influencer_profile_data = {}
         influencer_profile_data_json = []
         
-        # VALIDATION ##########################
+
+        # VALIDATION #########################
         selected_user_db = helper_functions._validation_function()
         
-        # DATABASE CONNECTION ##########################
-        db_config = helper_functions._db_config()
 
+        # DATABASE CONNECTION ################
+        db_config = helper_functions._db_config()
 
         if selected_user_db is not None:
             user_id = selected_user_db[0]
