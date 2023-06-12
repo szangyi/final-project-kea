@@ -1,6 +1,6 @@
 import { React, useState } from 'react';
 import { createBrowserRouter, RouterProvider, useRouteLoaderData } from 'react-router-dom';
-import { authLoader, navLoader } from './util/auth';
+import { authLoader, navLoader, navLoaderPublic, authLoaderPublic } from './util/auth';
 
 
 // --------------------------
@@ -76,6 +76,7 @@ const App = () => {
                 {
                     // UNPROTECTED/ PUBLIC
                     id: 'public-root',
+                    loader: navLoaderPublic,
                     children: [
                         {
                             element: <RootLayoutNavLoggedout />,

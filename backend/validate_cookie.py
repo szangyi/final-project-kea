@@ -1,18 +1,39 @@
-from bottle import get, response
+from bottle import get, response, request
 import helper_functions
 
 # VALIDATING THE COOKIE #
 @get("/api/validate-cookie")
 def _validate_cookie():
     try:
+        print("######## VALIDATE COOOOOKIE")
+
+        onlyCheck = request.query.get("onlyCheck")
+        print("######## onlycheck")
+        print(onlyCheck)
+
         # VALIDATION ##########################
-        selected_user_db = helper_functions._validation_function()
-        
-        if selected_user_db is not None:
-            response.status = 200
+
+        if onlyCheck is not None:
+            print("######public pages")
+            selected_user_db = helper_functions._validation_function()
+            
+            if selected_user_db is not None:
+                response.status = 200
+            else:
+                print("# IGY JARTAL")
+                response.status = 200
+                return None
+
         else:
-            response.status = 400
-            return "Invalid request"        
+            print("######private pages")
+            selected_user_db = helper_functions._validation_function()
+            
+            if selected_user_db is not None:
+                response.status = 200
+            else:
+                response.status = 400
+                return "Invalid request"  
+
         
     except Exception as ex:
         print(ex)

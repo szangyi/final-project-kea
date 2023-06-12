@@ -20,6 +20,7 @@ import { navLoader } from '../util/auth';
 // VALIDATION
 import { useFormik } from 'formik';
 import { loginSchema } from '../schemas';
+import Cookies from 'js-cookie';
 
 const LoginPage = () => {
 
@@ -27,7 +28,7 @@ const LoginPage = () => {
     const [formError, setFormError] = useState('');
     const [errorMessage, setErrorMessage] = useState(null)
     const expirationDate = new Date();
-    const token = useRouteLoaderData('root');
+
     const nav = useNavigate();
     expirationDate.setTime(expirationDate.getTime() + 60 * 60 * 1000);
     const { values, errors, touched, handleBlur, handleChange, setTouched, validateForm } = useFormik({
@@ -42,12 +43,12 @@ const LoginPage = () => {
     });
 
     // REDIRECT WHEN USER IS LOGGED IN ---------------
-    useEffect(() => {
-        if (token === true) {
-            console.log('userloggedinman');
-            nav('/');
-        }
-    }, [token]);
+    // useEffect(() => {
+    //     if (token === true) {
+    //         console.log('userloggedinman');
+    //         nav('/');
+    //     }
+    // }, [token]);
 
 
     // API CALLS ---------------

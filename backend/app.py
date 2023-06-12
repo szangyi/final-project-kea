@@ -11,6 +11,7 @@ import auth_login
 import auth_signup
 import auth_logout
 import validate_cookie
+import check_cookie
 
 import influencer_get_profiles
 import influencer_create_profile
