@@ -1,44 +1,48 @@
-import { redirect } from "react-router-dom";
 import ValidateCookieAPI from "../api/ValidateCookieAPI";
-// return redirect('/login'); // redirect not working anymore
-
-
-export const authLoader = async (onlyCheck) => {
-    const isCookie = await ValidateCookieAPI(onlyCheck);
+import { redirect } from "react-router-dom";
+export const authLoader = async (value) => {
+    console.log("here")
+    const isCookie = await ValidateCookieAPI(value);
     console.log(isCookie)
 
-    if (!isCookie) {
-        return false
-    } else {
-        return true;
-    }
+    return isCookie
+
 };
 
 export async function navLoader() {
     console.log('navloader runs')
-    const requestCookie = await authLoader();
+    const valuePrivate = "private"
+    const requestCookie = await authLoader(valuePrivate);
     console.log(requestCookie)
 
     if (requestCookie == false) {
-        return window.location.href = '/login';
+        return redirect("/login")
     }
     else {
         return true;
     }
 }
 
-export async function navLoaderPublic() {
-    console.log('navloaderPUBLICOOO runs')
-    const onlyCheck = "whatever";
-    const requestCookie = await authLoader(onlyCheck);
-    console.log(requestCookie)
+export async function navLoaderPublic(requestCookiePublic) {
 
-    if (requestCookie == true) {
+    requestCookiePublic = await checkPublic();
+    if (requestCookiePublic == true) {
         console.log('youare logged in')
-        return window.location.href = '/home';
+       return redirect("/home")
+
     }
     else {
         console.log('youare NOOTT logged in')
         return false;
     }
 }
+
+async function checkPublic(){
+    const valuePublic = "public"
+    const requestCookiePublic = await authLoader(valuePublic);
+    
+    return requestCookiePublic;
+    
+}
+
+

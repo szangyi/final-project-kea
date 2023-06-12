@@ -4,22 +4,23 @@
 // --------------------------
 import axios from 'axios';
 
-export default async function ValidateCookieAPI(onlyCheck) {
+export default async function ValidateCookieAPI(value) {
     const errorMessage = "Invalid request"
-    console.log('im in the apiiii')
-    console.log(onlyCheck)
 
     try {
 
         // const response = await axios.get('/api/validate-cookie', { onlyCheck });
-        const response = await axios.get('/api/validate-cookie', { params: { onlyCheck } });
+        const response = await axios.get('/api/validate-cookie', { params: { value } });
+        console.log(response.data.message)
 
 
-        if (response.status === 200) {
-            console.log(response)
-            return true
-        } else {
+        if (response.data.message == "page is public") {
+            console.log(response.data.message)
+            console.log("I am here")
             return false
+        } else {
+            console.log(response.data.message)
+            return true
         }
     } catch (error) {
         console.log('Invalid request', error);
