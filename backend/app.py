@@ -36,6 +36,10 @@ import user_update_security_info
 def img(filepath):
     return static_file(filepath, root="./images")
 
+@get("/")
+def react_app():
+    return static_file('index.html', root='/home/influncr/influncr/final-project-kea/frontend/public')
+
 ############### RUN #####################
 try:
   import production
