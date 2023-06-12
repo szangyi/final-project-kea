@@ -12,21 +12,18 @@ def _validate_cookie():
         print("######## onlycheck")
         print(onlyCheck)
 
-        # VALIDATION ##########################
-
-        if onlyCheck is not None:
-            print("######public pages")
-            print("# THIS SHOULD BE NONE")
+        selected_user_db = helper_functions._validation_function()
+        if selected_user_db is not None:
             response.status = 200
-            return None
-
         else:
-            print("######private pages")
-            selected_user_db = helper_functions._validation_function()
-            
-            if selected_user_db is not None:
-                response.status = 200
-            else:
+
+            if onlyCheck is not None:
+                print("######public pages")
+                print("# THIS SHOULD BE NONE")
+                # response.status = 200
+                response.status = 400
+                return None
+            else:        
                 response.status = 400
                 print("# invalid request")
                 return None

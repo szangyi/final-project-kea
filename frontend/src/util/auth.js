@@ -7,11 +7,11 @@ export const authLoader = async (onlyCheck) => {
     const isCookie = await ValidateCookieAPI(onlyCheck);
     console.log(isCookie)
 
-    // if (!isCookie) {
-    //     return false
-    // } else {
-    //     return true;
-    // }
+    if (!isCookie) {
+        return false
+    } else {
+        return true;
+    }
 };
 
 export async function navLoader() {
