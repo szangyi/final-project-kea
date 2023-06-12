@@ -6,8 +6,8 @@ DEVELOPMENT_CONN = {
         }
 
 PRODUCTION_CONN = {
-            "host":"",
-            "user": "",
-            "password": "",
-            "database": ""
+            "host":"influncr.mysql.pythonanywhere-services.com",
+            "user": "influncr",
+            "password": "3wLvaoheJVUTnXk",
+            "database": "influncr$influncr"
 }
