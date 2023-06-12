@@ -18,8 +18,7 @@ import UserDashboard from './pages/UserDashBoard/UserDashboard.js';
 import AccountInfo from './pages/UserDashBoard/AccountInfo';
 import Interests from './pages/UserDashBoard/Interests';
 import Security from './pages/UserDashBoard/Security';
-import RootLayoutNav from './pages/Root/RootLayoutNav.js';
-import RootLayout from './pages/Root/RootLayout.js';
+
 import { Navigate } from 'react-router-dom';
 import ProfileLandingPage from './pages/ProfileLandingPage';
 import CollectionPage from './pages/CollectionPage';
@@ -33,42 +32,80 @@ import NavLoggedout from './components/Navigation/NavLoggedout'
 import HomePageLoggedout from './pages/HomePageLoggedout';
 import HomePageLoggedin from './pages/HomePageLoggedin'
 
+import RootLayoutNavLoggedin from './pages/Root/RootLayoutNavLoggedin.js';
+import RootLayoutNavLoggedout from './pages/Root/RootLayoutNavLoggedout.js';
+import RootLayout from './pages/Root/RootLayout.js';
 
 const App = () => {
 
     const router = createBrowserRouter([
-
         {
-            path: '/',
-            element: <RootLayoutNav />,
             id: 'root',
-            loader: navLoader,
             children: [
-                { index: true, element: <HomePage /> },
-                { path: "/login", element: <LoginPage /> },
-                { path: "/signup", element: <SignupPage /> },
                 {
-                    path: "/user-dashboard", element: <UserDashboard />, children: [
-                        { path: "/user-dashboard/", element: <Navigate to="account-info" replace /> }, // set account-info as default
-                        { path: "/user-dashboard/account-info", element: <AccountInfo /> },
-                        { path: "/user-dashboard/security", element: <Security /> },
-                        { path: "/user-dashboard/interests", element: <Interests /> },
+                    // PROTECTED/ PRIVATE
+                    id: 'private-root',
+                    loader: navLoader,
+                    children: [
+                        {
+                            element: <RootLayoutNavLoggedin />,
+                            children: [
+                                { path: "/home", element: <HomePageLoggedin /> },
+                                {
+                                    path: "/user-dashboard", element: <UserDashboard />, children: [
+                                        { path: "/user-dashboard/", element: <Navigate to="account-info" replace /> }, // set account-info as default
+                                        { path: "/user-dashboard/account-info", element: <AccountInfo /> },
+                                        { path: "/user-dashboard/security", element: <Security /> },
+                                        { path: "/user-dashboard/interests", element: <Interests /> },
+                                    ]
+                                },
+                                { path: "/user-collection", element: <UserCollectionPage /> },
+                                { path: "/influencer-dashboard", element: <InfluenceDashboardPage /> },
+                                { path: "/collection", element: <CollectionPage /> },
+                                { path: "/profile/:username", element: <ProfileLandingPage /> },
+                            ]
+                        },
+                        {
+                            element: <RootLayout />,
+                            children: [
+                                { path: '/create-profile', element: <CreateProfilePage /> }
+                            ]
+                        }
+                    ],
+                },
+                {
+                    // UNPROTECTED/ PUBLIC
+                    id: 'public-root',
+                    children: [
+                        {
+                            element: <RootLayoutNavLoggedout />,
+                            children: [
+                                { path: "/", element: <HomePageLoggedout /> },
+                                { path: "/login", element: <LoginPage /> },
+                                { path: "/signup", element: <SignupPage /> },
+                            ],
+                        }
                     ]
                 },
-                { path: "/user-collection", element: <UserCollectionPage /> },
-                { path: "/influencer-dashboard", element: <InfluenceDashboardPage /> },
-                { path: "/collection", element: <CollectionPage /> },
-                { path: "/profile/:username", element: <ProfileLandingPage /> },
+
                 { path: '*', element: <ErrorPage404 replace /> },
-            ],
-        },
-        {
-            path: '/create-profile',
-            element: <RootLayout />,
-            children: [
-                { index: true, element: <CreateProfilePage /> },
+
             ]
-        }
+
+        },
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

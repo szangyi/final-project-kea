@@ -15,6 +15,7 @@ export const authLoader = async () => {
 
 
 export async function navLoader() {
+  console.log('navloader runs')
   const requestCookie = await authLoader();
   if (requestCookie == true) {
     return true;
