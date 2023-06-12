@@ -1,25 +1,48 @@
-import { useState } from "react";
-import { redirect } from "react-router-dom";
-import Cookies from 'js-cookie';
 import ValidateCookieAPI from "../api/ValidateCookieAPI";
+import { redirect } from "react-router-dom";
+export const authLoader = async (value) => {
+    console.log("here")
+    const isCookie = await ValidateCookieAPI(value);
+    console.log(isCookie)
 
+    return isCookie
 
-export const authLoader = async () => {
-  const isCookie = await ValidateCookieAPI();
-  if (!isCookie) {
-    return redirect('/login');
-  } else {
-    return true;
-  }
 };
 
-
 export async function navLoader() {
-  const requestCookie = await authLoader();
-  if (requestCookie == true) {
-    return true;
-  }
-  else {
-    return false;
-  }
+    console.log('navloader runs')
+    const valuePrivate = "private"
+    const requestCookie = await authLoader(valuePrivate);
+    console.log(requestCookie)
+
+    if (requestCookie == false) {
+        return redirect("/login")
+    }
+    else {
+        return true;
+    }
 }
+
+export async function navLoaderPublic(requestCookiePublic) {
+
+    requestCookiePublic = await checkPublic();
+    if (requestCookiePublic == true) {
+        console.log('youare logged in')
+       return redirect("/home")
+
+    }
+    else {
+        console.log('youare NOOTT logged in')
+        return false;
+    }
+}
+
+async function checkPublic(){
+    const valuePublic = "public"
+    const requestCookiePublic = await authLoader(valuePublic);
+    
+    return requestCookiePublic;
+    
+}
+
+

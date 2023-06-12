@@ -18,7 +18,7 @@ export default async function LogInAPI(values, setFormError, setErrorMessage) {
         const response = await axios.post('/api/login', formData)
 
         if (response.status === 200) {
-            window.location.href = '/';
+            window.location.href = '/home';
         }
     } catch (error) {
         console.log(error.response.status)

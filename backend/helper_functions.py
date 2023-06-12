@@ -20,6 +20,7 @@ def _validation_function():
         selected_user_db = database_access_functions._get_user(user_email_validated, db_config)
         return selected_user_db
     except Exception as ex:
+        print("######wtf man")
         response.status = 500
         return str(ex)
 
