@@ -99,8 +99,9 @@ const CollectionCard = ({ array, filteringCard, favoriteenabled, searchQuery, se
                                 component="img"
                                 alt="profile image"
                                 sx={{ borderRadius: '15px' }}
+                                image={`https://influncr.pythonanywhere.com/images/profile_images/${array[11]}`}
                                 // image={`http://127.0.0.1:7878/profile_images/${array[11]}`}
-                                image={'https://images.unsplash.com/photo-1571566882372-1598d88abd90?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODU0NTg1OTZ8&ixlib=rb-4.0.3&q=85'}
+                                // image={'https://images.unsplash.com/photo-1571566882372-1598d88abd90?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODU0NTg1OTZ8&ixlib=rb-4.0.3&q=85'}
                             />
                             {favoriteenabled &&
                                 <CardActions>

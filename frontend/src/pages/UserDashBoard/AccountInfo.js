@@ -151,9 +151,10 @@ const AccountInfo = (props) => {
                             <Typography variant="h6">profile photo</Typography>
 
                             {values.profileImage ? (
-                                <Box
+                                <Box  
                                     component="img"
-                                    src={`http://127.0.0.1:7878/profile_images/${values.profileImage}`}
+                                    src={`https://influncr.pythonanywhere.com/images/profile_images/${values.profileImage}`}
+                                    // src={`http://127.0.0.1:7878/profile_images/${values.profileImage}`}
                                     sx={{ height: 50, width: 50, borderRadius: '50%' }}
                                 />
                             ) : (

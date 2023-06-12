@@ -81,9 +81,10 @@ const CollectionCard = ({ array, filteringCard, searchQuery, searchCategory, sea
                 <Card key={index} sx={{ width: 350, borderRadius: '20px' }}>
                     <CardMedia
                         component="img"
-                        alt="profile image"
+                        alt="profile image"  
                         sx={{ height: 200, width: 200, borderRadius: '50%', mx: 'auto', my: { xs: 5, sm: 10 } }}
-                        image={`http://127.0.0.1:7878/profile_images/${array[11]}`}
+                        image={`https://influncr.pythonanywhere.com/images/profile_images/${array[11]}`}
+                        // image={`http://127.0.0.1:7878/profile_images/${array[11]}`}
                     />
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="div">

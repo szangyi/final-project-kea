@@ -51,9 +51,10 @@ const ProfileLandingPage = () => {
                         sx={{ mt: 5, mb: 5, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                         <Stack
                             sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 5 }}>
-                            <Box
+                            <Box  
                                 component="img"
-                                src={`http://127.0.0.1:7878/profile_images/${profileData[11]}`}
+                                src={`https://influncr.pythonanywhere.com/images/profile_images/${profileData[11]}`}
+                                // src={`http://127.0.0.1:7878/profile_images/${profileData[11]}`}
                                 sx={{ height: 200, width: 200, borderRadius: '50%' }}
                             />
                             <Stack>

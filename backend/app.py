@@ -1,4 +1,4 @@
-from bottle import Bottle, run, default_app, static_file, get, request
+from bottle import Bottle, run, default_app, static_file, get, route
 
 ############# PY CLASSES ################
 import g
@@ -35,10 +35,15 @@ import user_update_security_info
 @get("/images/<filepath:re:.*\.(jpg|png|gif|ico|svg)>")
 def img(filepath):
     return static_file(filepath, root="./images")
+  
+# production
+# @get("/images/<filepath:re:.*\.(jpg|png|gif|ico|svg)>")
+# def img(filepath):
+#     return static_file(filepath, root="./home/influncr/influncr/final-project-kea/backend/images/")
 
-@get("/")
+@route('/<:re:.*>', method='GET')
 def react_app():
-    return static_file('index.html', root='/home/influncr/influncr/final-project-kea/frontend/public')
+    return static_file('index.html', root='/home/influncr/influncr/final-project-kea/frontend/build')
 
 ############### RUN #####################
 try:
