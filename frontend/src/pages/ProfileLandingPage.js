@@ -3,8 +3,6 @@
 // --------------------------
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
-import Cookies from 'js-cookie';
 // --------------------------
 // MATERIAL UI ---------------
 // --------------------------
@@ -13,6 +11,8 @@ import { Stack } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Chip from '@mui/material/Chip';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import { Alert } from '@mui/material';
+
 // --------------------------
 // COMPONENTS ---------------
 // --------------------------
@@ -29,12 +29,13 @@ import ErrorPage from './ErrorPage';
 const ProfileLandingPage = () => {
     // VARIABLES ---------------
     const [profileData, setProfileData] = useState([]);
+    const [profileExists, setProfileExists] = useState([]);
     const [otherProfiles, setOtherProfiles] = useState([]);
     const [errorMessage, setErrorMessage] = useState(null)
     const username = useParams();
-
+    console.log(profileExists)
     // CONNECT TO API ---------------
-    GetProfileAPI( username, setProfileData, setOtherProfiles, setErrorMessage);
+    GetProfileAPI(username, setProfileData, setOtherProfiles, setErrorMessage, setProfileExists);
 
     if (errorMessage) {
         return <ErrorPage error={errorMessage} />
@@ -43,15 +44,24 @@ const ProfileLandingPage = () => {
     return (
         <>
             <Banner variant="medium" headline1={username.username} />
+
             {profileData.length === 0 ? (
-                <Loader />
+                <>
+            {profileExists && (
+                        <Alert severity="error">{profileExists}</Alert>)}
+                    <Loader />
+                </>
+
+
             ) : (
                 <>
+                            
+
                     <Stack
                         sx={{ mt: 5, mb: 5, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                         <Stack
                             sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 5 }}>
-                            <Box  
+                            <Box
                                 component="img"
                                 src={`https://influncr.pythonanywhere.com/images/profile_images/${profileData[11]}`}
                                 // src={`http://127.0.0.1:7878/profile_images/${profileData[11]}`}

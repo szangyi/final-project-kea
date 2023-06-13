@@ -9,9 +9,8 @@ def _delete_profile():
     try:
         # VARIABLES ##########################
         request_influencer_ID = request.json
-        # influencer_ID = request_influencer_ID["influencerid"]
+        influencer_ID = request_influencer_ID["influencerid"]
         
-        influencer_ID = 123
         # VALIDATION #########################
         selected_user_db = helper_functions._validation_function()
 

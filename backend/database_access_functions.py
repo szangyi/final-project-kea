@@ -190,12 +190,12 @@ def _get_all_influencer_profiles(user_id, db_config):
     finally:
         db.close()
         
-def _get_one_influencer_profile(influencer_username, db_config):
+def _get_one_influencer_profile(influencer_ID, db_config):
     try:
         db = mysql.connector.connect(**db_config)
         cursor = db.cursor()
-        sql_get_user = """SELECT * FROM influencers_profile WHERE influencer_username =%s"""
-        var = (influencer_username,)
+        sql_get_user = """SELECT * FROM influencers_profile WHERE influencer_ID =%s"""
+        var = (influencer_ID,)
         cursor.execute(sql_get_user, var)
         profile = cursor.fetchone()
         db.commit()

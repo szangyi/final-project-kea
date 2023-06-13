@@ -4,7 +4,7 @@
 // --------------------------
 import axios from 'axios';
 
-export default async function GetProfileAPI(username,setProfileData, setOtherProfiles, setErrorMessage) {
+export default async function GetProfileAPI(username,setProfileData, setOtherProfiles, setErrorMessage, setProfileExists) {
     const errorMessage = "error";
 
     try {
@@ -23,7 +23,7 @@ export default async function GetProfileAPI(username,setProfileData, setOtherPro
                 message: "We could not fetch the data. Try again!",
                 statusCode: error.response.status,
             };
-            setErrorMessage(errorMessage);
+            setProfileExists(errorMessage.message);
         } else {
             const errorMessage = { // General error message
                 statusCode: error.response.status,
