@@ -33,10 +33,8 @@ const LoginPage = () => {
     expirationDate.setTime(expirationDate.getTime() + 60 * 60 * 1000);
     const { values, errors, touched, handleBlur, handleChange, setTouched, validateForm } = useFormik({
         initialValues: {
-            // email: '',
-            // password: '',
-            email: 'alex@gmail.com',
-            password: 'FERImari24',
+            email: '',
+            password: '',
         },
 
         validationSchema: loginSchema,
@@ -54,7 +52,6 @@ const LoginPage = () => {
     // API CALLS ---------------
     const loginHandler = async (event) => {
         event.preventDefault();
-        console.log(values)
 
         // Touch all the inputfields before submission
         setTouched({

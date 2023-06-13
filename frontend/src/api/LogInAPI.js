@@ -21,7 +21,6 @@ export default async function LogInAPI(values, setFormError, setErrorMessage) {
             window.location.href = '/home';
         }
     } catch (error) {
-        console.log(error.response.status)
         if (error.response.status === 400) {
             const errorMessage = { // Page specific error message
                 message: "Your e-mail or password is incorrect or this account doesn't exist.",

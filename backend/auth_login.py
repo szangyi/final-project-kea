@@ -37,8 +37,14 @@ def _login():
         if check_password:
             password_db = check_password[5]
             password_db_encoded = password_db.encode('utf-8')
-            password_matched = bcrypt.checkpw(password_encode, password_db_encoded)
-
+            
+            try:
+                password_matched = bcrypt.checkpw(password_encode, password_db_encoded)
+            except Exception as ex:
+                print(ex)
+                response.status = 400
+                password_matched = None
+                
             if password_matched:
                 user = database_access_functions._login(user_email, password_db, db_config)
                 
@@ -55,6 +61,7 @@ def _login():
             response.status = 400
             return  "wrong credentials"
     except Exception as ex:
+        print(ex)
         response.status = 500
         return str(ex)
 
