@@ -11,6 +11,7 @@ def _check_cookie():
         if selected_user_db is not None:
             response.status = 200
         else:
+            response.status = 400
             return False     
         
     except Exception as ex:

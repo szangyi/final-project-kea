@@ -29,7 +29,6 @@ def _():
 
         else:
             response.status = 400
-            response.body = "Could not be added to favorites"
     except Exception as ex:
         print(ex)
         response.status = 500

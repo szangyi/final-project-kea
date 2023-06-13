@@ -16,8 +16,6 @@ def _update_basic_info():
         username = html.escape(request.forms.get("username"))
         user_image = request.files.get("image")
         image_id = str(uuid.uuid4())
-        print(user_image)
-        print(request.files)
         
 
         # VALIDATION ##########################

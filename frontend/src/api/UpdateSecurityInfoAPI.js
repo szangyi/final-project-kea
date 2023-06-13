@@ -14,7 +14,6 @@ export default async function UpdateSecurityInfoAPI(values, setErrorMessage) {
             passwordNew: values.passwordNew,
         };
 
-        console.log(formData)
 
 
         const response = await axios.post('/api/update-security-info', formData, {

@@ -9,7 +9,6 @@ def _validate_cookie():
     try:
 
         value = request.query.get("value")
-        print(value)
         validate_cookie_private = {"message": "page should be protected"}
         validate_cookie_public = {"message": "page is public"}
 
@@ -21,8 +20,10 @@ def _validate_cookie():
             return json.dumps(validate_cookie_private)
         else:
             if value == "public":
+                response.status = 200
                 return json.dumps(validate_cookie_public)
             else:
+                response.status = 200
                 return json.dumps(validate_cookie_public)
 
 

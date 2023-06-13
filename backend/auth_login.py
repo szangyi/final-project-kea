@@ -44,6 +44,7 @@ def _login():
                 print(ex)
                 response.status = 400
                 password_matched = None
+                return str(ex)
                 
             if password_matched:
                 user = database_access_functions._login(user_email, password_db, db_config)

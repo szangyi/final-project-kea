@@ -4,22 +4,26 @@
 // --------------------------
 import axios from 'axios';
 
-export default async function DeleteProfileAPI(influencerid, handleClose, setError) {
-
+export default async function DeleteProfileAPI(influencerid, handleClose, setError, setDeleteError) {
+    
     try {
         const response = await axios.post('/api/delete-profile',  { influencerid });
-
+        console.log(response.status)
         if (response.status === 200) {
             handleClose()
-        } else {
-            const error = {
-                message: response.body,
-                statusCode: response.status,
-            };
-            setError(error);
-        }
+        } 
     } catch (error) {
-        console.log('Create profile failed:', error);
-        setError(error);
+        if (error.response.status === 400) {
+            const errorMessage = {
+                message: "An influencer profile could not be deleted",
+                statusCode: error.response.status,
+            };
+            setDeleteError(errorMessage.message);
+        } else {
+            const errorMessage = { 
+                statusCode: error.response.status,
+            };
+            setError(errorMessage);
+        }
     }
 }

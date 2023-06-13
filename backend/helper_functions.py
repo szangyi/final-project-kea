@@ -49,7 +49,6 @@ def _db_config():
         
 def _generate_token(email):
     try:
-        print("I am here 2")
         payload = {'email': email}
         token_auth = jwt.encode(payload, g.SECRET_KEY, algorithm='HS256')
         token_json = {
@@ -59,6 +58,7 @@ def _generate_token(email):
 
     except Exception as ex:
         print(ex)
+        response.status = 500
         return None
 
 def _token_validator(token_request):

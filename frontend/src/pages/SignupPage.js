@@ -52,7 +52,6 @@ const SignupPage = () => {
     const submitHandler = async (event) => {
         // const { username, firstName, lastName, email, password } = values; // Destructure values because of Formik
         event.preventDefault();
-        console.log(values)
 
         // Touch all the inputfields before submission
         setTouched({
