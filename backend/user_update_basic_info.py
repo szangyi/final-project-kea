@@ -29,14 +29,18 @@ def _update_basic_info():
             validation_errors.append(error_un)
         user_last_name, error_un = g._is_last_name(user_last_name)
         if error_un:
-            validation_errors.append(error_un)        
-        user_image, error_img = g._is_item_image(user_image )
-        if error_img:
-            validation_errors.append(error_img)
+            validation_errors.append(error_un)  
+            
+        if user_image:      
+            user_image, error_img = g._is_item_image(user_image )
+            if error_img:
+                validation_errors.append(error_img)
+            else:
+                filename,file_extension = os.path.splitext(user_image.filename)
+                image_name =f"{image_id}{file_extension}"
+                user_image.save(f"images/profile_images/{image_name}")
         else:
-            filename,file_extension = os.path.splitext(user_image.filename)
-            image_name =f"{image_id}{file_extension}"
-            user_image.save(f"images/profile_images/{image_name}")
+            pass
 
         if validation_errors:
             return g._send(400, validation_errors)
@@ -51,15 +55,16 @@ def _update_basic_info():
                 user_email = selected_user_db[4]
                 check_user = database_access_functions._user_exist(user_email, username , db_config )
                 if check_user is None:
+                    response.status = 200
                     _update_user_function(selected_user_db,user_first_name, user_last_name, username,image_name, db_config )
                 else: 
                     response.status = 409
             else:
+                response.status = 200
                 _update_user_function(selected_user_db,user_first_name, user_last_name, username, image_name, db_config )
 
         else:
             response.status = 400
-            return  "User info couldn't be updated"
        
     
 

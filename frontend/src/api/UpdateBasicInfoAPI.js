@@ -4,7 +4,7 @@
 // --------------------------
 import axios from 'axios';
 
-export default async function UpdateBasicInfoAPI(values, setErrorMessage) {
+export default async function UpdateBasicInfoAPI(values, setErrorMessage,setUpdateError) {
 
     try {
 
@@ -32,12 +32,19 @@ export default async function UpdateBasicInfoAPI(values, setErrorMessage) {
                 message: "User with the same username already exists",
                 statusCode: error.response.status,
             };
-            setErrorMessage(errorMessage.message);
+            setUpdateError(errorMessage.message);
+        
+        }else if (error.response.status === 400) {
+                const errorMessage = { // Page specific error message
+                    message: "User could not be fetched",
+                    statusCode: error.response.status,
+                };
+                setUpdateError(errorMessage.message);
         } else {
             const errorMessage = { // General error message
                 statusCode: error.response.status,
             };
             setErrorMessage(errorMessage);
-        }
+        } 
     }
 }

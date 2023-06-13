@@ -10,6 +10,8 @@ import MyCustomButton from "../../components/Button/Button"
 import MyCustomTextField from "../../components/Form/TextField";
 import { Box, Typography } from '@mui/material';
 import { Grid } from '@mui/material';
+import { Alert } from '@mui/material';
+
 // --------------------------
 // VALIDATION ---------------
 // --------------------------
@@ -26,6 +28,7 @@ const AccountInfo = (props) => {
 
     const userData = useOutletContext(); // data from UserDashBoard
     const [errorMessage, setErrorMessage] = useState(null)
+    const [updateError, setUpdateError] = useState(null)
     const [formError, setFormError] = useState(null);
 
 
@@ -55,13 +58,14 @@ const AccountInfo = (props) => {
             firstName: true,
             lastName: true,
             username: true,
+            profileImage: true
         });
 
 
         const updatedErrors = await validateForm();
         if ((Object.keys(updatedErrors).length === 0) && (Object.keys(errors).length === 0)) {
             setFormError("");
-            UpdateBasicInfoAPI(values, setErrorMessage);
+            UpdateBasicInfoAPI(values, setErrorMessage, setUpdateError);
         } else {
             setFormError('Please fill in all the required fields.');
         }
@@ -73,6 +77,7 @@ const AccountInfo = (props) => {
     }
     return (
         <>
+
             <Box component="section" sx={{ py: 5, px: 5, }}>
 
                 <Typography variant="h4" >my account</Typography>
@@ -85,7 +90,9 @@ const AccountInfo = (props) => {
 
                             <Typography variant="h6">user information</Typography>
                             {/* <Typography variant="subtitle1" sx={{color: 'customColors.salmon.dark'}}>user information</Typography> */}
-
+                            {updateError && (
+                                <Alert severity="error">{updateError}</Alert>
+                            )}
                             <Grid container item spacing={2}>
                                 <Grid item xs={6}>
                                     <MyCustomTextField
@@ -151,7 +158,7 @@ const AccountInfo = (props) => {
                             <Typography variant="h6">profile photo</Typography>
 
                             {values.profileImage ? (
-                                <Box  
+                                <Box
                                     component="img"
                                     src={`https://influncr.pythonanywhere.com/images/profile_images/${values.profileImage}`}
                                     // src={`http://127.0.0.1:7878/profile_images/${values.profileImage}`}
