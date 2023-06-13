@@ -73,6 +73,11 @@ export const userSecuritySchema = Yup.object().shape({
         .max(100, 'Max. 100 characters')
         .matches(regexPassword, { message: "Your password must include at least 1 uppercase-, 1 lowercase letter, and 1 number" })
         .required('Required field'),
+    passwordNew: Yup.string()
+        .min(6, 'Min. 6 characters')
+        .max(100, 'Max. 100 characters')
+        .matches(regexPassword, { message: "Your password must include at least 1 uppercase-, 1 lowercase letter, and 1 number" })
+        .required('Required field'),
 })
 
 

@@ -4,7 +4,7 @@
 // --------------------------
 import axios from 'axios';
 
-export default async function UpdateSecurityInfoAPI(values, setErrorMessage) {
+export default async function UpdateSecurityInfoAPI(values, setErrorMessage, setSecurityError) {
 
     try {
 
@@ -32,13 +32,19 @@ export default async function UpdateSecurityInfoAPI(values, setErrorMessage) {
                 message: "User with the same email already exists",
                 statusCode: error.response.status,
             };
-            setErrorMessage(errorMessage.message);
+            setSecurityError(errorMessage.message);
         } else if (error.response.status === 401) {
             const errorMessage = { // Page specific error message
                 message: "Passwords do not match",
                 statusCode: error.response.status,
             };
-            setErrorMessage(errorMessage.message);
+            setSecurityError(errorMessage.message);
+        }else if (error.response.status === 400) {
+                const errorMessage = { // Page specific error message
+                    message: "User data could not be updated",
+                    statusCode: error.response.status,
+                };
+                setSecurityError(errorMessage.message);
         } else {
             const errorMessage = { // General error message
                 statusCode: error.response.status,

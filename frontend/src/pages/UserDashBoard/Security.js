@@ -9,6 +9,7 @@ import { useOutletContext } from 'react-router-dom';
 import { Grid, Alert } from '@mui/material';
 import MyCustomButton from "../../components/Button/Button"
 import MyCustomTextField from "../../components/Form/TextField";
+
 // --------------------------
 // VALIDATION ---------------
 // --------------------------
@@ -26,20 +27,22 @@ const Security = () => {
 
     const userData = useOutletContext();
     const [errorMessage, setErrorMessage] = useState(null)
+    const [securityError, setSecurityError] = useState(null)
     const [formError, setFormError] = useState('');
 
 
     const { values, errors, touched, handleBlur, handleChange, setTouched, validateForm } = useFormik({
         initialValues: {
-            email: userData.email,
-            password: userData.password,
+            email: '',
+            password: '',
+            passwordNew: ''
         },
-        
+
 
         validationSchema: userSecuritySchema,
     });
 
-    const submitHandler = async(event) => {
+    const submitHandler = async (event) => {
         event.preventDefault();
 
         setTouched({
@@ -51,7 +54,7 @@ const Security = () => {
         const updatedErrors = await validateForm();
         if ((Object.keys(updatedErrors).length === 0) && (Object.keys(errors).length === 0)) {
             setFormError("");
-            UpdateSecurityInfoAPI(values, setErrorMessage);
+            UpdateSecurityInfoAPI(values, setErrorMessage, setSecurityError);
         } else {
             setFormError('Please fill in all the required fields.');
         }
@@ -59,7 +62,7 @@ const Security = () => {
 
 
     if (errorMessage) {
-        return <ErrorPage error={errorMessage}/>
+        return <ErrorPage error={errorMessage} />
     }
     return (
         <>
@@ -80,22 +83,24 @@ const Security = () => {
 
                             <Typography variant="h6">user information</Typography>
                             {/* <Typography variant="subtitle1" sx={{color: 'customColors.salmon.dark'}}>user information</Typography> */}
-
+                            {securityError && (
+                                <Alert severity="error">{securityError}</Alert>
+                            )}
 
                             <MyCustomTextField
-                                    size="normal"
-                                    margin="normal"
-                                    fullWidth
-                                    id="email"
-                                    label="Email"
-                                    name="email"
-                                    type="text"
-                                    value={values.email}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    error={touched.email && Boolean(errors.email)}
-                                    helperText={touched.email && errors.email}
-                                />
+                                size="normal"
+                                margin="normal"
+                                fullWidth
+                                id="email"
+                                label="Email"
+                                name="email"
+                                type="text"
+                                value={values.email}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                error={touched.email && Boolean(errors.email)}
+                                helperText={touched.email && errors.email}
+                            />
                             <MyCustomTextField
                                 size="normal"
                                 margin="normal"
