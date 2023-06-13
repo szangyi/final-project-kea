@@ -19,7 +19,7 @@ export default async function GetAllProfilesAPI(setProfilesData, setErrorMessage
                 message: "We could not fetch the data. Try again!",
                 statusCode: error.response.status,
             };
-            setErrorMessage(errorMessage);
+            setErrorMessage(errorMessage.message);
         } else {
             const errorMessage = { // General error message
                 statusCode: error.response.status,
