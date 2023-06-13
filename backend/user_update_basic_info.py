@@ -70,6 +70,7 @@ def _update_basic_info():
 
     except Exception as ex:
         print(ex)
+        response.status = 500
         return str(ex)
     
 def _update_user_function(selected_user_db,user_first_name, user_last_name, username, image_name, db_config):
