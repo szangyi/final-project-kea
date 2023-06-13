@@ -18,7 +18,7 @@ import Banner from '../../components/Banner/Banner';
 import MyCustomDrawer from '../../components/Drawer/MyCustomDrawer';
 import AccountInfoAPI from '../../api/AccountInfoAPI';
 import Loader from '../../components/Loader/Loader'
-import Error from '../../components/Error/Error'
+import ErrorPage from '../ErrorPage';
 
 const UserDashboard = (theme) => {
 
@@ -35,7 +35,9 @@ const UserDashboard = (theme) => {
     AccountInfoAPI( setUserData, setError);
 
 
-
+    if (error) {
+        return <ErrorPage error={error} />
+    }
 
     return (
         <>

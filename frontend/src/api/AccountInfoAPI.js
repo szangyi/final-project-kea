@@ -13,17 +13,19 @@ export default async function AccountInfoAPI(setUserData, setError) {
         if (response.status === 200) {
             const userData = response.data;
             setUserData(userData);
-        } else {
-            setUserData(errorMessage);
-            const error = {
-                message: response.body,
-                statusCode: response.status,
-            };
-            setError(error);
-        }
+        } 
     } catch (error) {
-        console.log('Create profile failed:', error);
-        setUserData(errorMessage);
-        setError(error);
+        if (error.response.status === 400) {
+            const errorMessage = {
+                message: "Your info could not be fetched",
+                statusCode: error.response.status,
+            };
+            setError(errorMessage);
+        } else {
+            const errorMessage = { 
+                statusCode: error.response.status,
+            };
+            setError(errorMessage);
+        }
     }
 }
