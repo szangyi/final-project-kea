@@ -48,20 +48,20 @@ def _():
             if error_web:
                 validation_errors.append(error_web)
 
-        if (influencer_instagram):
-            influencer_instagram, error_ig = g._is_item_account(influencer_instagram)
-            if error_ig:
-                validation_errors.append(error_ig)
+        # if (influencer_instagram):
+        #     influencer_instagram, error_ig = g._is_item_account(influencer_instagram)
+        #     if error_ig:
+        #         validation_errors.append(error_ig)
 
-        if (influencer_youtube):
-            influencer_youtube, error_yt = g._is_item_account(influencer_youtube)
-            if error_yt:
-                validation_errors.append(error_yt)
+        # if (influencer_youtube):
+        #     influencer_youtube, error_yt = g._is_item_account(influencer_youtube)
+        #     if error_yt:
+        #         validation_errors.append(error_yt)
 
-        if (influencer_tiktok): 
-            influencer_tiktok, error_tt = g._is_item_account(influencer_tiktok)
-            if error_tt:
-                validation_errors.append(error_tt)
+        # if (influencer_tiktok): 
+        #     influencer_tiktok, error_tt = g._is_item_account(influencer_tiktok)
+        #     if error_tt:
+        #         validation_errors.append(error_tt)
         
         profile_image_delete, error_img = g._is_item_image(profile_image_delete)
         if error_img:
@@ -76,8 +76,10 @@ def _():
     
     
         # DATABASE CONNECTION ##########################
+        print("I am here")
         db_config = helper_functions._db_config()
         selected_user_db = database_access_functions._get_user(user_email_validated, db_config)
+        print(selected_user_db)
         
         if selected_user_db is not None:
 
@@ -91,11 +93,6 @@ def _():
                 else:
                     pass
                                 
-                array_hashtags = []
-                influencer_hashtag_divided = influencer_tags_list.split(",")
-                hashtag_list = database_access_functions._hashtags_manager(array_hashtags, influencer_hashtag_divided, db_config)
-                hashtag_list_json = json.dumps(hashtag_list)
-
                 influencer_data = {
                     "influencer_ID": influencer_ID,
                     "user_ID": selected_user_db[0],
@@ -106,7 +103,7 @@ def _():
                     "influencer_instagram": influencer_instagram,
                     "influencer_youtube": influencer_youtube,
                     "influencer_tiktok": influencer_tiktok,
-                    "influencer_tags": hashtag_list_json,
+                    "influencer_tags": influencer_tags,
                     "influencer_category": influencer_category,
                     "profile_image": image_name,
                     "profile_created_at": profile_created_at,
@@ -118,7 +115,7 @@ def _():
                 response.status = 409 # Conflict
         else:
             response.status = 400
-            return  "Profile couldn't be created"
+
     except Exception as ex:
         print(ex)
         response.status = 500
