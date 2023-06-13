@@ -6,8 +6,8 @@ import axios from 'axios';
 
 export default async function GetAllProfilesAPI(setProfilesData, setErrorMessage) {
     try {
+        console.log("here")
         const response = await axios.get('/api/profiles');
-
         if (response.status === 200) {
             const profileData = response.data;
             setProfilesData(profileData);
@@ -19,7 +19,7 @@ export default async function GetAllProfilesAPI(setProfilesData, setErrorMessage
                 message: "We could not fetch the data. Try again!",
                 statusCode: error.response.status,
             };
-            setErrorMessage(errorMessage.message);
+            setErrorMessage(errorMessage);
         } else {
             const errorMessage = { // General error message
                 statusCode: error.response.status,

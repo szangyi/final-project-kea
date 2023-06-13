@@ -18,6 +18,7 @@ def _():
             user_id = selected_user_db[0]
             profiles = database_access_functions._get_all_profiles(db_config, user_id)
             profiles_json = json.dumps(profiles, default=helper_functions._datetime_handler)
+            response.status = 200
             return profiles_json
         else:
             response.status = 400
