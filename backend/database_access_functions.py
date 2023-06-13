@@ -298,7 +298,6 @@ def _check_favorite_relationship(user_ID, influencer_ID, db_config):
 
 def _add_to_favorites(user_ID, influencer_ID, db_config):
     try:
-        print("###################### add to fav")
         db = mysql.connector.connect(**db_config)
         cursor = db.cursor()
         sql_add_relationship = """INSERT INTO favorites (influencer_ID, user_ID ) VALUES (%s,%s)"""
@@ -317,11 +316,6 @@ def _add_to_favorites(user_ID, influencer_ID, db_config):
 
 def _remove_from_favorites(user_ID, influencer_ID, db_config):
     try:
-        print("###################### unfav")
-        print("userid:")
-        print(user_ID)
-        print("influencerid:")
-        print(influencer_ID)
         db = mysql.connector.connect(**db_config)
         cursor = db.cursor()
         sql_remove_relationship = """DELETE FROM favorites WHERE user_ID = %s AND influencer_ID = %s"""

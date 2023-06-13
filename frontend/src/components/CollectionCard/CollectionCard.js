@@ -3,25 +3,27 @@ import './CollectionCard.css'
 // --------------------------
 // REACT ---------------
 // --------------------------
-import Cookies from 'js-cookie';
-import axios from 'axios';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+
+// --------------------------
+// REACT ---------------
+// --------------------------
+import AddToFavoritesAPI from '../../api/AddToFavoritesAPI';
+import ErrorPage from '../../pages/ErrorPage';
+
 
 // --------------------------
 // MATERIAL UI ---------------
 // --------------------------
-import Container from "@mui/material/Container";
 import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-
 import IconButton from '@mui/material/IconButton';
 import { Box } from '@mui/material';
-
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import InstagramIcon from '@mui/icons-material/Instagram';
@@ -33,25 +35,16 @@ import MusicVideoIcon from '@mui/icons-material/MusicVideo';
 
 const CollectionCard = ({ array, filteringCard, favoriteenabled, searchQuery, searchCategory, searchHashtag, searchSocial, searchLocation }) => {
     // VARIABLES ---------------
-    const token = Cookies.get('token');
+    const [errorMessage, setErrorMessage] = useState(null)
     let cardArray;
-    // const favoriteenabled = props.favoriteenabled
 
-    // CONNECTING TO API ---------------
-    const handleAddToFavorites = async (influencerID) => {
-        try {
-            const response = await axios.post('/api/add-to-favorites', { influencerID }, {
-                headers: {
-                    Authorization: `${token}`,
-                }
-            },
-            );
+    // API CALLS ---------------
+    const handleAddToFavorites = (influencerid) => {
+        AddToFavoritesAPI(influencerid, setErrorMessage)
+    }
 
-            console.log(response)
-
-        } catch {
-            console.log('Getting all profiles failed:');
-        }
+    if (errorMessage) {
+        return <ErrorPage error={errorMessage} />
     }
 
     // CHECKING WHICH ARRAY SHOULD BE RETURNED ---------------
@@ -100,8 +93,8 @@ const CollectionCard = ({ array, filteringCard, favoriteenabled, searchQuery, se
                                 alt="profile image"
                                 sx={{ borderRadius: '15px' }}
                                 image={`https://influncr.pythonanywhere.com/images/profile_images/${array[11]}`}
-                                // image={`http://127.0.0.1:7878/profile_images/${array[11]}`}
-                                // image={'https://images.unsplash.com/photo-1571566882372-1598d88abd90?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODU0NTg1OTZ8&ixlib=rb-4.0.3&q=85'}
+                            // image={`http://127.0.0.1:7878/profile_images/${array[11]}`}
+                            // image={'https://images.unsplash.com/photo-1571566882372-1598d88abd90?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODU0NTg1OTZ8&ixlib=rb-4.0.3&q=85'}
                             />
                             {favoriteenabled &&
                                 <CardActions>
@@ -123,7 +116,6 @@ const CollectionCard = ({ array, filteringCard, favoriteenabled, searchQuery, se
                                 </Typography>
                                 <Typography gutterBottom variant="body2" color="text.secondary">
                                     Tags: {array[9].substring(1, array[9].length - 1).replace(/,/g, ' ')}
-                                    {/* Tags: {array[9]} */}
                                 </Typography>
                                 <Typography gutterBottom variant="body2" color="text.secondary">
                                     Location: {array[4]}
@@ -154,34 +146,6 @@ const CollectionCard = ({ array, filteringCard, favoriteenabled, searchQuery, se
                                         {/* <a href={`/${array[6]}`}>TK</a> */}
                                     </div>
                                 )}
-                            </CardActions>
-                            {/* <CardActions>
-                                {array[5] && (
-                                    <div>
-                                        <a href={`/${array[5]}`}>WEB</a>
-                                    </div>
-                                )}
-                                {array[6] && (
-                                    <div>
-                                        <a href={`/${array[6]}`}>IG</a>
-                                    </div>
-                                )}
-                                {array[7] && (
-                                    <div>
-                                        <a href={`/${array[6]}`}>YT</a>
-                                    </div>
-                                )}
-                                {array[8] && (
-                                    <div>
-                                        <a href={`/${array[6]}`}>TK</a>
-                                    </div>
-                                )}
-                            </CardActions> */}
-                            <CardActions>
-                                {/* <IconButton onClick={() => handleAddToFavorites(array[0])}>
-                                    {array[14] ? <FavoriteIcon /> : <FavoriteBorderIcon />}
-                                </IconButton> */}
-                                {/* <Button component={Link} to={`/profile/${array[2]}`} size="small">View profile</Button> */}
                             </CardActions>
                             <CardActions>
                                 <Box className="card-click" component={Link} to={`/profile/${array[2]}`}></Box>

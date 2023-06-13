@@ -9,8 +9,8 @@ def _():
     try:
         # VARIABLES ##########################
         request_data = request.json
-        influencer_ID = request_data["influencerID"]
-        
+        influencer_ID = request_data["influencerid"]
+
 
         # VALIDATION ##########################
         selected_user_db = helper_functions._validation_function()
