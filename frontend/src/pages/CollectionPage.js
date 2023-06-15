@@ -26,6 +26,7 @@ import MeshGradientBackground from '../components/MeshGradient/MeshGradientBackg
 import Category from '../components/Category/Category'
 import GetAllProfilesAPI from '../api/GetAllProfilesAPI';
 import ErrorPage from './ErrorPage';
+import MyCustomChipMinimal from '../components/Chip/ChipMinimal';
 
 const CollectionPage = () => {
 
@@ -98,13 +99,15 @@ const CollectionPage = () => {
                 <Grid item xs={9} sx={{ overflow: 'auto', pl: 3, pb: 3, pr: 6 }}>
                     <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2, flexWrap: 'wrap', mb: 3 }}>
                         {SOCIALOPTIONS.map((social, index) => (
-                            <Chip
+                            <MyCustomChipMinimal
                                 sx={{ px: 1 }}
                                 key={index}
                                 onClick={() => handleChangeSocial(social["social"])}
                                 label={social["social"]}
-                                color={selected === social["social"] ? "primary" : "default"}
-                                variant={selected === social["social"] ? "default" : "outlined"}
+                                className={selected === social["social"] ? "selected" : ""}
+                                // color={selected === social["social"] ? "primary" : "default"}
+                                variant="outlined"
+                                disableRipple
                             />
 
                         ))}

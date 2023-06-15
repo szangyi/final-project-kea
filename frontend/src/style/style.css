@@ -117,3 +117,7 @@ a{
 .MuiStepConnector-line{
     min-height: 100% !important;
 }
+
+.chip-minimal {
+    border: none !important;
+}
