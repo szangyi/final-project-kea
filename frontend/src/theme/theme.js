@@ -64,32 +64,32 @@ let theme = createTheme({
         fontFamily: 'Hanken Grotesk',
         h1: {
             fontFamily: 'Encode Sans Expanded',
-            fontWeight: 800,
+            fontWeight: 300,
         },
         h2: {
             fontFamily: 'Encode Sans Expanded',
-            fontWeight: 800,
+            fontWeight: 300,
         },
         h3: {
             fontFamily: 'Encode Sans Expanded',
-            fontWeight: 800,
+            fontWeight: 300,
             fontSize: '2.5rem',
             marginBottom: 16,
         },
         h4: {
             fontFamily: 'Encode Sans Expanded',
-            fontWeight: 800,
+            fontWeight: 300,
             fontSize: '1.7rem',
             marginBottom: 10,
 
         },
         h5: {
-            fontWeight: 800,
+            fontWeight: 500,
             fontFamily: 'Encode Sans Expanded',
-            fontSize: '1.4rem',
+            fontSize: '1.2rem',
         },
         h6: {
-            fontWeight: 800,
+            fontWeight: 500,
             fontFamily: 'Encode Sans Expanded',
             fontSize: '1rem',
             marginBottom: 10,

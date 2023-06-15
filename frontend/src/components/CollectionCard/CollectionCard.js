@@ -84,73 +84,84 @@ const CollectionCard = ({ array, filteringCard, favoriteenabled, searchQuery, se
             {cardArray.map((array, index) => (
                 <Grid key={index} item className="card-container">
 
-                    <Card className="card glassmorphism"
+                    <Card className="card" sx={{ mb: 2 }}
                     // sx={{ width: 350 }}
                     >
-                        <Box className="card-image-container" sx={{ borderRadius: '15px', mx: 3, my: 3 }}>
-                            <CardMedia
-                                component="img"
-                                alt="profile image"
-                                sx={{ borderRadius: '15px' }}
-                                image={`https://influncr.pythonanywhere.com/images/profile_images/${array[11]}`}
-                            // image={`http://127.0.0.1:7878/profile_images/${array[11]}`}
-                            // image={'https://images.unsplash.com/photo-1571566882372-1598d88abd90?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODU0NTg1OTZ8&ixlib=rb-4.0.3&q=85'}
-                            />
-                            {favoriteenabled &&
-                                <CardActions>
-                                    <IconButton onClick={() => handleAddToFavorites(array[0])}>
-                                        {array[14] ? <FavoriteIcon sx={{ color: 'customColors.salmon.dark' }} /> : <FavoriteBorderIcon sx={{ color: 'customColors.salmon.dark' }} />}
-                                    </IconButton>
+
+                        <CardContent className='card-content' sx={{padding: 0}}>
+
+                            <Box className="card-image-container" sx={{ borderRadius: '10px' }}>
+                                <CardMedia
+                                    component="img"
+                                    alt="profile image"
+                                    sx={{}}
+                                    image={`https://influncr.pythonanywhere.com/images/profile_images/${array[11]}`}
+                                // image={`http://127.0.0.1:7878/profile_images/${array[11]}`}
+                                // image={'https://images.unsplash.com/photo-1571566882372-1598d88abd90?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODU0NTg1OTZ8&ixlib=rb-4.0.3&q=85'}
+                                />
+                                {favoriteenabled &&
+                                    <CardActions className='card-fav'>
+                                        <IconButton onClick={() => handleAddToFavorites(array[0])}>
+                                            {array[14] ? <FavoriteIcon sx={{ color: 'customColors.salmon.dark' }} /> : <FavoriteBorderIcon sx={{ color: 'customColors.salmon.dark' }} />}
+                                        </IconButton>
+                                    </CardActions>
+                                }
+
+                            </Box>
+
+                            <Box className="card-content-container" sx={{ mt: 1 }}>
+                                <Box>
+                                    <Typography gutterBottom variant="h6" component="div">
+                                        {array[2]}
+                                    </Typography>
+                                    <Typography gutterBottom variant="body1" color="text.secondary" sx={{ fontWeight: 500 }}>
+                                        {/* Category: */}
+                                        {array[10]}
+                                    </Typography>
+                                    <Typography gutterBottom variant="body2" color="text.secondary">
+                                        {/* Tags: */}
+                                        {array[9].substring(1, array[9].length - 1).replace(/,/g, ' ')}
+                                    </Typography>
+                                    <Typography gutterBottom variant="body2" color="text.secondary">
+                                        {/* Location: */}
+                                        {array[4]}
+                                    </Typography>
+                                </Box>
+                                <CardActions className="icons-container" sx={{ gap: 0 }}>
+                                    {array[5] && (
+                                        <div>
+                                            <LanguageIcon fontSize="small"></LanguageIcon>
+                                            {/* <a href={`/${array[5]}`}>WEB</a> */}
+                                        </div>
+                                    )}
+                                    {array[6] && (
+                                        <div>
+                                            <InstagramIcon fontSize="small"></InstagramIcon>
+                                            {/* <a href={`/${array[6]}`}>IG</a> */}
+                                        </div>
+                                    )}
+                                    {array[7] && (
+                                        <div>
+                                            <YouTubeIcon fontSize="small"></YouTubeIcon>
+                                            {/* <a href={`/${array[6]}`}>YT</a> */}
+                                        </div>
+                                    )}
+                                    {array[8] && (
+                                        <div>
+                                            <MusicVideoIcon fontSize="small"></MusicVideoIcon>
+                                            {/* <a href={`/${array[6]}`}>TK</a> */}
+                                        </div>
+                                    )}
                                 </CardActions>
-                            }
 
-                        </Box>
+                            </Box>
 
-                        <Box className="card-content-container" sx={{ mx: 3, mt: 1, mb: 3 }}>
-                            <CardContent>
-                                <Typography gutterBottom variant="h5" component="div">
-                                    {array[2]}
-                                </Typography>
-                                <Typography gutterBottom variant="body2" color="text.secondary">
-                                    Category: {array[10]}
-                                </Typography>
-                                <Typography gutterBottom variant="body2" color="text.secondary">
-                                    Tags: {array[9].substring(1, array[9].length - 1).replace(/,/g, ' ')}
-                                </Typography>
-                                <Typography gutterBottom variant="body2" color="text.secondary">
-                                    Location: {array[4]}
-                                </Typography>
-                            </CardContent>
-                            <CardActions>
-                                {array[5] && (
-                                    <div>
-                                        <LanguageIcon></LanguageIcon>
-                                        {/* <a href={`/${array[5]}`}>WEB</a> */}
-                                    </div>
-                                )}
-                                {array[6] && (
-                                    <div>
-                                        <InstagramIcon></InstagramIcon>
-                                        {/* <a href={`/${array[6]}`}>IG</a> */}
-                                    </div>
-                                )}
-                                {array[7] && (
-                                    <div>
-                                        <YouTubeIcon></YouTubeIcon>
-                                        {/* <a href={`/${array[6]}`}>YT</a> */}
-                                    </div>
-                                )}
-                                {array[8] && (
-                                    <div>
-                                        <MusicVideoIcon></MusicVideoIcon>
-                                        {/* <a href={`/${array[6]}`}>TK</a> */}
-                                    </div>
-                                )}
-                            </CardActions>
-                            <CardActions>
-                                <Box className="card-click" component={Link} to={`/profile/${array[2]}`}></Box>
-                            </CardActions>
-                        </Box>
+                        </CardContent>
+
+
+                        <CardActions className="card-click">
+                            <Box component={Link} to={`/profile/${array[2]}`}></Box>
+                        </CardActions>
                     </Card>
                 </Grid>
             ))}

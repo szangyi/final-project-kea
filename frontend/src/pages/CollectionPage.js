@@ -77,7 +77,7 @@ const CollectionPage = () => {
         <>
 
             <Banner variant="medium" headline1="Find your influencer" />
-            <MeshGradientBackground variant="full"></MeshGradientBackground>
+            {/* <MeshGradientBackground variant="full"></MeshGradientBackground> */}
 
             {/* <Grid container sx={{ display: 'flex', flexDirection: 'row', height: '100vh', pt: 5 }}> */}
             <Grid container sx={{ minHeight: '100vh', my: 5, mx: 2, }}>
