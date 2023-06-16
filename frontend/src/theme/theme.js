@@ -84,7 +84,7 @@ let theme = createTheme({
 
         },
         h5: {
-            fontWeight: 500,
+            fontWeight: 800,
             fontFamily: 'Encode Sans Expanded',
             fontSize: '1.2rem',
         },

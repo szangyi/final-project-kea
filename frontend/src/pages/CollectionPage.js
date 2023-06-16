@@ -9,7 +9,7 @@ import axios from 'axios';
 // --------------------------
 import Stack from '@mui/material/Stack';
 import Box from "@mui/material/Box";
-import { Grid } from '@mui/material';
+import { Grid, Typography } from '@mui/material';
 import Chip from '@mui/material/Chip';
 
 // --------------------------
@@ -37,7 +37,7 @@ const CollectionPage = () => {
     const [socialData, setSocialData] = useState('All');
     const [locationData, setLocationData] = useState('');
     const [profilesData, setProfilesData] = useState(null);
-    const [selected, setSelected] = useState('');
+    const [selected, setSelected] = useState('All');
     const [errorMessage, setErrorMessage] = useState(null)
     const allOptionIndex = SOCIALOPTIONS.findIndex(option => option.social === 'All');
     const [activeIndex, setActiveIndex] = useState(allOptionIndex);
@@ -58,6 +58,7 @@ const CollectionPage = () => {
 
     const handleChangeSocial = (social) => {
         setSelected((prevSelected) => (prevSelected === social ? null : social));
+        // setSelected((prevSelected) => (prevSelected === social ? 'All' : social));
         setSocialData((prevSocialData) => (prevSocialData === social ? 'All' : social));
     };
 
@@ -81,22 +82,32 @@ const CollectionPage = () => {
             {/* <MeshGradientBackground variant="full"></MeshGradientBackground> */}
 
             {/* <Grid container sx={{ display: 'flex', flexDirection: 'row', height: '100vh', pt: 5 }}> */}
-            <Grid container sx={{ minHeight: '100vh', my: 5, mx: 2, }}>
+            <Grid container sx={{ minHeight: '100vh', mx: 1, }}>
 
                 {/* ---------------- */}
                 {/* FILTERS */}
-                <Grid item xs={3} className="glassmorphism" sx={{ display: 'flex', flexDirection: 'column', p: 3, gap: 3, height: '90vh' }}>
+                <Grid item xs={3} className="" sx={{ py: 5, pl: 2, pr: 3, display: 'flex', flexDirection: 'column', gap:4, height: '90vh' }}>
+                    <Typography variant="h5">Filters</Typography>
 
                     <SearchBar onChange={handleSearchQueryChange} value={searchQuery} />
-                    <Category onCategoryChange={handleCategoryChange} filter={"yes"} />
-                    <Location onLocationChange={handleLocationChange} />
-                    <Hashtags onHashtagChange={handleHashtagChange} filter={"yes"} />
 
+                    <Box>
+                        <Typography variant="body1" sx={{ fontWeight: '800', mb: 1  }} > Category</Typography>
+                        <Category onCategoryChange={handleCategoryChange} filter={"yes"} />
+                    </Box>
+                    <Box>
+                        <Typography variant="body1" sx={{ fontWeight: '800', mb: 1 }} > Location</Typography>
+                        <Location onLocationChange={handleLocationChange} />
+                    </Box>
+                    <Box>
+                        <Typography variant="body1" sx={{ fontWeight: '800', mb: 1 }} > Hashtags</Typography>
+                        <Hashtags onHashtagChange={handleHashtagChange} filter={"yes"} />
+                    </Box>
                 </Grid>
 
                 {/* ---------------- */}
                 {/* COLLECTION */}
-                <Grid item xs={9} sx={{ overflow: 'auto', pl: 3, pb: 3, pr: 6 }}>
+                <Grid item xs={9} sx={{ pt: 5, pl: 3, pb: 3, pr: 6, overflow: 'auto', borderLeft: '1px solid', borderLeftColor: 'customColors.grey.light' }}>
                     <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2, flexWrap: 'wrap', mb: 3 }}>
                         {SOCIALOPTIONS.map((social, index) => (
                             <MyCustomChipMinimal

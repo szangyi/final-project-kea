@@ -39,19 +39,21 @@ const Category = ({ onCategoryChange, filter, helperText, error }) => {
     return (
         <>
             <FormControl sx={{ width: '100%' }} >
-                <InputLabel>Category</InputLabel>
+            
+                {filter ? '' : <InputLabel>Category</InputLabel>}
                 <Select
-                    sx={{ borderRadius: '15px' }}
+                    sx={{ borderRadius: '15px', height:'45px', fontSize: '14px' }}
                     labelId="category"
                     id="category"
                     value={categoryData !== '' ? categoryData : 'All categories'}
-                    label="Category"
+                    label={!filter ? 'Category' : undefined}
                     onChange={handleCategoryChange}>
+                    
 
-                    {filter && <MenuItem value="All categories">All Categories</MenuItem>}
+                    {filter && <MenuItem value="All categories" sx={{fontSize:'14px '}}>All Categories</MenuItem>}
 
                     {CATEGORYOPTIONS.map((option, index) => (
-                        <MenuItem key={index} value={option.category}>
+                        <MenuItem key={index} value={option.category} sx={{fontSize: '14px'}}>
                             {option.category}
                         </MenuItem>
                     ))}

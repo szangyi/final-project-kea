@@ -8,6 +8,7 @@ import React, { useState } from 'react';
 // --------------------------
 import Box from '@mui/material/Box';
 import Autocomplete from '@mui/material/Autocomplete';
+import MyCustomAutocomplete from './AutoComplete';
 
 // --------------------------
 // COMPONENTS ---------------
@@ -28,7 +29,7 @@ const Location = ({ onLocationChange, helperText, error }) => {
 
 
     return (
-        <Autocomplete
+        <MyCustomAutocomplete
             id="country-select"
             options={LOCATION}
             // autoHighlight
@@ -37,7 +38,7 @@ const Location = ({ onLocationChange, helperText, error }) => {
             onChange={handleLocationChange}
             value={locationData}
             renderOption={(props, option) => (
-                <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
+                <Box component="li" sx={{ fontSize: '14px', '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
                     <img
                         loading="lazy"
                         width="20"
@@ -50,6 +51,7 @@ const Location = ({ onLocationChange, helperText, error }) => {
             )}
             renderInput={(params) => (
                 <MyCustomTextField
+                sx={{fontSize: '14px', height: '45px'}}
                     {...params}
                     label="Choose a country"
                     inputProps={{

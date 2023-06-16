@@ -121,3 +121,7 @@ a{
 .chip-minimal {
     border: none !important;
 }
+
+#country-select * {
+    font-size: 14px !important;
+}

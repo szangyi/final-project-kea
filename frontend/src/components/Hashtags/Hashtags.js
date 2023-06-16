@@ -49,7 +49,8 @@ const Hashtags = ({ onHashtagChange, filter, helperText, error }) => {
                 <MyCustomTextField
                     {...params}
                     variant="standard"
-                    label="Chose hashtags"
+                    className="tags"
+                    label="Choose hashtags"
                     helperText={helperText}
                     error={error}
                 />
