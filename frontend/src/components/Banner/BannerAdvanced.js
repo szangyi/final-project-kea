@@ -1,9 +1,10 @@
 import "./Banner.css"
 
-import {useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import { Box, Typography, Divider } from "@mui/material"
 import MeshGradient from "../MeshGradient/MeshGradient"
 import MyCustomButton from "../Button/Button"
+import MiniCardCollection from "../Card/MiniCardCollection";
 
 const BannerAdvanced = (props) => {
 
@@ -24,6 +25,7 @@ const BannerAdvanced = (props) => {
 
             {showMeshGradient && <MeshGradient variant={props.variant} />}
 
+            {props.miniCardsEnabled && <MiniCardCollection />}
 
             <Box className="text-container bannerPadding" sx={{
                 display: 'flex',
@@ -35,11 +37,12 @@ const BannerAdvanced = (props) => {
                 <Typography variant="h2">{props.headline3}</Typography>
                 <Typography variant="h2">{props.headline4}</Typography>
 
-                {props.divider ? <Divider /> : ''}
+                {/* {props.divider ? <Divider /> : ''} */}
 
                 <Typography sx={{ mt: 2 }} >{props.copy1}</Typography>
                 <Typography >{props.copy2}</Typography>
-                <MyCustomButton sx={{ mt: 4 }}>{props.button}</MyCustomButton>
+                <MyCustomButton href={props.href} sx={{ mt: 4, width: 'fit-content' }}>{props.button}</MyCustomButton>
+
             </Box>
 
         </Box>

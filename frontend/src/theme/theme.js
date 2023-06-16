@@ -68,7 +68,7 @@ let theme = createTheme({
         },
         h2: {
             fontFamily: 'Encode Sans Expanded',
-            fontWeight: 300,
+            fontWeight: 400,
         },
         h3: {
             fontFamily: 'Encode Sans Expanded',
@@ -84,9 +84,9 @@ let theme = createTheme({
 
         },
         h5: {
-            fontWeight: 800,
+            fontWeight: 600,
             fontFamily: 'Encode Sans Expanded',
-            fontSize: '1.2rem',
+            fontSize: '1.3rem',
         },
         h6: {
             fontWeight: 500,

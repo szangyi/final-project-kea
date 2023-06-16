@@ -4,6 +4,7 @@ import {useState, useEffect} from 'react';
 import { Box, Typography, Divider } from "@mui/material"
 import MeshGradient from "../MeshGradient/MeshGradient"
 import MyCustomButton from "../Button/Button"
+import MiniCardCollection from "../Card/MiniCardCollection";
 
 const Banner = (props) => {
 
@@ -22,12 +23,13 @@ const Banner = (props) => {
 
             {showMeshGradient && <MeshGradient variant={props.variant} />}
 
+            {props.miniCardsEnabled && <MiniCardCollection />}
 
             <Box className="text-container bannerPadding" sx={{
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'center',
-                alignText: 'left'
+                alignText: 'left',
             }}>
                 {props.headline1 ? <Typography variant="h1">{props.headline1}</Typography> : null}
                 {props.headline2 ? <Typography variant="h1">{props.headline2}<Box sx={{ color: "white", display: 'inline-block' }}>.</Box></Typography> : null}

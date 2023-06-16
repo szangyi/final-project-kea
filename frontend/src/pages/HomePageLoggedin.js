@@ -15,7 +15,7 @@ import GetRandomProfilesAPI from '../api/GetRandomProfilesAPI';
 import Loader from '../components/Loader/Loader'
 import CollectionCard from '../components/CollectionCard/CollectionCard'
 import ErrorPage from './ErrorPage';
-
+import MiniCard from '../components/Card/MiniCard';
 
 
 import { Box, Typography, Stack } from "@mui/material";
@@ -49,8 +49,10 @@ const HomePageLoggedin = (theme) => {
                 headline3="I'm looking for Fashion influencer"
                 headline4="on Instagram"
                 divider={true}
-                button="Sign up"
+                button="Discover"
+                href="/collection"
                 copy1="Discover Youtube, TikTok, and Instagram influencers"
+                miniCardsEnabled
             />
 
             <StepsInfluencerDiscovery />

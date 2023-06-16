@@ -8,6 +8,9 @@ import StepLabel from '@mui/material/StepLabel';
 import StepContent from '@mui/material/StepContent';
 import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
+import collageLandscape from '../../assets/collage-landscape.png'
+import collagePortrait from '../../assets/collage-portrait.png'
+
 
 import { Box, Grid, Typography } from "@mui/material";
 
@@ -57,13 +60,15 @@ const StepsInfluencerDiscovery = (props) => {
 
 
     return (
-        <Box component="section" className="steps-influencer-discovery sectionPadding" >
+        <Box component="section" className="steps-influencer-discovery sectionPadding" sx={{ my: 5}}>
 
-            <Typography variant="subtitle1" sx={{ color: 'customColors.salmon.dark' }}>Influencer discovery</Typography>
-            <Typography variant="h3" sx={{marginBottom: 2}}>find your influencers</Typography>
-
-            <Grid container spacing={10} >
+            <Grid container spacing={{ xs: 10, sm: 5, lg: 10 }} >
                 <Grid item xs={12} md={8} lg={6}>
+
+                    <Typography variant="subtitle1" sx={{ color: 'customColors.salmon.dark' }}>Influencer discovery</Typography>
+                    <Typography variant="h3" sx={{ marginBottom: 2 }}>find your influencers</Typography>
+
+
                     <div>
                         <Stepper activeStep={activeStep} orientation="vertical">
                             {steps.map((label, index) => (
@@ -105,8 +110,9 @@ const StepsInfluencerDiscovery = (props) => {
                     </div>
                 </Grid>
 
-                <Grid item xs={12} md={4} lg={6}>
-                    <h5>Will be an image here</h5>
+                <Grid item xs={12} md={4} lg={6} sx={{display: 'flex', flexDirection:'column', justifyContent:'center' }}>
+                    <img className="mobile desktop" style={{ height: 'auto', width: '100%' }} src={collageLandscape} alt="Collage of influencers" />
+                    <img className="tablet" style={{ height: 'auto', width: 'auto' }} src={collagePortrait} alt="Collage of influencers" />
                 </Grid>
 
             </Grid>

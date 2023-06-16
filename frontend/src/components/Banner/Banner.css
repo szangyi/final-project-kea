@@ -20,6 +20,8 @@ section.banner>* {
     color: black;
     width: inherit;
     height: inherit;
+    margin-top: -32px;
+    width: 70%;
 }
 
 .banner button {
@@ -30,9 +32,9 @@ section.banner>* {
 /* VARIANTS */
 
 section.banner[variant='large'] {
-    height: 80vh;
+    height: 100vh;
 }
 
 section.banner[variant='medium'] {
-    height: 60vh;
+    height: 70vh;
 }

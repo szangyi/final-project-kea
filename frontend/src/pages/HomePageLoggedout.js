@@ -24,6 +24,7 @@ const HomePage = (theme) => {
                 copy1="And we are here to help you to find your rocks."
                 copy2="People who motivates you - to be a better you!"
                 button="Sign up"
+                miniCardsEnabled
             />
 
             <StepsInfluencerDiscovery />
