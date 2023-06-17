@@ -15,21 +15,21 @@ const MiniCardCollection = () => {
     return (
         <Box className="mini-card-collection">
 
-            <MiniCard className="mini-card glassmorphism" _className="glassmorphism"
+            <MiniCard className="mini-card glassmorphism"
                 sx={{ rotate: '-15deg', bottom: '230px', right: '260px' }}
             >
                 <FlareIcon fontSize="large" />
                 <Typography variant="h5"> Achieve your dreams </Typography>
             </MiniCard>
 
-            <MiniCard className="mini-card glassmorphism" _className="glassmorphism"
+            <MiniCard className="mini-card glassmorphism"
                 sx={{ rotate: '-15deg', bottom: '350px', right: '60px' }}
             >
                 <SportsGymnasticsIcon fontSize="large" />
                 <Typography variant="h5"> Transform your life </Typography>
             </MiniCard>
 
-            <MiniCard className="mini-card glassmorphism" _className="glassmorphism"
+            <MiniCard className="mini-card glassmorphism"
                 sx={{ rotate: '15deg', bottom: '80px', right: '35px' }}
             >
                 <RouteIcon fontSize="large" />

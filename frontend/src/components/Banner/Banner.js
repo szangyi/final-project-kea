@@ -36,7 +36,7 @@ const Banner = (props) => {
                 {props.divider ? <Divider /> : null}
                 {props.copy1 ? <Typography sx={{ mt: 2 }} >{props.copy1} </Typography> : null}
                 {props.copy2 ? <Typography >{props.copy2}</Typography> : null}
-                {props.button ? <MyCustomButton sx={{ mt: 4 }}>{props.button}</MyCustomButton> : null}
+                {props.button ? <MyCustomButton sx={{ mt: 4, width: 'fit-content'}} href={props.href} >{props.button}</MyCustomButton> : null}
             </Box>
 
         </Box>

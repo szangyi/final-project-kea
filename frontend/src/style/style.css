@@ -64,7 +64,7 @@ a{
 @media (min-width: 1200px) {
     .sectionPadding {
         padding-inline: calc(10 * 10px);
-        padding-block: calc(10 * 10px);
+        padding-block: calc(12 * 10px);
     }
 }
 
@@ -126,6 +126,10 @@ a{
     font-size: 14px !important;
 }
 
+.signup-cta-section .textbox {
+    margin-top: 0;
+}
+
 
 
 
@@ -144,7 +148,7 @@ a{
 /* tablet */
 @media (min-width: 900px) {
     .mobile {
-        display: block;
+        display: none;
     }
     .tablet {
         display: block;

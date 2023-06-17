@@ -57,17 +57,21 @@ const HomePageLoggedin = (theme) => {
 
             <StepsInfluencerDiscovery />
 
+            <ChipCollection
+                headline="100% verified influencers"
+                copy="Explore our extensive list of topics and uncover influencers who excel in their fields. Unlock a world of knowledge, creativity, and expertise, and browse in topics such as"
+            />
+
+
             <Box component="section" className="get-inspired sectionPadding" sx={{ backgroundColor: 'customColors.grey.light' }}>
-                <Typography variant="h3" sx={{ marginBottom: 2 }}>get inspired</Typography>
+                <Typography variant="h3" sx={{ marginBottom: 4 }}>Get inspired</Typography>
 
                 <Stack>
                     {profilesData === null ? (
                         <Loader />
                     ) : (
                         <>
-
                             <CollectionCard favoriteenabled={false} array={profilesData} />
-
                         </>
                     )}
                 </Stack>

@@ -19,8 +19,9 @@ let theme = createTheme({
             main: '#184CCA',
         },
         background: {
-            default: '#ffffff',
-            paper: '#ffffff',
+            main: '#ffffff',
+            // paper: '#ffffff',
+            contrastText: '#000000'
         },
         info: {
             main: '#a4b0ff',

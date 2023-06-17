@@ -6,6 +6,7 @@ const MyCustomButton = styled(Button)(({ variant, theme }) => ({
     backgroundColor: theme.palette.customColors.purple.light,
     paddingInline: 30,
     borderRadius: "0",
+    // width: "fit-content",
     color: "black",
     fontWeight: "800",
     border: "2px solid black",

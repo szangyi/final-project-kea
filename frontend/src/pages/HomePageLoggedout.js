@@ -11,6 +11,7 @@ import MyCustomTextField from "../components/Form/TextField";
 import MeshGradient from '../components/MeshGradient/MeshGradient';
 import ChipCollection from '../components/ChipCollection/ChipCollection';
 import TextBox from '../components/TextBox/TextBox'
+import { Box } from '@mui/material';
 
 const HomePage = (theme) => {
 
@@ -19,11 +20,12 @@ const HomePage = (theme) => {
 
             <Banner
                 variant="large"
-                headline1="people trust people"
+                headline1="People trust people"
                 headline2="not ads"
                 copy1="And we are here to help you to find your rocks."
                 copy2="People who motivates you - to be a better you!"
                 button="Sign up"
+                href="/signup"
                 miniCardsEnabled
             />
 
@@ -31,15 +33,17 @@ const HomePage = (theme) => {
 
             <ChipCollection
                 headline="100% verified influencers"
-                copy="Browse in topics such as"
+                copy="Explore our extensive list of topics and uncover influencers who excel in their fields. Unlock a world of knowledge, creativity, and expertise, and browse in topics such as"
             />
 
-            <TextBox
-                headline="start discovering today"
-                copy1="For each ad campaign that you create, you can control how much you're willing to spend on clicks and conversions"
-                button="sign up"
-            />
-
+            <Box className="signup-cta-section">
+                <TextBox
+                    headline="Start discovering today"
+                    copy1="Join our community of motivated individuals and embark on a journey of inspiration and growth. Take the first step towards a brighter future. Sign up today and tap into the transformative power of influential voices."
+                    button="sign up"
+                    href="/signup"
+                />
+            </Box>
 
         </>
     )

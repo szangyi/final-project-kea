@@ -13,7 +13,7 @@ const ChipCollection = (props, ) => {
         <Box className="chip-collection-section sectionPadding" sx={{ backgroundColor: 'customColors.blue.dark', display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
 
             <Typography variant="h3" sx={{ color: "white" }}>{props.headline}</Typography>
-            <Typography sx={{ color: "white" }}>{props.copy}</Typography>
+            <Typography sx={{ color: "white", width: {xs: '100%', md: '70%'} }}>{props.copy}</Typography>
             <Box maxWidth='sm' sx={{
                 marginTop: 6,
                 display: 'flex',
@@ -24,7 +24,7 @@ const ChipCollection = (props, ) => {
                 
 
                 {CATEGORYOPTIONS.map(category => (
-                    <Chip icon={<CheckCircleIcon />} color='salmon' key={category.category} label={category.category} />
+                    <Chip icon={<CheckCircleIcon style={{ color:"customColors.salmon.dark !important" }} />} color='background' key={category.category} label={category.category} />
                 ))}
             </Box>
         </Box>
