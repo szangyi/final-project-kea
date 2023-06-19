@@ -13,6 +13,7 @@ import MiniCard from "./MiniCard";
 const MiniCardCollection = () => {
 
     return (
+
         <Box className="mini-card-collection">
 
             <MiniCard className="mini-card glassmorphism"
@@ -33,9 +34,8 @@ const MiniCardCollection = () => {
                 sx={{ rotate: '15deg', bottom: '80px', right: '35px' }}
             >
                 <RouteIcon fontSize="large" />
-                <Typography variant="h5"> Inspire your journey </Typography>
+                <Typography variant="h5"> Inspire the journey </Typography>
             </MiniCard>
-
 
         </Box>
     )

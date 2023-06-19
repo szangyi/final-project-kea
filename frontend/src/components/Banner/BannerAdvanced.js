@@ -5,9 +5,12 @@ import { Box, Typography, Divider } from "@mui/material"
 import MeshGradient from "../MeshGradient/MeshGradient"
 import MyCustomButton from "../Button/Button"
 import MiniCardCollection from "../Card/MiniCardCollection";
+import { handleWindowSizeChange } from '../../util/detectMediaQuery'
+
 
 const BannerAdvanced = (props) => {
 
+    const [mediaQuery, setMediaQuery] = useState("");
     const [showMeshGradient, setShowMeshGradient] = useState(false);
 
     useEffect(() => {
@@ -18,6 +21,15 @@ const BannerAdvanced = (props) => {
         return () => clearTimeout(timeoutId); // Cleanup the timeout if the component unmounts before the timeout is reached
     }, []);
 
+    useEffect(() => {
+        const handleResize = () => handleWindowSizeChange(setMediaQuery);
+        handleResize()
+        window.addEventListener("resize", handleResize);
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    }, []); // Empty dependency array to run the effect only once on mount
+
     return (
         <Box component="section" className="banner banner-advanced" variant="large" >
 
@@ -25,7 +37,13 @@ const BannerAdvanced = (props) => {
 
             {showMeshGradient && <MeshGradient variant={props.variant} />}
 
-            {props.miniCardsEnabled && <MiniCardCollection />}
+            {mediaQuery === 'desktop' ? (
+                <>
+                    {props.miniCardsEnabled && <MiniCardCollection />}
+                </>
+            ) : (
+                <></>
+            )}
 
             <Box className="text-container bannerPadding" sx={{
                 display: 'flex',

@@ -72,6 +72,7 @@ const UserDashboard = (theme) => {
                             <Banner variant="medium"
                                 headline1="Hi"
                                 headline2={userData.username}
+                                miniCardsEnabledSmall
                             />
 
                             <Box component="section" className="userdashboard-section">
@@ -84,7 +85,7 @@ const UserDashboard = (theme) => {
                                     display: 'flex'
                                 }}>
                                     {mediaQuery == 'mobile' && <MyCustomMenuMobile />}
-                                    {mediaQuery == 'desktop' && <MyCustomDrawer />}
+                                    {mediaQuery == 'tablet' || mediaQuery == 'desktop' && <MyCustomDrawer />}
                                     <Outlet context={userData} />
 
                                 </Box>

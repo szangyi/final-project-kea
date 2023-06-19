@@ -5,6 +5,8 @@ export function handleWindowSizeChange(setMediaQuery) {
   
     if (windowWidth < 600) {
       setMediaQuery("mobile");
+    } else if (windowWidth < 950){
+      setMediaQuery("tablet");
     } else {
       setMediaQuery("desktop");
     }

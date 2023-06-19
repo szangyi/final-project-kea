@@ -72,7 +72,7 @@ const InfluencerPage = () => {
             <Banner
                 variant="medium"
                 headline1="Make an influence!"
-                miniCardsEnabledV2
+                miniCardsEnabledInfluencer
             />
             <Box
                 component="section"

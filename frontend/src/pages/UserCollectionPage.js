@@ -49,7 +49,12 @@ const UserCollectionPage = () => {
     return (
         <>
 
-            <Banner variant="medium" headline1="Your Collection" copy1="Curate your personal gallery of inspiration" />
+            <Banner 
+            variant="medium" 
+            headline1="Your Collection" 
+            copy1="Curate your personal gallery of inspiration"
+            miniCardsEnabledSmall
+            />
             <Stack className='sectionPadding'>
                 {favoritesData === null ? (
                     <Loader />
