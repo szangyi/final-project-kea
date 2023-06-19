@@ -31,6 +31,10 @@ def _():
         profile_created_at = str(int(time.time()))
         image_id = str(uuid.uuid4())
 
+        print(influencer_tags_list)
+        print(influencer_tags)
+        print(type(influencer_tags_list))
+        print(type(influencer_tags))
 
         # VALIDATION ##########################
         validation_errors = []
@@ -109,7 +113,9 @@ def _():
                     "profile_created_at": profile_created_at,
                 }
                 
-                database_access_functions._create_influencer_profile(influencer_data, db_config)
+                hashtags_list = influencer_tags_list.split(',')
+                database_access_functions._create_influencer_profile(influencer_data,hashtags_list, db_config)
+
                 response.status = 200
             else:
                 response.status = 409 # Conflict
