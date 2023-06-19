@@ -65,7 +65,7 @@ function ResponsiveAppBar() {
     const [userData, setUserData] = useState(null);
     const [error, setError] = useState(null)
 
-    AccountInfoAPI( setUserData, setError);
+    AccountInfoAPI(setUserData, setError);
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -82,171 +82,180 @@ function ResponsiveAppBar() {
         setAnchorElUser(null);
     };
 
+    console.log(userData)
+
     return (
         <>
-        {userData === null ? (
-            <Loader />
 
-        ) : (
-        <AppBar position="static" sx={{ paddingInline: { xs: 2, md: 5 }, boxShadow: 0, backgroundColor: 'transparent' }} >
-            <Container maxWidth="xl">
-                <Toolbar disableGutters>
+            <AppBar position="static" sx={{ paddingInline: { xs: 2, md: 5 }, boxShadow: 0, backgroundColor: 'transparent' }} >
+                <Container maxWidth="xl">
+                    <Toolbar disableGutters>
 
-                    {/* Desktop */}
-                    {/* Put logo here */}
-                    <Box className="logo-container" sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}>
-                        <Link to="/">
-                            <Logo variant="black" />
-                        </Link>
-                    </Box>
+                        {/* Desktop */}
+                        {/* Put logo here */}
+                        <Box className="logo-container" sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}>
+                            <Link to="/">
+                                <Logo variant="black" />
+                            </Link>
+                        </Box>
 
-                    {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
+                        {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
 
-                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'right', alignItems: 'center' }}>
-
-                        {pages.map(page => (
-                            <MenuItem disableRipple component="a" variant="navlink"
-                                key={page.name}
-                                href={page.href}
-                                className={page.className}
-                                // onClick={() => page.action()}
-                                sx={{ p: 0, marginInline: 2, my: 2, color: 'primary.main', fontWeight: 600, display: 'block', }}
-                            >
-                                {page.name}
-                            </MenuItem>
-                        ))}
-
-                    </Box>
-
-
-                    {/* Mobile */}
-
-                    <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-                        <IconButton
-                            size="large"
-                            aria-label="account of current user"
-                            aria-controls="menu-appbar"
-                            aria-haspopup="true"
-                            onClick={handleOpenNavMenu}
-                            color="inherit"
-                        >
-                            <MenuIcon />
-                        </IconButton>
-                        <Menu
-                            id="menu-appbar"
-                            anchorEl={anchorElNav}
-                            anchorOrigin={{
-                                vertical: 'bottom',
-                                horizontal: 'left',
-                            }}
-                            keepMounted
-                            transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'left',
-                            }}
-                            open={Boolean(anchorElNav)}
-                            onClose={handleCloseNavMenu}
-                            sx={{
-                                display: { xs: 'block', md: 'none' },
-                            }}
-                        >
+                        <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'right', alignItems: 'center' }}>
 
                             {pages.map(page => (
-                                <MenuItem component="a"
+                                <MenuItem disableRipple component="a" variant="navlink"
                                     key={page.name}
                                     href={page.href}
-                                // onClick={() => page.action()}
+                                    className={page.className}
+                                    // onClick={() => page.action()}
+                                    sx={{ p: 0, marginInline: 2, my: 2, color: 'primary.main', fontWeight: 600, display: 'block', }}
                                 >
                                     {page.name}
                                 </MenuItem>
                             ))}
 
-                        </Menu>
-                    </Box>
-
-                    {/* Put logo here */}
-                    <Box sx={{ maxHeight: '20px', display: { xs: 'flex', md: 'none' }, justifyContent:'center', flexGrow: 1 }}>
-                        <Logo variant="white"/>
-                    </Box>
-                    {/* <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 2, flexGrow: 1 }} /> */}
-                    <Typography
-                        sx={{
-                            mr: 0,
-                            display: { xs: 'flex', md: 'none' },
-                            flexGrow: 1,
-                        }}
-                    >
-                    </Typography>
+                        </Box>
 
 
-                    {/* All screen sizes */}
-                    <Box sx={{ flexGrow: 0 }}>
-                        <Tooltip _title="Open settings">
-                            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0, marginLeft: 2 }}>
-                            {userData.userImage ? (
-                                <Box
-                                    component="img"
-                                    src={`https://influncr.pythonanywhere.com/images/profile_images/${userData.userImage}`}
-                                    // src={`http://127.0.0.1:7878/profile_images/${userData.userImage}`}
-                                    sx={{ height: 50, width: 50, borderRadius: '50%' }}
-                                />
-                            ) : (
-                                <Avatar sx={{border: '2px solid white'}}
-                                />
-                            )}
+                        {/* Mobile */}
 
+                        <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+                            <IconButton
+                                size="large"
+                                aria-label="account of current user"
+                                aria-controls="menu-appbar"
+                                aria-haspopup="true"
+                                onClick={handleOpenNavMenu}
+                                color="inherit"
+                            >
+                                <MenuIcon />
                             </IconButton>
-                        </Tooltip>
-                        <Menu
-                            sx={{ mt: '45px' }}
-                            id="menu-appbar"
-                            anchorEl={anchorElUser}
-                            anchorOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
+                            <Menu
+                                id="menu-appbar"
+                                anchorEl={anchorElNav}
+                                anchorOrigin={{
+                                    vertical: 'bottom',
+                                    horizontal: 'left',
+                                }}
+                                keepMounted
+                                transformOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'left',
+                                }}
+                                open={Boolean(anchorElNav)}
+                                onClose={handleCloseNavMenu}
+                                sx={{
+                                    display: { xs: 'block', md: 'none' },
+                                }}
+                            >
+
+                                {pages.map(page => (
+                                    <MenuItem component="a"
+                                        key={page.name}
+                                        href={page.href}
+                                    // onClick={() => page.action()}
+                                    >
+                                        {page.name}
+                                    </MenuItem>
+                                ))}
+
+                            </Menu>
+                        </Box>
+
+                        {/* Put logo here */}
+                        <Box sx={{ maxHeight: '20px', display: { xs: 'flex', md: 'none' }, justifyContent: 'center', flexGrow: 1 }}>
+                            <Logo variant="white" />
+                        </Box>
+                        {/* <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 2, flexGrow: 1 }} /> */}
+                        <Typography
+                            sx={{
+                                mr: 0,
+                                display: { xs: 'flex', md: 'none' },
+                                flexGrow: 1,
                             }}
-                            keepMounted
-                            transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            open={Boolean(anchorElUser)}
-                            onClose={handleCloseUserMenu}
                         >
-                            {/* {settings.map((setting) => (
+                        </Typography>
+
+
+                        {/* All screen sizes */}
+                        <Box sx={{ flexGrow: 0 }}>
+                            <Tooltip _title="Open settings">
+                                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0, marginLeft: 2 }}>
+                                    {userData === null ? (
+                                        // <Loader />
+                                        <Avatar sx={{ border: '2px solid white' }}
+                                        />
+                                    ) : (
+
+                                        <>
+                                            {
+                                                userData.userImage ? (
+                                                    <Box
+                                                        component="img"
+                                                        src={`https://influncr.pythonanywhere.com/images/profile_images/${userData.userImage}`}
+                                                        // src={`http://127.0.0.1:7878/profile_images/${userData.userImage}`}
+                                                        sx={{ border: '2px solid white', height: 50, width: 50, borderRadius: '50%' }}
+                                                    />
+                                                ) : (
+                                                    <Avatar sx={{ border: '2px solid white' }} alt={userData.firstName} src="/fallback" 
+                                                    />
+                                                )
+                                            }
+                                        </>
+                                    )}
+
+                                </IconButton>
+                            </Tooltip>
+                            <Menu
+                                sx={{ mt: '45px' }}
+                                id="menu-appbar"
+                                anchorEl={anchorElUser}
+                                anchorOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                keepMounted
+                                transformOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                open={Boolean(anchorElUser)}
+                                onClose={handleCloseUserMenu}
+                            >
+                                {/* {settings.map((setting) => (
                                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
                                     <Typography textAlign="center">{setting}</Typography>
                                 </MenuItem>
                             ))} */}
 
-                            {settings.map(setting => (
-                                <MenuItem component="a"
-                                    key={setting.name}
-                                    href={setting.href}
-                                // onClick={() => setting.action()}
-                                >
-                                    <Typography textAlign="center">{setting.name}</Typography>
-                                </MenuItem>
-                            ))}
+                                {settings.map(setting => (
+                                    <MenuItem component="a"
+                                        key={setting.name}
+                                        href={setting.href}
+                                    // onClick={() => setting.action()}
+                                    >
+                                        <Typography textAlign="center">{setting.name}</Typography>
+                                    </MenuItem>
+                                ))}
 
-                            <Divider />
+                                <Divider />
 
-                            {settings2.map(setting => (
-                                <MenuItem component="a"
-                                    key={setting.name}
-                                    href={setting.href}
-                                    onClick={() => setting.action()}
-                                >
-                                    <Typography textAlign="center">{setting.name}</Typography>
-                                </MenuItem>
-                            ))}
-                        </Menu>
-                    </Box>
+                                {settings2.map(setting => (
+                                    <MenuItem component="a"
+                                        key={setting.name}
+                                        href={setting.href}
+                                        onClick={() => setting.action()}
+                                    >
+                                        <Typography textAlign="center">{setting.name}</Typography>
+                                    </MenuItem>
+                                ))}
+                            </Menu>
+                        </Box>
 
-                </Toolbar>
-            </Container>
-        </AppBar>
-        )}
+                    </Toolbar>
+                </Container>
+            </AppBar>
         </>
     );
 }
