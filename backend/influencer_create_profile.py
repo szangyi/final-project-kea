@@ -76,7 +76,6 @@ def _():
     
     
         # DATABASE CONNECTION ##########################
-        print("I am here")
         db_config = helper_functions._db_config()
         selected_user_db = database_access_functions._get_user(user_email_validated, db_config)
         print(selected_user_db)

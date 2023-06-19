@@ -6,7 +6,6 @@ import axios from 'axios';
 
 export default async function GetAllProfilesAPI(setProfilesData, setErrorMessage) {
     try {
-        console.log("here")
         const response = await axios.get('/api/profiles');
         if (response.status === 200) {
             const profileData = response.data;

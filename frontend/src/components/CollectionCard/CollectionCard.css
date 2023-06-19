@@ -4,7 +4,13 @@
 /* CARDS CONTAINER */
 .cards-container {
     display: grid !important;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+
+@media (min-width: 900px) {
+    .cards-container {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
 }
 
 .cards-container .card-container .card,
@@ -28,16 +34,17 @@
     display: grid;
 }
 
-.card > * {
-grid-area: 1/1
+.card>* {
+    grid-area: 1/1
 }
 
 
 /* CARD CHILDREN */
 /* IMAGE */
 .card .card-content {
-    width:inherit
+    width: inherit
 }
+
 .card .card-image-container {
     overflow: hidden;
     display: grid;
@@ -61,7 +68,7 @@ grid-area: 1/1
     transform: scale(1);
     transition: .2s ease-in;
     aspect-ratio: 1/1;
-    width:inherit;
+    width: inherit;
 }
 
 /* CONTENT */
@@ -80,14 +87,13 @@ grid-area: 1/1
     padding: 0 !important;
 }
 
-.card-click > * {
+.card-click>* {
     width: 100%;
     height: 100%;
     cursor: pointer;
     z-index: 9;
 }
 
-.card-fav > * {
+.card-fav>* {
     z-index: 10
 }
-

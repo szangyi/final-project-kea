@@ -26,6 +26,8 @@ import LanguageIcon from '@mui/icons-material/Language';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import MusicVideoIcon from '@mui/icons-material/MusicVideo';
 import MenuItem from '@mui/material/MenuItem';
+import Skeleton from '@mui/material/Skeleton';
+
 
 // --------------------------
 // COMPONENTS ---------------
@@ -80,7 +82,15 @@ const InfluencerPage = () => {
                 sx={{ pt: { xs: 5, md: 5 }, pb: { xs: 2, md: 5 }, minHeight: { xs: '200px', md: '500px' } }}>
 
                 {influencerData === null ? (
-                    <Loader />
+                    // <Loader />
+                    <>
+                        <Box sx={{pt: { xs: 1, md: 5 }, pb: { xs: 1, md: 0 }, px: { xs: 1, md: 3 }, width: {xs: '100%', md: '60%'}, margin: 'auto', display: 'flex', flexDirection: 'column', alignItems: {xs: 'start', md: 'center'} }} >
+                            <Skeleton width="100%" />
+                            <Skeleton width="60%" />
+                            <Skeleton sx={{ mt: 4 }} variant="rounded" width={100} height={30} />
+
+                        </Box>
+                    </>
 
                 ) : (
                     <>
@@ -91,7 +101,7 @@ const InfluencerPage = () => {
                                     width: '100%',
                                     display: 'flex',
                                     direction: 'column',
-                                    alignItems: {xs: 'start', md:'center'}
+                                    alignItems: { xs: 'start', md: 'center' }
                                 }}>
                                 <Typography sx={{ pt: { xs: 1, md: 5 }, pb: { xs: 1, md: 0 }, px: { xs: 1, md: 3 } }} variant="h3">Step into the spotlight with ease!</Typography>
                                 <Typography sx={{ pt: { xs: 1, md: 1 }, pb: { xs: 1, md: 0 }, px: { xs: 1, md: 3 } }} variant="p">Create your first profile, and become recognizable.</Typography>
@@ -198,7 +208,7 @@ const InfluencerPage = () => {
                                                                     open={open}
                                                                     onClose={handleClose}
                                                                     aria-labelledby="draggable-dialog-title">
-                                                                    
+
                                                                     <DialogTitle >
                                                                         Are you sure you want to delete this profile?
                                                                     </DialogTitle>

@@ -82,8 +82,6 @@ function ResponsiveAppBar() {
         setAnchorElUser(null);
     };
 
-    console.log(userData)
-
     return (
         <>
 
