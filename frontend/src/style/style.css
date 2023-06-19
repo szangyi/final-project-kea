@@ -53,8 +53,8 @@ a{
 /* sx={{ px: { xs: 5, sm: 5, md: 15 }, py: { xs: 5, sm: 5, md: 10 } }}> */
 
 .sectionPadding {
-    padding-inline: calc(5 * 10px);
-    padding-block: calc(5 * 10px);
+    padding-inline: calc(3 * 10px);
+    padding-block: calc(3 * 10px);
 }
 
 /* sm */
@@ -166,4 +166,15 @@ a{
     .desktop {
         display: block;
     }
+}
+
+
+
+.profile-section {
+
+}
+
+
+.profile-section .image-container {
+    
 }

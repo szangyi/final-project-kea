@@ -47,6 +47,7 @@ let theme = createTheme({
                 light:'#D9DEE8'
             },
             grey: {
+                lighter: '#F8F4F4',
                 light: '#E8E4E1',
                 main: '#B8AFA9',
             }

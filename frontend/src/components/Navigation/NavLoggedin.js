@@ -191,7 +191,7 @@ function ResponsiveAppBar() {
                                     sx={{ height: 50, width: 50, borderRadius: '50%' }}
                                 />
                             ) : (
-                                <Avatar alt="Demy Sharp"
+                                <Avatar sx={{border: '2px solid white'}}
                                 />
                             )}
 

@@ -8,10 +8,13 @@ import MyCustomButton from "../Button/Button"
 const TextBox = (props) => {
 
     return (
-        <Box component="section" className="textbox" sx={{ mt: 5 }} >
+        <Box component="section" className="textbox" sx={{ }} >
 
             <Box className="text-container sectionPadding" sx={{
-                width: { xs: '100%', md: '80%' },
+                width: {
+                    xs: '100%'
+                    // ,md: '80%'
+                },
                 margin: 'auto',
                 display: 'flex',
                 flexDirection: 'column',

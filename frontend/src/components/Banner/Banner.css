@@ -38,3 +38,8 @@ section.banner[variant='large'] {
 section.banner[variant='medium'] {
     height: 70vh;
 }
+
+
+section.banner[variant='small'] {
+    height: 40vh;
+}

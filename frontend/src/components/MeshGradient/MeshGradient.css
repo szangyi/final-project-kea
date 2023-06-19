@@ -56,6 +56,12 @@
   height: calc(70vh + 64px);
 }
 
+#gradient-canvas[variant*="small"] {
+  height: calc(40vh + 64px);
+}
+
+
+
 
 
 
