@@ -60,6 +60,7 @@ const MyCustomDrawer = (props) => {
 
             sx={{
                 py: 3,
+                pl: 2,
                 width: drawerWidth,
                 flexShrink: 0,
                 [`& .MuiDrawer-paper`]: { backgroundColor: 'transparent', width: drawerWidth, borderRight: 0, boxSizing: 'border-box', position: 'unset' },

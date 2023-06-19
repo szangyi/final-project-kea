@@ -50,6 +50,7 @@ let theme = createTheme({
                 lighter: '#F8F4F4',
                 light: '#E8E4E1',
                 main: '#B8AFA9',
+                dark: '#7A7572'
             }
         },
 

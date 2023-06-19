@@ -246,7 +246,7 @@ const ProfileLandingPage = () => {
                         color="white"
                         headline="Explore more influencers!"
                         copy1="Are you hungry for more inspiration? Look no further. Discover new voices, fresh perspectives, and hidden gems that can elevate your journey to new heights."
-                        button="Discover"
+                        button="Browse"
                         href=""
                     />
 
