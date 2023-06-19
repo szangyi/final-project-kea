@@ -178,3 +178,10 @@ a{
 .profile-section .image-container {
     
 }
+
+
+
+.MuiDialog-container .MuiPaper-root {
+    border-radius: 15px;
+    padding: 30px;
+}

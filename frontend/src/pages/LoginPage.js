@@ -92,7 +92,7 @@ const LoginPage = () => {
                     }}
                 >
                     <Typography component="h2" variant="h4" sx={{ mb: 2 }} >
-                        log in
+                        Log in
                     </Typography>
 
                     {formError && (

@@ -45,7 +45,7 @@
   }
   
   #gradient-canvas-bg[variant*="full"] {
-    height: 250vh;
+    height: 200vh;
     width:100vw;
     opacity:.2;
   }

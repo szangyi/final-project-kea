@@ -36,7 +36,7 @@ const SocialAccountsForm = ({ values, handleChange, touched, errors }) => {
 
     return (
         <>
-            <Typography variant="h5"> Social accounts </Typography>
+                    <Typography variant="h6" sx={{ fontWeight: 600}}> Social accounts </Typography>
             <Box>
                 <MyCustomTextField
                     size="normal"

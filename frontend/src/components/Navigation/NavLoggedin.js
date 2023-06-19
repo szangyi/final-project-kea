@@ -165,8 +165,8 @@ function ResponsiveAppBar() {
                     </Box>
 
                     {/* Put logo here */}
-                    <Box sx={{ display: { xs: 'flex', md: 'none' }, mr: 2, flexGrow: 1 }}>
-                        <Logo variant="black" />
+                    <Box sx={{ maxHeight: '20px', display: { xs: 'flex', md: 'none' }, justifyContent:'center', flexGrow: 1 }}>
+                        <Logo variant="white"/>
                     </Box>
                     {/* <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 2, flexGrow: 1 }} /> */}
                     <Typography

@@ -79,7 +79,7 @@ const MyCustomDrawer = (props) => {
                                 key={item.text} >
                                 <ListItemButton onClick={item.action}>
                                     {icon && <ListItemIcon sx={{ minWidth: '40px', minHeight: '', }} >{item.icon}</ListItemIcon>}
-                                    <ListItemText primary={item.text} primaryTypographyProps={{ fontSize: '16px' }}
+                                    <ListItemText primary={item.text} primaryTypographyProps={{}}
                                     />
                                 </ListItemButton>
                             </ListItem>

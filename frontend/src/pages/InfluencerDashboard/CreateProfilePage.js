@@ -37,6 +37,7 @@ import SocialAccountsForm from './SocialAccountsForm';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { createProfileSchema } from '../../schemas';
+import MeshGradientBackground from '../../components/MeshGradient/MeshGradientBackground';
 
 
 const CreateProfile = () => {
@@ -109,13 +110,14 @@ const CreateProfile = () => {
     return (
         <>
 
+            <MeshGradientBackground variant="full" />
 
-            <Stack sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <Typography sx={{ pt: { xs: 1, md: 5 }, pb: { xs: 1, md: 5 } }} variant="h2">Create your profile </Typography>
+            <Stack sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', margin: 'auto', width: {xs: '100%', md: '80%',lg: '60%'} }}>
+                <Typography sx={{ pt: { xs: 1, md: 5 }, pb: { xs: 1, md: 5 } }} variant="h3">Create your profile </Typography>
 
                 <Box className="glassmorphism" sx={{
-                    gap: 2, flexGrow: 1, mx: { xs: 5, md: 10 }, py: { xs: 1, md: 3 }, pl: { xs: 1, md: 3 }, pr: { xs: 1, md: 10 },
-                    display: 'flex', flexDirection: 'row', alignItems: 'center', width: '700px', minHeight: '500px', position: 'relative'
+                    gap: 2, flexGrow: 1, mx: { xs: 2, sm:5, md: 10 }, p: { xs: 3, md: 5 },
+                    display: 'flex', flexDirection: 'row', alignItems: 'center', _width: '700px', minHeight: '500px', position: 'relative'
                 }}>
 
                     <Stack>
@@ -125,9 +127,9 @@ const CreateProfile = () => {
                         )}
 
 
-                    {profileExists && (
-                        <Alert severity="error">{profileExists}</Alert>
-                    )}
+                        {profileExists && (
+                            <Alert severity="error">{profileExists}</Alert>
+                        )}
 
 
                         <InfluencerBasicInfoForm values={values} handleChange={handleChange} touched={touched} errors={errors} />

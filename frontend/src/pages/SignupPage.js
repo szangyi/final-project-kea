@@ -95,7 +95,7 @@ const SignupPage = () => {
                     }}
                 >
                     <Typography component="h2" variant="h4" sx={{ mb: 2 }} >
-                        sign up
+                        Sign up
                     </Typography>
 
                     {formError && (

@@ -5,6 +5,7 @@ import { Box, Typography, Divider } from "@mui/material"
 import MeshGradient from "../MeshGradient/MeshGradient"
 import MyCustomButton from "../Button/Button"
 import MiniCardCollection from "../Card/MiniCardCollection";
+import MiniCardCollectionV2 from "../Card/MiniCardCollectionV2";
 
 const Banner = (props) => {
 
@@ -24,6 +25,7 @@ const Banner = (props) => {
             {showMeshGradient && <MeshGradient variant={props.variant} />}
 
             {props.miniCardsEnabled && <MiniCardCollection />}
+            {props.miniCardsEnabledV2 && <MiniCardCollectionV2 />}
 
             <Box className="text-container bannerPadding" sx={{
                 display: 'flex',

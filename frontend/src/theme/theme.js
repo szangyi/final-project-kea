@@ -110,8 +110,10 @@ let theme = createTheme({
             fontSize: '0.6rem',
         },
         listitem: {
-            fontSize: '.6rem',
+            fontSize: '.5rem',
             fontWeight: 800,
+            fontFamily: 'Encode Sans Expanded',
+
         },
 
     },
