@@ -16,6 +16,8 @@ import Loader from '../components/Loader/Loader'
 import CollectionCard from '../components/CollectionCard/CollectionCard'
 import ErrorPage from './ErrorPage';
 import MiniCard from '../components/Card/MiniCard';
+import Skeleton from '@mui/material/Skeleton';
+
 
 
 import { Box, Typography, Stack } from "@mui/material";
@@ -37,7 +39,7 @@ const HomePageLoggedin = (theme) => {
     }, [profilesData]);
 
     if (errorMessage) {
-        return <ErrorPage error={errorMessage}/>
+        return <ErrorPage error={errorMessage} />
     }
 
     return (
@@ -68,7 +70,35 @@ const HomePageLoggedin = (theme) => {
 
                 <Stack>
                     {profilesData === null ? (
-                        <Loader />
+                        // <Loader />
+
+                        <>
+                            <Stack sx={{ display: 'flex', flexDirection: 'row', gap: { xs: 1, md: 5 }, }}>
+                                <Box sx={{ width: 'fit-content' }}>
+                                    <Skeleton sx={{ borderRadius: '15px' }} variant="rounded" width={300} height={300} />
+                                    <Box sx={{ pt: 0.5, width: 300 }}>
+                                        <Skeleton />
+                                        <Skeleton width="60%" />
+                                    </Box>
+                                </Box>
+                                <Box sx={{ width: 'fit-content' }}>
+                                    <Skeleton sx={{ borderRadius: '15px' }} variant="rounded" width={300} height={300} />
+                                    <Box sx={{ pt: 0.5, width: 300 }}>
+                                        <Skeleton />
+                                        <Skeleton width="60%" />
+                                    </Box>
+                                </Box>
+                                <Box sx={{ width: 'fit-content' }}>
+                                    <Skeleton sx={{ borderRadius: '15px' }} variant="rounded" width={300} height={300} />
+                                    <Box sx={{ pt: 0.5, width: 300 }}>
+                                        <Skeleton />
+                                        <Skeleton width="60%" />
+                                    </Box>
+                                </Box>
+                            </Stack>
+                        </>
+
+
                     ) : (
                         <>
                             <CollectionCard favoriteenabled={false} array={profilesData} />

@@ -11,6 +11,7 @@ import Stack from '@mui/material/Stack';
 import Box from "@mui/material/Box";
 import { Grid, Typography } from '@mui/material';
 import Chip from '@mui/material/Chip';
+import Skeleton from '@mui/material/Skeleton';
 
 // --------------------------
 // COMPONENTS ---------------
@@ -86,13 +87,13 @@ const CollectionPage = () => {
 
                 {/* ---------------- */}
                 {/* FILTERS */}
-                <Grid item xs={3} className="" sx={{ py: 5, pl: 2, pr: 3, display: 'flex', flexDirection: 'column', gap:4, height: '90vh' }}>
+                <Grid item xs={3} className="" sx={{ py: 5, pl: 2, pr: 3, display: 'flex', flexDirection: 'column', gap: 4, height: '90vh' }}>
                     <Typography variant="h5">Filters</Typography>
 
                     <SearchBar onChange={handleSearchQueryChange} value={searchQuery} />
 
                     <Box>
-                        <Typography variant="body1" sx={{ fontWeight: '800', mb: 1  }} > Category</Typography>
+                        <Typography variant="body1" sx={{ fontWeight: '800', mb: 1 }} > Category</Typography>
                         <Category onCategoryChange={handleCategoryChange} filter={"yes"} />
                     </Box>
                     <Box>
@@ -126,9 +127,43 @@ const CollectionPage = () => {
 
                     <Stack>
                         {profilesData === null ? (
-                            <Loader />
+                            // <Loader />
+                            <>
+                                <Stack sx={{ display: 'flex', flexDirection: 'row', gap: { xs: 1, md: 5 }, }}>
+                                    <Box sx={{ width: 'fit-content' }}>
+                                        <Skeleton sx={{ borderRadius: '15px' }} variant="rounded" width={300} height={300} />
+                                        <Box sx={{ pt: 0.5, width: 300 }}>
+                                            <Skeleton />
+                                            <Skeleton width="60%" />
+                                        </Box>
+                                    </Box>
+                                    <Box sx={{ width: 'fit-content' }}>
+                                        <Skeleton sx={{ borderRadius: '15px' }} variant="rounded" width={300} height={300} />
+                                        <Box sx={{ pt: 0.5, width: 300 }}>
+                                            <Skeleton />
+                                            <Skeleton width="60%" />
+                                        </Box>
+                                    </Box>
+                                    <Box sx={{ width: 'fit-content' }}>
+                                        <Skeleton sx={{ borderRadius: '15px' }} variant="rounded" width={300} height={300} />
+                                        <Box sx={{ pt: 0.5, width: 300 }}>
+                                            <Skeleton />
+                                            <Skeleton width="60%" />
+                                        </Box>
+                                    </Box>
+                                </Stack>
+                            </>
                         ) : (
-                            <CollectionCard favoriteenabled={true} filteringCard={"yes"} array={profilesData} searchQuery={searchQuery} searchCategory={categoryData} searchHashtag={hashtagData} searchSocial={socialData} searchLocation={locationData} />
+
+                            <CollectionCard
+                                favoriteenabled={true}
+                                filteringCard={"yes"}
+                                array={profilesData}
+                                searchQuery={searchQuery}
+                                searchCategory={categoryData}
+                                searchHashtag={hashtagData}
+                                searchSocial={socialData}
+                                searchLocation={locationData} />
                         )}
                     </Stack>
                 </Grid>
