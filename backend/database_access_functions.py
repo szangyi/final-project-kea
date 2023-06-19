@@ -169,10 +169,17 @@ def _get_one_influencer_profile(influencer_ID, db_config):
         var = (influencer_ID,)
         cursor.execute(sql_get_user, var)
         profile = cursor.fetchone()
+        hashtags =_get_influencer_hashtags(influencer_ID, db_config)
+        print("wejkfndwejkfbnewkfjbewfjebf")
+        print(hashtags)
+        print(type(hashtags))
+        print(profile)
         db.commit()
+        profile_hashtags = profile + (tuple(hashtags),)
+        print(profile_hashtags)
         
         response.status = 200
-        return profile
+        return profile_hashtags
     
     except Exception as ex:
         print(ex)
@@ -193,6 +200,25 @@ def _get_other_influencer_profiles(user_ID,username, db_config):
         
         response.status = 200
         return other_profiles
+    
+    except Exception as ex:
+        print(ex)
+        response.status= 500
+        return str(ex)
+
+    finally:
+        db.close()
+        
+def _get_influencer_hashtags(influencer_ID, db_config):
+    try:
+        db = mysql.connector.connect(**db_config)
+        cursor = db.cursor()
+        sql_check_influencer = "SELECT tag_name FROM hashtags RIGHT JOIN hashtags_influencers ON hashtags.tag_ID = hashtags_influencers.tag_ID  AND influencer_ID = %s "
+        var_check_influencer = (influencer_ID,)
+        cursor.execute(sql_check_influencer, var_check_influencer)
+        hashtags = cursor.fetchall()
+        response.status = 200
+        return hashtags
     
     except Exception as ex:
         print(ex)

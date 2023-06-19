@@ -47,7 +47,7 @@ const ProfileLandingPage = () => {
 
             {profileData.length === 0 ? (
                 <>
-            {profileExists && (
+                    {profileExists && (
                         <Alert severity="error">{profileExists}</Alert>)}
                     <Loader />
                 </>
@@ -55,7 +55,7 @@ const ProfileLandingPage = () => {
 
             ) : (
                 <>
-                            
+
 
                     <Stack
                         sx={{ mt: 5, mb: 5, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -74,8 +74,11 @@ const ProfileLandingPage = () => {
                             </Stack>
                         </Stack>
 
-                        <Stack sx={{ mt: 5 }}>
-                            <Chip icon={<CheckCircleIcon />} color='salmon' key={profileData[9]} label={profileData[9]} />
+                        <Stack sx={{ mt: 5, display:'flex', flexDirection:'row' }}>
+                            {profileData[14].map((item, index) => (
+                                <Chip sx={{mr:2}} icon={<CheckCircleIcon />} color='salmon' key={index} label={item} />
+
+                            ))}
                         </Stack>
 
                         <Typography sx={{ fontSize: '20px', mt: 5 }} variant="overline">Bio</Typography>
