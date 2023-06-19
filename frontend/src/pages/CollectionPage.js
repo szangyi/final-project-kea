@@ -12,7 +12,6 @@ import Box from "@mui/material/Box";
 import { Grid, Typography } from '@mui/material';
 import Skeleton from '@mui/material/Skeleton';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
-import Button from '@mui/material/Button';
 
 
 // --------------------------
@@ -151,7 +150,6 @@ const CollectionPage = () => {
                             <Box
                                 sx={{
                                     position: 'absolute',
-                                    // top: -drawerBleeding,
                                     borderTopLeftRadius: 8,
                                     borderTopRightRadius: 8,
                                     visibility: 'visible',
