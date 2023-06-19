@@ -8,6 +8,7 @@ import database_access_functions
 import helper_functions
 import os
 import html
+import mysql.connector
 
 # CREATING INFLUENCER PROFILE #
 @post("/api/create-profile")
@@ -84,11 +85,15 @@ def _():
 
             profile_exist_db = database_access_functions._profile_exist(influencer_username, db_config)
             if not profile_exist_db:
+                db = mysql.connector.connect(**db_config)
+
+                cursor = db.cursor()
+                db.start_transaction()
                 user_id = selected_user_db[0]
                 profiles = database_access_functions._get_all_influencer_profiles(user_id, db_config)
                 if profiles == []:
                     is_influencer = True
-                    database_access_functions._update_user_is_influencer(user_id, is_influencer, db_config)
+                    database_access_functions._update_user_is_influencer(user_id, is_influencer, cursor)
                 else:
                     pass
                                 
@@ -109,8 +114,8 @@ def _():
                 }
                 
                 hashtags_list = influencer_tags_list.split(',')
-                database_access_functions._create_influencer_profile(influencer_data,hashtags_list, db_config)
-
+                database_access_functions._create_influencer_profile(influencer_data,hashtags_list, cursor)
+                db.commit()
                 response.status = 200
             else:
                 response.status = 409 # Conflict
@@ -120,4 +125,7 @@ def _():
     except Exception as ex:
         print(ex)
         response.status = 500
+        db.rollback()
         return str(ex)
+    finally:
+        db.close()
