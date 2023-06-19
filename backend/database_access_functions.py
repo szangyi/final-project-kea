@@ -170,13 +170,9 @@ def _get_one_influencer_profile(influencer_ID, db_config):
         cursor.execute(sql_get_user, var)
         profile = cursor.fetchone()
         hashtags =_get_influencer_hashtags(influencer_ID, db_config)
-        print("wejkfndwejkfbnewkfjbewfjebf")
-        print(hashtags)
-        print(type(hashtags))
-        print(profile)
+
         db.commit()
         profile_hashtags = profile + (tuple(hashtags),)
-        print(profile_hashtags)
         
         response.status = 200
         return profile_hashtags
@@ -197,7 +193,7 @@ def _get_other_influencer_profiles(user_ID,username, db_config):
         var_check_influencer = (user_ID,username,)
         cursor.execute(sql_check_influencer, var_check_influencer)
         other_profiles = cursor.fetchall()
-        
+                
         response.status = 200
         return other_profiles
     
@@ -262,10 +258,17 @@ def _get_all_profiles(db_config, user_ID):
         var = (user_ID,)
         cursor.execute(sql_check_influencer, var)
         profiles = cursor.fetchall()
-        db.commit()
-        
+        profiles_list = []
+        for profile in profiles:
+            print(profile)
+            hashtags =_get_influencer_hashtags(profile[0], db_config)
+            print(hashtags)
+            profile_hashtags = profile + (tuple(hashtags),)
+            print(profile_hashtags)
+            profiles_list.append(profile_hashtags)
+        db.commit() 
         response.status = 200
-        return profiles
+        return profiles_list
     
     except Exception as ex:
         print(ex)

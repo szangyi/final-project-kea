@@ -115,7 +115,7 @@ const CollectionCard = ({ array, filteringCard, favoriteenabled, searchQuery, se
                                     Category: {array[10]}
                                 </Typography>
                                 <Typography gutterBottom variant="body2" color="text.secondary">
-                                    Tags: {array[9].substring(1, array[9].length - 1).replace(/,/g, ' ')}
+                                    Tags: {array[15]}
                                 </Typography>
                                 <Typography gutterBottom variant="body2" color="text.secondary">
                                     Location: {array[4]}
