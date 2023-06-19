@@ -30,12 +30,7 @@ def _():
         profile_image_delete = request.files.get("image")
         profile_created_at = str(int(time.time()))
         image_id = str(uuid.uuid4())
-
-        print(influencer_tags_list)
-        print(influencer_tags)
-        print(type(influencer_tags_list))
-        print(type(influencer_tags))
-
+        
         # VALIDATION ##########################
         validation_errors = []
 

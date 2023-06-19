@@ -224,23 +224,20 @@ def _get_influencer_hashtags(influencer_ID, db_config):
     finally:
         db.close()
 
-def _delete_influencer_profile(influencer_ID, db_config):
+def _delete_influencer_profile(influencer_ID, cursor):
     try:
-        db = mysql.connector.connect(**db_config)
-        cursor = db.cursor()
+
         sql = """ DELETE FROM influencers_profile WHERE influencer_ID=%s"""
         cursor.execute(sql, (influencer_ID,))
         
-        response.status = 200
-        db.commit()
+
+        
     
     except Exception as ex:
         print(ex)
         response.status= 500
         return str(ex)
 
-    finally:
-        db.close()
         
 def _delete_user_account(user_ID, db_config):
     try:
@@ -422,7 +419,7 @@ def _update_user_basic_info(user_id,user_basic_data, db_config):
             
         )
         cursor.execute(sql, var)
-        db.commit()
+        
         
         response.status = 200
     except Exception as ex:
@@ -463,10 +460,8 @@ def _update_user_security_info(user_security_data, db_config):
     finally:
         db.close()
         
-def _update_user_is_influencer(user_id,is_influencer, db_config):
+def _update_user_is_influencer(user_id,is_influencer, cursor):
     try:
-        db = mysql.connector.connect(**db_config)
-        cursor = db.cursor()
         sql = """ UPDATE users
                     SET is_influencer =%s
                     WHERE user_ID=%s
@@ -476,18 +471,15 @@ def _update_user_is_influencer(user_id,is_influencer, db_config):
             user_id
         )
         
-        print(var)
         cursor.execute(sql, var)
-        db.commit()
+
         
-        response.status = 200
     except Exception as ex:
         print(ex)
         response.status= 500
         return str(ex)
 
-    finally:
-        db.close()
+
 
 def _create_influencer_profile(influencer_data,hashtag_list,  db_config):
     try:
