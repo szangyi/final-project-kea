@@ -45,8 +45,7 @@ const HomePageLoggedin = (theme) => {
     return (
         <>
 
-            {/* Add filter to this banner */}
-            <BannerAdvanced
+            {/* <BannerAdvanced
                 variant="large"
                 headline3="I'm looking for Fashion influencer"
                 headline4="on Instagram"
@@ -55,7 +54,10 @@ const HomePageLoggedin = (theme) => {
                 href="/collection"
                 copy1="Discover Youtube, TikTok, and Instagram influencers"
                 miniCardsEnabled
-            />
+            /> */}
+
+            {/* Add filter to this banner */}
+            <BannerAdvanced />
 
             <StepsInfluencerDiscovery />
 

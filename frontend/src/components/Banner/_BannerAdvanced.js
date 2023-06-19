@@ -1,48 +1,17 @@
 import "./Banner.css"
 
 import { useState, useEffect } from 'react';
-import useSearchParams, { useNavigate } from 'react-router-dom';
 import { Box, Typography, Divider } from "@mui/material"
 import MeshGradient from "../MeshGradient/MeshGradient"
 import MyCustomButton from "../Button/Button"
 import MiniCardCollection from "../Card/MiniCardCollection";
 import { handleWindowSizeChange } from '../../util/detectMediaQuery'
-import Category from "../Category/Category";
-import SoMe from "../SoMe/SoMe";
 
 
 const BannerAdvanced = (props) => {
 
     const [mediaQuery, setMediaQuery] = useState("");
-    const [customFilter, setCustomFilter] = useState("")
     const [showMeshGradient, setShowMeshGradient] = useState(false);
-    const nav = useNavigate();
-
-
-    const handleCategoryChange = (value) => {
-        setCustomFilter((prevFilter) => ({
-            ...prevFilter,
-            category: value,
-        }));
-    };
-
-    const handleSoMeChange = (value) => {
-        setCustomFilter((prevFilter) => ({
-            ...prevFilter,
-            social: value,
-        }));
-    };
-
-    console.log({ customFilter })
-
-    const handleSubmit = () => {
-        const filters = {
-            social: customFilter.social,
-            category: customFilter.category,
-        };
-        console.log(filters)
-        nav(`/collection/?categoryFilter=${filters.category}&someFilter=${filters.social}`, { state: { filters } });
-    };
 
     useEffect(() => {
         const timeoutId = setTimeout(() => {
@@ -68,7 +37,7 @@ const BannerAdvanced = (props) => {
 
             {mediaQuery === 'desktop' ? (
                 <>
-                    <MiniCardCollection />
+                    {props.miniCardsEnabled && <MiniCardCollection />}
                 </>
             ) : (
                 <></>
@@ -80,20 +49,11 @@ const BannerAdvanced = (props) => {
                 justifyContent: 'center',
                 alignText: 'left'
             }}>
-                <Typography variant="h2">I'm looking for a</Typography>
-
-                <Category
-                    onCategoryChange={handleCategoryChange}
-                // value={values.category}
-                />
-
-                <SoMe onSoMeChange={handleSoMeChange} />
-
-                <Typography variant="h2">influencer on</Typography>
-
-                <Typography sx={{ mt: 2 }} >Discover Youtube, TikTok, and Instagram influencers</Typography>
-
-                <MyCustomButton onClick={handleSubmit} sx={{ mt: 4, width: 'fit-content' }}>Discover</MyCustomButton>
+                <Typography variant="h2">{props.headline3}</Typography>
+                <Typography variant="h2">{props.headline4}</Typography>
+                <Typography sx={{ mt: 2 }} >{props.copy1}</Typography>
+                <Typography >{props.copy2}</Typography>
+                <MyCustomButton href={props.href} sx={{ mt: 4, width: 'fit-content' }}>{props.button}</MyCustomButton>
 
             </Box>
 

@@ -2,6 +2,7 @@
 // REACT ---------------
 // --------------------------
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { handleWindowSizeChange } from '../util/detectMediaQuery'
 
 // --------------------------
@@ -45,8 +46,12 @@ const CollectionPage = () => {
     const allOptionIndex = SOCIALOPTIONS.findIndex(option => option.social === 'All');
     const [mediaQuery, setMediaQuery] = useState("");
     const [open, setOpen] = React.useState(false);
-    // const container = window !== undefined ? () => window().document.body : undefined;
+    const location = useLocation();
+    const filters = location.state?.filters;
 
+    console.log({filters})
+    console.log(filters.category)
+    console.log(filters.some)
 
     useEffect(() => {
         const handleResize = () => handleWindowSizeChange(setMediaQuery);
@@ -58,6 +63,26 @@ const CollectionPage = () => {
     }, []); // Empty dependency array to run the effect only once on mount
 
 
+    useEffect(() => {
+        // if (filters && filters.category) {
+        //     console.group('handdleeecate change')
+        //     handleCategoryChange(filters.category);
+        // } 
+        
+        // if (filters && filters.some) {
+        //     console.group('handdle sooooooocial change')
+        //     handleChangeSocial(filters.some)
+        // }
+
+        console.log('i like the way')
+        handleCategoryChange(filters);
+        handleChangeSocial(filters.social)
+
+
+    }, [filters]);
+
+
+
 
     // HANDLERS ---------------
     const handleSearchQueryChange = (event) => {
@@ -66,6 +91,7 @@ const CollectionPage = () => {
 
     const handleCategoryChange = (data) => {
         setCategoryData(data.category);
+
     }
 
     const handleHashtagChange = (data) => {
@@ -73,6 +99,8 @@ const CollectionPage = () => {
     }
 
     const handleChangeSocial = (social) => {
+        console.log('handlesociaaal')
+        console.log(social)
         setSelected((prevSelected) => (prevSelected === social ? null : social));
         setSocialData((prevSocialData) => (prevSocialData === social ? 'All' : social));
     };
@@ -112,7 +140,10 @@ const CollectionPage = () => {
 
                             <Box>
                                 <Typography variant="body1" sx={{ fontWeight: '800', mb: 1 }} > Category</Typography>
-                                <Category onCategoryChange={handleCategoryChange} filter={"yes"} />
+                                <Category onCategoryChange={handleCategoryChange}
+                                    // {...(filters.category && { customFilters: filters.category })}
+                                    {...(filters.category && { customFilters: filters.category })}
+                                    filter={"yes"} />
                             </Box>
                             <Box>
                                 <Typography variant="body1" sx={{ fontWeight: '800', mb: 1 }} > Location</Typography>
@@ -127,7 +158,7 @@ const CollectionPage = () => {
                 ) : (
                     <>
 
-                        <Stack sx={{display: 'flex', width: '100%',flexDirection: 'column', mt: 3, pl: {xs: 1, sm: 3}, pr: {xs: 3, sm: 6} }}>
+                        <Stack sx={{ display: 'flex', width: '100%', flexDirection: 'column', mt: 3, pl: { xs: 1, sm: 3 }, pr: { xs: 3, sm: 6 } }}>
                             <SearchBar onChange={handleSearchQueryChange} value={searchQuery} />
 
                             <Box sx={{ textAlign: 'start', pt: 1, my: 2 }}>
@@ -162,15 +193,15 @@ const CollectionPage = () => {
 
                                 <Typography variant="h5">Filters</Typography>
 
-                                <Box sx={{mt: 4}}>
+                                <Box sx={{ mt: 4 }}>
                                     <Typography variant="body1" sx={{ fontWeight: '800', mb: 1 }} > Category</Typography>
                                     <Category onCategoryChange={handleCategoryChange} filter={"yes"} />
                                 </Box>
-                                <Box sx={{mt: 4}}>
+                                <Box sx={{ mt: 4 }}>
                                     <Typography variant="body1" sx={{ fontWeight: '800', mb: 1 }} > Location</Typography>
                                     <Location onLocationChange={handleLocationChange} />
                                 </Box>
-                                <Box sx={{mt: 4}}>
+                                <Box sx={{ mt: 4 }}>
                                     <Typography variant="body1" sx={{ fontWeight: '800', mb: 1 }} > Hashtags</Typography>
                                     <Hashtags onHashtagChange={handleHashtagChange} filter={"yes"} />
                                 </Box>
@@ -194,7 +225,7 @@ const CollectionPage = () => {
 
                 {/* ---------------- */}
                 {/* COLLECTION */}
-                <Grid item xs={12} md={9} sx={{ pt:{ xs: 1, md: 5}, pl:{xs: 1, sm: 3}, pb: 3, pr: { xs: 3, sm: 6}, overflow: 'auto', borderLeft: { xs: '0', md: '1px solid' }, borderLeftColor: { xs: 'transparent', md: 'customColors.grey.light' } }}>
+                <Grid item xs={12} md={9} sx={{ pt: { xs: 1, md: 5 }, pl: { xs: 1, sm: 3 }, pb: 3, pr: { xs: 3, sm: 6 }, overflow: 'auto', borderLeft: { xs: '0', md: '1px solid' }, borderLeftColor: { xs: 'transparent', md: 'customColors.grey.light' } }}>
                     <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2, flexWrap: 'wrap', mb: 3 }}>
                         {SOCIALOPTIONS.map((social, index) => (
                             <MyCustomChipMinimal
