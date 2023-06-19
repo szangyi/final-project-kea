@@ -3,6 +3,8 @@
 // --------------------------
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
+import AddToFavoritesAPI from '../api/AddToFavoritesAPI';
+import AccountInfoAPI from '../api/AccountInfoAPI';
 
 // --------------------------
 // MATERIAL UI ---------------
@@ -37,13 +39,25 @@ const ProfileLandingPage = () => {
     const [otherProfiles, setOtherProfiles] = useState([]);
     const [errorMessage, setErrorMessage] = useState(null)
     const username = useParams();
-    console.log(profileExists)
+    const [userData, setUserData] = useState(null);
+
     // CONNECT TO API ---------------
+    AccountInfoAPI(setUserData);
     GetProfileAPI(username, setProfileData, setOtherProfiles, setErrorMessage, setProfileExists);
+
+    console.log(userData)
+
+    // API CALLS ---------------
+    const handleAddToFavorites = (influencerid) => {
+        AddToFavoritesAPI(influencerid, setErrorMessage)
+    }
+
 
     if (errorMessage) {
         return <ErrorPage error={errorMessage} />
     }
+
+    console.log(profileData)
 
     return (
         <>
@@ -65,7 +79,7 @@ const ProfileLandingPage = () => {
 
                         {/* HEADER */}
                         <Stack
-                            sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, alignItems: 'center', gap: 5 }}>
+                            sx={{ display: 'flex', flexDirection: {xs: 'column', md: 'row'}, alignItems: 'center', gap: 5 }}>
 
                             <Box className="image-container" sx={{ mt: -10, }}>
                                 <Box
@@ -75,19 +89,24 @@ const ProfileLandingPage = () => {
                                     sx={{ height: { xs: 200, md: 300 }, width: { xs: 200, md: 300 }, borderRadius: '50%', border: '3px solid white', objectFit: 'cover' }}
                                 />
                             </Box>
+                            <Stack sx={{width: '100%', display: 'flex', flexDirection:'row', justifyContent:'space-between'}}>
 
-                            <Stack>
-                                <Typography sx={{ mb: 1 }} variant="h3">{username.username}</Typography>
-                                <Typography variant="body1" color="text.secondary" sx={{ fontWeight: 500 }}>
-                                    {/* Category: */}
-                                    {profileData[10]}
-                                </Typography>
+                                <Box>
+                                    <Typography sx={{ mb: 1 }} variant="h3">{username.username}</Typography>
+                                    <Typography variant="body1" color="text.secondary" sx={{ fontWeight: 500 }}>
+                                        {/* Category: */}
+                                        {profileData[10]}
+                                    </Typography>
+                                </Box>
+
+                                <IconButton sx={{height: 'fit-content'}}  onClick={() => handleAddToFavorites(profileData[0])}>
+                                    {profileData[14] ? <FavoriteIcon sx={{ color: 'customColors.salmon.dark' }} /> : <FavoriteBorderIcon sx={{ color: 'customColors.salmon.dark' }} />}
+                                    {/* <FavoriteBorderIcon sx={{ color: 'customColors.salmon.dark' }} /> */}
+                                </IconButton>
+                                
                             </Stack>
 
-                            <IconButton onClick={() => handleAddToFavorites(array[0])}>
-                                {/* {array[14] ? <FavoriteIcon sx={{ color: 'customColors.salmon.dark' }} /> : <FavoriteBorderIcon sx={{ color: 'customColors.salmon.dark' }} />} */}
-                                <FavoriteBorderIcon sx={{ color: 'customColors.salmon.dark' }} />
-                            </IconButton>
+
                         </Stack>
 
                         {/* GRID */}
@@ -215,7 +234,7 @@ const ProfileLandingPage = () => {
                         <>
                         </>
                     ) : (
-                        <Stack sx={{ backgroundColor: 'customColors.grey.lighter', pt: 2, px: { xs: 3, md: 10 }, pb: 5 }}>
+                        <Stack sx={{ backgroundColor: 'customColors.grey.lighter', pt: 2, px: { xs: 3, lg: 10 }, pb: 5 }}>
                             <Typography sx={{ textAlign: 'center', mb: 5, mt: 5 }} variant="h4">Other profiles from the same influencer</Typography>
                             <CollectionCard favoriteenabled={false} filteringCard={"no"} array={otherProfiles} />
                         </Stack>

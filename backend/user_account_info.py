@@ -13,6 +13,7 @@ def _account_info():
 
         if selected_user_db is not None:
             user_info = {
+                "user_ID": selected_user_db[0],
                 "username": selected_user_db[1],
                 "firstName": selected_user_db[2],
                 "lastName": selected_user_db[3],
