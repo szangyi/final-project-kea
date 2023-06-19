@@ -37,7 +37,7 @@ const InfluencerPage = () => {
   // VARIABLES ---------------
   const [influencerData, setInfluencerData] = useState(null);
   const [deleteError, setDeleteError] = useState(null);
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null)
 
   // HANDLERS ---------------
@@ -172,7 +172,6 @@ const InfluencerPage = () => {
 
                                 <Dialog
                                   open={open}
-                                  className="ekdfjelkfjeklfj"
                                   onClose={handleClose}
                                   aria-labelledby="draggable-dialog-title">
                                   <DialogTitle>

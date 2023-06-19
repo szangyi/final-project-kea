@@ -9,7 +9,9 @@ import { useOutletContext } from 'react-router-dom';
 import { Grid, Alert } from '@mui/material';
 import MyCustomButton from "../../components/Button/Button"
 import MyCustomTextField from "../../components/Form/TextField";
-
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogTitle from '@mui/material/DialogTitle';
 // --------------------------
 // VALIDATION ---------------
 // --------------------------
@@ -21,6 +23,7 @@ import { Box, Typography } from '@mui/material';
 // --------------------------
 import ErrorPage from '../ErrorPage';
 import UpdateSecurityInfoAPI from '../../api/UpdateSecurityInfoAPI';
+import DeleteUserAccountAPI from '../../api/DeleteUserAccountAPI';
 
 const Security = () => {
 
@@ -29,7 +32,8 @@ const Security = () => {
     const [errorMessage, setErrorMessage] = useState(null)
     const [securityError, setSecurityError] = useState(null)
     const [formError, setFormError] = useState('');
-
+    const [deleteError, setDeleteError] = useState(null);
+    const [open, setOpen] = useState(false);
 
     const { values, errors, touched, handleBlur, handleChange, setTouched, validateForm } = useFormik({
         initialValues: {
@@ -41,6 +45,20 @@ const Security = () => {
 
         validationSchema: userSecuritySchema,
     });
+
+    // HANDLERS ---------------
+    const handleOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+    const handleDelete = () => {
+        DeleteUserAccountAPI(handleClose, setErrorMessage, setDeleteError);
+
+    }
 
     const submitHandler = async (event) => {
         event.preventDefault();
@@ -74,6 +92,10 @@ const Security = () => {
 
                 {formError && (
                     <Alert sx={{ mt: 2, mb: -4 }} severity="error">{formError}</Alert>
+                )}
+
+                {deleteError && (
+                  <Alert severity="error">{deleteError}</Alert>
                 )}
 
                 <Box component="form" onSubmit={submitHandler} sx={{ mt: 1, width: '100%' }}>
@@ -145,6 +167,30 @@ const Security = () => {
                         </Grid>
 
                     </Grid>
+
+
+                    <MyCustomButton
+                        variant="danger"
+                        onClick={() => {
+                            handleOpen();
+                        }}>
+                        Delete account
+                    </MyCustomButton>
+
+                    <Dialog
+                        open={open}
+                        onClose={handleClose}
+                        aria-labelledby="draggable-dialog-title">
+                        <DialogTitle>
+                            Are you sure you want to delete your account?
+                        </DialogTitle>
+                        <DialogActions>
+                            <MyCustomButton variant="tertiary" autoFocus onClick={handleClose}>
+                                Cancel
+                            </MyCustomButton>
+                            <MyCustomButton variant="danger" onClick={() => handleDelete()} >Delete</MyCustomButton>
+                        </DialogActions>
+                    </Dialog>
 
 
                 </Box>

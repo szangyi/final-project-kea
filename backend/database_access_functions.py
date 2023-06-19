@@ -241,6 +241,26 @@ def _delete_influencer_profile(influencer_ID, db_config):
 
     finally:
         db.close()
+        
+def _delete_user_account(user_ID, db_config):
+    try:
+        db = mysql.connector.connect(**db_config)
+        cursor = db.cursor()
+        sql = """ DELETE FROM users WHERE user_ID=%s"""
+        cursor.execute(sql, (user_ID,))
+        
+        response.status = 200
+        db.commit()
+        
+        return True
+    
+    except Exception as ex:
+        print(ex)
+        response.status= 500
+        return None
+
+    finally:
+        db.close()
 
 def _get_all_profiles(db_config, user_ID):
     try:
@@ -473,6 +493,7 @@ def _create_influencer_profile(influencer_data,hashtag_list,  db_config):
     try:
         db = mysql.connector.connect(**db_config)
         cursor = db.cursor()
+        db.start_transaction()
         sql_create_profile = """INSERT INTO influencers_profile (influencer_ID, user_ID, influencer_username, influencer_bio_description, influencer_location, influencer_website, influencer_instagram, influencer_youtube, influencer_tiktok, influencer_tags, influencer_category, profile_image, profile_created_at) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
         var = (
             influencer_data["influencer_ID"],
@@ -505,10 +526,8 @@ def _create_influencer_profile(influencer_data,hashtag_list,  db_config):
                 db.commit()
                 
                 get_last_inserted_hashtag = cursor.lastrowid
-                print("emldkewnfdlekwjfbnewlf")
                 _hashtags_influencer(get_last_inserted_hashtag, influencer_data["influencer_ID"], db_config )
             else:
-                print("rflwldwllwlwl")
                 _hashtags_influencer(result_check[0], influencer_data["influencer_ID"], db_config )
 
         
@@ -517,6 +536,7 @@ def _create_influencer_profile(influencer_data,hashtag_list,  db_config):
     except Exception as ex:
         print(ex)
         response.status = 500
+        db.rollback()
         return str(ex)
         
     finally:
