@@ -15,17 +15,20 @@ import { Typography, useThemeProps } from '@mui/material';
 // --------------------------
 import { CATEGORYOPTIONS } from '../../util/Constants';
 
-const Category = ({ className, onCategoryChange, customFilters, filter, helperText, error }) => {
+const Category = ({ className, onCategoryChange, customFilters, filter, helperText, error, valueEdit, value }) => {
 
     // VARIABLES ---------------
     let initialCategoryData;
 
     if (customFilters) {
         initialCategoryData = customFilters
+    } 
+    else if (valueEdit=="yes") {
+        initialCategoryData = value;
     } else if (filter) {
-        initialCategoryData = 'All categories'
+        initialCategoryData = 'All categories';
     } else {
-        initialCategoryData = { category: '' }
+        initialCategoryData = { category: '' };
     }
 
     const [categoryData, setCategoryData] = useState(initialCategoryData);
@@ -53,7 +56,7 @@ const Category = ({ className, onCategoryChange, customFilters, filter, helperTe
                     sx={{ borderRadius: '15px', height: '45px', fontSize: '14px' }}
                     labelId="category"
                     id="category"
-                    value={categoryData !== '' ? categoryData : 'All categories'}
+                    value={categoryData !== '' ? categoryData : 'All categories' ? categoryData: categoryData}
                     label={!filter ? 'Category' : undefined}
                     onChange={handleCategoryChange}>
 

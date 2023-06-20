@@ -21,6 +21,7 @@ import AccountInfo from './pages/UserDashBoard/AccountInfo';
 import Interests from './pages/UserDashBoard/Interests';
 import Security from './pages/UserDashBoard/Security';
 import ProfileLandingPage from './pages/ProfileLandingPage';
+import EditInfluencerProfile from './pages/EditInfluencerProfile';
 import CollectionPage from './pages/CollectionPage';
 import UserCollectionPage from './pages/UserCollectionPage.js'
 import SignupPage from './pages/SignupPage'
@@ -60,6 +61,7 @@ const App = () => {
                                 { path: "/influencer-dashboard", element: <InfluenceDashboardPage /> },
                                 { path: "/collection", element: <CollectionPage /> },
                                 { path: "/profile/:username", element: <ProfileLandingPage /> },
+                                { path: "/edit-profile/:username", element: <EditInfluencerProfile /> },
                             ]
                         },
                         {

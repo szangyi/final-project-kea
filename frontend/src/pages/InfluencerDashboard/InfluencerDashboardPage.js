@@ -62,6 +62,8 @@ const InfluencerPage = () => {
         DeleteProfileAPI(influencerid, handleClose, setErrorMessage, setDeleteError);
     }
 
+    console.log(influencerData)
+
 
     if (errorMessage) {
         return <ErrorPage error={errorMessage} />
@@ -179,9 +181,9 @@ const InfluencerPage = () => {
 
                                                                 <MenuItem
                                                                     disableRipple
-                                                                    component="a"
+                                                                    component={Link}
                                                                     variant="navlink"
-                                                                    href="#"
+                                                                    to={`/edit-profile/${array[2]}`}
                                                                     sx={{ p: 0, width: 'fit-content', m: 0, my: 2, mr: 3, color: 'primary.main', fontWeight: 600, display: 'block', }}
                                                                 >
                                                                     Edit
