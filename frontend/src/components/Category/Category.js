@@ -9,13 +9,13 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
-import { Typography } from '@mui/material';
+import { Typography, useThemeProps } from '@mui/material';
 // --------------------------
 // COMPONENTS ---------------
 // --------------------------
 import { CATEGORYOPTIONS } from '../../util/Constants';
 
-const Category = ({ onCategoryChange, customFilters, filter, helperText, error }) => {
+const Category = ({ className, onCategoryChange, customFilters, filter, helperText, error }) => {
 
     // VARIABLES ---------------
     let initialCategoryData;
@@ -46,7 +46,7 @@ const Category = ({ onCategoryChange, customFilters, filter, helperText, error }
 
     return (
         <>
-            <FormControl sx={{ width: '100%' }} >
+            <FormControl className={className} sx={{ width: '100%' }} >
 
                 {filter ? '' : <InputLabel>Category</InputLabel>}
                 <Select

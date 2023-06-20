@@ -1,7 +1,7 @@
 import "./Banner.css"
 
 import { useState, useEffect } from 'react';
-import useSearchParams, { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Box, Typography, Divider } from "@mui/material"
 import MeshGradient from "../MeshGradient/MeshGradient"
 import MyCustomButton from "../Button/Button"
@@ -84,13 +84,20 @@ const BannerAdvanced = (props) => {
                 <Typography variant="h2">I'm looking for a</Typography>
 
                 <Category
+                    className="advanced-select"
                     onCategoryChange={handleCategoryChange}
                     customFilters
                 />
 
-                <SoMe onSoMeChange={handleSoMeChange} />
+                <Typography variant="h2" sx={{ mt: 1 }}>influencer</Typography>
 
-                <Typography variant="h2">influencer on</Typography>
+                <Box sx={{ display: 'flex', }}>
+                    <Typography variant="h2">on</Typography>
+
+                    <SoMe
+                        className="advanced-select select-social"
+                        onSoMeChange={handleSoMeChange} />
+                </Box>
 
                 <Typography sx={{ mt: 2 }} >Discover Youtube, TikTok, and Instagram influencers</Typography>
 

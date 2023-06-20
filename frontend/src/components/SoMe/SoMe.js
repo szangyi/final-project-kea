@@ -15,7 +15,7 @@ import { Typography } from '@mui/material';
 // --------------------------
 import { SOCIALOPTIONS } from '../../util/Constants';
 
-const SoMe = ({ onSoMeChange, customFilters }) => {
+const SoMe = ({ className, onSoMeChange, customFilters }) => {
 
     // VARIABLES ---------------
     let initialSoMeData;
@@ -47,7 +47,7 @@ const SoMe = ({ onSoMeChange, customFilters }) => {
 
     return (
         <>
-            <FormControl sx={{ width: '100%' }} >
+            <FormControl className={className} sx={{ width: '100%' }} >
 
                 <Select
                     sx={{ borderRadius: '15px', height: '45px', fontSize: '14px' }}
