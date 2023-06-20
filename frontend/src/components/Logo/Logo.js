@@ -29,8 +29,8 @@ const Logo = (props) => {
                     <defs>
                         <linearGradient id="paint0_linear_6268_76331" x1="-9" y1="26.5" x2="401" y2="65" gradientUnits="userSpaceOnUse">
                             <stop stopColor="white" />
-                            <stop offset="0.708333" stopColor="white" stop-opacity="0.68" />
-                            <stop offset="1" stopColor="white" stop-opacity="0.14" />
+                            <stop offset="0.708333" stopColor="white" stopOpacity="0.68" />
+                            <stop offset="1" stopColor="white" stopOpacity="0.14" />
                         </linearGradient>
                     </defs>
                 </svg>

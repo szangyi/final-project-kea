@@ -1,7 +1,7 @@
 // --------------------------
 // REACT ---------------
 // --------------------------
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 // --------------------------
 // MATERIAL UI ---------------
 // --------------------------
@@ -20,8 +20,7 @@ const Category = ({ onCategoryChange, customFilters, filter, helperText, error }
     // VARIABLES ---------------
     let initialCategoryData;
 
-    // const initialCategoryData = filter ? 'All categories' : { category: '' };
-    if (customFilters && filter) {
+    if (customFilters) {
         initialCategoryData = customFilters
     } else if (filter) {
         initialCategoryData = 'All categories'
@@ -30,7 +29,6 @@ const Category = ({ onCategoryChange, customFilters, filter, helperText, error }
     }
 
     const [categoryData, setCategoryData] = useState(initialCategoryData);
-
 
     // HANDLING CHANGE ---------------
     const handleCategoryChange = (event) => {

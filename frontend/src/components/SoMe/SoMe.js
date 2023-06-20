@@ -27,13 +27,14 @@ const SoMe = ({ onSoMeChange, customFilters }) => {
         initialSoMeData = { some: '' }
     }
 
-    const [categoryData, setSoMeData] = useState(initialSoMeData);
+    const [soMeData, setSoMeData] = useState(initialSoMeData);
 
 
     // HANDLING CHANGE ---------------
     const handleSomeChange = (event) => {
         const valueData = event.target.value;
         setSoMeData(valueData);
+        console.log('ADDITIONAL MAAAAAN')
 
         // Different handling of data based on which context the component is used in
         // if (filter) {
@@ -52,7 +53,7 @@ const SoMe = ({ onSoMeChange, customFilters }) => {
                     sx={{ borderRadius: '15px', height: '45px', fontSize: '14px' }}
                     labelId="some"
                     id="some"
-                    // value={someData !== '' ? someData : 'All SoMe'}
+                    value={soMeData !== '' ? soMeData : 'All SoMe'}
                     onChange={handleSomeChange}>
 
                     {SOCIALOPTIONS.map((option, index) => (

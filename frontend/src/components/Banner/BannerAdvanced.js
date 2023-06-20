@@ -37,11 +37,12 @@ const BannerAdvanced = (props) => {
 
     const handleSubmit = () => {
         const filters = {
-            social: customFilter.social,
-            category: customFilter.category,
+            social: customFilter.social || 'All',
+            category: customFilter.category || 'All categories',
         };
         console.log(filters)
         nav(`/collection/?categoryFilter=${filters.category}&someFilter=${filters.social}`, { state: { filters } });
+        // nav(`/collection/`, { state: { filters } });
     };
 
     useEffect(() => {
@@ -84,7 +85,7 @@ const BannerAdvanced = (props) => {
 
                 <Category
                     onCategoryChange={handleCategoryChange}
-                // value={values.category}
+                    customFilters
                 />
 
                 <SoMe onSoMeChange={handleSoMeChange} />

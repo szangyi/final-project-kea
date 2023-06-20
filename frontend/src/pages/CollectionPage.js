@@ -49,10 +49,6 @@ const CollectionPage = () => {
     const location = useLocation();
     const filters = location.state?.filters;
 
-    console.log({filters})
-    console.log(filters.category)
-    console.log(filters.some)
-
     useEffect(() => {
         const handleResize = () => handleWindowSizeChange(setMediaQuery);
         handleResize()
@@ -63,24 +59,12 @@ const CollectionPage = () => {
     }, []); // Empty dependency array to run the effect only once on mount
 
 
-    useEffect(() => {
-        // if (filters && filters.category) {
-        //     console.group('handdleeecate change')
-        //     handleCategoryChange(filters.category);
-        // } 
-        
-        // if (filters && filters.some) {
-        //     console.group('handdle sooooooocial change')
-        //     handleChangeSocial(filters.some)
-        // }
-
-        console.log('i like the way')
-        handleCategoryChange(filters);
-        handleChangeSocial(filters.social)
-
-
-    }, [filters]);
-
+    if (filters) {
+        useEffect(() => {
+            handleCategoryChange(filters);
+            handleChangeSocial(filters.social)
+        }, [filters]);
+    }
 
 
 
@@ -91,17 +75,15 @@ const CollectionPage = () => {
 
     const handleCategoryChange = (data) => {
         setCategoryData(data.category);
-
     }
 
     const handleHashtagChange = (data) => {
+        console.log(data)
         setHashtagData(data.hashtag)
     }
 
     const handleChangeSocial = (social) => {
-        console.log('handlesociaaal')
-        console.log(social)
-        setSelected((prevSelected) => (prevSelected === social ? null : social));
+        setSelected((prevSelected) => (prevSelected === social ? 'All' : social));
         setSocialData((prevSocialData) => (prevSocialData === social ? 'All' : social));
     };
 
@@ -140,10 +122,21 @@ const CollectionPage = () => {
 
                             <Box>
                                 <Typography variant="body1" sx={{ fontWeight: '800', mb: 1 }} > Category</Typography>
-                                <Category onCategoryChange={handleCategoryChange}
-                                    // {...(filters.category && { customFilters: filters.category })}
-                                    {...(filters.category && { customFilters: filters.category })}
-                                    filter={"yes"} />
+
+                                {filters && filters.category && (
+                                    <Category
+                                        onCategoryChange={handleCategoryChange}
+                                        customFilters={filters.category}
+                                        filter="yes"
+                                    />
+                                )}
+                                {(!filters || !filters.category) && (
+                                    <Category
+                                        onCategoryChange={handleCategoryChange}
+                                        filter="yes"
+                                    />
+                                )}
+
                             </Box>
                             <Box>
                                 <Typography variant="body1" sx={{ fontWeight: '800', mb: 1 }} > Location</Typography>
