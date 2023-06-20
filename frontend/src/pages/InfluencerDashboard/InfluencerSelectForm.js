@@ -23,8 +23,9 @@ const InfleuncerSelectForm = ({ values, handleChange, touched, errors }) => {
 
     return (
         <>
-            <Typography variant="h5"> Category selection </Typography>
-            <Box sx={{ my: 3 }}>
+            <Typography variant="h6" sx={{ fontWeight: 600}}> Category selection </Typography>
+
+            <Box sx={{ my: 3, mb: 6 }}>
                 <Category
                     onCategoryChange={handleCategoryChange}
                     value={values.category}

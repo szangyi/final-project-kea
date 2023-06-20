@@ -10,6 +10,8 @@ import Cookies from 'js-cookie';
 // --------------------------
 import Stack from '@mui/material/Stack';
 import Box from "@mui/material/Box";
+import Skeleton from '@mui/material/Skeleton';
+
 // --------------------------
 // COMPONENTS ---------------
 // --------------------------
@@ -49,18 +51,48 @@ const UserCollectionPage = () => {
     return (
         <>
 
-            <Banner variant="medium" headline1="Your Boards" />
-
-            <MeshGradientBackground variant="full"></MeshGradientBackground>
-
+            <Banner
+                variant="medium"
+                headline1="Your Collection"
+                copy1="Curate your personal gallery of inspiration"
+                miniCardsEnabledSmall
+            />
             <Stack className='sectionPadding'>
-
-                <Typography variant="body">
-                    Your charming boards you will find here, by category. Enjoy!
-                </Typography>
-
                 {favoritesData === null ? (
-                    <Loader />
+                    // <Loader />
+
+                    <>
+                        <Box sx={{ mb: 20, mt: { xs: 5, lg: 0 } }} >
+                            <Skeleton />
+                            <Skeleton width="60%" />
+                        </Box>
+
+
+                        <Stack sx={{ display: 'flex', flexDirection: 'row', gap: { xs: 1, md: 5 }, }}>
+                            <Box sx={{ width: 'fit-content' }}>
+                                <Skeleton sx={{ borderRadius: '15px' }} variant="rounded" width={300} height={300} />
+                                <Box sx={{ pt: 0.5, width: 300 }}>
+                                    <Skeleton />
+                                    <Skeleton width="60%" />
+                                </Box>
+                            </Box>
+                            <Box sx={{ width: 'fit-content' }}>
+                                <Skeleton sx={{ borderRadius: '15px' }} variant="rounded" width={300} height={300} />
+                                <Box sx={{ pt: 0.5, width: 300 }}>
+                                    <Skeleton />
+                                    <Skeleton width="60%" />
+                                </Box>
+                            </Box>
+                            <Box sx={{ width: 'fit-content' }}>
+                                <Skeleton sx={{ borderRadius: '15px' }} variant="rounded" width={300} height={300} />
+                                <Box sx={{ pt: 0.5, width: 300 }}>
+                                    <Skeleton />
+                                    <Skeleton width="60%" />
+                                </Box>
+                            </Box>
+                        </Stack>
+                    </>
+
                 ) : (
                     <>
                         {favoritesData == 0 ? (
@@ -69,14 +101,22 @@ const UserCollectionPage = () => {
                                 <Typography variant="body">You haven't added any favorites yet.</Typography>
                             </Stack>
                         ) : (
-                            getUniqueCategories().map((category) => ( // create sections for categories
-                                <Box key={category}>
-                                    <Typography sx={{ mt: 5, mb: 3 }} variant="h3">{category}</Typography>
-                                    <CollectionCard
-                                        favoriteenabled={true} array={favoritesData.filter((profile) => profile[10] === category)}
-                                    />
-                                </Box>
-                            ))
+                            <>
+                                <Typography variant="h6" sx={{ mb: 5, mt: { xs: 5, lg: 0 }, width: { xs: '100%', md: '70%' } }}>
+                                    Explore your collection and let the power of your hand-picked influencers unlock new levels of inspiration. <span style={{ fontWeight: '800', fontStyle: 'italic', textDecoration: 'underline' }}>Together</span>, let's shape a gallery of motivation that will fuel your dreams and aspirations.
+                                </Typography>
+
+                                {getUniqueCategories().map((category) => (
+                                    // create sections for categories
+                                    <Box key={category}>
+                                        <Typography sx={{ mt: 5, mb: 3 }} variant="h3">{category}</Typography>
+                                        <CollectionCard
+                                            favoriteenabled={true}
+                                            array={favoritesData.filter((profile) => profile[10] === category)}
+                                        />
+                                    </Box>
+                                ))}
+                            </>
                         )}
                     </>
                 )}
@@ -90,19 +130,19 @@ const UserCollectionPage = () => {
                         <TextBox
                             bg="customColors.blue.dark"
                             color="white"
-                            headline="find your influencer!"
-                            copy1="For each ad campaign that you create, you can control how much you're willing to spend on clicks and conversions"
-                            button="browse"
+                            headline="Find your influencer!"
+                            copy1="Are you hungry for inspiration? Look no further. Discover new voices, fresh perspectives, and hidden gems that can elevate your journey to new heights."
+                            button="Browse"
                             href=""
                         />
                     ) : (
                         <TextBox
                             bg="customColors.blue.dark"
                             color="white"
-                            headline="discover more!"
-                            copy1="For each ad campaign that you create, you can control how much you're willing to spend on clicks and conversions"
-                            button="find your influencer"
-                            href=""
+                            headline="Explore more influencers!"
+                            copy1="Are you hungry for more inspiration? Look no further. Discover new voices, fresh perspectives, and hidden gems that can elevate your journey to new heights."
+                            button="Browse"
+                            href="/collection"
                         />
                     )}
                 </>

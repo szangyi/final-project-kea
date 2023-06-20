@@ -94,8 +94,8 @@ const SignupPage = () => {
                         width: '100%',
                     }}
                 >
-                    <Typography component="h2" variant="h4" sx={{ mb: 2 }} >
-                        sign up
+                    <Typography variant="h5" sx={{ mb: 2 }} >
+                        Sign up
                     </Typography>
 
                     {formError && (

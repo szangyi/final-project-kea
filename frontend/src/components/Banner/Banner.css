@@ -20,6 +20,15 @@ section.banner>* {
     color: black;
     width: inherit;
     height: inherit;
+    margin-top: -32px;
+    width: 100%;
+}
+@media (min-width: 600px) {
+
+    .banner .text-container {
+        width: 70%;
+
+    }
 }
 
 .banner button {
@@ -30,9 +39,84 @@ section.banner>* {
 /* VARIANTS */
 
 section.banner[variant='large'] {
-    height: 80vh;
+    height: 100vh;
 }
 
 section.banner[variant='medium'] {
-    height: 60vh;
+    height: 70vh;
+}
+
+
+section.banner[variant='small'] {
+    height: 40vh;
+}
+
+
+
+
+
+.advanced-select {
+    /* background-color: gold !important; */
+}
+
+.advanced-select fieldset {
+    border: none !important;
+    border-radius: 0 !important;
+    border-bottom: 3px solid black !important;
+}
+.advanced-select .MuiInputBase-root {
+    height: 70px;
+    min-width: 200px;
+    max-width: fit-content;
+    margin-top: -20px;
+}
+
+@media (min-width: 900px) {
+    .advanced-select .MuiInputBase-root {
+        margin-top: 10px;
+    }
+}
+
+
+.advanced-select.select-social .MuiInputBase-root {
+    margin-left: 15px;
+}
+
+@media (min-width: 900px) {
+    .advanced-select.select-social .MuiInputBase-root {
+        margin-left: 30px;
+    }
+}
+
+.advanced-select .MuiSelect-select {
+    margin-top: 55px;
+    padding-left: 0;
+}
+
+.advanced-select label {
+    display: none;
+}
+
+/* Font-size to follow h2 */
+.advanced-select .MuiSelect-select {
+    font-weight: 600;
+    font-size:2.375rem;
+}
+
+@media (min-width: 600px) {
+    .advanced-select .MuiSelect-select {
+        font-size: 3.125rem;
+    }
+}
+
+@media (min-width: 900px) {
+    .advanced-select .MuiSelect-select {
+        font-size: 3.3333rem;
+    }
+}
+
+@media (min-width: 900px) {
+    .advanced-select .MuiSelect-select {
+        font-size:3.75rem;
+    }
 }

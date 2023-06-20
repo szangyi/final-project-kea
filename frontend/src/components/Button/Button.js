@@ -6,6 +6,7 @@ const MyCustomButton = styled(Button)(({ variant, theme }) => ({
     backgroundColor: theme.palette.customColors.purple.light,
     paddingInline: 30,
     borderRadius: "0",
+    // width: "fit-content",
     color: "black",
     fontWeight: "800",
     border: "2px solid black",
@@ -30,6 +31,14 @@ const MyCustomButton = styled(Button)(({ variant, theme }) => ({
             backgroundColor: theme.palette.customColors.grey.light,
         },
     }),
+
+    ...(variant === "danger" && {
+        backgroundColor: theme.palette.customColors.salmon.dark,
+        "&:hover": {
+            backgroundColor: theme.palette.customColors.salmon.main,
+        },
+    }),
+
     ...(variant === "tertiary" && {
         backgroundColor: theme.palette.customColors.grey.light,
         border: 'none',
@@ -40,16 +49,7 @@ const MyCustomButton = styled(Button)(({ variant, theme }) => ({
             backgroundColor: theme.palette.customColors.grey.main,
         },
     }),
-    ...(variant === "danger" && {
-        backgroundColor: theme.palette.customColors.salmon.dark,
-        border: 'none',
-        boxShadow: 'none',
-        WebkitBoxShadow:'none',
-        borderRadius: '20px',
-        "&:hover": {
-            backgroundColor: theme.palette.customColors.salmon.main,
-        },
-    })
+
 
 
 }))

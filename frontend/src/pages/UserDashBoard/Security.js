@@ -84,9 +84,12 @@ const Security = () => {
     }
     return (
         <>
-            <Box component="section" className="glassmorphism" sx={{ py: 5, px: 5, }}>
+         <Box component="section" sx={{
+                    borderLeft: {sm:'1px solid lightgrey'},
+                    py: {xs: 2, sm: 5}, px: {xs: 2, md: 5},
+            }}>
 
-                <Typography variant="h4" >security</Typography>
+                <Typography variant="h4">Security</Typography>
                 <Typography variant="paragraph">Here you can change how you access your account.</Typography>
 
 
@@ -103,7 +106,7 @@ const Security = () => {
                     <Grid container spacing={4} sx={{ mt: 2 }}>
                         <Grid container item xs={6}>
 
-                            <Typography variant="h6">user information</Typography>
+                            <Typography variant="h6">User information</Typography>
                             {/* <Typography variant="subtitle1" sx={{color: 'customColors.salmon.dark'}}>user information</Typography> */}
                             {securityError && (
                                 <Alert severity="error">{securityError}</Alert>

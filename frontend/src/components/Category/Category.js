@@ -1,7 +1,7 @@
 // --------------------------
 // REACT ---------------
 // --------------------------
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 // --------------------------
 // MATERIAL UI ---------------
 // --------------------------
@@ -9,18 +9,26 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
-import { Typography } from '@mui/material';
+import { Typography, useThemeProps } from '@mui/material';
 // --------------------------
 // COMPONENTS ---------------
 // --------------------------
 import { CATEGORYOPTIONS } from '../../util/Constants';
 
-const Category = ({ onCategoryChange, filter, helperText, error }) => {
+const Category = ({ className, onCategoryChange, customFilters, filter, helperText, error }) => {
 
     // VARIABLES ---------------
-    const initialCategoryData = filter ? 'All categories' : { category: '' };
-    const [categoryData, setCategoryData] = useState(initialCategoryData);
+    let initialCategoryData;
 
+    if (customFilters) {
+        initialCategoryData = customFilters
+    } else if (filter) {
+        initialCategoryData = 'All categories'
+    } else {
+        initialCategoryData = { category: '' }
+    }
+
+    const [categoryData, setCategoryData] = useState(initialCategoryData);
 
     // HANDLING CHANGE ---------------
     const handleCategoryChange = (event) => {
@@ -38,20 +46,22 @@ const Category = ({ onCategoryChange, filter, helperText, error }) => {
 
     return (
         <>
-            <FormControl sx={{ width: '100%' }} >
-                <InputLabel>Category</InputLabel>
+            <FormControl className={className} sx={{ width: '100%' }} >
+
+                {filter ? '' : <InputLabel>Category</InputLabel>}
                 <Select
-                    sx={{ borderRadius: '15px' }}
+                    sx={{ borderRadius: '15px', height: '45px', fontSize: '14px' }}
                     labelId="category"
                     id="category"
                     value={categoryData !== '' ? categoryData : 'All categories'}
-                    label="Category"
+                    label={!filter ? 'Category' : undefined}
                     onChange={handleCategoryChange}>
 
-                    {filter && <MenuItem value="All categories">All Categories</MenuItem>}
+
+                    {filter && <MenuItem value="All categories" sx={{ fontSize: '14px ' }}>All Categories</MenuItem>}
 
                     {CATEGORYOPTIONS.map((option, index) => (
-                        <MenuItem key={index} value={option.category}>
+                        <MenuItem key={index} value={option.category} sx={{ fontSize: '14px' }}>
                             {option.category}
                         </MenuItem>
                     ))}

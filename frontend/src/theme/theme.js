@@ -19,8 +19,9 @@ let theme = createTheme({
             main: '#184CCA',
         },
         background: {
-            default: '#ffffff',
-            paper: '#ffffff',
+            main: '#ffffff',
+            // paper: '#ffffff',
+            contrastText: '#000000'
         },
         info: {
             main: '#a4b0ff',
@@ -46,8 +47,10 @@ let theme = createTheme({
                 light:'#D9DEE8'
             },
             grey: {
+                lighter: '#F8F4F4',
                 light: '#E8E4E1',
                 main: '#B8AFA9',
+                dark: '#7A7572'
             }
         },
 
@@ -64,32 +67,32 @@ let theme = createTheme({
         fontFamily: 'Hanken Grotesk',
         h1: {
             fontFamily: 'Encode Sans Expanded',
-            fontWeight: 800,
+            fontWeight: 300,
         },
         h2: {
             fontFamily: 'Encode Sans Expanded',
-            fontWeight: 800,
+            fontWeight: 400,
         },
         h3: {
             fontFamily: 'Encode Sans Expanded',
-            fontWeight: 800,
+            fontWeight: 300,
             fontSize: '2.5rem',
             marginBottom: 16,
         },
         h4: {
             fontFamily: 'Encode Sans Expanded',
-            fontWeight: 800,
+            fontWeight: 300,
             fontSize: '1.7rem',
             marginBottom: 10,
 
         },
         h5: {
-            fontWeight: 800,
+            fontWeight: 600,
             fontFamily: 'Encode Sans Expanded',
-            fontSize: '1.4rem',
+            fontSize: '1.3rem',
         },
         h6: {
-            fontWeight: 800,
+            fontWeight: 500,
             fontFamily: 'Encode Sans Expanded',
             fontSize: '1rem',
             marginBottom: 10,
@@ -107,8 +110,10 @@ let theme = createTheme({
             fontSize: '0.6rem',
         },
         listitem: {
-            fontSize: '.6rem',
+            fontSize: '.5rem',
             fontWeight: 800,
+            fontFamily: 'Encode Sans Expanded',
+
         },
 
     },

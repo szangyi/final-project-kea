@@ -78,17 +78,22 @@ const AccountInfo = (props) => {
     return (
         <>
 
-            <Box component="section" sx={{ py: 5, px: 5, }}>
+            <Box component="section"
+                sx={{
+                    borderLeft: {sm:'1px solid lightgrey'},
+                    py: {xs: 2, sm: 5}, px: {xs: 2, md: 5},
+                }}
+            >
 
-                <Typography variant="h4" >my account</Typography>
+                <Typography variant="h4" >My account</Typography>
                 <Typography variant="paragraph">Here you can edit public information about yourself.</Typography>
 
                 <Box component="form" onSubmit={submitHandler} sx={{ mt: 1, width: '100%' }}>
 
                     <Grid container spacing={4} sx={{ mt: 2 }}>
-                        <Grid container item xs={8}>
+                        <Grid container item xs={12} md={8}>
 
-                            <Typography variant="h6">user information</Typography>
+                            <Typography variant="h6">User information</Typography>
                             {/* <Typography variant="subtitle1" sx={{color: 'customColors.salmon.dark'}}>user information</Typography> */}
                             {updateError && (
                                 <Alert severity="error">{updateError}</Alert>
@@ -143,19 +148,11 @@ const AccountInfo = (props) => {
                                 helperText={touched.username && errors.username}
                             />
 
-                            <MyCustomButton
-                                type="submit"
-                                variant="contained"
-                                sx={{ mt: 6, mb: 2, }}
-                            >
-                                Save changes
-                            </MyCustomButton>
-
                         </Grid>
 
-                        <Grid item xs={4}>
+                        <Grid item xs={12} md={4}>
 
-                            <Typography variant="h6">profile photo</Typography>
+                            <Typography variant="h6">Profile photo</Typography>
 
                             {values.profileImage ? (
                                 <Box
@@ -165,7 +162,7 @@ const AccountInfo = (props) => {
                                     sx={{ height: 50, width: 50, borderRadius: '50%' }}
                                 />
                             ) : (
-                                <Typography variant="p">You dont have a profile photo yet</Typography>
+                                <Typography variant="body2" color="customColors.grey.dark" >You do not have a profile image yet</Typography>
 
                             )}
                             <ProfileImage
@@ -178,7 +175,13 @@ const AccountInfo = (props) => {
 
                         </Grid>
 
-
+                        <MyCustomButton
+                            type="submit"
+                            variant="contained"
+                            sx={{ mt: 6, mb: 2, ml: {xs: 4} }}
+                        >
+                            Save changes
+                        </MyCustomButton>
 
                     </Grid>
 

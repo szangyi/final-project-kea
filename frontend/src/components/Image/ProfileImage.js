@@ -1,6 +1,6 @@
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
-import { Typography } from '@mui/material';
+import { Typography, MenuItem } from '@mui/material';
 
 const ProfileImage = ({ onImageChange, helperText, error }) => {
 
@@ -19,15 +19,18 @@ const ProfileImage = ({ onImageChange, helperText, error }) => {
         type="file"
         onChange={handleChange}
       />
-      
+
       <label htmlFor="profileImage">
-        <Button variant="raised" component="span">
+        <MenuItem disableRipple component="a"
+          variant="navlink"
+          sx={{ p: 0, width: 'fit-content', m: 0, my: 2, color: 'primary.main', fontWeight: 600, display: 'block', }}
+        >
           Upload Image
-        </Button>
+        </MenuItem>
       </label>
 
       {error && (
-        <Typography variant="caption" color="error" sx={{mx: 1.5}}>
+        <Typography variant="caption" color="error" sx={{ mx: 1.5 }}>
           {helperText}
         </Typography>
       )}

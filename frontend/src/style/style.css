@@ -53,8 +53,8 @@ a{
 /* sx={{ px: { xs: 5, sm: 5, md: 15 }, py: { xs: 5, sm: 5, md: 10 } }}> */
 
 .sectionPadding {
-    padding-inline: calc(5 * 10px);
-    padding-block: calc(5 * 10px);
+    padding-inline: calc(3 * 10px);
+    padding-block: calc(3 * 10px);
 }
 
 /* sm */
@@ -64,7 +64,7 @@ a{
 @media (min-width: 1200px) {
     .sectionPadding {
         padding-inline: calc(10 * 10px);
-        padding-block: calc(10 * 10px);
+        padding-block: calc(12 * 10px);
     }
 }
 
@@ -116,4 +116,78 @@ a{
 
 .MuiStepConnector-line{
     min-height: 100% !important;
+}
+
+.chip-minimal {
+    border: none !important;
+}
+
+#country-select * {
+    font-size: 14px !important;
+}
+
+.signup-cta-section .textbox {
+    margin-top: 0;
+}
+
+
+
+
+/* mobile */
+
+.tablet {
+    display: none;
+}
+.desktop {
+    display: none;
+}
+.mobile {
+    display: block;
+}
+
+/* tablet */
+@media (min-width: 900px) {
+    .mobile {
+        display: none;
+    }
+    .tablet {
+        display: block;
+    }
+}
+
+/* desktop */
+@media (min-width: 1200px) {
+    .mobile {
+        display: none;
+    }
+    .tablet {
+        display: none;
+    }
+    .desktop {
+        display: block;
+    }
+}
+
+
+
+.profile-section {
+
+}
+
+
+.profile-section .image-container {
+    
+}
+
+
+
+.MuiDialog-container .MuiPaper-root {
+    border-radius: 15px;
+    padding: 30px;
+}
+
+
+.filter-drawer .MuiPaper-root {
+    height: 50%;
+    overflow: auto;
 }

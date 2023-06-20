@@ -91,8 +91,8 @@ const LoginPage = () => {
                         backgroundColor: "#FFFF"
                     }}
                 >
-                    <Typography component="h2" variant="h4" sx={{ mb: 2 }} >
-                        log in
+                    <Typography variant="h5" sx={{ mb: 2 }} >
+                        Log in
                     </Typography>
 
                     {formError && (

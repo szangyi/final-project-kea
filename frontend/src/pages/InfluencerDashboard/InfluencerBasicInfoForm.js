@@ -26,8 +26,8 @@ const InfluencerBasicInfoForm = ({ values, handleChange, touched, errors }) => {
     return (
         <>
 
-            <Typography variant="h5"> Basic information </Typography>
-            <Box>
+            <Typography variant="h6" sx={{ fontWeight: 600}}> Basic information </Typography>
+            <Box sx={{mb: 3}}>
                 <MyCustomTextField
                     size="normal"
                     margin="normal"

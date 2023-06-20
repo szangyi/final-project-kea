@@ -60,6 +60,7 @@ const MyCustomDrawer = (props) => {
 
             sx={{
                 py: 3,
+                pl: 2,
                 width: drawerWidth,
                 flexShrink: 0,
                 [`& .MuiDrawer-paper`]: { backgroundColor: 'transparent', width: drawerWidth, borderRight: 0, boxSizing: 'border-box', position: 'unset' },
@@ -78,7 +79,7 @@ const MyCustomDrawer = (props) => {
                                 key={item.text} >
                                 <ListItemButton onClick={item.action}>
                                     {icon && <ListItemIcon sx={{ minWidth: '40px', minHeight: '', }} >{item.icon}</ListItemIcon>}
-                                    <ListItemText primary={item.text} primaryTypographyProps={{ fontSize: '16px' }}
+                                    <ListItemText primary={item.text} primaryTypographyProps={{}}
                                     />
                                 </ListItemButton>
                             </ListItem>

@@ -15,6 +15,8 @@ import GetRandomProfilesAPI from '../api/GetRandomProfilesAPI';
 import Loader from '../components/Loader/Loader'
 import CollectionCard from '../components/CollectionCard/CollectionCard'
 import ErrorPage from './ErrorPage';
+import MiniCard from '../components/Card/MiniCard';
+import Skeleton from '@mui/material/Skeleton';
 
 
 
@@ -37,35 +39,71 @@ const HomePageLoggedin = (theme) => {
     }, [profilesData]);
 
     if (errorMessage) {
-        return <ErrorPage error={errorMessage}/>
+        return <ErrorPage error={errorMessage} />
     }
 
     return (
         <>
 
-            {/* Add filter to this banner */}
-            <BannerAdvanced
+            {/* <BannerAdvanced
                 variant="large"
                 headline3="I'm looking for Fashion influencer"
                 headline4="on Instagram"
                 divider={true}
-                button="Sign up"
+                button="Discover"
+                href="/collection"
                 copy1="Discover Youtube, TikTok, and Instagram influencers"
-            />
+                miniCardsEnabled
+            /> */}
+
+            {/* Add filter to this banner */}
+            <BannerAdvanced />
 
             <StepsInfluencerDiscovery />
 
+            <ChipCollection
+                headline="100% verified influencers"
+                copy="Explore our extensive list of topics and uncover influencers who excel in their fields. Unlock a world of knowledge, creativity, and expertise, and browse in topics such as"
+            />
+
+
             <Box component="section" className="get-inspired sectionPadding" sx={{ backgroundColor: 'customColors.grey.light' }}>
-                <Typography variant="h3" sx={{ marginBottom: 2 }}>get inspired</Typography>
+                <Typography variant="h3" sx={{ marginBottom: 4 }}>Get inspired</Typography>
 
                 <Stack>
                     {profilesData === null ? (
-                        <Loader />
+                        // <Loader />
+
+                        <>
+                            <Stack sx={{ display: 'flex', flexDirection: 'row', gap: { xs: 1, md: 5 }, }}>
+                                <Box sx={{ width: 'fit-content' }}>
+                                    <Skeleton sx={{ borderRadius: '15px' }} variant="rounded" width={300} height={300} />
+                                    <Box sx={{ pt: 0.5, width: 300 }}>
+                                        <Skeleton />
+                                        <Skeleton width="60%" />
+                                    </Box>
+                                </Box>
+                                <Box sx={{ width: 'fit-content' }}>
+                                    <Skeleton sx={{ borderRadius: '15px' }} variant="rounded" width={300} height={300} />
+                                    <Box sx={{ pt: 0.5, width: 300 }}>
+                                        <Skeleton />
+                                        <Skeleton width="60%" />
+                                    </Box>
+                                </Box>
+                                <Box sx={{ width: 'fit-content' }}>
+                                    <Skeleton sx={{ borderRadius: '15px' }} variant="rounded" width={300} height={300} />
+                                    <Box sx={{ pt: 0.5, width: 300 }}>
+                                        <Skeleton />
+                                        <Skeleton width="60%" />
+                                    </Box>
+                                </Box>
+                            </Stack>
+                        </>
+
+
                     ) : (
                         <>
-
                             <CollectionCard favoriteenabled={false} array={profilesData} />
-
                         </>
                     )}
                 </Stack>

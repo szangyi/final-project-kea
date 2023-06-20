@@ -5,12 +5,10 @@ import { Box, Typography, Divider } from "@mui/material"
 import MeshGradient from "../MeshGradient/MeshGradient"
 import MyCustomButton from "../Button/Button"
 import MiniCardCollection from "../Card/MiniCardCollection";
-import MiniCardCollectionSmall from "../Card/MiniCardCollectionSmall";
-import MiniCardCollectionInfluencer from "../Card/MiniCardCollectionInfluencer";
 import { handleWindowSizeChange } from '../../util/detectMediaQuery'
 
 
-const Banner = (props) => {
+const BannerAdvanced = (props) => {
 
     const [mediaQuery, setMediaQuery] = useState("");
     const [showMeshGradient, setShowMeshGradient] = useState(false);
@@ -32,40 +30,36 @@ const Banner = (props) => {
         };
     }, []); // Empty dependency array to run the effect only once on mount
 
-
     return (
-        <Box component="section" className="banner" variant={props.variant} >
+        <Box component="section" className="banner banner-advanced" variant="large" >
 
             {showMeshGradient && <MeshGradient variant={props.variant} />}
 
             {mediaQuery === 'desktop' ? (
                 <>
                     {props.miniCardsEnabled && <MiniCardCollection />}
-                    {props.miniCardsEnabledInfluencer && <MiniCardCollectionInfluencer />}
-                    {props.miniCardsEnabledSmall && <MiniCardCollectionSmall />}
                 </>
             ) : (
                 <></>
             )}
 
-            < Box className="text-container bannerPadding" sx={{
+            <Box className="text-container bannerPadding" sx={{
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'center',
-                alignText: 'left',
+                alignText: 'left'
             }}>
+                <Typography variant="h2">{props.headline3}</Typography>
+                <Typography variant="h2">{props.headline4}</Typography>
+                <Typography sx={{ mt: 2 }} >{props.copy1}</Typography>
+                <Typography >{props.copy2}</Typography>
+                <MyCustomButton href={props.href} sx={{ mt: 4, width: 'fit-content' }}>{props.button}</MyCustomButton>
 
-            {props.headline1 ? <Typography variant="h1">{props.headline1}</Typography> : null}
-            {props.headline2 ? <Typography variant="h1">{props.headline2}<Box sx={{ color: "white", display: 'inline-block' }}>.</Box></Typography> : null}
-            {props.divider ? <Divider /> : null}
-            {props.copy1 ? <Typography sx={{ mt: 2 }} >{props.copy1} </Typography> : null}
-            {props.copy2 ? <Typography >{props.copy2}</Typography> : null}
-            {props.button ? <MyCustomButton sx={{ mt: 4, width: 'fit-content' }} href={props.href} >{props.button}</MyCustomButton> : null}
+            </Box>
+
         </Box>
-
-        </Box >
     )
 }
 
 
-export default Banner;
+export default BannerAdvanced;

@@ -1,81 +1,99 @@
-
-
 /* ALL THIS SHOULD BE MOVED TO CUSTOM COMPONENT (STYLED) */
 
 
-.card .card-image-container {
-    overflow: hidden;   
+/* CARDS CONTAINER */
+.cards-container {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+
+@media (min-width: 900px) {
+    .cards-container {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+}
+
+.cards-container .card-container .card,
+.cards-container .card-container {
+    width: inherit
+}
+
+/* CARD CONTAINER */
+.card-container {
+    text-decoration: none;
+    /* cursor: pointer; */
+}
+
+
+/* CARD */
+.card {
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    /* border: 1px solid red !important; */
     display: grid;
 }
 
-.card .card-image-container > * {
+.card>* {
+    grid-area: 1/1
+}
+
+
+/* CARD CHILDREN */
+/* IMAGE */
+.card .card-content {
+    width: inherit
+}
+
+.card .card-image-container {
+    overflow: hidden;
+    display: grid;
+    width: inherit;
+}
+
+.card .card-image-container>* {
     grid-area: 1/1;
 }
 
-
 .card .card-image-container .MuiCardActions-root {
-    height:fit-content;
+    height: fit-content;
     justify-self: end;
-    z-index:10;
+    z-index: 10 !important;
 }
-
-
 
 .card img {
     width: fill;
     width: -webkit-fill-available;
-    max-height:200px;
+    /* max-height: 200px; */
     transform: scale(1);
     transition: .2s ease-in;
+    aspect-ratio: 1/1;
+    width: inherit;
 }
 
+/* CONTENT */
 .card-content-container * {
+    padding: 0 !important;
+    margin-block: 0px !important;
+}
+
+.card-content-container .icons-container {
+    margin-top: 10px !important;
+}
+
+
+/* INTERACTIONS */
+.card-click {
     padding: 0 !important;
 }
 
-.card-container .card {
-    transition: .2s ease-in;
-}
-
-.card-container:hover .card {
-    transform:scale(.97);
-    background-color: white !important;
-}
-
-.card-container:hover img {
-    transform:scale(1.2);
-}
-
-.card-container {
-    text-decoration: none;
+.card-click>* {
+    width: 100%;
+    height: 100%;
     cursor: pointer;
+    z-index: 9;
 }
 
-.card-click {
-    /* background: rosybrown; */
-    width:100%;
-    height:100%;
-    position:absolute;
-    top:0;
-    left:0;
-}
-
-.card-container {
-    display: flex;
-
-}
-
-.card-container .card {
-    /* min-width: 250px; */
-}
-
-.cards-container {
-    display: grid !important;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-}
-
-.cards-container .card-container .card,
-.cards-container .card-container
-{
-    width:inherit
+.card-fav>* {
+    z-index: 10
 }

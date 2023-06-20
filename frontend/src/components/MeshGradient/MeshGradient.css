@@ -49,12 +49,18 @@
 }
 
 #gradient-canvas[variant*="large"] {
-  height: calc(80vh + 64px);
+  height: calc(100vh + 64px);
 }
 
 #gradient-canvas[variant*="medium"] {
-  height: calc(60vh + 64px);
+  height: calc(70vh + 64px);
 }
+
+#gradient-canvas[variant*="small"] {
+  height: calc(40vh + 64px);
+}
+
+
 
 
 
