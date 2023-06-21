@@ -406,7 +406,7 @@ def _update_user_basic_info(user_id,user_basic_data, db_config):
                     SET username =%s,
                             user_first_name =%s,
                             user_last_name =%s,
-                            user_image_ID = %s
+                            user_profile_image = %s
                             
                     WHERE user_ID=%s
               """
@@ -419,6 +419,7 @@ def _update_user_basic_info(user_id,user_basic_data, db_config):
             
         )
         cursor.execute(sql, var)
+        db.commit()
         
         
         response.status = 200
