@@ -19,12 +19,12 @@ export const signupSchema = Yup.object().shape({
         .required('Required field'),
     lastName: Yup.string()
         .min(2, 'Min. 2 characters')
-        .max(20, 'Max. 20 characters')
+        .max(50, 'Max. 20 characters')
         .matches(regexSpecChars, { message: "Invalid characters, only alphabets are allowed." })
         .required('Required field'),
     username: Yup.string()
         .min(3, 'Min. 3 characters')
-        .max(16, 'Max. 16 characters')
+        .max(30, 'Max. 30 characters')
         .matches(regexSpecCharsWithNumbers, { message: "Invalid characters, only alphabets and numberic values are allowed." })
         .required('Required field'),
     email: Yup.string()
@@ -52,15 +52,15 @@ export const loginSchema = Yup.object().shape({
 export const userBasicInfoSchema = Yup.object().shape({
     firstName: Yup.string()
         .min(2, 'Min. 2 characters')
-        .max(20, 'Max. 20 characters')
+        .max(50, 'Max. 20 characters')
         .required('Required field'),
     lastName: Yup.string()
         .min(2, 'Min. 2 characters')
-        .max(20, 'Max. 20 characters')
+        .max(50, 'Max. 20 characters')
         .required('Required field'),
     username: Yup.string()
         .min(3, 'Min. 3 characters')
-        .max(16, 'Max. 16 characters')
+        .max(30, 'Max. 30 characters')
         .required('Required field'),
 })
 
@@ -84,7 +84,7 @@ export const userSecuritySchema = Yup.object().shape({
 export const createProfileSchema = Yup.object().shape({
     username: Yup.string()
         .min(3, 'Min. 3 characters')
-        .max(16, 'Max. 16 characters')
+        .max(30, 'Max. 30 characters')
         .matches(regexSpecCharsWithNumbers, { message: "Invalid characters, only alphabets and numberic values are allowed." })
         .required('Required field'),
     bio: Yup.string()
