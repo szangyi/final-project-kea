@@ -31,7 +31,7 @@ def _():
                 if profile:
                     user_ID = profile[1]
                     
-                    other_profiles = database_access_functions._get_other_influencer_profiles(user_ID, username, db_config)
+                    other_profiles = database_access_functions._get_other_influencer_profiles(influencer__ID, user_ID, username, db_config)
                     
                     profile_response = {
                         "profileData": profile,
@@ -40,7 +40,7 @@ def _():
                     
                     
                     profile_json = json.dumps(profile_response, default=helper_functions._datetime_handler)
-                    
+                    print(profile_response)
                     response.status = 200
                     return profile_json
                 else:

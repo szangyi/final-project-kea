@@ -185,7 +185,7 @@ def _get_one_influencer_profile(influencer_ID, db_config):
     finally:
         db.close()
 
-def _get_other_influencer_profiles(user_ID,username, db_config):
+def _get_other_influencer_profiles(influencer__ID, user_ID,username, db_config):
     try:
         db = mysql.connector.connect(**db_config)
         cursor = db.cursor()
@@ -193,9 +193,17 @@ def _get_other_influencer_profiles(user_ID,username, db_config):
         var_check_influencer = (user_ID,username,)
         cursor.execute(sql_check_influencer, var_check_influencer)
         other_profiles = cursor.fetchall()
+        all_other_profiles = []
+
+        for profile in other_profiles:
+            
+            hashtags =_get_influencer_hashtags(influencer__ID, db_config)
+            profile_hashtags = other_profiles + hashtags
+
+
                 
         response.status = 200
-        return other_profiles
+        return profile_hashtags
     
     except Exception as ex:
         print(ex)
