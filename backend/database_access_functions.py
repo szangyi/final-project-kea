@@ -185,7 +185,7 @@ def _get_one_influencer_profile(influencer_ID, db_config):
     finally:
         db.close()
 
-def _get_other_influencer_profiles(influencer__ID, user_ID,username, db_config):
+def _get_other_influencer_profiles(user_ID,username, db_config):
     try:
         db = mysql.connector.connect(**db_config)
         cursor = db.cursor()
@@ -194,16 +194,24 @@ def _get_other_influencer_profiles(influencer__ID, user_ID,username, db_config):
         cursor.execute(sql_check_influencer, var_check_influencer)
         other_profiles = cursor.fetchall()
         all_other_profiles = []
-
-        for profile in other_profiles:
-            
-            hashtags =_get_influencer_hashtags(influencer__ID, db_config)
-            profile_hashtags = other_profiles + hashtags
-
+        
+        db.commit()
+        
+        if other_profiles is not None:
+            for profile in other_profiles:
+                if profile is not None:
+                    influencer_id_profile = profile[0]
+                    hashtags =_get_influencer_hashtags(influencer_id_profile, db_config)
+                    profile_hashtags = profile + (tuple(hashtags))
+                    all_other_profiles.append(profile_hashtags)
+                else:
+                    pass
+        else:
+            all_other_profiles = other_profiles
 
                 
         response.status = 200
-        return profile_hashtags
+        return all_other_profiles
     
     except Exception as ex:
         print(ex)
@@ -312,8 +320,25 @@ def _get_random_profiles(user_ID, db_config, num_profiles):
         random_profiles = cursor.fetchall()
         db.commit()
         
+        all_random_profiles = []
+        
         response.status = 200
-        return random_profiles
+        
+        if random_profiles is not None:
+            for profile in random_profiles:
+                if profile is not None:
+                    influencer_id_profile = profile[0]
+                    hashtags =_get_influencer_hashtags(influencer_id_profile, db_config)
+                    profile_hashtags = profile + (tuple(hashtags))
+                    all_random_profiles.append(profile_hashtags)
+                else:
+                    pass
+        else:
+            all_random_profiles = random_profiles
+
+                
+        response.status = 200
+        return all_random_profiles
     
     except Exception as ex:
         print(ex)
