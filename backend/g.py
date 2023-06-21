@@ -39,7 +39,7 @@ def _is_first_name(text=None):
   return text, None
 
 def _is_last_name(text=None):
-  min, max = 2, 20
+  min, max = 2, 50
   error = f"Last name must be {min} to {max} characters. No spaces"
   if not text: return None, error
   text = re.sub("[\n\t]*", "", text)
@@ -50,7 +50,7 @@ def _is_last_name(text=None):
   return text, None
 
 def _is_username(text=None):
-  min, max = 3, 16
+  min, max = 3, 30
   error = f"Username must be {min} to {max} characters. No spaces"
   if not text: return None, error
   text = re.sub("[\n\t]*", "", text)

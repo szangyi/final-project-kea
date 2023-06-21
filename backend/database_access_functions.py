@@ -79,7 +79,7 @@ def _signup(user_data, db_config ):
     try:
         db = mysql.connector.connect(**db_config)
         cursor = db.cursor()
-        sql_signup = """INSERT INTO users (user_ID, username, user_first_name, user_last_name, user_email, user_password, user_image_ID, is_influencer, user_created_at ) VALUES ( %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
+        sql_signup = """INSERT INTO users (user_ID, username, user_first_name, user_last_name, user_email, user_password, user_profile_image, is_influencer, user_created_at ) VALUES ( %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
         var = (
             user_data["user_ID"],
             user_data["username"],
@@ -87,7 +87,7 @@ def _signup(user_data, db_config ):
             user_data["user_last_name"],
             user_data["user_email"],
             user_data["user_password"],
-            user_data["user_image_ID"],
+            user_data["user_profile_image"],
             user_data["is_influencer"],
             user_data["user_created_at"],
         )

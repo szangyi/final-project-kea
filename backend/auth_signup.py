@@ -21,7 +21,7 @@ def _signup():
         username = html.escape(request_user_data["username"])
         user_password = request_user_data["password"]
         user_created_at = str(int(time.time()))
-        user_image_ID = ""
+        user_profile_image = ""
         user_interest_tags = '{}'
         is_influencer = False
 
@@ -69,7 +69,7 @@ def _signup():
                 "user_last_name": user_last_name,
                 "user_email": user_email,
                 "user_password": password_hashed,
-                "user_image_ID": user_image_ID, 
+                "user_profile_image": user_profile_image, 
                 "user_interest_tags": user_interest_tags, 
                 "is_influencer": is_influencer, 
                 "user_created_at": user_created_at,
