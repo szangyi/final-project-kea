@@ -191,9 +191,9 @@ function ResponsiveAppBar() {
                                                 userData.userImage ? (
                                                     <Box
                                                         component="img"
-                                                        src={`https://influncr.pythonanywhere.com/images/profile_images/${userData.userImage}`}
-                                                        // src={`http://127.0.0.1:7878/profile_images/${userData.userImage}`}
-                                                        sx={{ border: '2px solid white', height: 50, width: 50, borderRadius: '50%' }}
+                                                        // src={`https://influncr.pythonanywhere.com/images/profile_images/${userData.userImage}`}
+                                                        src={`http://127.0.0.1:7878/profile_images/${userData.userImage}`}
+                                                        sx={{ border: '2px solid white', height: 50, width: 50,objectFit: 'cover', borderRadius: '50%' }}
                                                     />
                                                 ) : (
                                                     <Avatar sx={{ border: '2px solid white' }} alt={userData.firstName} src="/fallback" 

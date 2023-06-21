@@ -57,8 +57,6 @@ const ProfileLandingPage = () => {
         return <ErrorPage error={errorMessage} />
     }
 
-    console.log(otherProfiles)
-
     return (
         <>
             <Banner variant="small" _headline1={username.username} />
@@ -84,8 +82,8 @@ const ProfileLandingPage = () => {
                             <Box className="image-container" sx={{ mt: -10, }}>
                                 <Box
                                     component="img"
-                                    src={`https://influncr.pythonanywhere.com/images/profile_images/${profileData[11]}`}
-                                    // src={`http://127.0.0.1:7878/profile_images/${profileData[11]}`}
+                                    // src={`https://influncr.pythonanywhere.com/images/profile_images/${profileData[11]}`}
+                                    src={`http://127.0.0.1:7878/profile_images/${profileData[11]}`}
                                     sx={{ height: { xs: 200, md: 300 }, width: { xs: 200, md: 300 }, borderRadius: '50%', border: '3px solid white', objectFit: 'cover' }}
                                 />
                             </Box>
@@ -100,8 +98,7 @@ const ProfileLandingPage = () => {
                                 </Box>
 
                                 <IconButton sx={{ height: 'fit-content' }} onClick={() => handleAddToFavorites(profileData[0])}>
-                                    {profileData[14] ? <FavoriteIcon sx={{ color: 'customColors.salmon.dark' }} /> : <FavoriteBorderIcon sx={{ color: 'customColors.salmon.dark' }} />}
-                                    {/* <FavoriteBorderIcon sx={{ color: 'customColors.salmon.dark' }} /> */}
+                                     <FavoriteBorderIcon sx={{ color: 'customColors.salmon.dark' }} />
                                 </IconButton>
 
                             </Stack>

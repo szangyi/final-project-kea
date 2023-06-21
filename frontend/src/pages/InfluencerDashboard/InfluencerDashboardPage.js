@@ -43,12 +43,14 @@ const InfluencerPage = () => {
 
     // VARIABLES ---------------
     const [influencerData, setInfluencerData] = useState(null);
+    const [selectedInfluId, setSelectedInfluId] = useState(null);
     const [deleteError, setDeleteError] = useState(null);
     const [open, setOpen] = React.useState(false);
     const [errorMessage, setErrorMessage] = useState(null)
 
     // HANDLERS ---------------
-    const handleOpen = () => {
+    const handleOpen = (influ_id) => {
+        setSelectedInfluId(influ_id);
         setOpen(true);
     };
 
@@ -58,12 +60,9 @@ const InfluencerPage = () => {
 
     // API CALLS ---------------
     GetInfluencerProfilesAPI(setInfluencerData, setErrorMessage)
-    const handleDelete = (influencerid) => {
-        DeleteProfileAPI(influencerid, handleClose, setErrorMessage, setDeleteError);
+    const handleDelete = (selectedInfluId) => {
+        DeleteProfileAPI(selectedInfluId, handleClose, setErrorMessage, setDeleteError);
     }
-
-    console.log(influencerData)
-
 
     if (errorMessage) {
         return <ErrorPage error={errorMessage} />
@@ -86,7 +85,7 @@ const InfluencerPage = () => {
                 {influencerData === null ? (
                     // <Loader />
                     <>
-                        <Box sx={{pt: { xs: 1, md: 5 }, pb: { xs: 1, md: 0 }, px: { xs: 1, md: 3 }, width: {xs: '100%', md: '60%'}, margin: 'auto', display: 'flex', flexDirection: 'column', alignItems: {xs: 'start', md: 'center'} }} >
+                        <Box sx={{ pt: { xs: 1, md: 5 }, pb: { xs: 1, md: 0 }, px: { xs: 1, md: 3 }, width: { xs: '100%', md: '60%' }, margin: 'auto', display: 'flex', flexDirection: 'column', alignItems: { xs: 'start', md: 'center' } }} >
                             <Skeleton width="100%" />
                             <Skeleton width="60%" />
                             <Skeleton sx={{ mt: 4 }} variant="rounded" width={100} height={30} />
@@ -145,9 +144,9 @@ const InfluencerPage = () => {
                                                             <Box
                                                                 component="img"
 
-                                                                src={`https://influncr.pythonanywhere.com/images/profile_images/${array[11]}`}
-                                                                // src={`http://127.0.0.1:7878/profile_images/${array[11]}`}
-                                                                sx={{ height: 50, width: 50, borderRadius: '50%' }}
+                                                                // src={`https://influncr.pythonanywhere.com/images/profile_images/${array[11]}`}
+                                                                src={`http://127.0.0.1:7878/profile_images/${array[11]}`}
+                                                                sx={{ height: 50, width: 50, objectFit: 'cover', borderRadius: '50%' }}
                                                             />
                                                         </TableCell>
                                                         <TableCell >{array[2]}</TableCell>
@@ -200,32 +199,36 @@ const InfluencerPage = () => {
                                                                 <MenuItem
                                                                     disableRipple
                                                                     variant="navlink"
-                                                                    onClick={() => { handleOpen() }}
+                                                                    onClick={() => { handleOpen(array[0]) }}
                                                                     sx={{ p: 0, width: 'fit-content', m: 0, my: 2, color: 'primary.main', fontWeight: 600, display: 'block', }}
                                                                 >
                                                                     Delete
                                                                 </MenuItem>
 
-                                                                <Dialog
-                                                                    open={open}
-                                                                    onClose={handleClose}
-                                                                    aria-labelledby="draggable-dialog-title">
 
-                                                                    <DialogTitle >
-                                                                        Are you sure you want to delete this profile?
-                                                                    </DialogTitle>
-                                                                    <DialogActions >
-                                                                        <MyCustomButton variant="secondary" autoFocus onClick={handleClose}>
-                                                                            Cancel
-                                                                        </MyCustomButton>
-                                                                        <MyCustomButton variant="danger" onClick={() => handleDelete(array[0])} >Delete</MyCustomButton>
-                                                                    </DialogActions>
-                                                                </Dialog>
 
                                                             </Stack>
                                                         </TableCell>
                                                     </TableRow>
                                                 ))}
+
+                                                <Dialog
+                                                    open={open}
+                                                    onClose={handleClose}
+                                                    aria-labelledby="draggable-dialog-title"
+                                                    >
+                                                   
+
+                                                    <DialogTitle >
+                                                        Are you sure you want to delete this profile?
+                                                    </DialogTitle>
+                                                    <DialogActions >
+                                                        <MyCustomButton variant="secondary" autoFocus onClick={handleClose}>
+                                                            Cancel
+                                                        </MyCustomButton>
+                                                        <MyCustomButton variant="danger" onClick={() => handleDelete(selectedInfluId)} >Delete</MyCustomButton>
+                                                    </DialogActions>
+                                                </Dialog>
                                             </TableBody>
                                         </Table>
                                     </TableContainer>
