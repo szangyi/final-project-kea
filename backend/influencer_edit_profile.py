@@ -15,14 +15,14 @@ def _edit_influencer():
         user_email_validated = helper_functions._token_validator(cookie_request)
         influencer_username = html.escape(request.forms.get("username"))
         influencer_bio_description = html.escape(request.forms.get("bio"))
-        influencer_location = request.forms.get("location") # no validation
+        influencer_location = request.forms.get("location") 
         influencer_website = html.escape(request.forms.get("website"))
         influencer_instagram = html.escape(request.forms.get("instagram"))
         influencer_youtube = html.escape(request.forms.get("youTube"))
         influencer_tiktok = html.escape(request.forms.get("tikTok"))
-        influencer_tags_list = request.forms.get("hashtag") # no validation
-        influencer_tags  = json.dumps(influencer_tags_list) # # no validation
-        influencer_category = request.forms.get("category") # no validation
+        influencer_tags_list = request.forms.get("hashtag") 
+        influencer_tags  = json.dumps(influencer_tags_list) 
+        influencer_category = request.forms.get("category") 
         profile_image_delete = request.files.get("image")
         profile_created_at = str(int(time.time()))
         image_id = str(uuid.uuid4())
@@ -43,21 +43,6 @@ def _edit_influencer():
             influencer_website, error_web = g._is_item_url(influencer_website)
             if error_web:
                 validation_errors.append(error_web)
-
-        # if (influencer_instagram):
-        #     influencer_instagram, error_ig = g._is_item_account(influencer_instagram)
-        #     if error_ig:
-        #         validation_errors.append(error_ig)
-
-        # if (influencer_youtube):
-        #     influencer_youtube, error_yt = g._is_item_account(influencer_youtube)
-        #     if error_yt:
-        #         validation_errors.append(error_yt)
-
-        # if (influencer_tiktok): 
-        #     influencer_tiktok, error_tt = g._is_item_account(influencer_tiktok)
-        #     if error_tt:
-        #         validation_errors.append(error_tt)
         
         profile_image_delete, error_img = g._is_item_image(profile_image_delete)
         if error_img:
@@ -90,8 +75,6 @@ def _edit_influencer():
                     "profile_created_at": profile_created_at,
                 }
                 
-                
-        
     except Exception as ex:
         print(ex)
         response.status = 500

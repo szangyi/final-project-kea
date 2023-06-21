@@ -1,7 +1,9 @@
 // --------------------------
 // REACT ---------------
 // --------------------------
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+
+
 // --------------------------
 // MATERIAL UI ---------------
 // --------------------------
@@ -9,11 +11,16 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
-import { Typography, useThemeProps } from '@mui/material';
+import { Typography } from '@mui/material';
+
+
 // --------------------------
-// COMPONENTS ---------------
+// UTILS ---------------
 // --------------------------
 import { CATEGORYOPTIONS } from '../../util/Constants';
+
+
+
 
 const Category = ({ className, onCategoryChange, customFilters, filter, helperText, error, valueEdit, value }) => {
 

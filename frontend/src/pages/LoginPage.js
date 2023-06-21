@@ -40,14 +40,6 @@ const LoginPage = () => {
         validationSchema: loginSchema,
     });
 
-    // REDIRECT WHEN USER IS LOGGED IN ---------------
-    // useEffect(() => {
-    //     if (token === true) {
-    //         console.log('userloggedinman');
-    //         nav('/');
-    //     }
-    // }, [token]);
-
 
     // API CALLS ---------------
     const loginHandler = async (event) => {

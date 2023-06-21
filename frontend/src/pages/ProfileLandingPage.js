@@ -82,8 +82,8 @@ const ProfileLandingPage = () => {
                             <Box className="image-container" sx={{ mt: -10, }}>
                                 <Box
                                     component="img"
-                                    // src={`https://influncr.pythonanywhere.com/images/profile_images/${profileData[11]}`}
-                                    src={`http://127.0.0.1:7878/profile_images/${profileData[11]}`}
+                                    src={`https://influncr.pythonanywhere.com/images/profile_images/${profileData[11]}`}
+                                    // src={`http://127.0.0.1:7878/profile_images/${profileData[11]}`}
                                     sx={{ height: { xs: 200, md: 300 }, width: { xs: 200, md: 300 }, borderRadius: '50%', border: '3px solid white', objectFit: 'cover' }}
                                 />
                             </Box>

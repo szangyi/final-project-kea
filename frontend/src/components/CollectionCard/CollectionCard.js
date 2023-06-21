@@ -1,18 +1,3 @@
-import './CollectionCard.css'
-
-// --------------------------
-// REACT ---------------
-// --------------------------
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-
-// --------------------------
-// REACT ---------------
-// --------------------------
-import AddToFavoritesAPI from '../../api/AddToFavoritesAPI';
-import ErrorPage from '../../pages/ErrorPage';
-
-
 // --------------------------
 // MATERIAL UI ---------------
 // --------------------------
@@ -30,6 +15,28 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import LanguageIcon from '@mui/icons-material/Language';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import MusicVideoIcon from '@mui/icons-material/MusicVideo';
+
+// --------------------------
+// STYLES ---------------
+// --------------------------
+import './CollectionCard.css'
+
+
+// --------------------------
+// REACT ---------------
+// --------------------------
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+
+
+// --------------------------
+// COMPONENTS ---------------
+// --------------------------
+import AddToFavoritesAPI from '../../api/AddToFavoritesAPI';
+import ErrorPage from '../../pages/ErrorPage';
+
+
+
 
 
 
@@ -75,30 +82,26 @@ const CollectionCard = ({ array, filteringCard, favoriteenabled, searchQuery, se
         cardArray = array;
     }
 
-    console.log(cardArray)
-
 
     return (
 
         <Grid className="cards-container" container sx={{ gap: '20px' }}>
-            {/* <Container disableGutters sx={{ display: 'flex', flexDirection: 'row', gap: '20px', flexWrap: 'wrap' }}> */}
 
             {cardArray.map((array, index) => (
                 <Grid key={index} item className="card-container">
 
                     <Card className="card" sx={{ mb: 2 }}
-                    // sx={{ width: 350 }}
                     >
 
-                        <CardContent className='card-content' sx={{padding: 0}}>
+                        <CardContent className='card-content' sx={{ padding: 0 }}>
 
                             <Box className="card-image-container" sx={{ borderRadius: '10px' }}>
                                 <CardMedia
                                     component="img"
                                     alt="profile image"
                                     sx={{}}
-                                    // image={`https://influncr.pythonanywhere.com/images/profile_images/${array[11]}`}
-                                image={`http://127.0.0.1:7878/profile_images/${array[11]}`}
+                                    image={`https://influncr.pythonanywhere.com/images/profile_images/${array[11]}`}
+                                    // image={`http://127.0.0.1:7878/profile_images/${array[11]}`}
                                 />
                                 {favoriteenabled &&
                                     <CardActions className='card-fav'>
@@ -121,7 +124,7 @@ const CollectionCard = ({ array, filteringCard, favoriteenabled, searchQuery, se
                                     </Typography>
                                     <Typography gutterBottom variant="body2" color="text.secondary">
                                         {/* Tags: */}
-                                        {filteringCard == 'yes' ? array[15]: array[14]}
+                                        {filteringCard == 'yes' ? array[15] : array[14]}
                                     </Typography>
                                     <Typography gutterBottom variant="body2" color="text.secondary">
                                         {/* Location: */}
@@ -132,25 +135,21 @@ const CollectionCard = ({ array, filteringCard, favoriteenabled, searchQuery, se
                                     {array[5] && (
                                         <div>
                                             <LanguageIcon fontSize="small"></LanguageIcon>
-                                            {/* <a href={`/${array[5]}`}>WEB</a> */}
                                         </div>
                                     )}
                                     {array[6] && (
                                         <div>
                                             <InstagramIcon fontSize="small"></InstagramIcon>
-                                            {/* <a href={`/${array[6]}`}>IG</a> */}
                                         </div>
                                     )}
                                     {array[7] && (
                                         <div>
                                             <YouTubeIcon fontSize="small"></YouTubeIcon>
-                                            {/* <a href={`/${array[6]}`}>YT</a> */}
                                         </div>
                                     )}
                                     {array[8] && (
                                         <div>
                                             <MusicVideoIcon fontSize="small"></MusicVideoIcon>
-                                            {/* <a href={`/${array[6]}`}>TK</a> */}
                                         </div>
                                     )}
                                 </CardActions>

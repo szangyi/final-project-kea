@@ -3,32 +3,31 @@
 // --------------------------
 import React, { useState, useEffect } from 'react';
 
+
 // --------------------------
 // MATERIAL UI ---------------
 // --------------------------
 import Box from '@mui/material/Box';
-import Autocomplete from '@mui/material/Autocomplete';
-import MyCustomAutocomplete from './AutoComplete';
+
 
 // --------------------------
 // COMPONENTS ---------------
 // --------------------------
 import MyCustomTextField from "../Form/TextField";
+import MyCustomAutocomplete from './AutoComplete';
+
+
+// --------------------------
+// UTILS ---------------
+// --------------------------
 import { LOCATION } from '../../util/Constants';
+
+
 
 const Location = ({ onLocationChange, helperText, error, valueEdit, value }) => {
 
     // VARIABLES ---------------
-
     const [locationData, setLocationData] = useState(null);
-
-    // if(valueEdit=="yes"){
-    //     initialLocationData = value;
-    //     console.log("jekckew")
-    //     console.log(value)
-    // } else{
-    //     initialLocationData = '';
-    // }
 
     useEffect(() => {
         if (valueEdit === "yes") {
@@ -36,10 +35,9 @@ const Location = ({ onLocationChange, helperText, error, valueEdit, value }) => 
         } else {
             setLocationData('');
         }
-      }, [valueEdit, value]);
-    // const [locationData, setLocationData] = useState(initialLocationData);
+    }, [valueEdit, value]);
 
-    console.log(locationData)
+
     // HANDLE CHANGE ---------------
     const handleLocationChange = (event, value) => {
         setLocationData(value);
@@ -54,11 +52,10 @@ const Location = ({ onLocationChange, helperText, error, valueEdit, value }) => 
         <MyCustomAutocomplete
             id="country-select"
             options={LOCATION}
-            // autoHighlight
             autoFocus
-            getOptionLabel={valueEdit==="yes" ? undefined:getLabel}            
+            getOptionLabel={valueEdit === "yes" ? undefined : getLabel}
             onChange={handleLocationChange}
-            value={locationData !== '' ?  locationData: locationData}
+            value={locationData !== '' ? locationData : locationData}
             renderOption={(props, option) => (
                 <Box component="li" sx={{ fontSize: '14px', '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
                     <img
@@ -73,7 +70,7 @@ const Location = ({ onLocationChange, helperText, error, valueEdit, value }) => 
             )}
             renderInput={(params) => (
                 <MyCustomTextField
-                sx={{fontSize: '14px', height: '45px'}}
+                    sx={{ fontSize: '14px', height: '45px' }}
                     {...params}
                     label="Choose a country"
                     inputProps={{

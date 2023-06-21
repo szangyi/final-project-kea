@@ -1,6 +1,9 @@
+// --------------------------
+// STYLES ---------------
+// --------------------------
 import "./Logo.css"
 
-import { Box, SvgIcon } from "@mui/material"
+
 
 const Logo = (props) => {
 

@@ -1,8 +1,15 @@
-import "./Nav.css";
 
+// --------------------------
+// REACT ---------------
+// --------------------------
 import * as React from 'react';
 import { useState } from 'react';
+import { Link } from "react-router-dom";
 
+
+// --------------------------
+// MATERIAL UI ---------------
+// --------------------------
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -14,15 +21,23 @@ import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import { Link } from "react-router-dom";
-import ErrorPage from '../../pages/ErrorPage'
-
-
-import { LogOutAPIAction as logoutAction } from '../../api/LogOutAPI'
 import { Divider } from '@mui/material';
+
+// --------------------------
+// COMPONENTS ---------------
+// --------------------------
+import { LogOutAPIAction as logoutAction } from '../../api/LogOutAPI'
 import Logo from "../Logo/Logo";
 import AccountInfoAPI from "../../api/AccountInfoAPI";
-import Loader from '../Loader/Loader'
+
+
+// --------------------------
+// STYLES ---------------
+// --------------------------
+import "./Nav.css";
+
+
+
 
 
 const pages = [
@@ -90,14 +105,11 @@ function ResponsiveAppBar() {
                     <Toolbar disableGutters>
 
                         {/* Desktop */}
-                        {/* Put logo here */}
                         <Box className="logo-container" sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}>
                             <Link to="/">
                                 <Logo variant="black" />
                             </Link>
                         </Box>
-
-                        {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
 
                         <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'right', alignItems: 'center' }}>
 
@@ -106,7 +118,6 @@ function ResponsiveAppBar() {
                                     key={page.name}
                                     href={page.href}
                                     className={page.className}
-                                    // onClick={() => page.action()}
                                     sx={{ p: 0, marginInline: 2, my: 2, color: 'primary.main', fontWeight: 600, display: 'block', }}
                                 >
                                     {page.name}
@@ -152,7 +163,6 @@ function ResponsiveAppBar() {
                                     <MenuItem component="a"
                                         key={page.name}
                                         href={page.href}
-                                    // onClick={() => page.action()}
                                     >
                                         {page.name}
                                     </MenuItem>
@@ -165,7 +175,6 @@ function ResponsiveAppBar() {
                         <Box sx={{ maxHeight: '20px', display: { xs: 'flex', md: 'none' }, justifyContent: 'center', flexGrow: 1 }}>
                             <Logo variant="white" />
                         </Box>
-                        {/* <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 2, flexGrow: 1 }} /> */}
                         <Typography
                             sx={{
                                 mr: 0,
@@ -191,12 +200,12 @@ function ResponsiveAppBar() {
                                                 userData.userImage ? (
                                                     <Box
                                                         component="img"
-                                                        // src={`https://influncr.pythonanywhere.com/images/profile_images/${userData.userImage}`}
-                                                        src={`http://127.0.0.1:7878/profile_images/${userData.userImage}`}
-                                                        sx={{ border: '2px solid white', height: 50, width: 50,objectFit: 'cover', borderRadius: '50%' }}
+                                                        src={`https://influncr.pythonanywhere.com/images/profile_images/${userData.userImage}`}
+                                                        // src={`http://127.0.0.1:7878/profile_images/${userData.userImage}`}
+                                                        sx={{ border: '2px solid white', height: 50, width: 50, objectFit: 'cover', borderRadius: '50%' }}
                                                     />
                                                 ) : (
-                                                    <Avatar sx={{ border: '2px solid white' }} alt={userData.firstName} src="/fallback" 
+                                                    <Avatar sx={{ border: '2px solid white' }} alt={userData.firstName} src="/fallback"
                                                     />
                                                 )
                                             }
@@ -221,17 +230,11 @@ function ResponsiveAppBar() {
                                 open={Boolean(anchorElUser)}
                                 onClose={handleCloseUserMenu}
                             >
-                                {/* {settings.map((setting) => (
-                                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                    <Typography textAlign="center">{setting}</Typography>
-                                </MenuItem>
-                            ))} */}
 
                                 {settings.map(setting => (
                                     <MenuItem component="a"
                                         key={setting.name}
                                         href={setting.href}
-                                    // onClick={() => setting.action()}
                                     >
                                         <Typography textAlign="center">{setting.name}</Typography>
                                     </MenuItem>

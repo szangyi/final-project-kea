@@ -42,7 +42,6 @@ const SignupPage = () => {
     // REDIRECT WHEN USER IS LOGGED IN ---------------
     useEffect(() => {
         if (token === true) {
-            console.log('userloggedinman');
             nav('/');
         }
     }, [token]);

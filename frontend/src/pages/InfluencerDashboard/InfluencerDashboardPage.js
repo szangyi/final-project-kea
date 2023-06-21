@@ -143,9 +143,8 @@ const InfluencerPage = () => {
                                                         <TableCell>
                                                             <Box
                                                                 component="img"
-
-                                                                // src={`https://influncr.pythonanywhere.com/images/profile_images/${array[11]}`}
-                                                                src={`http://127.0.0.1:7878/profile_images/${array[11]}`}
+                                                                src={`https://influncr.pythonanywhere.com/images/profile_images/${array[11]}`}
+                                                                // src={`http://127.0.0.1:7878/profile_images/${array[11]}`}
                                                                 sx={{ height: 50, width: 50, objectFit: 'cover', borderRadius: '50%' }}
                                                             />
                                                         </TableCell>

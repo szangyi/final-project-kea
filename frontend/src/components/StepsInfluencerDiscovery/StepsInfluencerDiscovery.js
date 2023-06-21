@@ -1,18 +1,35 @@
-import "./StepsInfluencerDiscovery.css"
-
+// --------------------------
+// REACT ---------------
+// --------------------------
 import React from 'react';
 
+
+// --------------------------
+// MATERIAL UI ---------------
+// --------------------------
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import StepContent from '@mui/material/StepContent';
 import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
+import { Box, Grid, Typography } from "@mui/material";
+
+
+// --------------------------
+// COMPONENTS ---------------
+// --------------------------
 import collageLandscape from '../../assets/collage-landscape.png'
 import collagePortrait from '../../assets/collage-portrait-small.png'
 
 
-import { Box, Grid, Typography } from "@mui/material";
+// --------------------------
+// STYLES ---------------
+// --------------------------
+import "./StepsInfluencerDiscovery.css"
+
+
+
 
 function getSteps() {
     return ['Create a profile', 'Explore influencers', 'Save collections and stay inspired'];
@@ -34,25 +51,8 @@ function getStepContent(step) {
 
 const StepsInfluencerDiscovery = (props) => {
 
-    // const theme = useTheme();
-
-
     const [activeStep, setActiveStep] = React.useState(0);
     const steps = getSteps();
-
-    const handleNext = () => {
-        setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    };
-
-    const handleBack = () => {
-        setActiveStep((prevActiveStep) => prevActiveStep - 1);
-    };
-
-    const handleReset = () => {
-        setActiveStep(0);
-    };
-
-
 
     return (
         <Box component="section" className="steps-influencer-discovery sectionPadding" sx={{ my: 5 }}>
@@ -68,21 +68,13 @@ const StepsInfluencerDiscovery = (props) => {
                         <Stepper activeStep={activeStep} orientation="vertical">
                             {steps.map((label, index) => (
                                 <Step active={true} key={label}>
-                                    <StepLabel><Typography variant="h6" sx={{ marginBottom: 0}}>{label}</Typography></StepLabel>
-                                    <StepContent sx={{paddingBottom: 4}}>
+                                    <StepLabel><Typography variant="h6" sx={{ marginBottom: 0 }}>{label}</Typography></StepLabel>
+                                    <StepContent sx={{ paddingBottom: 4 }}>
                                         <Typography>{getStepContent(index)}</Typography>
                                     </StepContent>
                                 </Step>
                             ))}
                         </Stepper>
-                        {activeStep === steps.length && (
-                            <Paper square elevation={0} className={"resetContainer"}>
-                                <Typography>All steps completed - you&apos;re finished</Typography>
-                                <Button onClick={handleReset}>
-                                    Reset
-                                </Button>
-                            </Paper>
-                        )}
                     </div>
                 </Grid>
 

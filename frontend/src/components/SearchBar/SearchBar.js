@@ -1,6 +1,17 @@
-import MyCustomTextField from "../../components/Form/TextField";
+// --------------------------
+// MATERIAL UI ---------------
+// --------------------------
 import { InputAdornment } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
+
+
+// --------------------------
+// COMPONENTS ---------------
+// --------------------------
+
+import MyCustomTextField from "../../components/Form/TextField";
+
+
 
 
 const SearchBar = ({ onChange, value }) => {

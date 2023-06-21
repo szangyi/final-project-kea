@@ -2,10 +2,6 @@
 // REACT ---------------
 // --------------------------
 import axios from 'axios';
-import Cookies from 'js-cookie';
-import { setAuthToken, useAuth } from '../util/auth';
-
-
 
 export default async function LogInAPI(values, setFormError, setErrorMessage) {
 

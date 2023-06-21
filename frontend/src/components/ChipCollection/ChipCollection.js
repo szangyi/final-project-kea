@@ -1,10 +1,23 @@
-import "./ChipCollection.css"
-
-import { Grid, Typography } from "@mui/material";
-import { Box } from "@mui/material";
+// --------------------------
+// MATERIAL UI ---------------
+// --------------------------
+import { Box, Typography } from "@mui/material";
 import Chip from '@mui/material/Chip';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+
+
+// --------------------------
+// UTILS ---------------
+// --------------------------
 import {CATEGORYOPTIONS} from '../../util/Constants'
+
+
+// --------------------------
+// STYLES ---------------
+// --------------------------
+import "./ChipCollection.css"
+
+
 
 
 const ChipCollection = (props, ) => {

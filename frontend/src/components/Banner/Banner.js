@@ -1,13 +1,36 @@
-import "./Banner.css"
-
+// --------------------------
+// REACT ---------------
+// --------------------------
 import { useState, useEffect } from 'react';
+
+
+// --------------------------
+// MATERIAL UI ---------------
+// --------------------------
 import { Box, Typography, Divider } from "@mui/material"
+
+
+// --------------------------
+// COMPONENTS ---------------
+// --------------------------
 import MeshGradient from "../MeshGradient/MeshGradient"
 import MyCustomButton from "../Button/Button"
 import MiniCardCollection from "../Card/MiniCardCollection";
 import MiniCardCollectionSmall from "../Card/MiniCardCollectionSmall";
 import MiniCardCollectionInfluencer from "../Card/MiniCardCollectionInfluencer";
+
+
+// --------------------------
+// UTILS ---------------
+// --------------------------
 import { handleWindowSizeChange } from '../../util/detectMediaQuery'
+
+
+// --------------------------
+// STYLES ---------------
+// --------------------------
+import "./Banner.css"
+
 
 
 const Banner = (props) => {

@@ -3,16 +3,23 @@
 // --------------------------
 import React, { useState } from 'react';
 
+
 // --------------------------
 // MATERIAL UI ---------------
 // --------------------------
 import Autocomplete from '@mui/material/Autocomplete';
 
+
 // --------------------------
 // COMPONENTS ---------------
 // --------------------------
-import { HASHTAGSOPTIONS } from '../../util/Constants';
 import MyCustomTextField from "../Form/TextField";
+
+
+// --------------------------
+// UTILS ---------------
+// --------------------------
+import { HASHTAGSOPTIONS } from '../../util/Constants';
 
 
 

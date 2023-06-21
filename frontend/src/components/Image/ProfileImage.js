@@ -1,6 +1,9 @@
-import Button from '@mui/material/Button';
+// --------------------------
+// MATERIAL UI ---------------
+// --------------------------
 import Stack from '@mui/material/Stack';
 import { Typography, MenuItem } from '@mui/material';
+
 
 const ProfileImage = ({ onImageChange, helperText, error }) => {
 

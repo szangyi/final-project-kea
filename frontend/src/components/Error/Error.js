@@ -1,18 +1,27 @@
 // --------------------------
 // REACT ---------------
 // --------------------------
-import React, { useState } from 'react';
-import Snackbar from '@mui/material/Snackbar';
-import MuiAlert from '@mui/material/Alert';
+import React from 'react';
+
+
 // --------------------------
 // MATERIAL UI ---------------
 // --------------------------
 import { Stack } from '@mui/material';
 import Typography from '@mui/material/Typography';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+
+
 // --------------------------
 // COMPONENTS ---------------
 // --------------------------
 import errorImage from '../../public/icons/errorImage.png'
+
+
+// --------------------------
+// STYLES ---------------
+// --------------------------
 import "./Error.css"
 
 

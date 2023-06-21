@@ -1,12 +1,21 @@
-import "./MiniCard.css"
-
+// --------------------------
+// MATERIAL UI ---------------
+// --------------------------
 import AutoGraphIcon from '@mui/icons-material/AutoGraph';
 import OpenWithIcon from '@mui/icons-material/OpenWith';
-import FlareIcon from '@mui/icons-material/Flare';
-import { Card, Typography, Box } from "@mui/material";
+import { Typography, Box } from "@mui/material";
 
-import MiniCardComponent from "./MiniCard";
+// --------------------------
+// COMPONENTS ---------------
+// --------------------------
 import MiniCard from "./MiniCard";
+
+
+// --------------------------
+// STYLES ---------------
+// --------------------------
+import "./MiniCard.css"
+
 
 
 const MiniCardCollectionInfluencer = () => {
@@ -17,7 +26,7 @@ const MiniCardCollectionInfluencer = () => {
             <MiniCard className="mini-card glassmorphism"
                 sx={{ rotate: '15deg', bottom: '210px', right: '300px' }}
             >
-               
+
                 <AutoGraphIcon fontSize="large" />
                 <Typography variant="h5"> Inspire and empower </Typography>
             </MiniCard>
@@ -25,7 +34,7 @@ const MiniCardCollectionInfluencer = () => {
             <MiniCard className="mini-card glassmorphism"
                 sx={{ rotate: '-15deg', bottom: '350px', right: '60px' }}
             >
-                 <OpenWithIcon fontSize="large" />
+                <OpenWithIcon fontSize="large" />
                 <Typography variant="h5">Expand your reach </Typography>
             </MiniCard>
 

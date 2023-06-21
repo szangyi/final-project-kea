@@ -1,24 +1,35 @@
-
-import "./MyCustomDrawer.css"
-
+// --------------------------
+// REACT ---------------
+// --------------------------
 import { useNavigate } from 'react-router-dom'
 
+
+// --------------------------
+// MATERIAL UI ---------------
+// --------------------------
 import { Box, Typography, Divider, Drawer } from "@mui/material"
-import MyCustomList from '../List/List';
-
-import Toolbar from '@mui/material/Toolbar';
-import List from '@mui/material/List';
-
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
 import PermIdentityOutlinedIcon from '@mui/icons-material/PermIdentityOutlined';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
-import CelebrationOutlinedIcon from '@mui/icons-material/CelebrationOutlined';
 import VolunteerActivismOutlinedIcon from '@mui/icons-material/VolunteerActivismOutlined';
+
+
+// --------------------------
+// COMPONENTS ---------------
+// --------------------------
+import MyCustomList from '../List/List';
+
+
+// --------------------------
+// STYLES ---------------
+// --------------------------
+import "./MyCustomDrawer.css"
+
+
+
 
 
 const drawerWidth = 200;
@@ -37,17 +48,11 @@ const MyCustomDrawer = (props) => {
             text: "Security",
             icon: <SettingsOutlinedIcon />,
             action: () => nav('/user-dashboard/security')
-            // action: () => "/security",
-            // href: '/security',
-
         },
         {
             text: "Interests",
             icon: <VolunteerActivismOutlinedIcon />,
             action: () => nav('/user-dashboard/interests')
-            // action: () => "/interests",
-            // href: '/interests',
-
         }
     ];
 
@@ -67,8 +72,6 @@ const MyCustomDrawer = (props) => {
             }}
         >
 
-            {/* <Toolbar /> */}
-
             <Box sx={{ overflow: 'auto' }}>
                 <MyCustomList sx={{backgroundColor: 'transparent'}}>
                     {itemsList.map(item => {
@@ -86,8 +89,6 @@ const MyCustomDrawer = (props) => {
                         );
                     })}
                 </MyCustomList>
-
-                {/* <Divider /> */}
             </Box>
         </Drawer>
 
