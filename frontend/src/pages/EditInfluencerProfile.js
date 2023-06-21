@@ -55,14 +55,14 @@ const EditInfluencerProfile = () => {
     // VALIDATION ---------------
     const { values, errors, touched, handleChange, handleBlur, setTouched, validateForm } = useFormik({
         // const formik = useFormik({
-        enableReinitialize: true, 
+        enableReinitialize: true,
         initialValues: {
             username: profileData ? profileData[2] : '',
             bio: profileData ? profileData[3] : '',
             location: profileData ? profileData[4] : '',
             image: profileData ? profileData[11] : '',
             category: profileData ? profileData[10] : '',
-            hashtag: profileData ? profileData[2] : '',
+            hashtag: profileData ? profileData[14] : '',
             website: profileData ? profileData[5] : '',
             instagram: profileData ? profileData[6] : '',
             youTube: profileData ? profileData[7] : '',
@@ -116,7 +116,7 @@ const EditInfluencerProfile = () => {
 
     }
 
- 
+
 
 
     if (errorMessage) {
@@ -219,7 +219,7 @@ const EditInfluencerProfile = () => {
                                         <Chip key={index} label={item} />
                                     ))}
                                     {/* <Chip key={profileData[9]} label={profileData[9]} /> */}
-                                    <Hashtags onHashtagChange={handleHashtagChange} value={profileData[14]} />
+                                    <Hashtags onHashtagChange={handleHashtagChange} value={profileData[14]} valueEdit="yes" />
 
                                 </Box>
 
@@ -230,13 +230,11 @@ const EditInfluencerProfile = () => {
                                     </Typography>
                                     <Location
                                         onLocationChange={handleLocationChange}
+                                        valueEdit="yes"
+                                        value={values.location}
                                         error={touched.location && Boolean(errors.location)}
                                         helperText={touched.location && errors.location}
-                                        value={values.location}
                                     />
-                                    <Typography variant="body2">
-                                        {profileData[4]}
-                                    </Typography>
                                 </Box>
 
                             </Grid>

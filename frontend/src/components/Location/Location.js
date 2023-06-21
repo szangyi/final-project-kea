@@ -1,7 +1,7 @@
 // --------------------------
 // REACT ---------------
 // --------------------------
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 // --------------------------
 // MATERIAL UI ---------------
@@ -16,16 +16,38 @@ import MyCustomAutocomplete from './AutoComplete';
 import MyCustomTextField from "../Form/TextField";
 import { LOCATION } from '../../util/Constants';
 
-const Location = ({ onLocationChange, helperText, error }) => {
+const Location = ({ onLocationChange, helperText, error, valueEdit, value }) => {
 
     // VARIABLES ---------------
-    const [locationData, setLocationData] = useState(null)
 
+    const [locationData, setLocationData] = useState(null);
+
+    // if(valueEdit=="yes"){
+    //     initialLocationData = value;
+    //     console.log("jekckew")
+    //     console.log(value)
+    // } else{
+    //     initialLocationData = '';
+    // }
+
+    useEffect(() => {
+        if (valueEdit === "yes") {
+            setLocationData(value);
+        } else {
+            setLocationData('');
+        }
+      }, [valueEdit, value]);
+    // const [locationData, setLocationData] = useState(initialLocationData);
+
+    console.log(locationData)
     // HANDLE CHANGE ---------------
     const handleLocationChange = (event, value) => {
         setLocationData(value);
         onLocationChange(value && value.label ? value.label : '');
     }
+
+    const getLabel = (option) => (option && option.label) || '';
+
 
 
     return (
@@ -34,9 +56,9 @@ const Location = ({ onLocationChange, helperText, error }) => {
             options={LOCATION}
             // autoHighlight
             autoFocus
-            getOptionLabel={(option) => (option && option.label) || ''}
+            getOptionLabel={valueEdit==="yes" ? undefined:getLabel}            
             onChange={handleLocationChange}
-            value={locationData}
+            value={locationData !== '' ?  locationData: locationData}
             renderOption={(props, option) => (
                 <Box component="li" sx={{ fontSize: '14px', '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
                     <img
