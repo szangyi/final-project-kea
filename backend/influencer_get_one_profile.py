@@ -40,7 +40,7 @@ def _():
                     
                     
                     profile_json = json.dumps(profile_response, default=helper_functions._datetime_handler)
-                    
+                    print(profile_response)
                     response.status = 200
                     return profile_json
                 else:

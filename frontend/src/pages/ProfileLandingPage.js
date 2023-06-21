@@ -57,7 +57,7 @@ const ProfileLandingPage = () => {
         return <ErrorPage error={errorMessage} />
     }
 
-    console.log(profileData)
+    console.log(otherProfiles)
 
     return (
         <>
@@ -239,7 +239,7 @@ const ProfileLandingPage = () => {
                     ) : (
                         <Stack sx={{ backgroundColor: 'customColors.grey.lighter', pt: 2, px: { xs: 3, lg: 10 }, pb: 5 }}>
                             <Typography sx={{ textAlign: 'center', mb: 5, mt: 5 }} variant="h4">Other profiles from the same influencer</Typography>
-                            <CollectionCard favoriteenabled={false} filteringCard={"no"} array={otherProfiles} />
+                            <CollectionCard favoriteenabled={false} filteringCard={"no"} otherProfiles="yes" array={otherProfiles} />
                         </Stack>
                     )}
 

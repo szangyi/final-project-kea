@@ -75,6 +75,8 @@ const CollectionCard = ({ array, filteringCard, favoriteenabled, searchQuery, se
         cardArray = array;
     }
 
+    console.log(cardArray)
+
 
     return (
 
@@ -120,7 +122,7 @@ const CollectionCard = ({ array, filteringCard, favoriteenabled, searchQuery, se
                                     </Typography>
                                     <Typography gutterBottom variant="body2" color="text.secondary">
                                         {/* Tags: */}
-                                        {array[9].substring(1, array[9].length - 1).replace(/,/g, ' ')}
+                                        {array[14]}
                                     </Typography>
                                     <Typography gutterBottom variant="body2" color="text.secondary">
                                         {/* Location: */}
