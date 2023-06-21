@@ -122,7 +122,7 @@ const CollectionCard = ({ array, filteringCard, favoriteenabled, searchQuery, se
                                     </Typography>
                                     <Typography gutterBottom variant="body2" color="text.secondary">
                                         {/* Tags: */}
-                                        {array[14]}
+                                        {filteringCard == 'yes' ? array[15]: array[14]}
                                     </Typography>
                                     <Typography gutterBottom variant="body2" color="text.secondary">
                                         {/* Location: */}
