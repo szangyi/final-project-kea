@@ -89,7 +89,7 @@ export const createProfileSchema = Yup.object().shape({
         .required('Required field'),
     bio: Yup.string()
         .min(10, 'Min. 10 characters')
-        .max(200, 'Max. 200 characters')
+        .max(350, 'Max. 350 characters')
         .matches(regexSpecChars, { message: "Invalid characters, only alphabets are allowed." })
         .required('Required field'),
     location: Yup.string()

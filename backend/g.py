@@ -1,5 +1,5 @@
 from bottle import response
-# import pylibmagic
+#import pylibmagic
 
 import magic
 import os
@@ -72,7 +72,7 @@ def _is_password(text=None):
 
 # BIO
 def _is_longtext(text=None):
-  min, max = 10, 200
+  min, max = 10, 350
   error = f"Bio must be {min} to {max} characters."
   if not text: return None, error
   text = text.strip()
