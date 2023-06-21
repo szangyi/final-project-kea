@@ -1,16 +1,16 @@
-from bottle import post, request, response
+from bottle import get, request, response
 import json
 import helper_functions
 import database_access_functions
 import helper_functions
 
 # GETTING ONE INFLUENCER PROFILE ##########################
-@post("/api/get-profile")
+@get("/api/get-profile")
 def _():
     try:
         # VARIABLES ##########################
-        request_username = request.json
-        username = request_username["username"]["username"]
+        username = request.query.get('usernameGet[username]')
+
         profile_response = {}
         profile = []
         other_profiles = []
@@ -29,9 +29,7 @@ def _():
                 influencer__ID = influencer__ID_database[0]
                 profile = database_access_functions._get_one_influencer_profile(influencer__ID, db_config)
                 if profile:
-                    print(profile)
                     user_ID = profile[1]
-                    print(user_ID)
                     
                     other_profiles = database_access_functions._get_other_influencer_profiles(user_ID, username, db_config)
                     
@@ -40,10 +38,8 @@ def _():
                         "otherProfiles": other_profiles
                     }
                     
-                    print(profile_response)
                     
                     profile_json = json.dumps(profile_response, default=helper_functions._datetime_handler)
-                    print(profile_json)
                     
                     response.status = 200
                     return profile_json

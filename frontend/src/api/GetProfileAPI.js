@@ -8,7 +8,11 @@ export default async function GetProfileAPI(username,setProfileData, setOtherPro
     const errorMessage = "error";
 
     try {
-        const response = await axios.post('/api/get-profile', { username });
+        const response = await axios.get('/api/get-profile', { 
+            params:{
+                usernameGet:username,
+            }
+         });
 
         if (response.status === 200) {
             const profileDataResponse = response.data.profileData;
