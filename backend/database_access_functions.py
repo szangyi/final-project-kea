@@ -170,6 +170,7 @@ def _get_one_influencer_profile(influencer_ID, db_config):
         cursor.execute(sql_get_user, var)
         profile = cursor.fetchone()
         hashtags =_get_influencer_hashtags(influencer_ID, db_config)
+        print(hashtags)
 
         db.commit()
         profile_hashtags = profile + (tuple(hashtags),)
@@ -213,8 +214,10 @@ def _get_influencer_hashtags(influencer_ID, db_config):
         var_check_influencer = (influencer_ID,)
         cursor.execute(sql_check_influencer, var_check_influencer)
         hashtags = cursor.fetchall()
+        hashtags_cleaned = [item[0] for item in hashtags if item[0] is not None]
+
         response.status = 200
-        return hashtags
+        return hashtags_cleaned
     
     except Exception as ex:
         print(ex)
