@@ -23,7 +23,8 @@ import influencers_get_random_profiles
 import profile_add_to_favorites
 import favorites_get_all
 
-import user_account_info 
+import user_account_info
+import user_delete_account 
 import user_update_basic_info
 import user_update_security_info
 
