@@ -1,14 +1,40 @@
-import "./Banner.css"
 
+// --------------------------
+// REACT ---------------
+// --------------------------
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+
+// --------------------------
+// MATERIAL UI ---------------
+// --------------------------
 import { Box, Typography, Divider } from "@mui/material"
+
+
+// --------------------------
+// COMPONENTS ---------------
+// --------------------------
 import MeshGradient from "../MeshGradient/MeshGradient"
 import MyCustomButton from "../Button/Button"
 import MiniCardCollection from "../Card/MiniCardCollection";
-import { handleWindowSizeChange } from '../../util/detectMediaQuery'
 import Category from "../Category/Category";
 import SoMe from "../SoMe/SoMe";
+
+
+// --------------------------
+// UTILS ---------------
+// --------------------------
+import { handleWindowSizeChange } from '../../util/detectMediaQuery'
+
+
+// --------------------------
+// STYLES ---------------
+// --------------------------
+import "./Banner.css"
+
+
+
 
 
 const BannerAdvanced = (props) => {
@@ -33,16 +59,13 @@ const BannerAdvanced = (props) => {
         }));
     };
 
-    console.log({ customFilter })
 
     const handleSubmit = () => {
         const filters = {
             social: customFilter.social || 'All',
             category: customFilter.category || 'All categories',
         };
-        console.log(filters)
-        nav(`/collection/?categoryFilter=${filters.category}&someFilter=${filters.social}`, { state: { filters } });
-        // nav(`/collection/`, { state: { filters } });
+        nav(`/collection/`, { state: { filters } });
     };
 
     useEffect(() => {

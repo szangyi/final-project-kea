@@ -2,33 +2,40 @@
 // REACT ---------------
 // --------------------------
 import React, { useState } from 'react';
-import { useOutletContext } from 'react-router-dom';
+
+
 // --------------------------
 // MATERIAL UI ---------------
 // --------------------------
 import { Grid, Alert } from '@mui/material';
-import MyCustomButton from "../../components/Button/Button"
-import MyCustomTextField from "../../components/Form/TextField";
+
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogTitle from '@mui/material/DialogTitle';
+
+
 // --------------------------
 // VALIDATION ---------------
 // --------------------------
 import { useFormik } from 'formik';
 import { userSecuritySchema } from '../../schemas';
 import { Box, Typography } from '@mui/material';
+
+
 // --------------------------
 // COMPONENTS ---------------
 // --------------------------
+import MyCustomButton from "../../components/Button/Button"
+import MyCustomTextField from "../../components/Form/TextField";
 import ErrorPage from '../ErrorPage';
 import UpdateSecurityInfoAPI from '../../api/UpdateSecurityInfoAPI';
 import DeleteUserAccountAPI from '../../api/DeleteUserAccountAPI';
 
+
+
 const Security = () => {
 
-
-    const userData = useOutletContext();
+    // VARIABLES ---------------
     const [errorMessage, setErrorMessage] = useState(null)
     const [securityError, setSecurityError] = useState(null)
     const [formError, setFormError] = useState('');
@@ -42,9 +49,9 @@ const Security = () => {
             passwordNew: ''
         },
 
-
         validationSchema: userSecuritySchema,
     });
+
 
     // HANDLERS ---------------
     const handleOpen = () => {
@@ -60,6 +67,8 @@ const Security = () => {
 
     }
 
+
+    // API CALLS ---------------
     const submitHandler = async (event) => {
         event.preventDefault();
 
@@ -79,14 +88,17 @@ const Security = () => {
     }
 
 
+    // ERROR PAGE ---------------
     if (errorMessage) {
         return <ErrorPage error={errorMessage} />
     }
+
+
     return (
         <>
-         <Box component="section" sx={{
-                    borderLeft: {sm:'1px solid lightgrey'},
-                    py: {xs: 2, sm: 5}, px: {xs: 2, md: 5},
+            <Box component="section" sx={{
+                borderLeft: { sm: '1px solid lightgrey' },
+                py: { xs: 2, sm: 5 }, px: { xs: 2, md: 5 },
             }}>
 
                 <Typography variant="h4">Security</Typography>
@@ -98,7 +110,7 @@ const Security = () => {
                 )}
 
                 {deleteError && (
-                  <Alert severity="error">{deleteError}</Alert>
+                    <Alert severity="error">{deleteError}</Alert>
                 )}
 
                 <Box component="form" onSubmit={submitHandler} sx={{ mt: 1, width: '100%' }}>
@@ -107,7 +119,8 @@ const Security = () => {
                         <Grid container item xs={6}>
 
                             <Typography variant="h6">User information</Typography>
-                            {/* <Typography variant="subtitle1" sx={{color: 'customColors.salmon.dark'}}>user information</Typography> */}
+
+
                             {securityError && (
                                 <Alert severity="error">{securityError}</Alert>
                             )}

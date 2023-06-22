@@ -1,4 +1,3 @@
-
 // --------------------------
 // REACT ---------------
 // --------------------------
@@ -6,6 +5,8 @@ import axios from 'axios';
 
 export default async function UpdateBasicInfoAPI(values, setErrorMessage,setUpdateError) {
 
+    console.log({values})
+    
     try {
 
         const formData = new FormData();

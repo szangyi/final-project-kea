@@ -1,11 +1,23 @@
-import "./MiniCard.css"
-
+// --------------------------
+// MATERIAL UI ---------------
+// --------------------------
 import WhatshotIcon from '@mui/icons-material/Whatshot';
 import EmojiPeopleIcon from '@mui/icons-material/EmojiPeople';
-import { Card, Typography, Box } from "@mui/material";
+import { Typography, Box } from "@mui/material";
 
-import MiniCardComponent from "./MiniCard";
+
+// --------------------------
+// COMPONENTS ---------------
+// --------------------------
 import MiniCard from "./MiniCard";
+
+
+// --------------------------
+// STYLES ---------------
+// --------------------------
+import "./MiniCard.css"
+
+
 
 
 const MiniCardCollectionSmall = () => {

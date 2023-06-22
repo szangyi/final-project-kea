@@ -3,7 +3,13 @@
 // --------------------------
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+
+
+// --------------------------
+// UTILS ---------------
+// --------------------------
 import { handleWindowSizeChange } from '../util/detectMediaQuery'
+
 
 // --------------------------
 // MATERIAL UI ---------------
@@ -30,6 +36,8 @@ import ErrorPage from './ErrorPage';
 import MyCustomChipMinimal from '../components/Chip/ChipMinimal';
 import Puller from '../components/Drawer/Puller';
 import MyCustomButton from '../components/Button/Button';
+
+
 
 const CollectionPage = () => {
 
@@ -99,9 +107,11 @@ const CollectionPage = () => {
     GetAllProfilesAPI(setProfilesData, setErrorMessage)
 
 
+    // ERROR PAGE ---------------
     if (errorMessage) {
         return <ErrorPage error={errorMessage} />
     }
+
 
     return (
         <>
@@ -227,7 +237,6 @@ const CollectionPage = () => {
                                 onClick={() => handleChangeSocial(social["social"])}
                                 label={social["social"]}
                                 className={selected === social["social"] ? "selected" : ""}
-                                // color={selected === social["social"] ? "primary" : "default"}
                                 variant="outlined"
                                 disableRipple
                             />
@@ -237,7 +246,6 @@ const CollectionPage = () => {
 
                     <Stack>
                         {profilesData === null ? (
-                            // <Loader />
                             <>
                                 <Stack sx={{ display: 'flex', flexDirection: 'row', gap: { xs: 1, md: 5 }, }}>
                                     <Box sx={{ width: 'fit-content' }}>

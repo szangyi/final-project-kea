@@ -3,7 +3,6 @@
 // --------------------------
 import axios from 'axios';
 
-
 export default async function SignUpAPI(values, nav, setErrorMessage, setUserExists) {
 
     console.log(values)

@@ -1,14 +1,16 @@
 // --------------------------
-// REACT ---------------
+// MATERIAL UI ---------------
 // --------------------------
-import React, { useState } from 'react';
 import { Box, Typography } from '@mui/material';
+
 
 // --------------------------
 // COMPONENTS ---------------
 // --------------------------
 import Category from '../../components/Category/Category'
 import Hashtags from '../../components/Hashtags/Hashtags';
+
+
 
 const InfleuncerSelectForm = ({ values, handleChange, touched, errors }) => {
 

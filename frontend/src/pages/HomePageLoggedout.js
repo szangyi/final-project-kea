@@ -1,17 +1,16 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import Cookies from 'js-cookie';
-import { useNavigate, useRouteLoaderData } from "react-router-dom";
+// --------------------------
+// MATERIAL UI ---------------
+// --------------------------
+import { Box } from '@mui/material';
 
-
+// --------------------------
+// COMPONENTS ---------------
+// --------------------------
 import Banner from '../components/Banner/Banner';
 import StepsInfluencerDiscovery from '../components/StepsInfluencerDiscovery/StepsInfluencerDiscovery';
-import MyCustomButton from "../components/Button/Button";
-import MyCustomTextField from "../components/Form/TextField";
-import MeshGradient from '../components/MeshGradient/MeshGradient';
 import ChipCollection from '../components/ChipCollection/ChipCollection';
 import TextBox from '../components/TextBox/TextBox'
-import { Box } from '@mui/material';
+
 
 const HomePage = (theme) => {
 

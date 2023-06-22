@@ -1,42 +1,21 @@
-import React, { useState } from 'react';
-import Stack from '@mui/material/Stack';
-import Paper from '@mui/material/Paper';
-import { styled } from '@mui/material/styles';
-import MyCustomTextField from "../../components/Form/TextField";
+// --------------------------
+// MATERIAL UI ---------------
+// --------------------------
 import { Typography, Box } from '@mui/material';
 
-import InstagramIcon from '@mui/icons-material/Instagram';
-import LaptopIcon from '@mui/icons-material/Laptop';
-import YouTubeIcon from '@mui/icons-material/YouTube';
+
+// --------------------------
+// COMPONENTS ---------------
+// --------------------------
+import MyCustomTextField from "../../components/Form/TextField";
+
 
 
 const SocialAccountsForm = ({ values, handleChange, touched, errors }) => {
 
-    const Item = styled(Paper)(({ theme }) => ({
-        backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-        ...theme.typography.body2,
-        padding: theme.spacing(1),
-        textAlign: 'center',
-        color: theme.palette.text.secondary,
-    }));
-
-    // const [socialAccountsData, setSocialAccountsData] = useState({
-    //     website: '',
-    //     instagram: '',
-    //     youTube: '',
-    //     tikTok: ''
-    // });
-
-    // const handleChange = (event) => {
-    //     const { name, value } = event.target;
-    //     setSocialAccountsData((prevData) => ({ ...prevData, [name]: value }));
-    //     onDataChange(socialAccountsData);
-    // }
-
-
     return (
         <>
-                    <Typography variant="h6" sx={{ fontWeight: 600}}> Social accounts </Typography>
+            <Typography variant="h6" sx={{ fontWeight: 600 }}> Social accounts </Typography>
             <Box>
                 <MyCustomTextField
                     size="normal"

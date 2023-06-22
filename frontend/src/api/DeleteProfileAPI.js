@@ -8,7 +8,6 @@ export default async function DeleteProfileAPI(influencerid, handleClose, setErr
     
     try {
         const response = await axios.post('/api/delete-profile',  { influencerid });
-        console.log(response.status)
         if (response.status === 200) {
             handleClose()
         } 

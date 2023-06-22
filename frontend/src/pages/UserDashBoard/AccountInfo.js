@@ -3,34 +3,39 @@
 // --------------------------
 import React, { useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
+
+
 // --------------------------
 // MATERIAL UI ---------------
 // --------------------------
-import MyCustomButton from "../../components/Button/Button"
-import MyCustomTextField from "../../components/Form/TextField";
-import { Box, Typography } from '@mui/material';
-import { Grid } from '@mui/material';
-import { Alert } from '@mui/material';
+
+import { Box, Typography, Grid, Alert } from '@mui/material';
+
 
 // --------------------------
 // VALIDATION ---------------
 // --------------------------
 import { useFormik } from 'formik';
 import { userBasicInfoSchema } from '../../schemas';
+
+
 // --------------------------
 // COMPONENTS ---------------
 // --------------------------
+import MyCustomButton from "../../components/Button/Button"
+import MyCustomTextField from "../../components/Form/TextField";
 import ErrorPage from '../ErrorPage';
 import UpdateBasicInfoAPI from '../../api/UpdateBasicInfoAPI';
 import ProfileImage from '../../components/Image/ProfileImage';
 
+
 const AccountInfo = (props) => {
 
+    // VARIABLES ---------------
     const userData = useOutletContext(); // data from UserDashBoard
     const [errorMessage, setErrorMessage] = useState(null)
     const [updateError, setUpdateError] = useState(null)
     const [formError, setFormError] = useState(null);
-
 
     const { values, errors, touched, handleBlur, handleChange, setTouched, validateForm } = useFormik({
         initialValues: {
@@ -43,14 +48,14 @@ const AccountInfo = (props) => {
         validationSchema: userBasicInfoSchema,
     });
 
+
+    // HANDLERS ---------------
     const handleImageChange = (value) => {
         handleChange({ target: { name: 'image', value } });
     };
 
 
-
-
-
+    // API CALLS ---------------
     const submitHandler = async (event) => {
         event.preventDefault();
 
@@ -72,16 +77,20 @@ const AccountInfo = (props) => {
 
     }
 
+
+    // ERROR PAGE ---------------
     if (errorMessage) {
         return <ErrorPage error={errorMessage} />
     }
+
+
     return (
         <>
 
             <Box component="section"
                 sx={{
-                    borderLeft: {sm:'1px solid lightgrey'},
-                    py: {xs: 2, sm: 5}, px: {xs: 2, md: 5},
+                    borderLeft: { sm: '1px solid lightgrey' },
+                    py: { xs: 2, sm: 5 }, px: { xs: 2, md: 5 },
                 }}
             >
 
@@ -94,10 +103,17 @@ const AccountInfo = (props) => {
                         <Grid container item xs={12} md={8}>
 
                             <Typography variant="h6">User information</Typography>
-                            {/* <Typography variant="subtitle1" sx={{color: 'customColors.salmon.dark'}}>user information</Typography> */}
+
+
+                            {formError && (
+                                <Alert severity="error" sx={{ mb: 2, }}>{formError}</Alert>
+                            )}
+
                             {updateError && (
                                 <Alert severity="error">{updateError}</Alert>
                             )}
+
+
                             <Grid container item spacing={2}>
                                 <Grid item xs={6}>
                                     <MyCustomTextField
@@ -157,8 +173,8 @@ const AccountInfo = (props) => {
                             {values.profileImage ? (
                                 <Box
                                     component="img"
-                                    // src={`https://influncr.pythonanywhere.com/images/profile_images/${values.profileImage}`}
-                                    src={`http://127.0.0.1:7878/profile_images/${values.profileImage}`}
+                                    src={`https://influncr.pythonanywhere.com/images/profile_images/${values.profileImage}`}
+                                    // src={`http://127.0.0.1:7878/profile_images/${values.profileImage}`}
                                     sx={{ height: 50, width: 50, objectFit: 'cover', borderRadius: '50%' }}
                                 />
                             ) : (
@@ -178,7 +194,7 @@ const AccountInfo = (props) => {
                         <MyCustomButton
                             type="submit"
                             variant="contained"
-                            sx={{ mt: 6, mb: 2, ml: {xs: 4} }}
+                            sx={{ mt: 6, mb: 2, ml: { xs: 4 } }}
                         >
                             Save changes
                         </MyCustomButton>

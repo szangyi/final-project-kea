@@ -1,8 +1,12 @@
-import "./Nav.css";
+// --------------------------
+// REACT ---------------
+// --------------------------
+import { Link } from "react-router-dom";
 
-import * as React from 'react';
-import { useNavigate } from "react-router-dom";
 
+// --------------------------
+// MATERIAL UI ---------------
+// --------------------------
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -11,12 +15,19 @@ import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
-import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
-import Logo from "../Logo/Logo";
-import { Link } from "react-router-dom";
 
+
+// --------------------------
+// COMPONENTS ---------------
+// --------------------------
+import Logo from "../Logo/Logo";
+
+
+// --------------------------
+// STYLES ---------------
+// --------------------------
+import "./Nav.css";
 
 
 
@@ -26,8 +37,6 @@ function ResponsiveAppBar() {
 
     let pages = [];
 
-    // not working because of SPA
-    // will have to create state handling anyways when we merge navs
     if (window.location.pathname.includes('login')) {
         pages = [
             {
@@ -61,14 +70,11 @@ function ResponsiveAppBar() {
                 <Toolbar disableGutters>
 
                     {/* Desktop */}
-                    {/* Put logo here */}
                     <Box className="logo-container" sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}>
-                    <Link to="/">
+                        <Link to="/">
                             <Logo variant="black" />
                         </Link>
                     </Box>
-
-                    {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'right', alignItems: 'center' }}>
 
@@ -76,7 +82,6 @@ function ResponsiveAppBar() {
                             <MenuItem disableRipple component="a" variant="navlink"
                                 key={page.name}
                                 href={page.href}
-                                // onClick={() => page.action()}
                                 sx={{ p: 0, marginInline: 2, my: 2, color: 'primary.main', fontWeight: 600, display: 'block', }}
                             >
                                 {page.name}
@@ -134,7 +139,6 @@ function ResponsiveAppBar() {
                         <Logo variant="black" />
                     </Box>
 
-                    {/* <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 2, flexGrow: 1 }} /> */}
                     <Typography
                         sx={{
                             mr: 0,
@@ -143,10 +147,6 @@ function ResponsiveAppBar() {
                         }}
                     >
                     </Typography>
-
-
-                    {/* All screen sizes */}
-
 
                 </Toolbar>
             </Container>

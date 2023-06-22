@@ -1,16 +1,16 @@
-import './UserDashboard.css';
 // --------------------------
 // REACT ---------------
 // --------------------------
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import Cookies from 'js-cookie';
-import { Outlet, useOutletContext, useNavigate, useRouteLoaderData } from "react-router-dom";
+import { Outlet } from "react-router-dom";
+
+
 // --------------------------
 // MATERIAL UI ---------------
 // --------------------------
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
+
+
 // --------------------------
 // COMPONENTS ---------------
 // --------------------------
@@ -20,7 +20,20 @@ import MyCustomMenuMobile from '../../components/Drawer/MyCustomMenuMobile';
 import AccountInfoAPI from '../../api/AccountInfoAPI';
 import Loader from '../../components/Loader/Loader'
 import ErrorPage from '../ErrorPage';
+
+
+// --------------------------
+// STYLES ---------------
+// --------------------------
+import './UserDashboard.css';
+
+
+// --------------------------
+// UTILS ---------------
+// --------------------------
 import { handleWindowSizeChange } from '../../util/detectMediaQuery'
+
+
 
 const UserDashboard = (theme) => {
 
@@ -29,14 +42,15 @@ const UserDashboard = (theme) => {
     const [userData, setUserData] = useState(null);
     const [error, setError] = useState(null)
 
+
     // HANDLERS ---------------
     const handleCloseError = () => {
         setError(null);
     };
 
+
     // API CALLS ---------------
     AccountInfoAPI(setUserData, setError);
-
 
 
     useEffect(() => {
@@ -49,8 +63,8 @@ const UserDashboard = (theme) => {
     }, []); // Empty dependency array to run the effect only once on mount
 
 
-    
-    
+
+    // ERROR PAGE ---------------
     if (error) {
         return <ErrorPage error={error} />
     }
@@ -77,11 +91,8 @@ const UserDashboard = (theme) => {
 
                             <Box component="section" className="userdashboard-section">
 
-                                {/* <Typography sx={{ pt: { xs: 1, md: 5 }, pb: { xs: 1, md: 2 }, px: { xs: 1, md: 3 } }} variant="h3">Account settings </Typography> */}
-
                                 <Box className="userdashboard-section-container" sx={{
                                     gap: 2, flexGrow: 1,
-                                    // py: { xs: 1, md: 3 }, pl: { xs: 1, md: 3 }, pr: { xs: 1, md: 3 }, 
                                     display: 'flex'
                                 }}>
                                     {mediaQuery == 'mobile' && <MyCustomMenuMobile />}

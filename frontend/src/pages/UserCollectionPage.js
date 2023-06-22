@@ -2,8 +2,7 @@
 // REACT ---------------
 // --------------------------
 import { useState } from 'react';
-import axios from 'axios';
-import Cookies from 'js-cookie';
+
 
 // --------------------------
 // MATERIAL UI ---------------
@@ -11,18 +10,18 @@ import Cookies from 'js-cookie';
 import Stack from '@mui/material/Stack';
 import Box from "@mui/material/Box";
 import Skeleton from '@mui/material/Skeleton';
+import { Typography } from '@mui/material';
+
 
 // --------------------------
 // COMPONENTS ---------------
 // --------------------------
-import Loader from '../components/Loader/Loader'
 import CollectionCard from '../components/CollectionCard/CollectionCard'
 import Banner from '../components/Banner/Banner';
-import MeshGradientBackground from '../components/MeshGradient/MeshGradientBackground';
-import { Typography } from '@mui/material';
 import TextBox from '../components/TextBox/TextBox'
 import FavoritesGetAllAPI from '../api/FavoritesGetAllAPI';
 import ErrorPage from './ErrorPage';
+
 
 const UserCollectionPage = () => {
 
@@ -30,8 +29,10 @@ const UserCollectionPage = () => {
     const [favoritesData, setFavoritesData] = useState(null);
     const [errorMessage, setErrorMessage] = useState(null)
 
+
     // CALLING API FUNCTION ---------------
     FavoritesGetAllAPI(setFavoritesData, setErrorMessage)
+
 
     // GET UNIQUE CATEGORIES ---------------
     const getUniqueCategories = () => {
@@ -42,11 +43,12 @@ const UserCollectionPage = () => {
         return [];
     };
 
-    console.log("favoritesData:", favoritesData);
 
+    // ERROR PAGE ---------------
     if (errorMessage) {
         return <ErrorPage error={errorMessage} />
     }
+
 
     return (
         <>
@@ -59,8 +61,6 @@ const UserCollectionPage = () => {
             />
             <Stack className='sectionPadding'>
                 {favoritesData === null ? (
-                    // <Loader />
-
                     <>
                         <Box sx={{ mb: 20, mt: { xs: 5, lg: 0 } }} >
                             <Skeleton />
@@ -107,7 +107,6 @@ const UserCollectionPage = () => {
                                 </Typography>
 
                                 {getUniqueCategories().map((category) => (
-                                    // create sections for categories
                                     <Box key={category}>
                                         <Typography sx={{ mt: 5, mb: 3 }} variant="h3">{category}</Typography>
                                         <CollectionCard

@@ -6,12 +6,9 @@ const MeshGradientBackground = (props) => {
     useEffect(() => {
         import("./GradientRawBackground").then((module) => { // dynamic import to conditionally import Gradient module
             const Gradient = module.Gradient;
-            console.log({Gradient})
 
             // Create your instance
             const gradient = new Gradient();
-            console.log({gradient})
-            console.log(document.querySelector('#gradient-canvas-bg'))
 
             // Call `initGradient` with the selector to your canvas
             gradient.initGradient('#gradient-canvas-bg');

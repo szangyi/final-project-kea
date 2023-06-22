@@ -1,19 +1,30 @@
-
-import "./MyCustomDrawer.css"
-
+// --------------------------
+// REACT ---------------
+// --------------------------
 import { useNavigate } from 'react-router-dom'
 
-import { Box, Typography, Divider, Drawer } from "@mui/material"
-import MyCustomList from '../List/List';
 
-import Toolbar from '@mui/material/Toolbar';
-import List from '@mui/material/List';
-import Menu from "@mui/material/Menu";
-import MenuItem from '@mui/material/MenuItem';
+// --------------------------
+// MATERIAL UI ---------------
+// --------------------------
+import { Box} from "@mui/material"
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
+
+
+// --------------------------
+// COMPONENTS ---------------
+// --------------------------
+import MyCustomList from '../List/List';
+
+
+// --------------------------
+// STYLES ---------------
+// --------------------------
+import "./MyCustomDrawer.css"
+
 
 
 const MyCustomMenuMobile = (props) => {
@@ -23,18 +34,15 @@ const MyCustomMenuMobile = (props) => {
     const itemsList = [
         {
             text: "My Account",
-            // icon: <PermIdentityOutlinedIcon />,
             action: () => nav('/user-dashboard/account-info')
         },
         {
             text: "Security",
-            // icon: <SettingsOutlinedIcon />,
             action: () => nav('/user-dashboard/security')
 
         },
         {
             text: "Interests",
-            // icon: <VolunteerActivismOutlinedIcon />,
             action: () => nav('/user-dashboard/interests')
         }
     ];
@@ -58,7 +66,6 @@ const MyCustomMenuMobile = (props) => {
             })}
         </MyCustomList>
 
-        {/* <Divider /> */}
     </Box>
     );
 }

@@ -3,9 +3,6 @@
 // --------------------------
 import axios from 'axios';
 
-
-
-
 export default async function CreateProfileAPI(values, nav, setErrorMessage, setProfileExists) {
     
     try {

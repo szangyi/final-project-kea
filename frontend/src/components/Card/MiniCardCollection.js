@@ -1,13 +1,23 @@
-import "./MiniCard.css"
-
-import PeopleIcon from '@mui/icons-material/People';
+// --------------------------
+// MATERIAL UI ---------------
+// --------------------------
 import SportsGymnasticsIcon from '@mui/icons-material/SportsGymnastics';
 import RouteIcon from '@mui/icons-material/Route';
 import FlareIcon from '@mui/icons-material/Flare';
-import { Card, Typography, Box } from "@mui/material";
+import { Typography, Box } from "@mui/material";
 
-import MiniCardComponent from "./MiniCard";
+
+// --------------------------
+// COMPONENTS ---------------
+// --------------------------
 import MiniCard from "./MiniCard";
+
+
+// --------------------------
+// STYLES ---------------
+// --------------------------
+import "./MiniCard.css"
+
 
 
 const MiniCardCollection = () => {

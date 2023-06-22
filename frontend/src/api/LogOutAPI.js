@@ -1,14 +1,11 @@
-
 // --------------------------
 // REACT ---------------
 // --------------------------
 import axios from 'axios';
 
-
 export function LogOutAPIAction(){
     LogOutAPI();
 }
-
 
 async function LogOutAPI() {
 

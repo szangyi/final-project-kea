@@ -1,19 +1,37 @@
+
+// --------------------------
+// STYLES ---------------
+// --------------------------
 import "./TextBox.css"
+
+
+// --------------------------
+// REACT ---------------
+// --------------------------
 import { Link } from 'react-router-dom';
 
 
+// --------------------------
+// MATERIAL UI ---------------
+// --------------------------
 import { Box, Typography } from "@mui/material"
+
+
+// --------------------------
+// COMPONENTS ---------------
+// --------------------------
 import MyCustomButton from "../Button/Button"
+
+
 
 const TextBox = (props) => {
 
     return (
-        <Box component="section" className="textbox" sx={{ }} >
+        <Box component="section" className="textbox" sx={{}} >
 
             <Box className="text-container sectionPadding" sx={{
                 width: {
                     xs: '100%'
-                    // ,md: '80%'
                 },
                 margin: 'auto',
                 display: 'flex',
@@ -29,7 +47,6 @@ const TextBox = (props) => {
                 <Typography>{props.copy2}</Typography>
                 <MyCustomButton
                     component={Link}
-                    // to={'/collection'}
                     to={props.href}
                     sx={{ mt: 4 }}>
                     {props.button}
