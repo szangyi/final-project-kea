@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom';
 import AddToFavoritesAPI from '../api/AddToFavoritesAPI';
 import AccountInfoAPI from '../api/AccountInfoAPI';
 
+
 // --------------------------
 // MATERIAL UI ---------------
 // --------------------------
@@ -18,9 +19,9 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import LanguageIcon from '@mui/icons-material/Language';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import MusicVideoIcon from '@mui/icons-material/MusicVideo';
-import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import IconButton from '@mui/material/IconButton';
+
 
 // --------------------------
 // COMPONENTS ---------------
@@ -31,6 +32,8 @@ import CollectionCard from '../components/CollectionCard/CollectionCard'
 import GetProfileAPI from '../api/GetProfileAPI';
 import ErrorPage from './ErrorPage';
 import TextBox from '../components/TextBox/TextBox';
+
+
 
 const ProfileLandingPage = () => {
     // VARIABLES ---------------
@@ -52,7 +55,8 @@ const ProfileLandingPage = () => {
         AddToFavoritesAPI(influencerid, setErrorMessage)
     }
 
-
+    
+// ERROR PAGE ---------------
     if (errorMessage) {
         return <ErrorPage error={errorMessage} />
     }
@@ -200,34 +204,6 @@ const ProfileLandingPage = () => {
 
 
                     </Stack>
-
-
-
-                    {/* <Typography sx={{ fontSize: '20px', mt: 5 }} variant="overline">Linked social accounts</Typography>
-                    <Stack
-                        sx={{ mt: 1, display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 5 }}>
-                        {profileData[5] && (
-                            <div>
-                                <a href={`/${profileData[5]}`}><img src={website} alt="web" /></a>
-                            </div>
-                        )}
-                        {profileData[6] && (
-                            <div>
-                                <a href={`/${profileData[6]}`}><img src={instagram} alt="instagram" /></a>
-                            </div>
-                        )}
-                        {profileData[7] && (
-                            <div>
-                                <a href={`/${profileData[6]}`}><img src={youtube} alt="youtube" /></a>
-                            </div>
-                        )}
-                        {profileData[8] && (
-                            <div>
-                                <a href={`/${profileData[6]}`}><img src={tiktok} alt="tiktok" /></a>
-                            </div>
-                        )}
-                    </Stack> */}
-
 
 
                     {otherProfiles.length === 0 ? (

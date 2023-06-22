@@ -440,10 +440,9 @@ def _update_user_basic_info(user_id,user_basic_data, db_config):
         cursor = db.cursor()
         sql = """ UPDATE users
                     SET username =%s,
-                            user_first_name =%s,
-                            user_last_name =%s,
-                            user_profile_image = %s
-                            
+                        user_first_name =%s,
+                        user_last_name =%s,
+                        user_profile_image = %s
                     WHERE user_ID=%s
               """
         var = (

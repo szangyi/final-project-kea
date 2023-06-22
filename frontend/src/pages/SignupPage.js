@@ -1,23 +1,37 @@
-
+// --------------------------
+// REACT ---------------
+// --------------------------
 import React, { useState, useEffect } from 'react';
-import Cookies from 'js-cookie';
 import { useNavigate, Link, useRouteLoaderData } from "react-router-dom";
 
+
+// --------------------------
+// MATERIAL UI ---------------
+// --------------------------
 import { Grid } from '@mui/material';
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
+import { Alert } from '@mui/material';
 
+
+// --------------------------
+// COMPONENTS ---------------
+// --------------------------
 import MyCustomButton from "../components/Button/Button";
 import MyCustomTextField from "../components/Form/TextField";
 import MeshGradient from '../components/MeshGradient/MeshGradient';
-import { Alert } from '@mui/material';
 import SignUpAPI from '../api/SignUpAPI';
 import ErrorPage from './ErrorPage';
 
-// VALIDATION
+
+// --------------------------
+// VALIDATION ---------------
+// --------------------------
 import { useFormik } from 'formik';
 import { signupSchema } from '../schemas';
+
+
 
 const SignupPage = () => {
 
@@ -25,7 +39,6 @@ const SignupPage = () => {
     const [formError, setFormError] = useState(null);
     const [userExists, setUserExists] = useState(null);
     const [errorMessage, setErrorMessage] = useState(null)
-    const token = useRouteLoaderData('root');
     const nav = useNavigate();
     const { values, errors, touched, handleBlur, handleChange, setTouched, validateForm } = useFormik({
         initialValues: {
@@ -39,17 +52,9 @@ const SignupPage = () => {
         validationSchema: signupSchema,
     });
 
-    // REDIRECT WHEN USER IS LOGGED IN ---------------
-    useEffect(() => {
-        if (token === true) {
-            nav('/');
-        }
-    }, [token]);
-
 
     // API CALLS ---------------
     const submitHandler = async (event) => {
-        // const { username, firstName, lastName, email, password } = values; // Destructure values because of Formik
         event.preventDefault();
 
         // Touch all the inputfields before submission
@@ -71,6 +76,8 @@ const SignupPage = () => {
         }
     }
 
+    
+    // ERROR PAGE ---------------
     if (errorMessage) {
         return <ErrorPage error={errorMessage} />
     }
@@ -119,7 +126,7 @@ const SignupPage = () => {
                                     type="text"
                                     value={values.firstName}
                                     onChange={handleChange}
-                                    onBlur={handleBlur} // validates the input when you unclick the input
+                                    onBlur={handleBlur} 
                                     error={touched.firstName && Boolean(errors.firstName)}
                                     helperText={touched.firstName && errors.firstName}
                                 />

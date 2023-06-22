@@ -3,7 +3,6 @@ import NavLoggedin from '../../components/Navigation/NavLoggedin'
 
 
 function RootLayoutNavLoggedin() {
-
     return (
         <>
             <NavLoggedin></NavLoggedin>

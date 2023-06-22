@@ -1,8 +1,13 @@
-import { styled } from '@mui/material/styles';
+// --------------------------
+// MATERIAL UI ---------------
+// --------------------------
 import {Typography, Container } from '@mui/material';
 
-// ----------------------------------------------------------------------
 
+// --------------------------
+// STYLES ---------------
+// --------------------------
+import { styled } from '@mui/material/styles';
 const StyledContent = styled('div')(({ theme }) => ({
   maxWidth: 480,
   margin: 'auto',
@@ -12,7 +17,8 @@ const StyledContent = styled('div')(({ theme }) => ({
   flexDirection: 'column',
 }));
 
-// ----------------------------------------------------------------------
+
+
 
 export default function Page404() {
   return (

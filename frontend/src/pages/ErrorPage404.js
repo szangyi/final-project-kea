@@ -1,16 +1,6 @@
-import { styled } from '@mui/material/styles';
-import { Typography, Container } from '@mui/material';
-import errorImage from '../assets/error.png'
-import MeshGradient from '../components/MeshGradient/MeshGradient';
-import { useLocation } from 'react-router-dom';
-import { useState } from 'react';
-import { useRouteError } from 'react-router-dom';
-// import MeshGradientBackground from '../components/MeshGradient/MeshGradientBackground';
-
-
-
-// ----------------------------------------------------------------------
-
+// --------------------------
+// STYLES ---------------
+// --------------------------
 const StyledContent = styled('div')(({ theme }) => ({
     maxWidth: 580,
     height: '90%',
@@ -22,13 +12,26 @@ const StyledContent = styled('div')(({ theme }) => ({
 }));
 
 
-// ----------------------------------------------------------------------
+// --------------------------
+// MATERIAL UI ---------------
+// --------------------------
+import { styled } from '@mui/material/styles';
+import { Typography, Container } from '@mui/material';
+
+
+// --------------------------
+// COMPONENTS ---------------
+// --------------------------
+import errorImage from '../assets/error.png'
+import MeshGradient from '../components/MeshGradient/MeshGradient';
+
+
+
 
 export default function ErrorPage404() {
 
     let statusCode ='404'
     let message = 'Ooops! Page not found!';
-
 
     return (
         <>

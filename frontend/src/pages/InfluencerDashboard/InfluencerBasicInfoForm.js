@@ -1,7 +1,7 @@
 // --------------------------
 // REACT ---------------
 // --------------------------
-import React, { useState } from 'react';
+import React from 'react';
 
 
 // --------------------------
@@ -10,7 +10,13 @@ import React, { useState } from 'react';
 import MyCustomTextField from "../../components/Form/TextField";
 import ProfileImage from '../../components/Image/ProfileImage';
 import Location from '../../components/Location/Location';
+
+
+// --------------------------
+// MATERIAL UI ---------------
+// --------------------------
 import { Typography, Box } from '@mui/material';
+
 
 
 const InfluencerBasicInfoForm = ({ values, handleChange, touched, errors }) => {

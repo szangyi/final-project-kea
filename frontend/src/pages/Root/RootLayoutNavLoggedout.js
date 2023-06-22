@@ -3,7 +3,6 @@ import NavLoggedout from '../../components/Navigation/NavLoggedout'
 
 
 function RootLayoutNavLoggedout() {
-
     return (
         <>
             <NavLoggedout></NavLoggedout>

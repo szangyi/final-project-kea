@@ -1,26 +1,36 @@
-
-import React, { useState, useEffect } from 'react';
+// --------------------------
+// REACT ---------------
+// --------------------------
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useNavigate, useRouteLoaderData } from 'react-router-dom'
 
 
+// --------------------------
+// MATERIAL UI ---------------
+// --------------------------
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
+import { Alert } from '@mui/material';
 
+
+// --------------------------
+// COMPONENTS ---------------
+// --------------------------
 import MyCustomButton from "../components/Button/Button";
 import MyCustomTextField from "../components/Form/TextField";
 import MeshGradient from '../components/MeshGradient/MeshGradient';
-import { Alert } from '@mui/material';
 import LogInAPI from '../api/LogInAPI';
 import ErrorPage from './ErrorPage';
-import { navLoader } from '../util/auth';
 
 
-// VALIDATION
+// --------------------------
+// VALIDATION ---------------
+// --------------------------
 import { useFormik } from 'formik';
 import { loginSchema } from '../schemas';
-import Cookies from 'js-cookie';
+
+
 
 const LoginPage = () => {
 
@@ -29,7 +39,6 @@ const LoginPage = () => {
     const [errorMessage, setErrorMessage] = useState(null)
     const expirationDate = new Date();
 
-    const nav = useNavigate();
     expirationDate.setTime(expirationDate.getTime() + 60 * 60 * 1000);
     const { values, errors, touched, handleBlur, handleChange, setTouched, validateForm } = useFormik({
         initialValues: {
@@ -61,6 +70,8 @@ const LoginPage = () => {
         }
     }
 
+
+    // ERROR PAGE ---------------
     if (errorMessage) {
         return <ErrorPage error={errorMessage} />
     }

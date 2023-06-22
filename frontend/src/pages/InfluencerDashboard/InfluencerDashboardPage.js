@@ -1,14 +1,15 @@
 // --------------------------
 // REACT ---------------
 // --------------------------
-import Cookies from 'js-cookie';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+
+
 // --------------------------
 // MATERIAL UI ---------------
 // --------------------------
 import Box from "@mui/material/Box";
-import { Stack } from '@mui/material';
+import { Stack, Alert } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -20,7 +21,6 @@ import AddIcon from '@mui/icons-material/Add';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogTitle from '@mui/material/DialogTitle';
-import { Alert } from '@mui/material';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import LanguageIcon from '@mui/icons-material/Language';
 import YouTubeIcon from '@mui/icons-material/YouTube';
@@ -33,11 +33,12 @@ import Skeleton from '@mui/material/Skeleton';
 // COMPONENTS ---------------
 // --------------------------
 import Banner from '../../components/Banner/Banner';
-import Loader from '../../components/Loader/Loader'
 import MyCustomButton from '../../components/Button/Button';
 import GetInfluencerProfilesAPI from '../../api/GetInfluencerProfilesAPI'
 import DeleteProfileAPI from '../../api/DeleteProfileAPI';
 import ErrorPage from '../ErrorPage';
+
+
 
 const InfluencerPage = () => {
 
@@ -47,6 +48,7 @@ const InfluencerPage = () => {
     const [deleteError, setDeleteError] = useState(null);
     const [open, setOpen] = React.useState(false);
     const [errorMessage, setErrorMessage] = useState(null)
+
 
     // HANDLERS ---------------
     const handleOpen = (influ_id) => {
@@ -58,15 +60,19 @@ const InfluencerPage = () => {
         setOpen(false);
     };
 
+
     // API CALLS ---------------
     GetInfluencerProfilesAPI(setInfluencerData, setErrorMessage)
     const handleDelete = (selectedInfluId) => {
         DeleteProfileAPI(selectedInfluId, handleClose, setErrorMessage, setDeleteError);
     }
 
+
+    // ERROR PAGE ---------------
     if (errorMessage) {
         return <ErrorPage error={errorMessage} />
     }
+
 
     // RETURN --------------- 
     return (
@@ -83,7 +89,6 @@ const InfluencerPage = () => {
                 sx={{ pt: { xs: 5, md: 5 }, pb: { xs: 2, md: 5 }, minHeight: { xs: '200px', md: '500px' } }}>
 
                 {influencerData === null ? (
-                    // <Loader />
                     <>
                         <Box sx={{ pt: { xs: 1, md: 5 }, pb: { xs: 1, md: 0 }, px: { xs: 1, md: 3 }, width: { xs: '100%', md: '60%' }, margin: 'auto', display: 'flex', flexDirection: 'column', alignItems: { xs: 'start', md: 'center' } }} >
                             <Skeleton width="100%" />
@@ -215,8 +220,8 @@ const InfluencerPage = () => {
                                                     open={open}
                                                     onClose={handleClose}
                                                     aria-labelledby="draggable-dialog-title"
-                                                    >
-                                                   
+                                                >
+
 
                                                     <DialogTitle >
                                                         Are you sure you want to delete this profile?

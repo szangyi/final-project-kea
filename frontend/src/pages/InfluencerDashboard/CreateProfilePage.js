@@ -1,4 +1,3 @@
-
 // --------------------------
 // REACT ---------------
 // --------------------------
@@ -6,16 +5,13 @@ import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
 
-
 // --------------------------
 // MATERIAL UI ---------------
 // --------------------------
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import { Stack } from '@mui/material';
-import { Alert } from '@mui/material';
+import { Stack, Alert } from '@mui/material';
 import ErrorPage from '../ErrorPage'
-
 
 
 // --------------------------
@@ -23,25 +19,21 @@ import ErrorPage from '../ErrorPage'
 // --------------------------
 import CreateProfileAPI from '../../api/CreateProfileAPI'
 import MyCustomButton from '../../components/Button/Button';
-
 import InfluencerBasicInfoForm from './InfluencerBasicInfoForm';
 import InfluencerSelectForm from './InfluencerSelectForm'
 import SocialAccountsForm from './SocialAccountsForm';
-
-
+import MeshGradientBackground from '../../components/MeshGradient/MeshGradientBackground';
 
 
 // --------------------------
 // VALIDATION ---------------
 // --------------------------
 import { useFormik } from 'formik';
-import * as Yup from 'yup';
 import { createProfileSchema } from '../../schemas';
-import MeshGradientBackground from '../../components/MeshGradient/MeshGradientBackground';
+
 
 
 const CreateProfile = () => {
-
 
     // VARIABLES ---------------
     const [profileExists, setProfileExists] = useState(null);
@@ -51,7 +43,6 @@ const CreateProfile = () => {
     const nav = useNavigate();
 
     const { values, errors, touched, handleChange, setTouched, validateForm } = useFormik({
-        // const formik = useFormik({
         initialValues: {
             username: '',
             bio: '',
@@ -100,9 +91,8 @@ const CreateProfile = () => {
 
     }
 
-    console.log(values)
-    console.log(errors)
 
+    // ERROR PAGE ---------------
     if (errorMessage) {
         return <ErrorPage error={errorMessage} />
     }
@@ -112,11 +102,11 @@ const CreateProfile = () => {
 
             <MeshGradientBackground variant="full" />
 
-            <Stack sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', margin: 'auto', width: {xs: '100%', md: '80%',lg: '60%'} }}>
+            <Stack sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', margin: 'auto', width: { xs: '100%', md: '80%', lg: '60%' } }}>
                 <Typography sx={{ pt: { xs: 1, md: 5 }, pb: { xs: 1, md: 5 } }} variant="h3">Create your profile </Typography>
 
                 <Box className="glassmorphism" sx={{
-                    gap: 2, flexGrow: 1, mx: { xs: 2, sm:5, md: 10 }, p: { xs: 3, md: 5 },
+                    gap: 2, flexGrow: 1, mx: { xs: 2, sm: 5, md: 10 }, p: { xs: 3, md: 5 },
                     display: 'flex', flexDirection: 'row', alignItems: 'center', _width: '700px', minHeight: '500px', position: 'relative'
                 }}>
 
@@ -125,7 +115,6 @@ const CreateProfile = () => {
                         {formError && (
                             <Alert severity="error" sx={{ mb: 2, }}>{formError}</Alert>
                         )}
-
 
                         {profileExists && (
                             <Alert severity="error">{profileExists}</Alert>

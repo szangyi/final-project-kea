@@ -50,6 +50,7 @@ const CollectionCard = ({ array, filteringCard, favoriteenabled, searchQuery, se
         AddToFavoritesAPI(influencerid, setErrorMessage)
     }
 
+    // ERROR PAGE ---------------
     if (errorMessage) {
         return <ErrorPage error={errorMessage} />
     }
