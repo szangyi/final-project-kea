@@ -112,6 +112,7 @@ const UserCollectionPage = () => {
                                         <Typography sx={{ mt: 5, mb: 3 }} variant="h3">{category}</Typography>
                                         <CollectionCard
                                             favoriteenabled={true}
+                                            collection = "yes"
                                             array={favoritesData.filter((profile) => profile[10] === category)}
                                         />
                                     </Box>
