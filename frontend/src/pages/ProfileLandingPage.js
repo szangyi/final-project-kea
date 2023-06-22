@@ -48,8 +48,6 @@ const ProfileLandingPage = () => {
     AccountInfoAPI(setUserData);
     GetProfileAPI(username, setProfileData, setOtherProfiles, setErrorMessage, setProfileExists);
 
-    console.log(userData)
-
     // API CALLS ---------------
     const handleAddToFavorites = (influencerid) => {
         AddToFavoritesAPI(influencerid, setErrorMessage)
