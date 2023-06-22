@@ -17,6 +17,8 @@ def _update_basic_info():
         user_image = request.files.get("image")
         image_id = str(uuid.uuid4())
         
+        db_config = helper_functions._db_config()
+        selected_user_db = helper_functions._validation_function()
 
         # VALIDATION ##########################
         validation_errors = []
@@ -40,15 +42,14 @@ def _update_basic_info():
                 image_name =f"{image_id}{file_extension}"
                 user_image.save(f"images/profile_images/{image_name}")
         else:
-            pass
-
+            image_name = selected_user_db[6]
+            
         if validation_errors:
             return g._send(400, validation_errors)
         
         
         # DATABASE ##########################
-        db_config = helper_functions._db_config()
-        selected_user_db = helper_functions._validation_function()
+
         
         if selected_user_db is not None:
             if selected_user_db[1] != username:
