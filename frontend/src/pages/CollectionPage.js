@@ -281,7 +281,9 @@ const CollectionPage = () => {
                                 searchCategory={categoryData}
                                 searchHashtag={hashtagData}
                                 searchSocial={socialData}
-                                searchLocation={locationData} />
+                                searchLocation={locationData}
+                                collection = "yes"
+                                />
                         )}
                     </Stack>
                 </Grid>

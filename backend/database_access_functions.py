@@ -422,10 +422,26 @@ def _get_all_favorites(user_id, db_config):
         var = (user_id, )
         cursor.execute(sql, var)
         favorite_influencers = cursor.fetchall()
+        favorites_array = []
+        
+        if favorite_influencers is not None:
+            for favorite in favorite_influencers:
+                if favorite is not None:
+                    influencer_id_profile = favorite[0]
+                    hashtags =_get_influencer_hashtags(influencer_id_profile, db_config)
+                    print(hashtags)
+                    favorites_hashtags = favorite + (tuple(hashtags),)
+                    favorites_array.append(favorites_hashtags)
+                else:
+                    pass
+        else:
+            favorites_array= favorite_influencers
         db.commit()
         
+        print(favorites_array)
+        
         response.status = 200
-        return favorite_influencers
+        return favorites_array
     except Exception as ex:
         print(ex)
         response.status= 500

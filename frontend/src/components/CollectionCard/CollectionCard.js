@@ -40,7 +40,7 @@ import ErrorPage from '../../pages/ErrorPage';
 
 
 
-const CollectionCard = ({ array, filteringCard, favoriteenabled, searchQuery, searchCategory, searchHashtag, searchSocial, searchLocation }) => {
+const CollectionCard = ({ array, filteringCard, favoriteenabled, searchQuery, searchCategory, searchHashtag, searchSocial, searchLocation, collection }) => {
     // VARIABLES ---------------
     const [errorMessage, setErrorMessage] = useState(null)
     let cardArray;
@@ -125,7 +125,7 @@ const CollectionCard = ({ array, filteringCard, favoriteenabled, searchQuery, se
                                     </Typography>
                                     <Typography gutterBottom variant="body2" color="text.secondary">
                                         {/* Tags: */}
-                                        {filteringCard == 'yes' ? array[15] : array[14]}
+                                        {collection == 'yes' ? array[15]: array[14]}
                                     </Typography>
                                     <Typography gutterBottom variant="body2" color="text.secondary">
                                         {/* Location: */}
