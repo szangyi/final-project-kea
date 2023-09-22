@@ -37,9 +37,9 @@ const LoginPage = () => {
     // VARIABLES ---------------
     const [formError, setFormError] = useState('');
     const [errorMessage, setErrorMessage] = useState(null)
-    const expirationDate = new Date();
+    // const expirationDate = new Date();
 
-    expirationDate.setTime(expirationDate.getTime() + 60 * 60 * 1000);
+    // expirationDate.setTime(expirationDate.getTime() + 60 * 60 * 1000);
     const { values, errors, touched, handleBlur, handleChange, setTouched, validateForm } = useFormik({
         initialValues: {
             email: '',

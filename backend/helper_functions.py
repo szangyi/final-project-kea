@@ -67,10 +67,10 @@ def _token_validator(token_request):
         
         response.status = 200
         return user_email
-    except jwt.ExpiredSignatureError:
-        response.status = 401
-        response.body = "Token is expired"
-        return None
+    # except jwt.ExpiredSignatureError:
+    #     response.status = 401
+    #     response.body = "Token is expired"
+    #     return None
     except jwt.InvalidTokenError:
         response.status = 400
         response.body = "Invalid token"
