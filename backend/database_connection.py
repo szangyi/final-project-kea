@@ -6,8 +6,8 @@ DEVELOPMENT_CONN = {
         }
 
 PRODUCTION_CONN = {
-        "host":"influencr-server.mysql.database.azure.com",
-        "user": "ejnxncztul",
-        "password": "V0023CQO4DKKF28J$",
-        "database": "influencr-database"
+        "host":"influencrszangyi.mysql.eu.pythonanywhere-services.com",
+        "user": "influencrszangyi",
+        "password": "FERImari24",
+        "database": "influencrszangyi$influencr"
 }

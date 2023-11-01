@@ -34,18 +34,20 @@ import user_update_security_info
 
 #############  IMAGES  #################
 
+# development
 @get("/images/<filepath:re:.*\.(jpg|png|gif|ico|svg)>")
 def img(filepath):
-    return static_file(filepath, root="./images")
+  return static_file(filepath, root="./images")
   
 # production
-# @get("/images/<filepath:re:.*\.(jpg|png|gif|ico|svg)>")
-# def img(filepath):
-#     return static_file(filepath, root="./home/influncr/influncr/final-project-kea/backend/images/")
+@get("/images/<filepath:re:.*\.(jpg|png|gif|ico|svg)>")
+def img(filepath):
+   return static_file(filepath, root="./home/influencrszangyi/final-project-kea/backend/images/")
 
+# production
 @route('/<:re:.*>', method='GET')
 def react_app():
-    return static_file('index.html', root='/home/influncr/influncr/final-project-kea/frontend/build')
+   return static_file('index.html', root='/home/influencrszangyi/final-project-kea/frontend/build')
 
 ############### RUN #####################
 try:
