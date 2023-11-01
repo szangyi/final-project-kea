@@ -35,9 +35,9 @@ import user_update_security_info
 #############  IMAGES  #################
 
 # development
-@get("/images/<filepath:re:.*\.(jpg|png|gif|ico|svg)>")
-def img(filepath):
-  return static_file(filepath, root="./images")
+# @get("/images/<filepath:re:.*\.(jpg|png|gif|ico|svg)>")
+# def img(filepath):
+#   return static_file(filepath, root="./images")
   
 # production
 @get("/images/<filepath:re:.*\.(jpg|png|gif|ico|svg)>")
